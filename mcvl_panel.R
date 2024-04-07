@@ -385,17 +385,52 @@ create_cohort(i)
 
 
 
+#Create the final panel from 2018
 
 for (i in 1957:2006){
 load(paste0("finalcohort", i, ".Rdata"))
-finalcohort<-finalcohort[finalcohort$year>2018]
+finalcohort<-finalcohort[finalcohort$year>=2018]
 finalcohort$birth_date= finalcohort$birth_date.x
 finalcohort$firm_id_sec<-finalcohort$firm_id_sec.x
 finalcohort<-finalcohort %>% select(-c(firm_id_sec.y, firm_id_sec.x, birth_date.x, birth_date.y, province_resid, selection, spells_number, firm_main_prov,
                                       contract_type))
-save(finalcohort, file=paste0("reducedcohort", i, ".Rdata"))
+save(finalcohort, file=paste0("reducedcohort18", i, ".Rdata"))
 gc()
 }
+
+
+load("reducedcohort181957.Rdata")
+df<-finalcohort
+rm(finalcohort)
+
+for (i in 1979:2006){
+  load(paste0("reducedcohort18", i, ".Rdata"))
+  df<-rbind(df, finalcohort)
+  gc()
+}
+
+
+count<-df %>% 
+  group_by(person_id, year) %>% 
+  summarize(cont=n())
+table(count$cont)
+
+save(df, file = "finalpanel2018.Rdata")
+
+#Create the final panel from 2019
+
+
+for (i in 1957:2006){
+  load(paste0("finalcohort", i, ".Rdata"))
+  finalcohort<-finalcohort[finalcohort$year>=2019]
+  finalcohort$birth_date= finalcohort$birth_date.x
+  finalcohort$firm_id_sec<-finalcohort$firm_id_sec.x
+  finalcohort<-finalcohort %>% select(-c(firm_id_sec.y, firm_id_sec.x, birth_date.x, birth_date.y, province_resid, selection, spells_number, firm_main_prov,
+                                         contract_type))
+  save(finalcohort, file=paste0("reducedcohort", i, ".Rdata"))
+  gc()
+}
+
 
 load("reducedcohort1957.Rdata")
 df<-finalcohort
@@ -414,6 +449,5 @@ count<-df %>%
 table(count$cont)
 
 save(df, file = "finalpanel2019b.Rdata")
-
 
 
