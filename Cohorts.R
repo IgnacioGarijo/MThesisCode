@@ -28,35 +28,35 @@ loadRData <- function(fileName){
 }
 
 
-min_year <- 2020
+min_year <- 2019
 max_year <- 2022
 min_month <- 1
 max_month <- 12
 
 
 contr1<- loadRData("processed_contribution_1.Rdata")
-contr1 <- contr1[contr1$year > 2019, ]
+contr1 <- contr1[contr1$year >= min_year , ]
 contr1$month <- as.numeric(contr1$month)
 contr1$time <- (contr1$year - min(contr1$year)) * 12 + (contr1$month - min(contr1$month) + 1)
 contr1 <- contr1[, c("person_id", "time", "income")]
 
 contr2<- loadRData("processed_contribution_2.Rdata")
 
-contr2 <- contr2[contr2$year > 2019, ]
+contr2 <- contr2[contr2$year >= min_year, ]
 contr2$month <- as.numeric(contr2$month)
 contr2$time <- (contr2$year - min(contr2$year)) * 12 + (contr2$month - min(contr2$month) + 1)
 contr2 <- contr2[, c("person_id", "time", "income")]
 
 contr3<- loadRData("processed_contribution_3.Rdata")
 
-contr3 <- contr3[contr3$year > 2019, ]
+contr3 <- contr3[contr3$year  >= min_year, ]
 contr3$month <- as.numeric(contr3$month)
 contr3$time <- (contr3$year - min(contr3$year)) * 12 + (contr3$month - min(contr3$month) + 1)
 contr3 <- contr3[, c("person_id", "time", "income")]
 
 contr4<- loadRData("processed_contribution_4.Rdata")
 
-contr4 <- contr4[contr4$year > 2019, ]
+contr4 <- contr4[contr4$year  >= min_year, ]
 contr4$month <- as.numeric(contr4$month)
 contr4$time <- (contr4$year - min(contr4$year)) * 12 + (contr4$month - min(contr4$month) + 1)
 contr4 <- contr4[, c("person_id", "time", "income")]
@@ -64,56 +64,56 @@ contr4 <- contr4[, c("person_id", "time", "income")]
 
 contr5<- loadRData("processed_contribution_5.Rdata")
 
-contr5 <- contr5[contr5$year > 2019, ]
+contr5 <- contr5[contr5$year  >= min_year, ]
 contr5$month <- as.numeric(contr5$month)
 contr5$time <- (contr5$year - min(contr5$year)) * 12 + (contr5$month - min(contr5$month) + 1)
 contr5 <- contr5[, c("person_id", "time", "income")]
 
 contr6<- loadRData("processed_contribution_6.Rdata")
 
-contr6 <- contr6[contr6$year > 2019, ]
+contr6 <- contr6[contr6$year  >= min_year, ]
 contr6$month <- as.numeric(contr6$month)
 contr6$time <- (contr6$year - min(contr6$year)) * 12 + (contr6$month - min(contr6$month) + 1)
 contr6 <- contr6[, c("person_id", "time", "income")]
 
 contr7<- loadRData("processed_contribution_7.Rdata")
 
-contr7 <- contr7[contr7$year > 2019, ]
+contr7 <- contr7[contr7$year  >= min_year, ]
 contr7$month <- as.numeric(contr7$month)
 contr7$time <- (contr7$year - min(contr7$year)) * 12 + (contr7$month - min(contr7$month) + 1)
 contr7 <- contr7[, c("person_id", "time", "income")]
 
 contr8<- loadRData("processed_contribution_8.Rdata")
 
-contr8 <- contr8[contr8$year > 2019, ]
+contr8 <- contr8[contr8$year  >= min_year, ]
 contr8$month <- as.numeric(contr8$month)
 contr8$time <- (contr8$year - min(contr8$year)) * 12 + (contr8$month - min(contr8$month) + 1)
 contr8 <- contr8[, c("person_id", "time", "income")]
 
 contr9<- loadRData("processed_contribution_9.Rdata")
 
-contr9 <- contr9[contr9$year > 2019, ]
+contr9 <- contr9[contr9$year  >= min_year, ]
 contr9$month <- as.numeric(contr9$month)
 contr9$time <- (contr9$year - min(contr9$year)) * 12 + (contr9$month - min(contr9$month) + 1)
 contr9 <- contr9[, c("person_id", "time", "income")]
 
 contr10<- loadRData("processed_contribution_10.Rdata")
 
-contr10 <- contr10[contr10$year > 2019, ]
+contr10 <- contr10[contr10$year  >= min_year, ]
 contr10$month <- as.numeric(contr10$month)
 contr10$time <- (contr10$year - min(contr10$year)) * 12 + (contr10$month - min(contr10$month) + 1)
 contr10 <- contr10[, c("person_id", "time", "income")]
 
 contr11<- loadRData("processed_contribution_11.Rdata")
 
-contr11 <- contr11[contr11$year > 2019, ]
+contr11 <- contr11[contr11$year  >= min_year, ]
 contr11$month <- as.numeric(contr11$month)
 contr11$time <- (contr11$year - min(contr11$year)) * 12 + (contr11$month - min(contr11$month) + 1)
 contr11 <- contr11[, c("person_id", "time", "income")]
 
 contr12<- loadRData("processed_contribution_12.Rdata")
 
-contr12 <- contr12[contr12$year > 2019, ]
+contr12 <- contr12[contr12$year  >= min_year, ]
 contr12$month <- as.numeric(contr12$month)
 contr12$time <- (contr12$year - min(contr12$year)) * 12 + (contr12$month - min(contr12$month) + 1)
 contr12 <- contr12[, c("person_id", "time", "income")]
@@ -132,7 +132,7 @@ setDT(df)
 #Reducing the df to make it easier to manage
 
 df<-df[,c("person_id", "exit_date", "entry_date", "year", "month", "days_spell", "job_relationship", "regime", "contr_type", "ncontracts")]
-df<-df[df$year>2019]
+df<-df[df$year>=min_year]
 
 #First let's create the time variable for the cohorts
 
@@ -146,8 +146,12 @@ df[, c("time", "yearmonth", "exit_month"):= list((year - min_year) * 12 + (month
 
 df<-df %>% select(-c(exit_date, year, month))
 
+min_time<- min(df$time)
+max_time<-max(df$time)
+
 #Loop from here
-for (i in 1:36){
+for (i in min_time:max_time){
+  i=1
 df1<-df %>% 
   group_by(person_id) %>% 
   mutate(treatment = ifelse(any(time==i & yearmonth==exit_month), 
@@ -199,64 +203,64 @@ df1<-merge(df1, dfincome, by=c("person_id", "time"), all.x = T )
 
 df1$income[is.na(df1$income)] <- 0
 
-# 
-# df1<-df1 %>%
-#   group_by(time) %>%
-#   summarise(days_worked=mean(days_spell, na.rm=T),
-#             salaries=mean(income, na.rm=T),
-#             ncontracts=mean(ncontracts, na.rm = T),
-#             days_worked=mean(days_spell, na.rm = T),
-#             internship = ifelse(sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE) == 0,
-#                                             0,
-#                                             sum(situation == "Internship or training") / sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE)),
-#             open_ended = ifelse(sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE) == 0,
-#                                 0,
-#                                 sum(situation == "open-ended") / sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE)),
-#             other_temporary = ifelse(sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE) == 0,
-#                                      0,
-#                                      sum(situation == "other temporary") / sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE)),
-#             permanent = ifelse(sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE) == 0,
-#                                0,
-#                                sum(situation == "permanent") / sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE)),
-#             pre_retirement = ifelse(sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE) == 0,
-#                                     0,
-#                                     sum(situation == "Pre-retirement") / sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE)),
-#             production_circumstances = ifelse(sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE) == 0,
-#                                               0,
-#                                               sum(situation == "production circumstances") / sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE)),
-#             project_based = ifelse(sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE) == 0,
-#                                    0,
-#                                    sum(situation == "project-based") / sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE)),
-#             replacement = ifelse(sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE) == 0,
-#                                  0,
-#                                  sum(situation == "Replacement") / sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE)),
-#             other= ifelse(sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE) == 0,
-#                           0,
-#                           sum(situation == "other") / sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE)),
-#             unemployed= sum(situation=="unemp", na.rm=T)/n(),
-#             self_emp= ifelse(sum(situation!= "unemp", na.rm=T) ==0, 0, sum(situation=="self-emp", na.rm=T)/sum(situation!="unemp", na.rm=T)),
-#             cohort=i
-# 
-#   )
 
 
-save(df1, file=paste0("anykind_cohort", i, ".Rdata"))
+df1<-df1 %>%
+  group_by(time) %>%
+  summarise(days_worked=mean(days_spell, na.rm=T),
+            salaries=mean(income, na.rm=T),
+            ncontracts=mean(ncontracts, na.rm = T),
+            days_worked=mean(days_spell, na.rm = T),
+            internship = ifelse(sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE) == 0,
+                                            0,
+                                            sum(situation == "Internship or training") / sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE)),
+            open_ended = ifelse(sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE) == 0,
+                                0,
+                                sum(situation == "open-ended") / sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE)),
+            other_temporary = ifelse(sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE) == 0,
+                                     0,
+                                     sum(situation == "other temporary") / sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE)),
+            permanent = ifelse(sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE) == 0,
+                               0,
+                               sum(situation == "permanent") / sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE)),
+            pre_retirement = ifelse(sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE) == 0,
+                                    0,
+                                    sum(situation == "Pre-retirement") / sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE)),
+            production_circumstances = ifelse(sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE) == 0,
+                                              0,
+                                              sum(situation == "production circumstances") / sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE)),
+            project_based = ifelse(sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE) == 0,
+                                   0,
+                                   sum(situation == "project-based") / sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE)),
+            replacement = ifelse(sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE) == 0,
+                                 0,
+                                 sum(situation == "Replacement") / sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE)),
+            other= ifelse(sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE) == 0,
+                          0,
+                          sum(situation == "other") / sum(situation != "unemp" & situation!= "self-emp", na.rm = TRUE)),
+            unemployed= sum(situation=="unemp", na.rm=T)/n(),
+            self_emp= ifelse(sum(situation!= "unemp", na.rm=T) ==0, 0, sum(situation=="self-emp", na.rm=T)/sum(situation!="unemp", na.rm=T)),
+            cohort=i
+
+  )
+
+save(df1, file=paste0("anykind_cohort18_", i, ".Rdata"))
 }
 
 
 ##Merging all cohorts
 
 
-load("anykind_cohort1.Rdata")
+load("anykind_cohort18_1.Rdata")
 dff<-df1
 
-for (i in 2:36){
-  load(paste0("anykind_cohort", i, ".Rdata"))
+for (i in 2:60){
+  load(paste0("anykind_cohort18_", i, ".Rdata"))
   dff<-rbind(df1, dff)
   gc()
 }
 
-save(dff, file="anykind_cohort_panel.Rdata")
+save(dff, file="anykind_cohort18_panel.Rdata")
 
 
 #Calculate number of people in each cohort
