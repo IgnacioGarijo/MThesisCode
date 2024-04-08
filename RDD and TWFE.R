@@ -622,8 +622,71 @@ dftwfe<-create_twfe_dataframe(dff[dff$group==i,],
                               last_variable = 16,
                               time_dif = 12, 
                               treatment_time = 37,
-                              months = 21)
+                              months = 28)
 
 
-create_twfeplots(dftwfe, paste0("DID_", i), 37)
+create_twfeplots(dftwfe, paste0("DID_long", i), 37)
+}
+
+
+###############NO DONUT DESIGN ###########
+load("anykind_cohort_panel.Rdata")
+
+create_twfe_dataframe<- function(df, first_variable, last_variable, time_dif, treatment_time, months ){
+  
+  
+  dffnames<-names(df[,first_variable:last_variable])
+  beginning<-treatment_time-months
+  
+  df1<-mutate(df[df$cohort %in%c(beginning:(treatment_time-1)),], time2=time+time_dif)
+  
+  df2<- mutate(df[df$cohort >=(beginning+time_dif),], time2=time)
+  
+  for (x in dffnames){
+    for (i in 1:6) {
+      
+      df1<-df1 %>% 
+        arrange(cohort, -time) %>% 
+        group_by(cohort) %>% 
+        mutate(!!paste0(x, i):=lag(get(x), i),
+               treatment=0)
+      
+      df2<-df2 %>% 
+        arrange(cohort, -time) %>% 
+        group_by(cohort) %>% 
+        mutate(!!paste0(x, i):=lag(get(x), i),
+               treatment=1)
+    }
+  }
+  
+  df1<-df1 %>% filter(cohort==time)
+  df2<-df2 %>% filter(cohort==time)
+  
+  df<-rbind(df1,df2)
+  
+}
+
+
+
+dftwfe<-create_twfe_dataframe(dff, 
+                      first_variable = 2,
+                      last_variable = 15,
+                      time_dif = 12, 
+                      treatment_time = 25,
+                      months = 28)
+
+create_twfeplots(dftwfe, new_directory = "no-donut_long", treatment_date = 25)
+
+
+
+for (i in c("permanent", "open-ended", "project-based", "production circumstances")){
+  dftwfe<-create_twfe_dataframe(dff[dff$group==i,], 
+                                first_variable = 3,
+                                last_variable = 16,
+                                time_dif = 12, 
+                                treatment_time = 37,
+                                months = 21)
+  
+  
+  create_twfeplots(dftwfe, paste0("DID_nodonut", i), 37)
 }
