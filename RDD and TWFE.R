@@ -158,7 +158,8 @@ gg<-
 
 
 ### ACTUAL DIFF-IN-DIFF ###
-dftwfe<-rbind(dff1 %>% mutate(treatment=0), dff2 %>% mutate(treatment=1))
+dftwfe<-rbind(dff1 %>% mutate(treatment=0), 
+              dff2 %>% mutate(treatment=1))
 
 
 

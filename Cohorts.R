@@ -150,8 +150,11 @@ min_time<- min(df$time)
 max_time<-max(df$time)
 
 #Loop from here
+
+
+create_cohort<-function(df, aggregation=NULL, name){
+  
 for (i in min_time:max_time){
-  i=1
 df1<-df %>% 
   group_by(person_id) %>% 
   mutate(treatment = ifelse(any(time==i & yearmonth==exit_month), 
@@ -204,9 +207,20 @@ df1<-merge(df1, dfincome, by=c("person_id", "time"), all.x = T )
 df1$income[is.na(df1$income)] <- 0
 
 
+if (is.null(aggregation)) {
+  df1 <- df1 %>%
+    group_by(time) 
+} else {
+  df1 <- df1 %>%
+    arrange(person_id, time) %>% 
+    group_by(person_id) %>% 
+    mutate(group=first(get(aggregation))) %>% 
+    group_by(time, group)
+}
 
-df1<-df1 %>%
-  group_by(time) %>%
+
+
+df1<-df1 %>% 
   summarise(days_worked=mean(days_spell, na.rm=T),
             salaries=mean(income, na.rm=T),
             ncontracts=mean(ncontracts, na.rm = T),
@@ -244,24 +258,43 @@ df1<-df1 %>%
 
   )
 
-save(df1, file=paste0("anykind_cohort18_", i, ".Rdata"))
+save(df1, file=paste0(name, i, ".Rdata"))
 }
+
+  load(paste0(name, "1.Rdata"))
+  
+  dff<-df1
+  for (i in (min_time+1):max_time){
+    load(paste0(name, i, ".Rdata"))
+    dff<-rbind(df1, dff)
+    gc()
+  }
+  
+  save(dff, file=paste0(name,"_panel.Rdata"))
+  
+  for (i in min_time:max_time){
+    file.remove(paste0(name, i, ".Rdata"))
+  }
+}
+
 
 
 ##Merging all cohorts
 
 
-load("anykind_cohort18_1.Rdata")
-dff<-df1
+# load("anykind_cohort18_1.Rdata")
+# dff<-df1
+# 
+# for (i in 2:60){
+#   load(paste0("anykind_cohort18_", i, ".Rdata"))
+#   dff<-rbind(df1, dff)
+#   gc()
+# }
+# 
+# save(dff, file="anykind_cohort18_panel.Rdata")
 
-for (i in 2:60){
-  load(paste0("anykind_cohort18_", i, ".Rdata"))
-  dff<-rbind(df1, dff)
-  gc()
-}
 
-save(dff, file="anykind_cohort18_panel.Rdata")
-
+#####################################################
 
 #Calculate number of people in each cohort
 
