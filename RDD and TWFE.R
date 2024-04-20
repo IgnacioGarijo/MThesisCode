@@ -618,7 +618,7 @@ create_twfeplots(dftwfe, "DID2", 25)
 load("situation_cohort_panel.Rdata")
 
 for (i in c("permanent", "open-ended", "project-based", "production circumstances")){
-dftwfe<-create_twfe_dataframe(dff[dff$group==i,], 
+dftwfe<-create_twfe_dataframe(dff[dff$group=="permanent",], 
                               first_variable = 3,
                               last_variable = 16,
                               time_dif = 12, 
