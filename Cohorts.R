@@ -13,12 +13,12 @@ theme_set(theme_minimal())
 setwd("C:/Users/ignac/OneDrive - Universidad Loyola Andalucía/Trabajo/Universidad/Máster/2º/2 semestre/TFM/Código/DiegoPuga/esurban_replication/esurban_replication/tmp/mcvl_cdf_2022")
 
 
+##################### FUNCTION THAT CREATES THE COHORTS #####################
+
 #Loading dataframes
 
 load("finalpanel2019b.Rdata")
 setDT(df)
-
-
 
 #Loading income dfs and cleaning so to have only the information needed
 
@@ -149,15 +149,29 @@ df<-df %>% select(-c(exit_date, year, month))
 min_time<- min(df$time)
 max_time<-max(df$time)
 
-#Loop from here
 
+##ACTUAL FUNCTION 
 
-create_cohort<-function(df, aggregation=NULL, name){
+create_cohort<-function(df, aggregation=NULL, previouscontracts=FALSE, name){
   
 for (i in min_time:max_time){
+  if(previouscontracts) {
+    df1 <- df %>%
+      group_by(person_id) %>%
+      mutate(treatment = ifelse(any(time == i & yearmonth == exit_month)  & entry_date < 20220000, 1, NA)) %>%
+      filter(!is.na(treatment)) %>%
+      select(-treatment)
+  } else {
+    df1 <- df %>%
+      group_by(person_id) %>%
+      mutate(treatment = ifelse(any(time == i & yearmonth == exit_month), 1, NA)) %>%
+      filter(!is.na(treatment)) %>%
+      select(-treatment)
+  }
+  
 df1<-df %>% 
   group_by(person_id) %>% 
-  mutate(treatment = ifelse(any(time==i & yearmonth==exit_month), 
+  mutate(treatment = ifelse(any(time==i & yearmonth==exit_month & entry_date<20220000), 
                             1, 
                             NA)) %>% 
   filter(!is.na(treatment)) %>% 
@@ -278,23 +292,120 @@ save(df1, file=paste0(name, i, ".Rdata"))
 }
 
 
-
-##Merging all cohorts
-
-
-# load("anykind_cohort18_1.Rdata")
-# dff<-df1
-# 
-# for (i in 2:60){
-#   load(paste0("anykind_cohort18_", i, ".Rdata"))
-#   dff<-rbind(df1, dff)
-#   gc()
-# }
-# 
-# save(dff, file="anykind_cohort18_panel.Rdata")
+############### FUNCTION THAT TRANSFORMS THE DATA FROM THE COHORTS TO COMPUTE THE RESULTS ##############
 
 
-#####################################################
+
+create_twfe_dataframe<- function(df, first_variable, last_variable, time_dif, treatment_time, months ){
+  
+  
+  dffnames<-names(df[,first_variable:last_variable])
+  beginning<-treatment_time-months
+  
+  df1<-mutate(df[df$cohort %in%c(beginning:(treatment_time-1)),], time2=time+time_dif)
+  
+  df2<- mutate(df[df$cohort >=(beginning+time_dif),], time2=time)
+  
+  for (x in dffnames){
+    for (i in 1:6) {
+      
+      cutoff<-treatment_time-i #For the doughnut RDD
+      
+      df1<-df1 %>% 
+        arrange(cohort, -time) %>% 
+        group_by(cohort) %>% 
+        mutate(!!paste0(x, i):=ifelse(time2 %in% c(cutoff:(treatment_time-1)),NA, lag(get(x), i)),
+               treatment=0)
+      
+      df2<-df2 %>% 
+        arrange(cohort, -time) %>% 
+        group_by(cohort) %>% 
+        mutate(!!paste0(x, i):=ifelse(time2 %in% c(cutoff:(treatment_time-1)),NA, lag(get(x), i)),
+               treatment=1)
+    }
+  }
+  
+  df1<-df1 %>% filter(cohort==time)
+  df2<-df2 %>% filter(cohort==time)
+  
+  df<-rbind(df1,df2) %>% 
+    mutate(time2=time2-treatment_time)
+  
+}
+
+
+
+
+
+##############FUNCTION THAT COMPUTES THE RESULTS #########################
+
+
+
+create_results<- function(dftwfe, new_directory){
+  dir.create(paste0("../../../../../../Plots/", new_directory))
+  
+  dff1<-dftwfe[dftwfe$time2<max(dftwfe$time2),]
+  dff2<-dftwfe[dftwfe$time2<max(dftwfe$time2)-1,]
+  dff3<-dftwfe[dftwfe$time2<max(dftwfe$time2)-2,]
+  dff4<-dftwfe[dftwfe$time2<max(dftwfe$time2)-3,]
+  dff5<-dftwfe[dftwfe$time2<max(dftwfe$time2)-4,]
+  dff6<-dftwfe[dftwfe$time2<max(dftwfe$time2)-5,]
+  
+  dflist<-list(dff1, dff2, dff3, dff4,dff5, dff6)
+  models<-list()
+  did_coefs<-list()
+  outcome_variables<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
+  
+  for(x in outcome_variables){
+    for (y in c(1:6)){
+      
+      model<-feols(reformulate("i(time2, treatment, ref = +0)", paste0(x,y)), 
+                   data = dflist[[y]])
+      
+      models[[paste("mod",x, y, sep = "_")]]<-model
+      
+      did_coefs[[paste("mod",x, y, sep = "_")]]<-summary(model, agg = c("ATT" = "time2::[^-]"))
+      
+      
+      
+    }
+    gg<-
+      ggiplot(list("1 month later"=models[[paste("mod",x, 1, sep = "_")]], 
+                   "2 months later"=models[[paste("mod",x, 2, sep = "_")]],
+                   "3 months later"= models[[paste("mod",x, 3, sep = "_")]],
+                   "4 months later"= models[[paste("mod",x, 4, sep = "_")]],
+                   "5 months later"= models[[paste("mod",x, 5, sep = "_")]],
+                   "6 months later"= models[[paste("mod",x, 6, sep = "_")]]
+      ),
+      pt.join=TRUE, 
+      pt.pch=19,
+      multi_style = 'facet',
+      facet_args = list(ncol=2, 
+                        scales= "free_y",
+                        labeller= labeller(category="")
+      ),
+      col= rep("#008080",6),
+      main= paste0("Treatment effects on ", x)
+      )+ 
+      theme_bw()+
+      theme(legend.position = "none", 
+            plot.title = element_text(hjust = 0.5),
+            axis.title.x = element_blank(),
+            strip.background = element_blank())+
+      geom_point(size=2, alpha=.7)+
+      geom_line(linewidth=1, alpha=.7)
+      
+      ggsave2(gg, file=paste0("../../../../../../Plots/", new_directory,"/DID_", x,".jpeg"), width = 7, height = 5)
+      
+  }
+  
+  
+}
+
+
+create_results(dftwfe, new_directory = "try")
+########JUNK #########
+
 
 #Calculate number of people in each cohort
 
@@ -404,6 +515,3 @@ ggperm2<-dfpermflows %>%
   ggtitle("flow of permanent workers")
 
 plot_grid(ggperm1, ggperm2, nrow = 2)
-
-
-  
