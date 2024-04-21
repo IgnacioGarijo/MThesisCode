@@ -27,7 +27,7 @@ df<-create_manageable_df(df)
 min_time<- min(df$time)
 max_time<-max(df$time)
 
-create_cohort(df, "rehearse")
+create_cohort(df, name="rehearse")
 
 
 
