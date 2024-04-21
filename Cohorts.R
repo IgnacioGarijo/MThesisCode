@@ -13,14 +13,13 @@ theme_set(theme_minimal())
 setwd("C:/Users/ignac/OneDrive - Universidad Loyola Andalucía/Trabajo/Universidad/Máster/2º/2 semestre/TFM/Código/DiegoPuga/esurban_replication/esurban_replication/tmp/mcvl_cdf_2022")
 
 
-##################### FUNCTION THAT CREATES THE COHORTS #####################
 
-#Loading dataframes
+#Loading dataframe
 
 load("finalpanel2019b.Rdata")
-setDT(df)
 
-#Loading income dfs and cleaning so to have only the information needed
+
+############################ FUNCTION TO LOAD DFS WITH A SPECIFIC NAME ###################
 
 loadRData <- function(fileName){
   load(fileName)
@@ -34,6 +33,12 @@ min_month <- 1
 max_month <- 12
 
 
+
+
+####################### FUNCTION TO CREATE THE INCOME DF ######################
+
+create_income_df<-function(min_year=2019, max_year=2022, min_month=1, max_month=12){
+  
 contr1<- loadRData("processed_contribution_1.Rdata")
 contr1 <- contr1[contr1$year >= min_year , ]
 contr1$month <- as.numeric(contr1$month)
@@ -121,17 +126,19 @@ contr12 <- contr12[, c("person_id", "time", "income")]
 dfincome<-rbind(contr1, contr2, contr3, contr4, contr5, contr6, contr7, contr8, contr9, contr10, contr11, contr12)
 
 rm(contr1, contr2, contr3, contr4, contr5, contr6, contr7, contr8, contr9, contr10, contr11, contr12)
+return(dfincome)
+}
+
+########### FUNCTION FOR MANAGEABLE DF ####################
 
 
-
-#Now let's start
-
-
+create_manageable_df<- function(df,min_year=2019, min_month=1){
 setDT(df)
 
 #Reducing the df to make it easier to manage
 
-df<-df[,c("person_id", "exit_date", "entry_date", "year", "month", "days_spell", "job_relationship", "regime", "contr_type", "ncontracts")]
+df<-df[,c("person_id", "exit_date", "entry_date", "year", "month", "days_spell", "job_relationship", "regime", 
+          "contr_type", "ncontracts", "occupation", "sector", "birth_date", "sex","person_muni_latest")]
 df<-df[df$year>=min_year]
 
 #First let's create the time variable for the cohorts
@@ -145,12 +152,20 @@ df[, c("time", "yearmonth", "exit_month"):= list((year - min_year) * 12 + (month
 
 
 df<-df %>% select(-c(exit_date, year, month))
+return(df)
+}
+
+
+
 
 min_time<- min(df$time)
 max_time<-max(df$time)
 
 
-##ACTUAL FUNCTION 
+
+##################### FUNCTION THAT CREATES THE COHORTS #####################
+
+
 
 create_cohort<-function(df, aggregation=NULL, previouscontracts=FALSE, name){
   
@@ -278,17 +293,17 @@ save(df1, file=paste0(name, i, ".Rdata"))
   load(paste0(name, "1.Rdata"))
   
   dff<-df1
-  for (i in (min_time+1):max_time){
-    load(paste0(name, i, ".Rdata"))
-    dff<-rbind(df1, dff)
-    gc()
-  }
+              for (i in (min_time+1):max_time){
+                load(paste0(name, i, ".Rdata"))
+                dff<-rbind(df1, dff)
+                gc()
+              }
   
   save(dff, file=paste0(name,"_panel.Rdata"))
   
-  for (i in min_time:max_time){
-    file.remove(paste0(name, i, ".Rdata"))
-  }
+              for (i in min_time:max_time){
+                file.remove(paste0(name, i, ".Rdata"))
+              }
 }
 
 
@@ -296,7 +311,7 @@ save(df1, file=paste0(name, i, ".Rdata"))
 
 
 
-create_twfe_dataframe<- function(df, first_variable, last_variable, time_dif, treatment_time, months ){
+create_twfe_dataframe<- function(df, first_variable, last_variable, time_dif, treatment_time, months, rdd=FALSE ){
   
   
   dffnames<-names(df[,first_variable:last_variable])
@@ -328,10 +343,80 @@ create_twfe_dataframe<- function(df, first_variable, last_variable, time_dif, tr
   df1<-df1 %>% filter(cohort==time)
   df2<-df2 %>% filter(cohort==time)
   
-  df<-rbind(df1,df2) %>% 
-    mutate(time2=time2-treatment_time)
+      if (rdd=FALSE){
+      df<-rbind(df1,df2) %>% 
+        mutate(time2=time2-treatment_time)
+      
+      return(df)
+      
+      } else {
+        return(list(df1=df1, df2=df2, dfnames=dffnames))
+      }
+      
+}
+
+
+
+
+#######################FUNCTION THAT COMPUTES THE RDD GRAPHS ########################
+
+#First obtain the dfs and names list
+
+create_rdd_figures<-function(df1, df2, dffnames, treatment_time, new_directory){
+  
+  for (x in dffnames){
+    dffrdd1<-df1 %>% 
+      select(cohort, time, time2, starts_with(x)) %>% 
+      select(-x) %>% 
+      pivot_longer(cols = starts_with(x)) %>% 
+      mutate(after=ifelse(time2>(treatment_time-1), "after", "before")) %>% 
+      pivot_wider(names_from = after, values_from = value) %>% 
+      mutate(treatment= "Placebo")
+    
+    dffrdd2<-df2 %>% 
+      select(cohort, time, time2,starts_with(x)) %>% 
+      select(-x) %>% 
+      pivot_longer(cols = starts_with(x)) %>% 
+      mutate(after=ifelse(time2>(treatment_time-1), "after", "before")) %>% 
+      pivot_wider(names_from = after, values_from = value) %>% 
+      mutate(treatment="treatment")
+    
+    dfrdd<-rbind(dffrdd1, dffrdd2)
+    
+    
+    gg<-
+      dfrdd%>% 
+      mutate(after=ifelse(after%in% c(0,1), NA, after)) %>% 
+      mutate(time=time-treatment_time) %>%                     
+      ggplot(aes(x=time2,color=as.factor(treatment))) +
+      geom_point(aes(y=before, shape=as.factor(treatment), alpha=as.factor(treatment))) +
+      geom_line(aes(y=before, linetype=as.factor(treatment), alpha=as.factor(treatment))) +
+      geom_point(aes(y=after, shape= as.factor(treatment), alpha=as.factor(treatment)))+
+      geom_line(aes(y=after, linetype=as.factor(treatment), alpha=as.factor(treatment))) +
+      geom_line(stat = "smooth", se=F, aes(y=after, alpha=as.factor(treatment)), method = "lm")+
+      geom_line(stat="smooth", se=F, aes(y=before, alpha=as.factor(treatment)), method = "lm")+
+      geom_vline(xintercept = 25)+ 
+      scale_color_manual(values = c("#00203FFF", "#008080"))+
+      scale_alpha_manual(values = c(.7,1))+
+      scale_shape_manual(values = c(18,16))+
+      scale_linetype_manual(values = c("dashed", "solid"))+
+      theme_bw()+
+      theme(legend.position = "bottom", 
+            legend.title = element_blank(),
+            axis.title.y=element_blank())+
+      facet_wrap(~name)
+    ggsave2(gg, file=paste0("../../../../../../Plots/", new_directory, "/", x, ".jpeg"), width=8, height = 7)
+  }
   
 }
+
+
+
+
+
+
+
+
 
 
 
