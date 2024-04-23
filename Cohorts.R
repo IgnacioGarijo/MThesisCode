@@ -1,22 +1,22 @@
-library(haven)
-library(data.table)
-library(tidyverse)
-library(lubridate) #to calculate differences between dates
-library(zoo) 
-library(cowplot) #To save plots
-#library(didimputation)
-library(fixest) #For feols
-library(ggfixest) #To plot the DiD with ggiplot
+# library(haven)
+# library(data.table)
+# library(tidyverse)
+# library(lubridate) #to calculate differences between dates
+# library(zoo) 
+# library(cowplot) #To save plots
+# #library(didimputation)
+# library(fixest) #For feols
+# library(ggfixest) #To plot the DiD with ggiplot
+# 
+# theme_set(theme_minimal())
 
-theme_set(theme_minimal())
-
-setwd("C:/Users/ignac/OneDrive - Universidad Loyola Andalucía/Trabajo/Universidad/Máster/2º/2 semestre/TFM/Código/DiegoPuga/esurban_replication/esurban_replication/tmp/mcvl_cdf_2022")
+# setwd("C:/Users/ignac/OneDrive - Universidad Loyola Andalucía/Trabajo/Universidad/Máster/2º/2 semestre/TFM/Código/DiegoPuga/esurban_replication/esurban_replication/tmp/mcvl_cdf_2022")
 
 
 
 #Loading dataframe
 
-load("finalpanel2019b.Rdata")
+# load("finalpanel2019b.Rdata")
 
 
 ############################ FUNCTION TO LOAD DFS WITH A SPECIFIC NAME ###################
@@ -27,10 +27,10 @@ loadRData <- function(fileName){
 }
 
 
-min_year <- 2019
-max_year <- 2022
-min_month <- 1
-max_month <- 12
+# min_year <- 2019
+# max_year <- 2022
+# min_month <- 1
+# max_month <- 12
 
 
 
@@ -158,16 +158,18 @@ return(df)
 
 
 
-min_time<- min(df$time)
-max_time<-max(df$time)
-
+# min_time<- min(df$time)
+# max_time<-max(df$time)
+# 
 
 
 ##################### FUNCTION THAT CREATES THE COHORTS #####################
 
 
 
-create_cohort<-function(df, aggregation=NULL, previouscontracts=FALSE, name){
+create_cohort<-function(df, aggregation=NULL,
+                        previouscontracts=FALSE,
+                        name){
   
 for (i in min_time:max_time){
   if(previouscontracts) {
@@ -183,14 +185,7 @@ for (i in min_time:max_time){
       filter(!is.na(treatment)) %>%
       select(-treatment)
   }
-  
-df1<-df %>% 
-  group_by(person_id) %>% 
-  mutate(treatment = ifelse(any(time==i & yearmonth==exit_month & entry_date<20220000), 
-                            1, 
-                            NA)) %>% 
-  filter(!is.na(treatment)) %>% 
-  select(-treatment)
+
 
 #Now let's create a complete grid for the individuals so there is one observation per person per month
 
@@ -343,7 +338,7 @@ create_twfe_dataframe<- function(df, first_variable, last_variable, time_dif, tr
   df1<-df1 %>% filter(cohort==time)
   df2<-df2 %>% filter(cohort==time)
   
-      if (rdd=FALSE){
+      if (rdd==FALSE){
       df<-rbind(df1,df2) %>% 
         mutate(time2=time2-treatment_time)
       
@@ -363,6 +358,7 @@ create_twfe_dataframe<- function(df, first_variable, last_variable, time_dif, tr
 #First obtain the dfs and names list
 
 create_rdd_figures<-function(df1, df2, dffnames, treatment_time, new_directory){
+  dir.create(paste0("../../../../../../Plots/", new_directory))
   
   for (x in dffnames){
     dffrdd1<-df1 %>% 
@@ -395,7 +391,7 @@ create_rdd_figures<-function(df1, df2, dffnames, treatment_time, new_directory){
       geom_line(aes(y=after, linetype=as.factor(treatment), alpha=as.factor(treatment))) +
       geom_line(stat = "smooth", se=F, aes(y=after, alpha=as.factor(treatment)), method = "lm")+
       geom_line(stat="smooth", se=F, aes(y=before, alpha=as.factor(treatment)), method = "lm")+
-      geom_vline(xintercept = 25)+ 
+      geom_vline(xintercept = treatment_time)+ 
       scale_color_manual(values = c("#00203FFF", "#008080"))+
       scale_alpha_manual(values = c(.7,1))+
       scale_shape_manual(values = c(18,16))+
@@ -426,7 +422,7 @@ create_rdd_figures<-function(df1, df2, dffnames, treatment_time, new_directory){
 
 
 
-create_results<- function(dftwfe, new_directory){
+create_results<- function(dftwfe, new_directory, disaggregation=FALSE){
   dir.create(paste0("../../../../../../Plots/", new_directory))
   
   dff1<-dftwfe[dftwfe$time2<max(dftwfe$time2),]
@@ -437,8 +433,10 @@ create_results<- function(dftwfe, new_directory){
   dff6<-dftwfe[dftwfe$time2<max(dftwfe$time2)-5,]
   
   dflist<-list(dff1, dff2, dff3, dff4,dff5, dff6)
+  modelsgg<-list()
   models<-list()
   did_coefs<-list()
+
   outcome_variables<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
   
   for(x in outcome_variables){
@@ -447,20 +445,26 @@ create_results<- function(dftwfe, new_directory){
       model<-feols(reformulate("i(time2, treatment, ref = +0)", paste0(x,y)), 
                    data = dflist[[y]])
       
-      models[[paste("mod",x, y, sep = "_")]]<-model
-      
-      did_coefs[[paste("mod",x, y, sep = "_")]]<-summary(model, agg = c("ATT" = "time2::[^-]"))
-      
-      
+      modelsgg[[paste("mod",x, y, sep = "_")]]<-model
+
+      if (disaggregation==FALSE ){
+        models[[paste("mod",x, y, sep = "_")]]<-model
+        did_coefs[[paste("mod",x, y, sep = "_")]]<-summary(model, agg = c("ATT" = "time2::[^-]"))
+      } else if (disaggregation==TRUE) {
+        models[[paste("mod",g,x, y, sep = "_")]]<-model
+        did_coefs[[paste("mod",g,x, y, sep = "_")]]<-summary(model, agg = c("ATT" = "time2::[^-]"))
+      }
       
     }
+    
+    
     gg<-
-      ggiplot(list("1 month later"=models[[paste("mod",x, 1, sep = "_")]], 
-                   "2 months later"=models[[paste("mod",x, 2, sep = "_")]],
-                   "3 months later"= models[[paste("mod",x, 3, sep = "_")]],
-                   "4 months later"= models[[paste("mod",x, 4, sep = "_")]],
-                   "5 months later"= models[[paste("mod",x, 5, sep = "_")]],
-                   "6 months later"= models[[paste("mod",x, 6, sep = "_")]]
+      ggiplot(list("1 month later"=modelsgg[[paste("mod",x, 1, sep = "_")]], 
+                   "2 months later"=modelsgg[[paste("mod",x, 2, sep = "_")]],
+                   "3 months later"= modelsgg[[paste("mod",x, 3, sep = "_")]],
+                   "4 months later"= modelsgg[[paste("mod",x, 4, sep = "_")]],
+                   "5 months later"= modelsgg[[paste("mod",x, 5, sep = "_")]],
+                   "6 months later"= modelsgg[[paste("mod",x, 6, sep = "_")]]
       ),
       pt.join=TRUE, 
       pt.pch=19,
@@ -473,130 +477,139 @@ create_results<- function(dftwfe, new_directory){
       main= paste0("Treatment effects on ", x)
       )+ 
       theme_bw()+
-      theme(legend.position = "none", 
+      theme(legend.position = "none",
             plot.title = element_text(hjust = 0.5),
             axis.title.x = element_blank(),
-            strip.background = element_blank())+
+            strip.background = element_rect(fill = "#9dbbc9"))+
       geom_point(size=2, alpha=.7)+
       geom_line(linewidth=1, alpha=.7)
       
       ggsave2(gg, file=paste0("../../../../../../Plots/", new_directory,"/DID_", x,".jpeg"), width = 7, height = 5)
       
   }
-  
-  
+  tables<-list("models"=models, "did_coefs"=did_coefs)
+  return(tables)
 }
 
 
-create_results(dftwfe, new_directory = "try")
+### FIX LOCATION CODES ##
+
+replace_province <- function(x) {
+  ifelse(nchar(x) == 1, NA,
+         ifelse(nchar(x) == 4, paste0("0", substr(x, 1, 1)),
+                ifelse(nchar(x) >= 5, substr(x, 1, 2), x)))
+}
+
+
+
 ########JUNK #########
 
 
 #Calculate number of people in each cohort
-
-df1<-df %>% 
-  #filter(entry_date<20220000) %>% 
-  mutate(laid_off= ifelse(contr_type=="permanent" & yearmonth==exit_month,1,0),
-         end_contract= ifelse(contr_type %in% c("project-based", "Internship or training", "other temporary", "production circumstances", "Replacement") & yearmonth==exit_month,1,0))
-
-df1<-df1 %>% 
-  group_by(time) %>% 
-  summarize(permanent_laidoff=sum(laid_off, na.rm=T),
-            temporary_ended=sum(end_contract)) %>% 
-  pivot_longer(cols = c(2,3)) %>% 
-  group_by(name) %>% 
-  mutate(diffY=(value-lag(value,12))/lag(value,12))
-
-df1 %>% 
-  ggplot(aes(x=time, y=value, color=name))+
-  geom_line()+
-  geom_vline(xintercept = c(13,25))
-
-
-## Descriptive graphs ##
-
-df1<-df %>% 
-  mutate(time %in% c(8:28))
-
-
-complete_grid<-expand.grid(person_id=unique(df1$person_id),
-                           time=8:28) 
-
-df1<-merge(complete_grid, df1, by=c("person_id", "time"), all.x = TRUE)
-
-
-df1$days_spell[is.na(df1$days_spell)]<-0
-df1$ncontracts[is.na(df1$ncontracts)]<-0
-
-
-setDT(df1)
-
-
-df1[, emp:= ifelse(!is.na(contr_type)| job_relationship %in% c(87,901,902,910,930,932,937,951),1,0)]
-
-df1[,  situation:= ifelse(!is.na(contr_type),
-                          contr_type,
-                          ifelse(regime %in% c(500:540, 721:740),
-                                 "self-emp",ifelse(emp==1, "other",
-                                                   "unemp")
-                          )
-)
-]
-
-df1$situation[is.na(df1$situation)]<-"unemp"
-
-
-dfemp<-df1 %>% 
-  group_by(time) %>% 
-  summarize(employed= sum(emp))
-
-ggunemp1<-dfemp %>% 
-  ggplot(aes(x=time, y=employed))+
-  geom_line()+
-  geom_vline(xintercept = c(13,25))+
-  ggtitle("Stock of employed")
-
-dfnewunemp<-df1 %>% 
-  arrange(person_id, time) %>% 
-  mutate(new_unemp=ifelse(emp==0 & lag(emp)==1, 1, 0),
-         new_emp=ifelse(emp==1 & lag(emp)==0,1,0)) %>% 
-  group_by(time) %>% 
-  summarize(new_unemp=sum(new_unemp),
-            new_emp=sum(new_emp)) %>% 
-  pivot_longer(cols = c(2,3))
-
-ggunemp2<-dfnewunemp %>% 
-  filter(time>8) %>% 
-  ggplot(aes(x=time, y=value, color=name)) +
-  geom_line()+
-  geom_vline(xintercept = c(13,25))+
-  theme(legend.position = "bottom",
-        legend.title = element_blank())+
-  ggtitle("Flows of new employment and unemployment spells")
-
-plot_grid(ggunemp1, ggunemp2, nrow = 2, rel_heights = c(1,1.5))
-
-dfperm<-df1 %>% 
-  group_by(time) %>% 
-  summarize(permanent_stock= sum(situation=="permanent"))
-
-ggperm1<-dfperm %>% 
-  ggplot(aes(x=time, y=permanent_stock))+
-  geom_line()+
-  geom_vline(xintercept = c(13,25))+
-  ggtitle("Stock of permanent workers")
-
-dfpermflows<-df1 %>% 
-  filter(situation=="permanent") %>% 
-  mutate(entry_month=entry_date %/% 100,
-         new_permanent= ifelse(situation=="permanent" & entry_month==yearmonth, 1, 0)) %>% 
-  group_by(time) %>% 
-  summarise(permanent_flows=sum(new_permanent))
-
-ggperm2<-dfpermflows %>% 
-  ggplot(aes(x=time, y =permanent_flows))+
-  geom_line() +
-  geom_vline(xintercept = c(13,25))+
-  ggtitle("flow of permanent workers")
-
-plot_grid(ggperm1, ggperm2, nrow = 2)
+# 
+# df1<-df %>% 
+#   #filter(entry_date<20220000) %>% 
+#   mutate(laid_off= ifelse(contr_type=="permanent" & yearmonth==exit_month,1,0),
+#          end_contract= ifelse(contr_type %in% c("project-based", "Internship or training", "other temporary", "production circumstances", "Replacement") & yearmonth==exit_month,1,0))
+# 
+# df1<-df1 %>% 
+#   group_by(time) %>% 
+#   summarize(permanent_laidoff=sum(laid_off, na.rm=T),
+#             temporary_ended=sum(end_contract)) %>% 
+#   pivot_longer(cols = c(2,3)) %>% 
+#   group_by(name) %>% 
+#   mutate(diffY=(value-lag(value,12))/lag(value,12))
+# 
+# df1 %>% 
+#   ggplot(aes(x=time, y=value, color=name))+
+#   geom_line()+
+#   geom_vline(xintercept = c(13,25))
+# 
+# 
+# ## Descriptive graphs ##
+# 
+# df1<-df %>% 
+#   mutate(time %in% c(8:28))
+# 
+# 
+# complete_grid<-expand.grid(person_id=unique(df1$person_id),
+#                            time=8:28) 
+# 
+# df1<-merge(complete_grid, df1, by=c("person_id", "time"), all.x = TRUE)
+# 
+# 
+# df1$days_spell[is.na(df1$days_spell)]<-0
+# df1$ncontracts[is.na(df1$ncontracts)]<-0
+# 
+# 
+# setDT(df1)
+# 
+# 
+# df1[, emp:= ifelse(!is.na(contr_type)| job_relationship %in% c(87,901,902,910,930,932,937,951),1,0)]
+# 
+# df1[,  situation:= ifelse(!is.na(contr_type),
+#                           contr_type,
+#                           ifelse(regime %in% c(500:540, 721:740),
+#                                  "self-emp",ifelse(emp==1, "other",
+#                                                    "unemp")
+#                           )
+# )
+# ]
+# 
+# df1$situation[is.na(df1$situation)]<-"unemp"
+# 
+# 
+# dfemp<-df1 %>% 
+#   group_by(time) %>% 
+#   summarize(employed= sum(emp))
+# 
+# ggunemp1<-dfemp %>% 
+#   ggplot(aes(x=time, y=employed))+
+#   geom_line()+
+#   geom_vline(xintercept = c(13,25))+
+#   ggtitle("Stock of employed")
+# 
+# dfnewunemp<-df1 %>% 
+#   arrange(person_id, time) %>% 
+#   mutate(new_unemp=ifelse(emp==0 & lag(emp)==1, 1, 0),
+#          new_emp=ifelse(emp==1 & lag(emp)==0,1,0)) %>% 
+#   group_by(time) %>% 
+#   summarize(new_unemp=sum(new_unemp),
+#             new_emp=sum(new_emp)) %>% 
+#   pivot_longer(cols = c(2,3))
+# 
+# ggunemp2<-dfnewunemp %>% 
+#   filter(time>8) %>% 
+#   ggplot(aes(x=time, y=value, color=name)) +
+#   geom_line()+
+#   geom_vline(xintercept = c(13,25))+
+#   theme(legend.position = "bottom",
+#         legend.title = element_blank())+
+#   ggtitle("Flows of new employment and unemployment spells")
+# 
+# plot_grid(ggunemp1, ggunemp2, nrow = 2, rel_heights = c(1,1.5))
+# 
+# dfperm<-df1 %>% 
+#   group_by(time) %>% 
+#   summarize(permanent_stock= sum(situation=="permanent"))
+# 
+# ggperm1<-dfperm %>% 
+#   ggplot(aes(x=time, y=permanent_stock))+
+#   geom_line()+
+#   geom_vline(xintercept = c(13,25))+
+#   ggtitle("Stock of permanent workers")
+# 
+# dfpermflows<-df1 %>% 
+#   filter(situation=="permanent") %>% 
+#   mutate(entry_month=entry_date %/% 100,
+#          new_permanent= ifelse(situation=="permanent" & entry_month==yearmonth, 1, 0)) %>% 
+#   group_by(time) %>% 
+#   summarise(permanent_flows=sum(new_permanent))
+# 
+# ggperm2<-dfpermflows %>% 
+#   ggplot(aes(x=time, y =permanent_flows))+
+#   geom_line() +
+#   geom_vline(xintercept = c(13,25))+
+#   ggtitle("flow of permanent workers")
+# 
+# plot_grid(ggperm1, ggperm2, nrow = 2)
