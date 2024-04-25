@@ -150,7 +150,6 @@ df[, c("time", "yearmonth", "exit_month"):= list((year - min_year) * 12 + (month
                                                   exit_date %/% 100)]
 
 
-
 df<-df %>% select(-c(exit_date, year, month))
 return(df)
 }
@@ -379,7 +378,6 @@ create_rdd_figures<-function(df1, df2, dffnames, treatment_time, new_directory){
     
     dfrdd<-rbind(dffrdd1, dffrdd2)
     
-    
     gg<-
       dfrdd%>% 
       mutate(after=ifelse(after%in% c(0,1), NA, after)) %>% 
@@ -402,6 +400,7 @@ create_rdd_figures<-function(df1, df2, dffnames, treatment_time, new_directory){
             axis.title.y=element_blank())+
       facet_wrap(~name)
     ggsave2(gg, file=paste0("../../../../../../Plots/", new_directory, "/", x, ".jpeg"), width=8, height = 7)
+    
   }
   
 }
@@ -422,8 +421,8 @@ create_rdd_figures<-function(df1, df2, dffnames, treatment_time, new_directory){
 
 
 
-create_results<- function(dftwfe, new_directory, disaggregation=FALSE){
-  dir.create(paste0("../../../../../../Plots/", new_directory))
+create_results<- function(dftwfe, new_directory, disaggregation=FALSE, figures=TRUE){
+ if(figures==T) {dir.create(paste0("../../../../../../Plots/", new_directory))}
   
   dff1<-dftwfe[dftwfe$time2<max(dftwfe$time2),]
   dff2<-dftwfe[dftwfe$time2<max(dftwfe$time2)-1,]
@@ -436,6 +435,7 @@ create_results<- function(dftwfe, new_directory, disaggregation=FALSE){
   modelsgg<-list()
   models<-list()
   did_coefs<-list()
+  pre_trends<-list()
 
   outcome_variables<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
   
@@ -450,14 +450,17 @@ create_results<- function(dftwfe, new_directory, disaggregation=FALSE){
       if (disaggregation==FALSE ){
         models[[paste("mod",x, y, sep = "_")]]<-model
         did_coefs[[paste("mod",x, y, sep = "_")]]<-summary(model, agg = c("ATT" = "time2::[^-]"))
+        pre_trends[[paste("mod",x, y, sep = "_")]]<-wald(model, "time2::-")
       } else if (disaggregation==TRUE) {
         models[[paste("mod",g,x, y, sep = "_")]]<-model
         did_coefs[[paste("mod",g,x, y, sep = "_")]]<-summary(model, agg = c("ATT" = "time2::[^-]"))
+        pre_trends[[paste("mod",g,x, y, sep = "_")]]<-wald(model, "time2::-")
+        
       }
       
     }
     
-    
+    if (figures==TRUE){
     gg<-
       ggiplot(list("1 month later"=modelsgg[[paste("mod",x, 1, sep = "_")]], 
                    "2 months later"=modelsgg[[paste("mod",x, 2, sep = "_")]],
@@ -485,9 +488,9 @@ create_results<- function(dftwfe, new_directory, disaggregation=FALSE){
       geom_line(linewidth=1, alpha=.7)
       
       ggsave2(gg, file=paste0("../../../../../../Plots/", new_directory,"/DID_", x,".jpeg"), width = 7, height = 5)
-      
+    } else{}
   }
-  tables<-list("models"=models, "did_coefs"=did_coefs)
+  tables<-list("models"=models, "did_coefs"=did_coefs, "pre_trends"=pre_trends)
   return(tables)
 }
 

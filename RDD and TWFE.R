@@ -10,27 +10,34 @@ library(ggfixest) #To plot the DiD with ggiplot
 library(broom)
 library(modelsummary)
 library(texreg) #for the tables
-
+library(broom)   #Para los mapas
+library(rgdal) #Mapas
 
 theme_set(theme_minimal())
 
 setwd("C:/Users/ignac/OneDrive - Universidad Loyola Andalucía/Trabajo/Universidad/Máster/2º/2 semestre/TFM/Código/DiegoPuga/esurban_replication/esurban_replication/tmp/mcvl_cdf_2022")
 
-source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
 
+#Using the functions
+
+# load("finalpanel2019c.Rdata")
+# 
+# dfincome<-create_income_df(min_year=2019)
+# 
+# df<-create_manageable_df(df, min_year = 2019)
+# 
+# save(df, file = "manageable_df.Rdata")
+# save(dfincome, file="manageable_dfincome.Rdata")
+
+
+source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
 
 variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
 labels2<- c("1 month later", "2 months later", "3 months later", "4 months later", "5 months later", "6 months later")
 names(labels2)<-1:6
 
-#Using the functions
-
-load("finalpanel2019b.Rdata")
-
-dfincome<-create_income_df(min_year=2019)
-
-df<-create_manageable_df(df, min_year = 2019)
-
+load("manageable_df.Rdata")
+load("manageable_dfincome.Rdata")
 min_time<- min(df$time)
 max_time<-max(df$time)
 
@@ -39,9 +46,9 @@ max_time<-max(df$time)
 ############### FIRST ANALYSIS AGGREGATED ################
 
 
-create_cohort(df, name="fromanykind")
+create_cohort(df, name="fromanykind2")
 
-load("fromanykind_panel.Rdata")
+load("fromanykind2_panel.Rdata")
 
 dftwfe<-create_twfe_dataframe(dff,
                               first_variable = 2, 
@@ -61,11 +68,11 @@ df1<-dfsrdd$df1
 df2<-dfsrdd$df2
 dfnames<-dfsrdd$dfnames
 
-create_rdd_figures(df1 = df1, df2 = df2, dffnames = dfnames, treatment_time = 37, new_directory = "verylong2")
+create_rdd_figures(df1 = df1, df2 = df2, dffnames = dfnames, treatment_time = 37, new_directory = "verylong3")
 
 
 
-result_models<-create_results(dftwfe = dftwfe, new_directory = "verylongtwfe2")
+result_models<-create_results(dftwfe = dftwfe, new_directory = "verylongtwfe3")
 
 dir.create("../../../../../../Tables/DID_aggregated/")
 
@@ -94,10 +101,24 @@ for (variable in variable_names) {
 
 ################# SECOND ANALYSIS, BY SITUATION ###################
 
+rm(list=ls())
+source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
+
+variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
+labels2<- c("1 month later", "2 months later", "3 months later", "4 months later", "5 months later", "6 months later")
+names(labels2)<-1:6
+
+load("manageable_df.Rdata")
+load("manageable_dfincome.Rdata")
+min_time<- min(df$time)
+max_time<-max(df$time)
+
+
+
+
 create_cohort(df, name = "bysituation", aggregation = "situation")
 
 load("bysituation_panel.Rdata")
-
 
 
 result_models<- list()
@@ -114,9 +135,6 @@ dftwfe<-create_twfe_dataframe(dff[dff$group==g,],
                               months = 30)
 result_models[[g]]<-create_results(dftwfe, paste0("DID_disaggregated", g),disaggregation = TRUE )
 }
-
-
-
 
 
 
@@ -196,6 +214,19 @@ for (contract in contracts) {
 
 ###############THIRD ANALYSIS BY GENDER ####################
 
+rm(list=ls())
+source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
+
+variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
+labels2<- c("1 month later", "2 months later", "3 months later", "4 months later", "5 months later", "6 months later")
+names(labels2)<-1:6
+
+load("manageable_df.Rdata")
+load("manageable_dfincome.Rdata")
+min_time<- min(df$time)
+max_time<-max(df$time)
+
+
 create_cohort(df, name = "bygender", aggregation = "sex")
 
 load("bygender_panel.Rdata")
@@ -206,7 +237,7 @@ dff<-dff %>%
 
 result_models<- list()
 
-groups<-c("men", "women")
+groups<-unique(dff$group)
 
 
 for (g in groups){
@@ -216,7 +247,7 @@ for (g in groups){
                                 time_dif = 12,
                                 treatment_time = 37,
                                 months = 30)
-  result_models[[g]]<-create_results(dftwfe, paste0("DID_disaggregated", g),disaggregation = TRUE )
+  result_models[[g]]<-create_results(dftwfe, paste0("DID_disaggregated", g),disaggregation = TRUE, figures = F )
 }
 
 
@@ -226,10 +257,12 @@ results<-data.frame()
 for (g in groups){
   for (variable in variable_names){
     for(number in 1:6){
+      pretrends<-result_models[[g]]$pre_trends[[paste("mod", g, variable, number, sep = "_")]]$p
       results1<- rownames_to_column(as.data.frame(result_models[[g]]$models[[paste("mod", g, variable, number, sep = "_")]]$coeftable)) %>% 
         mutate(group=g, 
                variable= variable, 
-               months_later=number)
+               months_later=number,
+               pre_trends=pretrends)
       results<-rbind(results, results1)
     }
   }
@@ -245,13 +278,16 @@ results<-results %>%
             months_later=months_later,
             se= `Std. Error`,
             plus95=coefficient+se*1.96,
-            minus95=coefficient-se*1.96)
+            minus95=coefficient-se*1.96,
+            pretrends=pre_trends,
+            pretest=ifelse(pretrends<=.05, "significant", "Not significant"))
 
 
 
 
 for (x in variable_names){
-  gg<-results %>% 
+  gg<-
+    results %>% 
     filter(variable==x) %>%  
     ggplot(aes(x=time, group=group, color=group))+
     geom_point(aes(y=coefficient), alpha=.7)+
@@ -271,7 +307,7 @@ for (x in variable_names){
 }
 
 
- dir.create("../../../../../../Tables/did_bygender")
+ #dir.create("../../../../../../Tables/did_bygender")
 
 for (g in groups) {
   for (variable in variable_names) {
@@ -298,29 +334,775 @@ for (g in groups) {
 
 ################ FOURTH: ANALYSIS BY PROVINCE ##############
 
+rm(list=ls())
+source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
+
+variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
+labels2<- c("1 month later", "2 months later", "3 months later", "4 months later", "5 months later", "6 months later")
+names(labels2)<-1:6
+
+load("manageable_df.Rdata")
+load("manageable_dfincome.Rdata")
+min_time<- min(df$time)
+max_time<-max(df$time)
 
 
+ shapefile_provincias <- readOGR("provincias/Provincias_ETRS89_30N.shp")
+ 
+ data_provincias <- tidy(shapefile_provincias)
+ nombres_provincias <- tibble(shapefile_provincias$Texto) %>% 
+   mutate(id = as.character(seq(0, nrow(.)-1)))
+ data_provincias_mapa <- data_provincias %>% 
+   left_join(nombres_provincias, by = "id")
+ 
+ regional_plot2 <- data_provincias_mapa%>%
+   mutate(lat_c = ifelse(lat <35e5, lat + 75e4, lat),
+          long_c = ifelse(long <(-5e5), (long + 65e4), long),
+          id2= as.numeric(id)+1)
+ 
+ #Exploring min and max values to know where to draw the line
+ regional_plot2%>%
+   filter(`shapefile_provincias$Texto` %in% c("Las Palmas", "Santa Cruz de Tenerife"))%>%
+   summarize(a = min(lat_c),
+             b = max(lat_c),
+             c = min(long_c),
+             d = max(long_c))
+ 
+ 
+ #Creating separate df
+ canaries_line <- data.frame(long = c(-354502, 134136, 134136),
+                             lat = c(4036484, 4036484, 3882137))
+ 
+
+ 
+
+
+ 
 # Change the local codes to province codes
  
-df$person_muni_latest <- replace_province(df$person_muni_latest)
+ df$person_muni_latest <- replace_province(df$person_muni_latest)
+# 
+ create_cohort(df, aggregation="person_muni_latest", name="byregion")
 
- 
+
+load("byregion_panel.Rdata")
+
+
+
+result_models<- list()
+
+groups<-unique(dff$group)
+
+
+for (g in groups){
+  dftwfe<-create_twfe_dataframe(dff[dff$group==g,],
+                                first_variable = 3, 
+                                last_variable = 16, 
+                                time_dif = 12,
+                                treatment_time = 37,
+                                months = 30)
+  result_models[[g]]<-create_results(dftwfe, paste0("DID_disaggregated", g),disaggregation = TRUE, figures = F )
+}
+
+
+
+results<-data.frame()
+
+for (g in groups){
+  for (variable in variable_names){
+    for(number in c(1,3,5)){
+      pretrends<-result_models[[g]]$pre_trends[[paste("mod", g, variable, number, sep = "_")]]$p
+      results1<- rownames_to_column(as.data.frame(result_models[[g]]$did_coefs[[paste("mod", g, variable, number, sep = "_")]]$coeftable)) %>% 
+        mutate(group=g, 
+               variable= variable, 
+               months_later=number,
+               pre_trends=pretrends)
+      results<-rbind(results, results1)
+    }
+  }
+}
+
+
+results<-results %>% 
+  filter(rowname=="ATT") %>% 
+  transmute(rowname=rowname,
+            coefficient= ifelse(grepl("^salar", variable), Estimate/100, Estimate),
+            pvalue= `Pr(>|t|)`,
+            group=group,
+            variable=variable,
+            months_later=months_later,
+            se= `Std. Error`,
+            plus95=coefficient+se*1.96,
+            minus95=coefficient-se*1.96,
+            id2=as.numeric(group),
+            stars=ifelse(pvalue<=0.1, "significant", "Not significant"),
+            pretrends=pre_trends,
+            pretest= ifelse(pretrends<=0.05, "significant", "Not significant"),
+            relevant= ifelse(stars=="significant" & pretest =="Not significant", "relevant", "non-relevant"))
+
+
+for (x in variable_names){
+results1<-results %>% 
+  filter(variable==x)
+
+map_df<-left_join(regional_plot2, results1, by="id2")
+
+if (x!="project_based"){
+gg<-map_df %>%
+  ggplot() +
+  geom_polygon(aes( x= long_c, 
+                    y = lat_c, 
+                    group = group.x,
+                    fill=coefficient,
+                    color=as.factor(relevant), 
+                    alpha=as.factor(relevant)),
+               linewidth = 0.05 ) +
+  geom_path(data = canaries_line, aes(x=long, y = lat, group = NULL), color = "grey40")+
+  theme_void() +
+  theme(panel.background = element_rect(linewidth= 1, color = "white", fill = "white")) +
+  scale_fill_gradient(low="#d0a5ae", 
+                      high = "#19547b")+
+  scale_alpha_manual(values = c(0.5, 1))+
+  guides(color="none",
+         alpha="none")+
+  theme(legend.title=element_blank())+
+  scale_color_manual(values = c("white", "black"))+
+  facet_wrap(~months_later, labeller = labeller(months_later=labels2) )
+}else{
+  gg<-map_df %>%
+    ggplot() +
+    geom_polygon(aes( x= long_c,
+                      y = lat_c,
+                      group = group.x,
+                      fill=coefficient,
+                      color="black"),
+                 linewidth = 0.05 ) +
+    geom_path(data = canaries_line, aes(x=long, y = lat, group = NULL), color = "grey40")+
+    theme_void() +
+    theme(panel.background = element_rect(linewidth= 1, color = "white", fill = "white")) +
+    scale_fill_gradient(low="#d0a5ae",
+                        high = "#19547b")+
+    guides(color="none",
+           alpha="none")+
+    theme(legend.title=element_blank())+
+    scale_color_manual(values = c("white", "black"))+
+    facet_wrap(~months_later, labeller = labeller(months_later=labels2) )
+}
+
+
+ggsave2(gg, file=paste0("../../../../../../Plots/DID_byprovince/", x,".jpeg"), width = 10, height = 6)
+
+}
+
+
+
+
+
 ################ FIFTH: BY OCCUPATION ###################
+rm(list=ls())
+source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
+
+variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
+labels2<- c("1 month later", "2 months later", "3 months later", "4 months later", "5 months later", "6 months later")
+names(labels2)<-1:6
+
+load("manageable_df.Rdata")
+load("manageable_dfincome.Rdata")
+min_time<- min(df$time)
+max_time<-max(df$time)
+
+
+
+create_cohort(df, aggregation = "occupation", name="byoccupation")
  
-create_cohort(df, aggregation = "occupation", "byocuppation")
- 
+load("byoccupation_panel.Rdata")
+
+
+result_models<- list()
+
+dff<-dff %>% filter(!is.na(group), group!=13)
+groups<-unique(dff$group)
+
+
+for (g in groups){
+  dftwfe<-create_twfe_dataframe(dff[dff$group==g,],
+                                first_variable = 3, 
+                                last_variable = 16, 
+                                time_dif = 12,
+                                treatment_time = 37,
+                                months = 30)
+  result_models[[g]]<-create_results(dftwfe, paste0("DID_disaggregated", g),disaggregation = TRUE, figures = F )
+}
+
+
+
+results<-data.frame()
+
+for (g in groups){
+  for (variable in variable_names){
+    for(number in c(1,3,5)){
+      pretrends<-result_models[[g]]$pre_trends[[paste("mod", g, variable, number, sep = "_")]]$p
+      results1<- rownames_to_column(as.data.frame(result_models[[g]]$did_coefs[[paste("mod", g, variable, number, sep = "_")]]$coeftable)) %>% 
+        mutate(group=g, 
+               variable= variable, 
+               months_later=number,
+               pre_trends=pretrends)
+      results<-rbind(results, results1)
+    }
+  }
+}
+
+
+results<-results %>% 
+  filter(rowname=="ATT") %>% 
+  transmute(rowname=rowname,
+            coefficient= ifelse(grepl("^salar", variable), Estimate/100, Estimate),
+            pvalue= `Pr(>|t|)`,
+            group=group,
+            group2= case_when(
+              group == 1 ~ "Engineers/Top Management",
+              group == 2 ~ "Technical Engineers/Experts",
+              group == 3 ~ "Managers",
+              group == 4 ~ "UntitledAssistants",
+              group == 5 ~ "Administrative Officers",
+              group == 6 ~ "Subordinates",
+              group == 7 ~ "Administrative Assistants",
+              group == 8 ~ "1st 2nd Grade Officers",
+              group == 9 ~ "3rd Grade Officers/Specialists",
+              group == 10 ~ "Unqualified +18",
+              group ==11 ~ "<18 years old",
+              TRUE ~ NA_character_
+            ),
+            variable=variable,
+            months_later=months_later,
+            se= `Std. Error`,
+            plus95=ifelse(variable=="salaries",(Estimate+se*1.96)/100,Estimate+se*1.96),
+            minus95=ifelse(variable=="salaries",(Estimate-se*1.96)/100,Estimate-se*1.96),
+            pretrends=pre_trends,
+            stars=ifelse(pvalue<=0.1, "significant", "Not significant"),
+            pretest=ifelse(pretrends<=.05, "significant", "Not significant"))
+
+for (x in variable_names){
+  results1<-results %>% 
+    filter(variable==x)
+
+gg<-
+  results1 %>% 
+  ggplot(aes(y=group2, x=coefficient))+
+  geom_point(aes(color=pretest), fill="#008080",size=3,shape=21, alpha=.7)+
+  geom_errorbarh(aes(xmax=plus95, xmin=minus95), color="#008080", alpha=.5)+
+  theme_bw()+
+  theme(axis.title = element_blank(),
+        axis.text.x = element_text(angle = 90),
+        legend.position = "none")+
+  geom_vline(xintercept = 0)+
+  scale_color_manual(values = c("#008080", "red"))+
+  facet_wrap(~months_later, labeller = labeller(months_later=labels2) )
+  
+ggsave2(gg, file=paste0("../../../../../../Plots/DID_byoccupation/", x,".jpeg"), width = 10, height = 6)
+
+}
+  
 
 
 ############### SIXTH: BY SECTOR #######################
 
- df$sector <- ifelse(df$sector %in% c(11, 12,13, 14, 15, 16,17,21, 22, 23, 24, 31, 32, 51, 52,
-                                         61, 62, 71,72, 81, 89, 91, 99),
-                                 paste0("0", df$sector),
-                                 df$sector) 
- 
+#  df$sector <- ifelse(df$sector %in% c(11, 12,13, 14, 15, 16,17,21, 22, 23, 24, 31, 32, 51, 52,
+#                                          61, 62, 71,72, 81, 89, 91, 99),
+#                                  paste0("0", df$sector),
+#                                  df$sector) 
+#  
+# 
+# df$sector<-substr(df$sector, 1,2)
+# 
+# create_cohort(df, aggregation="sector", name="bysector")
+# 
+# 
+# load("bysector_panel.Rdata")
+# 
+# 
+# 
+# result_models<- list()
+# 
+# dff<-dff %>% 
+#   filter(!is.na(group)) %>% 
+#   ungroup() %>% 
+#   group_by(group) %>% 
+#   mutate(nn=n()) %>% 
+#   ungroup() %>% 
+#   filter(nn==max(nn))
+# 
+# groups<-unique(dff$group)
+# 
+# 
+# for (g in groups) {
+#   tryCatch({
+#     dftwfe <- create_twfe_dataframe(dff[dff$group == paste0(g), ],
+#                                     first_variable = 3,
+#                                     last_variable = 16,
+#                                     time_dif = 12,
+#                                     treatment_time = 37,
+#                                     months = 30)
+#     result_models[[paste0(g)]] <- create_results(dftwfe, paste0("DID_disaggregated", g), disaggregation = TRUE, figures = F)
+#   }, error = function(e) {
+#     cat("Error occurred for group:", g, "\n")
+#   })
+# }
+# 
+# 
+# results<-data.frame()
+# 
+# for (g in groups){
+#   for (variable in variable_names){
+#     for(number in c(1,3,5)){
+#       pretrends<-result_models[[g]]$pre_trends[[paste("mod", g, variable, number, sep = "_")]]$p
+#       results1<- rownames_to_column(as.data.frame(result_models[[g]]$did_coefs[[paste("mod", g, variable, number, sep = "_")]]$coeftable)) %>% 
+#         mutate(group=g, 
+#                variable= variable, 
+#                months_later=number,
+#                pre_trends=pretrends)
+#       results<-rbind(results, results1)
+#     }
+#   }
+# }
+# 
+# 
+# results<-results %>% 
+#   filter(rowname=="ATT") %>% 
+#   transmute(rowname=rowname,
+#             coefficient= ifelse(grepl("^salar", variable), Estimate/100, Estimate),
+#             pvalue= `Pr(>|t|)`,
+#             group=group,
+#             group2 = case_when(
+#               group == "01" ~ "Crop and animal production",
+#               group == "02" ~ "Forestry and logging",
+#               group == "03" ~ "Fishing and aquaculture",
+#               group == "05" ~ "Mining of coal and lignite",
+#               group == "06" ~ "Extraction of crude petroleum and natural gas",
+#               group == "07" ~ "Mining of metal ores",
+#               group == "08" ~ "Other mining and quarrying",
+#               group == "09" ~ "Mining support service activities",
+#               group == "10" ~ "M of Food Products",
+#               group == "11" ~ "M of Beverages",
+#               group == "12" ~ "M of Tobacco Products",
+#               group == "13" ~ "M of Textiles",
+#               group == "14" ~ "M of Wearing Apparel",
+#               group == "15" ~ "M of Leather",
+#               group == "16" ~ "M of Wood Products",
+#               group == "17" ~ "M of Paper & Paper Products",
+#               group == "18" ~ "Printing & Reproduction of Recorded Media",
+#               group == "19" ~ "M Refined Petroleum Products",
+#               group == "20" ~ "M of Chemical Products",
+#               group == "21" ~ "M of Basic Pharmaceutical Products",
+#               group == "22" ~ "M of Rubber and Plastic Products",
+#               group == "23" ~ "M of Other Non-Metallic Mineral Products",
+#               group == "24" ~ "M of Basic Metals",
+#               group == "25" ~ "M of Metal Products",
+#               group == "26" ~ "M of Electronic Products",
+#               group == "27" ~ "M of Electrical Equipment",
+#               group == "28" ~ "M of Machinery & Equipment",
+#               group == "29" ~ "M of Motor Vehicles",
+#               group == "30" ~ "M of Other Transport Equipment",
+#               group == "31" ~ "M of Furniture",
+#               group == "32" ~ "Other manufacturing",
+#               group == "33" ~ "Machinery Repair & Installation",
+#               group == "35" ~ "Energy Supply & Conditioning",
+#               group == "36" ~ "Water Management",
+#               group == "37" ~ "Sewerage Services",
+#               group == "38" ~ "Waste Management & Remediation",
+#               group == "39" ~ "Waste Remediation & Management",
+#               group == "41" ~ "Building Construction",
+#               group == "42" ~ "Civil Engineering",
+#               group == "43" ~ "Specialized Construction",
+#               group == "45" ~ "Motor Vehicle Trade & Repair",
+#               group == "46" ~ "Wholesale Trade",
+#               group == "47" ~ "Retail Trade",
+#               group == "49" ~ "Land & Pipeline Transport",
+#               group == "50" ~ "Water Transport",
+#               group == "51" ~ "Air Transport",
+#               group == "52" ~ "Transportation Support Services",
+#               group == "53" ~ "Postal Services",
+#               group == "55" ~ "Accommodation Services",
+#               group == "56" ~ "Food & Beverage Services",
+#               group == "58" ~ "Publishing & Media Production",
+#               group == "59" ~ "Media Production & Distribution",
+#               group == "60" ~ "Broadcasting & Programming",
+#               group == "61" ~ "Telecommunications",
+#               group == "62" ~ "Computer Services & Consultancy",
+#               group == "63" ~ "Information Services",
+#               group == "64" ~ "Financial Services",
+#               group == "65" ~ "Insurance & Pension Funding",
+#               group == "66" ~ "Auxiliary Financial Services",
+#               group == "68" ~ "Real Estate Activities",
+#               group == "69" ~ "Legal & Accounting Services",
+#               group == "70" ~ "Management Consultancy",
+#               group == "71" ~ "Architectural & Engineering Services",
+#               group == "72" ~ "Research & Development",
+#               group == "73" ~ "Advertising & Market Research",
+#               group == "74" ~ "Professional & Technical Services",
+#               group == "75" ~ "Veterinary Services",
+#               group == "77" ~ "Rental & Leasing Activities",
+#               group == "78" ~ "Employment Services",
+#               group == "79" ~ "Travel & Reservation Services",
+#               group == "80" ~ "Security & Investigation",
+#               group == "81" ~ "Building Services & Landscaping",
+#               group == "82" ~ "Business Support Services",
+#               group == "84" ~ "Public Administration & Defense",
+#               group == "85" ~ "Education",
+#               group == "86" ~ "Healthcare Services",
+#               group == "87" ~ "Residential Care Services",
+#               group == "88" ~ "Social Work Services",
+#               group == "90" ~ "Arts & Entertainment",
+#               group == "91" ~ "Cultural Activities",
+#               group == "92" ~ "Gambling & Betting",
+#               group == "93" ~ "Sports & Recreation",
+#               group == "94" ~ "Membership Organization Activities",
+#               group == "95" ~ "Personal Goods Repair",
+#               group == "96" ~ "Personal Services",
+#               group == "97" ~ "Domestic Employment",
+#               group == "98" ~ "Household Production",
+#               group == "99" ~ "Extraterritorial Organizations",
+#               TRUE ~ NA_character_
+#             ),
+#             variable=variable,
+#             months_later=months_later,
+#             months_laterst=paste0(months_later," months later"),
+#             se= `Std. Error`,
+#             plus95=ifelse(variable=="salaries",(Estimate+se*1.96)/100,Estimate+se*1.96),
+#             minus95=ifelse(variable=="salaries",(Estimate-se*1.96)/100,Estimate-se*1.96),
+#             stars=ifelse(pvalue<=0.1, "significant", "Not significant"),
+#             pretrends=pre_trends,
+#             pretest=ifelse(pretrends<=.05, "significant", "Not significant"))
+# 
+# 
+# results<-results %>% 
+#   mutate(group3=as.numeric(group),
+#          group4=group3,
+#          group3=case_when(group3 %in% c(1:3) ~ "RURAL",
+#                           group3 %in% c(5:9) ~ "MINING",
+#                           group3 %in% c(10:33) ~ "MANUFACTURING",
+#                           group3 ==35 ~ "ENERGY",
+#                           group3 %in% c(36:39)~"WATER",
+#                           group3 %in% c(41:43) ~ "CONSTRUCTION",
+#                           group3 %in% c(45:47) ~ "WHOLESALE",
+#                           group3 %in% c(49:53) ~ "TRANSPORTATION",
+#                           group3 %in% c(55,56) ~ "ACCOMODATION",
+#                           group3 %in% c(58:63) ~ "COMMUNICATION",
+#                           group3 %in% c(64:66)~ "FINANCE", 
+#                           group3 == 68 ~ "REAL ESTATE",
+#                           group3 %in% c(69:75)~ "PROFESSIONAL",
+#                           group3 %in% c(77:82) ~ "ADMINISTRATIVE",
+#                           group3==84 ~ "PUBLIC ADMIN",
+#                           group3==85 ~ "EDUCATION", 
+#                           group3 %in% c(86:88) ~ "HEALTH",
+#                           group3 %in% c(90:93) ~ "ARTS",
+#                           group3 %in% c(94,95) ~ "OTHER",
+#                           group3 %in% c(96:98) ~ "HOUSEHOLDS",
+#                           group3 == 99 ~ "EXTRATERRITORIAL",
+#                           TRUE ~ " "
+#                           ),
+#          relevant=ifelse(pretest=="Not significant" & stars=="significant","relevant", "not relevant")) %>% 
+#   group_by(group3) %>% 
+#   mutate(names= ifelse(group4==min(group4),group3, " ")) %>% 
+#   ungroup()
+# 
+# 
+# 
+# 
+# 
+# 
+# for (x in variable_names){
+#   results1<-results %>% 
+#     filter(variable==x)
+#   results1$interaction_order <- interaction(results1$names, results1$group2, drop = TRUE)
+#   results1$interaction_order <- fct_reorder(results1$interaction_order, -results1$group4)
+#   color_gradient <- colorRampPalette(c("#384e78", "#02CCFE"))
+#   
+#   results1$group3 <- fct_reorder(results1$group3, results1$group4)
+#   
+#   color_df <- data.frame(group3 = unique_group3, color = color_gradient(length(unique(results1$group3))))
+#   
+#   results1 <- merge(results1 %>% arrange(group4), color_df, by = "group3", all.x = TRUE)
+#   
+#   a<-results1$color
+#   gg<-
+#     results1 %>% 
+#     ggplot(aes(y=interaction_order, x=coefficient))+
+#     geom_point(aes(color=pretest), fill="#008080", alpha=.7, shape=21)+
+#     geom_errorbarh(aes(xmax=plus95, xmin=minus95), color="#008080", alpha=.5)+
+#       scale_color_manual(values = c("#008080", "red"))+
+#     theme_bw()+
+#     theme(axis.title = element_blank(),
+#           axis.text.x = element_text(angle = 90),
+#           axis.text.y=element_text(color=a))+
+#     geom_vline(xintercept = 0)+
+#     facet_wrap(~months_later, labeller = labeller(months_later=labels2) )
+#   
+#   ggsave2(gg, file=paste0("../../../../../../Plots/DID_bysector/", x,".jpeg"), width = 10, height = 6)
+#   
+# }
+
+
+
+############### SIXTH: BY SECTOR2 #######################
+rm(list=ls())
+source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
+
+variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
+labels2<- c("1 month later", "2 months later", "3 months later", "4 months later", "5 months later", "6 months later")
+names(labels2)<-1:6
+
+load("manageable_df.Rdata")
+load("manageable_dfincome.Rdata")
+min_time<- min(df$time)
+max_time<-max(df$time)
+
+
+
+df$sector <- ifelse(df$sector %in% c(11, 12,13, 14, 15, 16,17,21, 22, 23, 24, 31, 32, 51, 52,
+                                     61, 62, 71,72, 81, 89, 91, 99),
+                    paste0("0", df$sector),
+                    df$sector)
+
 
 df$sector<-substr(df$sector, 1,2)
 
+df<-df %>%
+  mutate(group3=as.numeric(sector),
+         sector2=case_when(group3 %in% c(1:3) ~ "AGRICULTURE, FORESTRY AND FISHING",
+                           group3 %in% c(5:9) ~ "MINING AND QUARRYING",
+                           group3 %in% c(10:33) ~ "MANUFACTURING",
+                           group3 ==35 ~ "ELECTRICITY, GAS, STEAM AND AIR CONDITIONING SUPPLY",
+                           group3 %in% c(36:39)~"WATER SUPPLY AND WASTE MANAGEMENT",
+                           group3 %in% c(41:43) ~ "CONSTRUCTION",
+                           group3 %in% c(45:47) ~ "WHOLESALE & REPAIR OF MOTOR VEHICLES",
+                           group3 %in% c(49:53) ~ "TRANSPORTATION AND STORAGE",
+                           group3 %in% c(55,56) ~ "ACCOMMODATION AND FOOD SERVICE",
+                           group3 %in% c(58:63) ~ "INFORMATION AND COMMUNICATION",
+                           group3 %in% c(64:66)~ "FINANCIAL AND INSURANCE ACTIVITIES",
+                           group3 == 68 ~ "REAL ESTATE",
+                           group3 %in% c(69:75)~ "PROFESSIONAL, SCIENTIFIC AND TECHNICAL",
+                           group3 %in% c(77:82) ~ "ADMINISTRATIVE & SUPPORT SERVICE ACTIVITIES",
+                           group3==84 ~ "PUBLIC ADMINISTRATION AND DEFENCE",
+                           group3==85 ~ "EDUCATION",
+                           group3 %in% c(86:88) ~ "HUMAN HEALTH AND SOCIAL WORK",
+                           group3 %in% c(90:93) ~ "ARTS, ENTERTAINMENT AND RECREATION",
+                           group3 %in% c(94,95) ~ "OTHER SERVICES",
+                           group3 %in% c(96:98) ~ "ACTIVITIES OF HOUSEHOLDS AS EMPLOYERS",
+                           group3 == 99 ~ "EXTRATERRITORIAL ORGANIZATIONS ACTIVITIES",
+                           TRUE ~ NA_character_
+         ))
+
+
+create_cohort(df, aggregation="sector2", name="bysector2")
+
+load("bysector2_panel.Rdata")
+
+
+
+result_models<- list()
+
+dff<-dff %>% 
+  filter(!is.na(group)) %>% 
+  ungroup() %>% 
+  group_by(group) %>% 
+  mutate(nn=n()) %>% 
+  ungroup() %>% 
+  filter(nn==max(nn))
+
+groups<-unique(dff$group)
+
+
+for (g in groups) {
+  tryCatch({
+    dftwfe <- create_twfe_dataframe(dff[dff$group == paste0(g), ],
+                                    first_variable = 3,
+                                    last_variable = 16,
+                                    time_dif = 12,
+                                    treatment_time = 37,
+                                    months = 30)
+    result_models[[paste0(g)]] <- create_results(dftwfe, paste0("DID_disaggregated", g), disaggregation = TRUE, figures = F)
+  }, error = function(e) {
+    cat("Error occurred for group:", g, "\n")
+  })
+}
+
+
+results<-data.frame()
+
+for (g in groups){
+  for (variable in variable_names){
+    for(number in c(1,3,5)){
+      pretrends<-result_models[[g]]$pre_trends[[paste("mod", g, variable, number, sep = "_")]]$p
+      results1<- rownames_to_column(as.data.frame(result_models[[g]]$did_coefs[[paste("mod", g, variable, number, sep = "_")]]$coeftable)) %>% 
+        mutate(group=g, 
+               variable= variable, 
+               months_later=number,
+               pre_trends=pretrends)
+      results<-rbind(results, results1)
+    }
+  }
+}
+
+
+results<-results %>% 
+  filter(rowname=="ATT") %>% 
+  transmute(rowname=rowname,
+            coefficient= ifelse(grepl("^salar", variable), Estimate/100, Estimate),
+            pvalue= `Pr(>|t|)`,
+            group=group,
+            variable=variable,
+            months_later=months_later,
+            se= `Std. Error`,
+            plus95=ifelse(variable=="salaries",(Estimate+se*1.96)/100,Estimate+se*1.96),
+            minus95=ifelse(variable=="salaries",(Estimate-se*1.96)/100,Estimate-se*1.96),
+            pretrends=pre_trends,
+            stars=ifelse(pvalue<=0.1, "significant", "Not significant"),
+            pretest=ifelse(pretrends<=.05, "significant", "Not significant"))
+
+for (x in variable_names){
+  results1<-results %>% 
+    filter(variable==x)
+  
+  gg<-
+    results1 %>% 
+    ggplot(aes(y=group, x=coefficient))+
+    geom_point(aes(color=pretest), fill="#008080",size=3,shape=21, alpha=.7)+
+    geom_errorbarh(aes(xmax=plus95, xmin=minus95), color="#008080", alpha=.5)+
+    theme_bw()+
+    theme(axis.title = element_blank(),
+          axis.text.x = element_text(angle = 90),
+          legend.position = "none")+
+    geom_vline(xintercept = 0)+
+    scale_color_manual(values = c("#008080", "red"))+
+    facet_wrap(~months_later, labeller = labeller(months_later=labels2) )
+  
+  ggsave2(gg, file=paste0("../../../../../../Plots/DID_bysector2/", x,".jpeg"), width = 10, height = 6)
+  
+}
+
+
+####################SEVENTH: BY AGE GROUP ##################
+rm(list=ls())
+source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
+
+variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
+labels2<- c("1 month later", "2 months later", "3 months later", "4 months later", "5 months later", "6 months later")
+names(labels2)<-1:6
+
+load("manageable_df.Rdata")
+load("manageable_dfincome.Rdata")
+min_time<- min(df$time)
+max_time<-max(df$time)
+
+
+
+df$age<-df$yearmonth%/%100- df$birth_date %/% 100
+
+df[, age_group:= case_when(age<25 ~ "<25",
+                           age %in% c(25:34) ~ "25-34",
+                           age %in% c(35:44) ~ "35-44",
+                           age %in% c(45:54) ~ "45-54",
+                           age %in% c(55:64) ~ "55-64",
+                           age > 64 ~ "65+")]
+
+create_cohort(df, aggregation = "age_group", name = "byagegroup")
+
+load("byagegroup_panel.Rdata")
+
+result_models<- list()
+
+groups<-unique(dff$group)
+
+
+for (g in groups){
+  dftwfe<-create_twfe_dataframe(dff[dff$group==g,],
+                                first_variable = 3, 
+                                last_variable = 16, 
+                                time_dif = 12,
+                                treatment_time = 37,
+                                months = 30)
+  result_models[[g]]<-create_results(dftwfe, paste0("DID_disaggregated", g),disaggregation = TRUE, figures = F )
+}
+
+
+
+results<-data.frame()
+
+for (g in groups){
+  for (variable in variable_names){
+    for(number in 1:6){
+      pretrends<-result_models[[g]]$pre_trends[[paste("mod", g, variable, number, sep = "_")]]$p
+      results1<- rownames_to_column(as.data.frame(result_models[[g]]$models[[paste("mod", g, variable, number, sep = "_")]]$coeftable)) %>% 
+        mutate(group=g, 
+               variable= variable, 
+               months_later=number,
+               pre_trends=pretrends)
+      results<-rbind(results, results1)
+    }
+  }
+}
+
+results<-results %>% 
+  filter(rowname!="(Intercept)") %>% 
+  transmute(time=as.numeric(gsub(".*:(-?\\d+):.*", "\\1", rowname)),
+            coefficient= Estimate,
+            pvalue= `Pr(>|t|)`,
+            group=group,
+            variable=variable,
+            months_later=months_later,
+            se= `Std. Error`,
+            plus95=coefficient+se*1.96,
+            minus95=coefficient-se*1.96,
+            pretrends=pre_trends,
+            pretest=ifelse(pretrends<=.05, "significant", "Not significant"))
+
+
+
+
+for (x in variable_names){
+ gg<-
+    results %>% 
+    filter(variable==x) %>%  
+    ggplot(aes(x=time, group=group, color=group))+
+    geom_point(aes(y=coefficient), alpha=.7)+
+    geom_line(aes(y=coefficient), alpha=.9)+
+    geom_errorbar(aes(ymin=minus95, ymax=plus95), alpha=.3, linetype="dashed")+
+    facet_wrap(~months_later, labeller = labeller(months_later=labels2))+
+    geom_vline(xintercept = 0)+
+    geom_hline(yintercept = 0)+
+    #scale_color_manual(values = c("#008080","#b67182",  "grey20"))+
+    theme_bw()+
+    theme(legend.position = "bottom",
+          legend.title = element_blank(),
+          axis.title = element_blank(),
+          title = element_text(hjust=.5))
+  ggsave2(gg, file=paste0("../../../../../../Plots/DID_byagegroup/", x,".jpeg"), width = 7, height = 6)
+  
+}
+
+
+#dir.create("../../../../../../Tables/did_bygender")
+
+# for (g in groups) {
+#   for (variable in variable_names) {
+#     cat(texreg(list(result_models[[g]]$did_coefs[[paste("mod", g, variable, 1, sep = "_")]],
+#                     result_models[[g]]$did_coefs[[paste("mod", g, variable, 2, sep = "_")]],
+#                     result_models[[g]]$did_coefs[[paste("mod", g, variable, 3, sep = "_")]],
+#                     result_models[[g]]$did_coefs[[paste("mod", g, variable, 4, sep = "_")]],
+#                     result_models[[g]]$did_coefs[[paste("mod", g, variable, 5, sep = "_")]],
+#                     result_models[[g]]$did_coefs[[paste("mod", g, variable, 6, sep = "_")]]),
+#                custom.model.names = labels2,
+#                custom.coef.map = list("ATT"="Days worked"),
+#                stars=c("*"=.1, "**"=.05, "***"=.01),
+#                include.rsquared = FALSE,
+#                include.adjrs = FALSE,
+#                include.nobs = FALSE,
+#                include.rmse = FALSE), file = paste0("../../../../../../Tables/did_byagegroup/", g,"_", variable,".tex")
+#     )
+#   }
+#   
+# }
 
 
 
@@ -408,86 +1190,86 @@ df$sector<-substr(df$sector, 1,2)
 # 
 
 
-
-######################### Analysis disaggregating by type of contract#############################
-
-load("situation_cohort_panel.Rdata")
-
-for (g in c("permanent", "open-ended", "project-based", "production circumstances")){
-dftwfe<-create_twfe_dataframe(dff[dff$group==g,], 
-                              first_variable = 3,
-                              last_variable = 16,
-                              time_dif = 12, 
-                              treatment_time = 37,
-                              months = 28)
-
-
-create_twfeplots(dftwfe, paste0("DID_long", g), 37)
-}
-
-
-###############NO DONUT DESIGN ###########
-
-load("anykind_cohort_panel.Rdata")
-
-create_twfe_dataframe<- function(df, first_variable, last_variable, time_dif, treatment_time, months ){
-  
-  
-  dffnames<-names(df[,first_variable:last_variable])
-  beginning<-treatment_time-months
-  
-  df1<-mutate(df[df$cohort %in%c(beginning:(treatment_time-1)),], time2=time+time_dif)
-  
-  df2<- mutate(df[df$cohort >=(beginning+time_dif),], time2=time)
-  
-  for (x in dffnames){
-    for (i in 1:6) {
-      
-      df1<-df1 %>% 
-        arrange(cohort, -time) %>% 
-        group_by(cohort) %>% 
-        mutate(!!paste0(x, i):=lag(get(x), i),
-               treatment=0)
-      
-      df2<-df2 %>% 
-        arrange(cohort, -time) %>% 
-        group_by(cohort) %>% 
-        mutate(!!paste0(x, i):=lag(get(x), i),
-               treatment=1)
-    }
-  }
-  
-  df1<-df1 %>% filter(cohort==time)
-  df2<-df2 %>% filter(cohort==time)
-  
-  df<-rbind(df1,df2)
-  
-}
-
-
-
-dftwfe<-create_twfe_dataframe(dff, 
-                      first_variable = 2,
-                      last_variable = 15,
-                      time_dif = 12, 
-                      treatment_time = 25,
-                      months = 28)
-
-create_twfeplots(dftwfe, new_directory = "no-donut_long", treatment_date = 25)
-
-
-
-for (i in c("permanent", "open-ended", "project-based", "production circumstances")){
-  dftwfe<-create_twfe_dataframe(dff[dff$group==i,], 
-                                first_variable = 3,
-                                last_variable = 16,
-                                time_dif = 12, 
-                                treatment_time = 37,
-                                months = 21)
-  
-  
-  create_twfeplots(dftwfe, paste0("DID_nodonut", i), 37)
-}
-
-
-
+# 
+# ######################### Analysis disaggregating by type of contract#############################
+# 
+# load("situation_cohort_panel.Rdata")
+# 
+# for (g in c("permanent", "open-ended", "project-based", "production circumstances")){
+# dftwfe<-create_twfe_dataframe(dff[dff$group==g,], 
+#                               first_variable = 3,
+#                               last_variable = 16,
+#                               time_dif = 12, 
+#                               treatment_time = 37,
+#                               months = 28)
+# 
+# 
+# create_twfeplots(dftwfe, paste0("DID_long", g), 37)
+# }
+# 
+# 
+# ###############NO DONUT DESIGN ###########
+# 
+# load("anykind_cohort_panel.Rdata")
+# 
+# create_twfe_dataframe<- function(df, first_variable, last_variable, time_dif, treatment_time, months ){
+#   
+#   
+#   dffnames<-names(df[,first_variable:last_variable])
+#   beginning<-treatment_time-months
+#   
+#   df1<-mutate(df[df$cohort %in%c(beginning:(treatment_time-1)),], time2=time+time_dif)
+#   
+#   df2<- mutate(df[df$cohort >=(beginning+time_dif),], time2=time)
+#   
+#   for (x in dffnames){
+#     for (i in 1:6) {
+#       
+#       df1<-df1 %>% 
+#         arrange(cohort, -time) %>% 
+#         group_by(cohort) %>% 
+#         mutate(!!paste0(x, i):=lag(get(x), i),
+#                treatment=0)
+#       
+#       df2<-df2 %>% 
+#         arrange(cohort, -time) %>% 
+#         group_by(cohort) %>% 
+#         mutate(!!paste0(x, i):=lag(get(x), i),
+#                treatment=1)
+#     }
+#   }
+#   
+#   df1<-df1 %>% filter(cohort==time)
+#   df2<-df2 %>% filter(cohort==time)
+#   
+#   df<-rbind(df1,df2)
+#   
+# }
+# 
+# 
+# 
+# dftwfe<-create_twfe_dataframe(dff, 
+#                       first_variable = 2,
+#                       last_variable = 15,
+#                       time_dif = 12, 
+#                       treatment_time = 25,
+#                       months = 28)
+# 
+# create_twfeplots(dftwfe, new_directory = "no-donut_long", treatment_date = 25)
+# 
+# 
+# 
+# for (i in c("permanent", "open-ended", "project-based", "production circumstances")){
+#   dftwfe<-create_twfe_dataframe(dff[dff$group==i,], 
+#                                 first_variable = 3,
+#                                 last_variable = 16,
+#                                 time_dif = 12, 
+#                                 treatment_time = 37,
+#                                 months = 21)
+#   
+#   
+#   create_twfeplots(dftwfe, paste0("DID_nodonut", i), 37)
+# }
+# 
+# 
+# 
