@@ -29,7 +29,7 @@ setwd("C:/Users/ignac/OneDrive - Universidad Loyola Andalucía/Trabajo/Universida
 # save(df, file = "manageable_df.Rdata")
 # save(dfincome, file="manageable_dfincome.Rdata")
 
-
+rm(list = ls())
 source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
 
 variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
@@ -40,6 +40,8 @@ load("manageable_df.Rdata")
 load("manageable_dfincome.Rdata")
 min_time<- min(df$time)
 max_time<-max(df$time)
+
+
 
 
 
@@ -72,9 +74,11 @@ create_rdd_figures(df1 = df1, df2 = df2, dffnames = dfnames, treatment_time = 37
 
 
 
-result_models<-create_results(dftwfe = dftwfe, new_directory = "verylongtwfe3")
+result_models<-create_results(dftwfe = dftwfe, new_directory = "verylongtwfe3", figures = F)
 
-dir.create("../../../../../../Tables/DID_aggregated/")
+
+
+#dir.create("../../../../../../Tables/DID_aggregated/")
 
 
 for (variable in variable_names) {
@@ -94,6 +98,56 @@ for (variable in variable_names) {
   )
 }
 
+
+
+results<-data.frame()
+
+  for (variable in variable_names){
+    for(number in 1:6){
+      pretrends<-result_models$pre_trends[[paste("mod", variable, number, sep = "_")]]$p
+      results1<- rownames_to_column(as.data.frame(result_models$models[[paste("mod", variable, number, sep = "_")]]$coeftable)) %>% 
+        mutate(variable= variable, 
+               months_later=number,
+               pre_trends=pretrends)
+      results<-rbind(results, results1)
+    }
+  }
+
+
+results<-results %>% 
+  filter(rowname!="(Intercept)") %>% 
+  transmute(time=as.numeric(gsub(".*:(-?\\d+):.*", "\\1", rowname)),
+            coefficient= Estimate,
+            pvalue= `Pr(>|t|)`,
+            variable=variable,
+            months_later=months_later,
+            se= `Std. Error`,
+            plus95=coefficient+se*1.96,
+            minus95=coefficient-se*1.96,
+            pretrends=pre_trends)
+
+
+
+
+for (x in variable_names){
+  gg<-
+    results %>% 
+    filter(variable==x, months_later %in% c(1,3,5)) %>%  
+    ggplot(aes(x=time, color=as.factor(months_later)))+
+    geom_point(aes(y=coefficient), alpha=.9)+
+    geom_line(aes(y=coefficient), alpha=.7)+
+    geom_errorbar(aes(ymin=minus95, ymax=plus95), alpha=.3, linetype="dashed")+
+    geom_vline(xintercept = 0)+
+    geom_hline(yintercept = 0)+
+    scale_color_manual(values = c("#065465", "#008080", "#b67182"), labels= labels2)+
+    theme_bw()+
+    theme(legend.position = "bottom",
+          legend.title = element_blank(),
+          axis.title = element_blank(),
+          title = element_text(hjust=.5))
+  ggsave2(gg, file=paste0("../../../../../../Plots/verylongtwfe3/", x,"2.jpeg"), width = 7, height = 6)
+  
+}
 
 
 
@@ -119,11 +173,19 @@ max_time<-max(df$time)
 create_cohort(df, name = "bysituation", aggregation = "situation")
 
 load("bysituation_panel.Rdata")
+df1<-dff
+load("bypresituation_panel.Rdata")
+
+dff<-dff %>% 
+  filter(group=="permanent") %>% 
+  mutate(group="pre-permanent")
+
+dff<-rbind(dff, df1)
 
 
 result_models<- list()
 
-contracts<-c("permanent", "open-ended", "project-based")
+contracts<-c("pre-permanent","permanent", "open-ended", "project-based")
 
 
 for (g in contracts){
@@ -133,7 +195,7 @@ dftwfe<-create_twfe_dataframe(dff[dff$group==g,],
                               time_dif = 12,
                               treatment_time = 37,
                               months = 30)
-result_models[[g]]<-create_results(dftwfe, paste0("DID_disaggregated", g),disaggregation = TRUE )
+result_models[[g]]<-create_results(dftwfe, paste0("DID_disaggregated", g),disaggregation = TRUE, figures = F )
 }
 
 
@@ -143,10 +205,12 @@ results<-data.frame()
 for (contract in contracts){
   for (variable in variable_names){
     for(number in 1:6){
+pretrends<-result_models[[g]]$pre_trends[[paste("mod", g, variable, number, sep = "_")]]$p
 results1<- rownames_to_column(as.data.frame(result_models[[contract]]$models[[paste("mod", contract, variable, number, sep = "_")]]$coeftable)) %>% 
   mutate(contract=contract, 
          variable= variable, 
-         months_later=number)
+         months_later=number,
+         pre_trends=pretrends)
 results<-rbind(results, results1)
   }
 }
@@ -162,28 +226,32 @@ results<-results %>%
             months_later=months_later,
             se= `Std. Error`,
             plus95=coefficient+se*1.96,
-            minus95=coefficient-se*1.96)
+            minus95=coefficient-se*1.96,
+            pretrends=pre_trends,
+            transp=contract)
 
 
 
 
 for (x in variable_names){
-gg<-results %>% 
+gg<-
+  results %>% 
   filter(variable==x) %>%  
   ggplot(aes(x=time, group=contract, color=contract))+
-  geom_point(aes(y=coefficient), alpha=.7)+
-  geom_line(aes(y=coefficient), alpha=.9)+
+  geom_point(aes(y=coefficient, alpha=transp))+
+  geom_line(aes(y=coefficient, alpha=transp))+
   geom_errorbar(aes(ymin=minus95, ymax=plus95), alpha=.3, linetype="dashed")+
   facet_wrap(~months_later, labeller = labeller(months_later=labels2))+
   geom_vline(xintercept = 0)+
   geom_hline(yintercept = 0)+
-  scale_color_manual(values = c("#065465", "#008080", "grey20"))+
+  scale_color_manual(values = c("#065465", "#008080","#008080", "grey40"), name="h")+
+  scale_alpha_manual(values = c(.8, .8, .5,.8), name="h")+
   theme_bw()+
   theme(legend.position = "bottom",
         legend.title = element_blank(),
         axis.title = element_blank(),
         title = element_text(hjust=.5))
-ggsave2(gg, file=paste0("../../../../../../Plots/DID_bycontract/", x,".jpeg"), width = 7, height = 6)
+ggsave2(gg, file=paste0("../../../../../../Plots/DID_bycontract/", x,"2.jpeg"), width = 7, height = 6)
 
 }
 
@@ -208,8 +276,23 @@ for (contract in contracts) {
                include.rmse = FALSE), file = paste0("../../../../../../Tables/DID_bycontract/", contract,"_", variable,".tex")
     )
   }
-  
 }
+
+ ##By situation but before
+rm(list=ls())
+source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
+
+variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
+labels2<- c("1 month later", "2 months later", "3 months later", "4 months later", "5 months later", "6 months later")
+names(labels2)<-1:6
+
+load("manageable_df.Rdata")
+load("manageable_dfincome.Rdata")
+min_time<- min(df$time)
+max_time<-max(df$time)
+
+create_cohort(df, aggregation = "situation", previouscontracts = T,name = "bypresituation")
+
 
 
 ###############THIRD ANALYSIS BY GENDER ####################
@@ -1081,6 +1164,207 @@ for (x in variable_names){
   
 }
 
+
+
+########### PREANALYSIS: LOGIT #####
+
+df1<- df[df$yearmonth==202112,]
+
+
+##Gender
+
+df1$sex<- ifelse(df1$sex==1, "man", "woman")
+
+#Province
+
+df1$person_muni_latest <- replace_province(df1$person_muni_latest)
+
+df1$province<-as.numeric(df1$person_muni_latest)
+
+df1 <- df1 %>%
+  mutate(province = as.factor(case_when(
+    province == 2 ~ "Albacete",
+    province == 3 ~ "Alicante",
+    province == 4 ~ "Almería",
+    province == 1 ~ "Álava",
+    province == 33 ~ "Asturias",
+    province == 5 ~ "Ávila",
+    province == 6 ~ "Badajoz",
+    province == 7 ~ "Balears, Illes",
+    province == 8 ~ "Barcelona",
+    province == 48 ~ "Bizkaia",
+    province == 9 ~ "Burgos",
+    province == 10 ~ "Cáceres",
+    province == 11 ~ "Cádiz",
+    province == 39 ~ "Cantabria",
+    province == 12 ~ "Castellón",
+    province == 13 ~ "Ciudad Real",
+    province == 14 ~ "Córdoba",
+    province == 15 ~ "Coruña, A",
+    province == 16 ~ "Cuenca",
+    province == 20 ~ "Gipuzkoa",
+    province == 17 ~ "Girona",
+    province == 18 ~ "Granada",
+    province == 19 ~ "Guadalajara",
+    province == 21 ~ "Huelva",
+    province == 22 ~ "Huesca",
+    province == 23 ~ "Jaén",
+    province == 24 ~ "León",
+    province == 25 ~ "Lleida",
+    province == 27 ~ "Lugo",
+    province == 28 ~ "Madrid",
+    province == 29 ~ "Málaga",
+    province == 30 ~ "Murcia",
+    province == 31 ~ "Navarra",
+    province == 32 ~ "Ourense",
+    province == 34 ~ "Palencia",
+    province == 35 ~ "Palmas, Las",
+    province == 36 ~ "Pontevedra",
+    province == 26 ~ "Rioja, La",
+    province == 37 ~ "Salamanca",
+    province == 38 ~ "Santa Cruz de Tenerife",
+    province == 40 ~ "Segovia",
+    province == 41 ~ "Sevilla",
+    province == 42 ~ "Soria",
+    province == 43 ~ "Tarragona",
+    province == 44 ~ "Teruel",
+    province == 45 ~ "Toledo",
+    province == 46 ~ "Valencia",
+    province == 47 ~ "Valladolid",
+    province == 49 ~ "Zamora",
+    province == 50 ~ "Zaragoza",
+    province == 51 ~ "Ceuta",
+    province == 52 ~ "Melilla",
+    TRUE ~ "Desconocida"  # Opción predeterminada en caso de que no haya ninguna coincidencia
+  )))
+
+## Occupation
+
+df1<-df1 %>% 
+  mutate(occupation= case_when(
+  occupation == 1 ~ "Engineers/Top Management",
+  occupation == 2 ~ "Technical Engineers/Experts",
+  occupation == 3 ~ "Managers",
+  occupation == 4 ~ "UntitledAssistants",
+  occupation == 5 ~ "Administrative Officers",
+  occupation == 6 ~ "Subordinates",
+  occupation == 7 ~ "Administrative Assistants",
+  occupation == 8 ~ "1st 2nd Grade Officers",
+  occupation == 9 ~ "3rd Grade Officers/Specialists",
+  occupation == 10 ~ "Unqualified +18",
+  occupation ==11 ~ "<18 years old",
+  TRUE ~ NA_character_
+))
+
+##sectors 
+
+df1$sector <- ifelse(df1$sector %in% c(11, 12,13, 14, 15, 16,17,21, 22, 23, 24, 31, 32, 51, 52,
+                                     61, 62, 71,72, 81, 89, 91, 99),
+                    paste0("0", df1$sector),
+                    df1$sector)
+
+
+df1$sector<-substr(df1$sector, 1,2)
+
+df1<-df1 %>%
+  mutate(group3=as.numeric(sector),
+         sector2=case_when(group3 %in% c(1:3) ~ "AGRICULTURE, FORESTRY AND FISHING",
+                           group3 %in% c(5:9) ~ "MINING AND QUARRYING",
+                           group3 %in% c(10:33) ~ "MANUFACTURING",
+                           group3 ==35 ~ "ELECTRICITY, GAS, STEAM AND AIR CONDITIONING SUPPLY",
+                           group3 %in% c(36:39)~"WATER SUPPLY AND WASTE MANAGEMENT",
+                           group3 %in% c(41:43) ~ "CONSTRUCTION",
+                           group3 %in% c(45:47) ~ "WHOLESALE & REPAIR OF MOTOR VEHICLES",
+                           group3 %in% c(49:53) ~ "TRANSPORTATION AND STORAGE",
+                           group3 %in% c(55,56) ~ "ACCOMMODATION AND FOOD SERVICE",
+                           group3 %in% c(58:63) ~ "INFORMATION AND COMMUNICATION",
+                           group3 %in% c(64:66)~ "FINANCIAL AND INSURANCE ACTIVITIES",
+                           group3 == 68 ~ "REAL ESTATE",
+                           group3 %in% c(69:75)~ "PROFESSIONAL, SCIENTIFIC AND TECHNICAL",
+                           group3 %in% c(77:82) ~ "ADMINISTRATIVE & SUPPORT SERVICE ACTIVITIES",
+                           group3==84 ~ "PUBLIC ADMINISTRATION AND DEFENCE",
+                           group3==85 ~ "EDUCATION",
+                           group3 %in% c(86:88) ~ "HUMAN HEALTH AND SOCIAL WORK",
+                           group3 %in% c(90:93) ~ "ARTS, ENTERTAINMENT AND RECREATION",
+                           group3 %in% c(94,95) ~ "OTHER SERVICES",
+                           group3 %in% c(96:98) ~ "ACTIVITIES OF HOUSEHOLDS AS EMPLOYERS",
+                           group3 == 99 ~ "EXTRATERRITORIAL ORGANIZATIONS ACTIVITIES",
+                           TRUE ~ NA_character_
+         ))
+
+
+## age group
+
+df1$age<-df1$yearmonth%/%100- df1$birth_date %/% 100
+
+df1[, age_group:= case_when(age<25 ~ "<25",
+                           age %in% c(25:34) ~ "25-34",
+                           age %in% c(35:44) ~ "35-44",
+                           age %in% c(45:54) ~ "45-54",
+                           age %in% c(55:64) ~ "55-64",
+                           age > 64 ~ "65+")]
+
+
+
+df1$project_based <- ifelse(df1$contr_type == "project-based", 1,0)
+df1$permanent <- ifelse(df1$contr_type == "permanent", 1, 0)
+df1$open_ended <- ifelse(df1$contr_type == "open-ended", 1, 0)
+
+
+df1<-df1 %>% 
+  ungroup() %>% 
+  mutate(project_based= as.factor(ifelse(is.na(project_based), 0, project_based)),
+         permanent= as.factor(ifelse(is.na(permanent), 0, permanent)),
+         open_ended=as.factor(ifelse(is.na(open_ended), 0, open_ended)))
+
+
+
+contracts <- c("permanent", "open_ended", "project_based")
+variable <- paste("sex", "province", "occupation", "sector2", "age_group", sep = "+")
+
+# Initialize a list to store the fitted models
+result_models <- list()
+
+for (contract in contracts) {
+    formula_str <- paste(contract, "~", variable)
+    formula <- as.formula(formula_str)
+    
+    model <- glm(data = df1, formula = formula, family = binomial)
+    
+    result_models[[paste(contract)]]$model <- model
+    result_models[[paste(contract)]]$AIC<- model$aic
+}
+
+
+plots<- list()
+rocobjs<-list("permanent", "open_ended", "project_based")
+
+df2 <-df1%>% 
+  filter(!is.na(sex), !is.na(province), !is.na(occupation), !is.na(sector2), !is.na(age_group))
+
+for (contract in contracts){
+predicted_probs <- predict(result_models[[contract]]$model, type = "response")
+
+rocobjs[[contract]] <- roc(df2[[contract]], predicted_probs)
+}
+
+
+gg<-ggroc(list("permanent (0.8197)"=rocobjs$permanent, 
+           "open_ended (0.8514)" =rocobjs$open_ended, 
+           "Project based (0.8095)"=rocobjs$project_based),
+      linewidth=1,
+      alpha= .8,
+      linetype="dashed")+
+  scale_color_manual(values = c("#065465", "#008080", "#b67182"))+
+  theme_bw()+
+  theme(legend.position = "bottom",
+        legend.title = element_blank())+
+  geom_abline(intercept = 1, slope = 1, color="grey70")+
+  ylab("True positive rate")+
+  xlab("False positive rate")
+  
+  
+ggsave2(gg, file=paste0("../../../../../../Plots/ROC.jpeg"), width=8, height = 7)
 
 #dir.create("../../../../../../Tables/did_bygender")
 
