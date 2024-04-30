@@ -7,10 +7,10 @@ library(lubridate) #to calculate differences between dates
 library(zoo) 
 library(cowplot) #To save plots
 
-theme_set(theme_minimal())
+theme_set(theme_bw())
 
 setwd("C:/Users/ignac/OneDrive - Universidad Loyola Andalucía/Trabajo/Universidad/Máster/2º/2 semestre/TFM/Código/DiegoPuga/esurban_replication/esurban_replication/tmp/mcvl_cdf_2022")
-load("finalpanel2019b.Rdata")
+load("descriptivepanel.Rdata")
 setDT(df)
 
 
@@ -25,27 +25,33 @@ df1<-df %>%
             nreplacement= sum(replacement),
             nproject=sum(project_based),
             nother=sum(other)) %>% 
-  mutate(rpermanent= npermanent/ncontracts,
-         ropen_ended= nopen_ended/ncontracts,
-         rother_temp=nother_temp/ncontracts,
-         rprod_circ= nprod_circ/ncontracts,
-         rinternship= ninternship/ncontracts,
-         rreplacement= nreplacement/ncontracts,
-         rproject=nproject/ncontracts,
-         rother=nother/ncontracts,
-         total= rpermanent+ropen_ended+rother_temp+rprod_circ+rinternship+rreplacement+rproject+rother)
+  mutate(permanent= npermanent/ncontracts,
+         open_ended= nopen_ended/ncontracts,
+         other_temp=nother_temp/ncontracts,
+         prod_circ= nprod_circ/ncontracts,
+         internship= ninternship/ncontracts,
+         replacement= nreplacement/ncontracts,
+         project_based=nproject/ncontracts,
+         other=nother/ncontracts,
+         total= permanent+open_ended+other_temp+ prod_circ+internship+replacement+project_based+other)
 
 df2 <-df1 %>% 
   pivot_longer(cols = c(12:18), names_to = "type", values_to = "value")
 
-#ggncontracts<-
+ggncontracts<-
 df2 %>% 
-  mutate(transp= as.factor(ifelse(type %in% c("rpermanent", "ropen_ended", "rproject"),0,1))) %>% 
+  filter(type %in% c("permanent", "open_ended", "project_based")) %>%  
   mutate(date=as.Date(paste(year, month, "01", sep="-")) ) %>%  
-  ggplot(aes(x=date, y=value, group=type, color=type, alpha=transp))+
-  geom_line()+
+  ggplot(aes(x=date, y=value, group=type, color=type))+
+  geom_line(alpha=.8)+
+  geom_point(alpha=.6, size=1)+
   geom_vline(xintercept = as.Date("2022-01-01"))+
+  scale_color_manual(values = c("permanent"="#065465", "open_ended"= "#008080","project_based"= "#b67182"))+
   scale_alpha_manual(values = c(1,0.2))+
+  theme(legend.title = element_blank(),
+        legend.position = "bottom",
+        axis.title.x = element_blank())+
+  ylab("Share of workers")+
   guides(alpha="none")
 
 ggsave2(ggncontracts, file="../../../../../../Plots/descriptive_mcvl/ratio_of_total_contracts.jpeg", width = 5)
@@ -87,15 +93,37 @@ dfncontracts<- df %>%
   group_by(year, month, contr_type) %>% 
   summarize(ncontracts=mean(ncontracts, na.rm = T)) %>% 
   mutate(date=as.Date(paste(year, month, "01", sep="-")))
+
+dfncontracts1<-df %>% 
+  filter(contr_type=="permanent", entry_date<20220000) %>% 
+  group_by(year, month) %>%
+  summarize(ncontracts=mean(ncontracts, na.rm = T)) %>% 
+  mutate(date=as.Date(paste(year, month, "01", sep="-")),
+         contr_type="pre-permanent")
   
-dfncontracts %>% 
-  mutate(transp= as.factor(ifelse(contr_type %in% c("permanent", "open-ended", "project-based"),0,1))) %>% 
+dfncontracts<-rbind(dfncontracts, dfncontracts1)
+
+gg<-
+  dfncontracts %>% 
+  filter(contr_type %in% c("permanent", "pre-permanent","open-ended", "project-based")) %>% 
   filter(!is.na(contr_type), contr_type!="Pre-retirement") %>% 
-  ggplot(aes(x=date, y=ncontracts, group=contr_type, color=contr_type, alpha=transp))+
+  ggplot(aes(x=date, y=ncontracts, group=contr_type, color=contr_type, alpha=contr_type))+
   geom_line()+
+  geom_point(size=1)+
   geom_vline(xintercept = as.Date("2022-01-01"))+
-  scale_alpha_manual(values = c(1,0.2))+
-  guides(alpha="none")
+  geom_vline(xintercept = as.Date("2021-01-01"), linetype="dashed", alpha=.4)+
+  geom_vline(xintercept = as.Date("2020-01-01"), linetype="dashed", alpha=.4)+
+  geom_vline(xintercept = as.Date("2019-01-01"), linetype="dashed", alpha=.4)+
+  geom_hline(yintercept = 1, alpha=.3)+
+  theme(legend.position = "bottom", 
+        legend.title = element_blank(),
+        axis.title.x = element_blank())+
+  ylab("Average number of contracts")+
+  scale_color_manual(name="h",values = c("permanent"="#065465","pre-permanent"="#065465", "open-ended"= "#008080","project-based"= "#b67182"))+
+    scale_alpha_manual(values = c(.7,.7,.4,.7), name="h")
+
+
+ggsave2(gg, file="../../../../../../Plots/descriptive_mcvl/YESnofcontracts.jpeg", width = 5, height = 3)
 
 ##days worked
 
@@ -105,20 +133,75 @@ dfdaysworked<-df %>%
   mutate(daysworked= ifelse(month==2, daysworked*30/28 , daysworked ),
          date=as.Date(paste(year, month, "01", sep="-")))
 
+dfdaysworked2<-df %>% 
+  filter(contr_type=="permanent", entry_date<20220000) %>% 
+  group_by(year, month) %>% 
+  summarise(daysworked=mean(days_spell)) %>% 
+  mutate(daysworked= ifelse(month==2, daysworked*30/28 , daysworked ),
+         date=as.Date(paste(year, month, "01", sep="-")),
+         contr_type="pre-permanent")
 
-#ggdaysworked<-
+dfdaysworked<-rbind(dfdaysworked, dfdaysworked2)
+
+ggdaysworked<-
 dfdaysworked %>% 
-  mutate(transp= as.factor(ifelse(contr_type %in% c("permanent", "open-ended", "project-based"),0,1))) %>% 
-  filter(!is.na(contr_type)) %>% 
-  ggplot(aes(x=date, y=daysworked, group=contr_type, color=contr_type, alpha=transp))+
+  filter(contr_type %in% c("permanent", "pre-permanent", "open-ended", "project-based")) %>% 
+  ggplot(aes(x=date, y=daysworked, group=contr_type, color=contr_type, alpha=contr_type))+
   geom_line()+
+  geom_point( size=1)+
   geom_vline(xintercept = as.Date("2022-01-01"))+
-  theme(legend.position = "bottom",
-        legend.title = element_blank())+
-  scale_alpha_manual(values = c(1,0.2))+
-  guides(alpha="none")
+  geom_vline(xintercept = as.Date("2021-01-01"), linetype="dashed", alpha=.4)+
+  geom_vline(xintercept = as.Date("2020-01-01"), linetype="dashed", alpha=.4)+
+  geom_vline(xintercept = as.Date("2019-01-01"), linetype="dashed", alpha=.4)+
+  theme(legend.position = "bottom", 
+        legend.title = element_blank(),
+        axis.title.x = element_blank())+
+  ylab("Average days under spell")+
+  scale_alpha_manual(values = c(.7,.7,.4,.7), name="h")+
+  scale_color_manual(values = c("permanent"="#065465", "pre-permanent"="#065465", "open-ended"= "#008080","project-based"= "#b67182"),
+                     name="h")
 
-ggsave2(ggdaysworked, file="../../../../../../Plots/descriptive_mcvl/daysworked.jpeg", width = 6)
+ggsave2(ggdaysworked, file="../../../../../../Plots/descriptive_mcvl/YESdaysworked.jpeg", width = 5, height = 3)
+
+
+##Less income?
+
+
+dfincome<-df %>% 
+  group_by(year, month, contr_type) %>% 
+  summarise(income=mean(income, na.rm=T)) %>% 
+  mutate(date=as.Date(paste(year, month, "01", sep="-")))
+
+dfincome2<-df %>% 
+  filter(contr_type=="permanent", entry_date<20220000) %>% 
+  group_by(year, month) %>% 
+  summarise(income=mean(income, na.rm = T)) %>% 
+  mutate(date=as.Date(paste(year, month, "01", sep="-")),
+         contr_type="pre-permanent")
+
+dfincome<-rbind(dfincome, dfincome2)
+
+ggincome<-
+  dfincome %>% 
+  filter(contr_type %in% c("permanent", "pre-permanent", "open-ended", "project-based")) %>% 
+  ggplot(aes(x=date, y=income/100, group=contr_type, color=contr_type, alpha=contr_type))+
+  geom_line()+
+  geom_point( size=1)+
+  geom_vline(xintercept = as.Date("2022-01-01"))+
+  geom_vline(xintercept = as.Date("2021-01-01"), linetype="dashed", alpha=.4)+
+  geom_vline(xintercept = as.Date("2020-01-01"), linetype="dashed", alpha=.4)+
+  geom_vline(xintercept = as.Date("2019-01-01"), linetype="dashed", alpha=.4)+
+  theme(legend.position = "bottom", 
+        legend.title = element_blank(),
+        axis.title.x = element_blank())+
+  ylab("Average monthly income")+
+  scale_alpha_manual(values = c(.7,.7,.4,.7), name="h")+
+  scale_color_manual(values = c("permanent"="#065465", "pre-permanent"="#065465", "open-ended"= "#008080","project-based"= "#b67182"),
+                     name="h")
+
+ggsave2(ggincome, file="../../../../../../Plots/descriptive_mcvl/YESincome.jpeg", width = 5, height = 3)
+
+
 
 
 ## permanent jobs weaker? (probably better with the other df)
@@ -170,7 +253,8 @@ df1<-df %>%
   summarise(income=mean(income, na.rm = T)) %>% 
   mutate(date= as.Date(paste(year, month, "01", sep = "-")))
 
-ggincome_contracts<-df1 %>% 
+#ggincome_contracts<-
+  df1 %>% 
   filter(!is.na(contr_type)) %>% 
   mutate(transp= as.factor(ifelse(contr_type %in% c("permanent", "open-ended", "project-based"),0,1))) %>% 
   ggplot(aes(x=date, y=income, color=contr_type, alpha=as.factor(transp))) +
@@ -194,7 +278,7 @@ df1<-df %>%
   mutate(sumpb=sum(dummy_project_based)) %>% 
   ungroup() %>% 
   group_by(person_id) %>% 
-  mutate(selected=ifelse(any(year==2021 & sumpb>10),1,0)) %>% 
+  mutate(selected=ifelse(any(year==2020 & sumpb>10),1,0)) %>% 
   filter(selected==1) %>% 
   ungroup()
 
@@ -217,7 +301,9 @@ df2 <-df2 %>%
   pivot_longer(cols = c(3:9), names_to = "type", values_to = "value")
 
 
-ggcontractstreatment<- df2 %>% 
+#ggcontractstreatment<- 
+  df2 %>% 
+  filter(year>2020) %>% 
   mutate(transp= as.factor(ifelse(type %in% c("permanent", "open_ended", "project"),0,1))) %>% 
   mutate(date=as.Date(paste(year, month, "01", sep="-")) ) %>%  
   ggplot(aes(x=date, y=value, group=type, color=type, alpha=transp))+
@@ -227,7 +313,7 @@ ggcontractstreatment<- df2 %>%
   guides(alpha="none")+
   theme(legend.position = "bottom", 
         legend.title = element_blank())
-
+plot_grid(ggcontractstreatment, ggcontractstreatment2)
 ggsave2(ggcontractstreatment, file="../../../../../../Plots/descriptive_mcvl/ggcontractstreatment.jpeg", width = 6)
 
 
@@ -485,13 +571,19 @@ dfcontracts9<-dfcontracts9 %>% pivot_longer(cols = c(3:6), names_to = "duration"
 
 dfcontracts9$duration <- factor(dfcontracts9$duration, levels = c("below7", "below15", "below30", "below90"))
 
-#ggduration<-
+ggduration<-
   dfcontracts9 %>% 
   arrange(duration) %>% 
   filter(!is.na(contract_type), contract_type %in% c("open-ended", "permanent", "project-based")) %>% 
   ggplot(aes(x=dates, y=value, color= contract_type))+
-  geom_line()+
+  geom_line(alpha=.8)+
   geom_vline(xintercept = as.Date("2022-01-01"))+
+    geom_vline(xintercept = as.Date("2021-01-01"), linetype="dashed" , alpha=.4)+
+    geom_vline(xintercept = as.Date("2020-01-01"), linetype="dashed", alpha=.4)+
+    geom_vline(xintercept = as.Date("2019-01-01"), linetype="dashed", alpha=.4)+
+    theme(axis.title.x = element_blank())+
+  ylab("Share of contracts")+
+  scale_color_manual(values = c("permanent"="#065465", "open-ended"= "#008080","project-based"= "#b67182"))+
   facet_wrap(~duration)+
   theme(legend.position = "bottom",
         legend.title = element_blank())
@@ -507,7 +599,7 @@ dfcontracts9$duration <- factor(dfcontracts9$duration, levels = c("below7", "bel
 #     theme(legend.position = "bottom",
 #           legend.title = element_blank()) 
 
-ggsave2(ggduration, file="../../../../../../Plots/descriptive_mcvl/ggduration.jpeg", width = 7, height = 6)
+ggsave2(ggduration, file="../../../../../../Plots/descriptive_mcvl/YESggduration.jpeg", width = 7, height = 6)
 
 
 ###What happened to ETT

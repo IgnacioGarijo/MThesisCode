@@ -174,13 +174,13 @@ for (i in min_time:max_time){
   if(previouscontracts) {
     df1 <- df %>%
       group_by(person_id) %>%
-      mutate(treatment = ifelse(any(time == i & yearmonth == exit_month)  & entry_date < 20220000, 1, NA)) %>%
+      mutate(treatment = ifelse(any(time == i & yearmonth == exit_month & situation != "unemp")  & entry_date < 20220000, 1, NA)) %>%
       filter(!is.na(treatment)) %>%
       select(-treatment)
   } else {
     df1 <- df %>%
       group_by(person_id) %>%
-      mutate(treatment = ifelse(any(time == i & yearmonth == exit_month), 1, NA)) %>%
+      mutate(treatment = ifelse(any(time == i & yearmonth == exit_month & situation != "unemp"), 1, NA)) %>%
       filter(!is.na(treatment)) %>%
       select(-treatment)
   }
@@ -381,15 +381,15 @@ create_rdd_figures<-function(df1, df2, dffnames, treatment_time, new_directory){
     gg<-
       dfrdd%>% 
       mutate(after=ifelse(after%in% c(0,1), NA, after)) %>% 
-      mutate(time=time-treatment_time) %>%                     
-      ggplot(aes(x=time2,color=as.factor(treatment))) +
+      mutate(time=(time-treatment_time)) %>%                     
+      ggplot(aes(x=time2-treatment_time,color=as.factor(treatment))) +
       geom_point(aes(y=before, shape=as.factor(treatment), alpha=as.factor(treatment))) +
       geom_line(aes(y=before, linetype=as.factor(treatment), alpha=as.factor(treatment))) +
       geom_point(aes(y=after, shape= as.factor(treatment), alpha=as.factor(treatment)))+
       geom_line(aes(y=after, linetype=as.factor(treatment), alpha=as.factor(treatment))) +
       geom_line(stat = "smooth", se=F, aes(y=after, alpha=as.factor(treatment)), method = "lm")+
       geom_line(stat="smooth", se=F, aes(y=before, alpha=as.factor(treatment)), method = "lm")+
-      geom_vline(xintercept = treatment_time)+ 
+      geom_vline(xintercept = 0)+ 
       scale_color_manual(values = c("#00203FFF", "#008080"))+
       scale_alpha_manual(values = c(.7,1))+
       scale_shape_manual(values = c(18,16))+
@@ -397,9 +397,9 @@ create_rdd_figures<-function(df1, df2, dffnames, treatment_time, new_directory){
       theme_bw()+
       theme(legend.position = "bottom", 
             legend.title = element_blank(),
-            axis.title.y=element_blank())+
+            axis.title=element_blank())+
       facet_wrap(~name)
-    ggsave2(gg, file=paste0("../../../../../../Plots/", new_directory, "/", x, ".jpeg"), width=8, height = 7)
+    ggsave2(gg, file=paste0("../../../../../../Plots/", new_directory, "/", x, ".jpeg"), width=8, height = 6)
     
   }
   

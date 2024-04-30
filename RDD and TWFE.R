@@ -12,6 +12,9 @@ library(modelsummary)
 library(texreg) #for the tables
 library(broom)   #Para los mapas
 library(rgdal) #Mapas
+library(pROC)
+library(ggpubr) #To grid the plots
+
 
 theme_set(theme_minimal())
 
@@ -29,6 +32,22 @@ setwd("C:/Users/ignac/OneDrive - Universidad Loyola Andalucía/Trabajo/Universida
 # save(df, file = "manageable_df.Rdata")
 # save(dfincome, file="manageable_dfincome.Rdata")
 
+# load("manageable_df.Rdata")
+# df[, emp:= ifelse(!is.na(contr_type)| job_relationship %in% c(87,901,902,910,930,932,937,951),1,0)]
+# 
+# df[,  situation:= ifelse(!is.na(contr_type),
+#                          contr_type,
+#                          ifelse(regime %in% c(500:540, 721:740),
+#                                 "self-emp",ifelse(emp==1, "other",
+#                                                   "unemp")
+#                          )
+# )
+# ]
+# 
+# df$situation[is.na(df$situation)]<-"unemp"
+# 
+# save(df,file="manageable_df.Rdata")
+
 rm(list = ls())
 source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
 
@@ -45,12 +64,13 @@ max_time<-max(df$time)
 
 
 
+
 ############### FIRST ANALYSIS AGGREGATED ################
 
 
-create_cohort(df, name="fromanykind2")
+create_cohort(df, name="fromanykind3")
 
-load("fromanykind2_panel.Rdata")
+load("fromanykind3_panel.Rdata")
 
 dftwfe<-create_twfe_dataframe(dff,
                               first_variable = 2, 
@@ -70,7 +90,7 @@ df1<-dfsrdd$df1
 df2<-dfsrdd$df2
 dfnames<-dfsrdd$dfnames
 
-create_rdd_figures(df1 = df1, df2 = df2, dffnames = dfnames, treatment_time = 37, new_directory = "verylong3")
+create_rdd_figures(df1 = df1, df2 = df2, dffnames = dfnames, treatment_time = 37, new_directory = "RDD")
 
 
 
@@ -89,7 +109,7 @@ for (variable in variable_names) {
                   result_models$did_coefs[[paste("mod",variable, 5, sep = "_")]],
                   result_models$did_coefs[[paste("mod",variable, 6, sep = "_")]]),
              custom.model.names = labels2,
-             custom.coef.map = list("ATT"="Days worked"),
+             custom.coef.map = list("ATT"=variable),
              stars=c("*"=.1, "**"=.05, "***"=.01),
              include.rsquared = FALSE,
              include.adjrs = FALSE,
@@ -128,8 +148,13 @@ results<-results %>%
 
 
 
+plots<-list()
+labs<-list(days_worked="N. days worked", salaries="Income", ncontracts="N. contracts",
+           open_ended= "Open ended", permanent="Permanent", project_based="Project-based", 
+            self_emp="Self-employment", unemployed= "Unemployment")
 
 for (x in variable_names){
+  label<-labs[[x]]
   gg<-
     results %>% 
     filter(variable==x, months_later %in% c(1,3,5)) %>%  
@@ -144,18 +169,22 @@ for (x in variable_names){
     theme(legend.position = "bottom",
           legend.title = element_blank(),
           axis.title = element_blank(),
-          title = element_text(hjust=.5))
-  ggsave2(gg, file=paste0("../../../../../../Plots/verylongtwfe3/", x,"2.jpeg"), width = 7, height = 6)
+          title = element_text(hjust=.5))+
+    ggtitle(label)
+  plots[[paste(x)]]<-gg
+  ggsave2(gg, file=paste0("../../../../../../Plots/verylongtwfe3/", x,"2.jpeg"), width = 7, height = 5)
   
 }
 
 
-
-
+plots<-ggarrange(plotlist = plots, common.legend = T, legend="bottom",
+                  ncol=2, nrow=4)
+ggsave2(plots, file="../../../../../../Plots/verylongtwfe3/grid.jpeg", width = 7, height = 9)
 
 ################# SECOND ANALYSIS, BY SITUATION ###################
 
 rm(list=ls())
+gc()
 source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
 
 variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
@@ -172,8 +201,27 @@ max_time<-max(df$time)
 
 create_cohort(df, name = "bysituation", aggregation = "situation")
 
+
+##By situation but before
+rm(list=ls())
+gc()
+source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
+
+variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
+labels2<- c("1 month later", "2 months later", "3 months later", "4 months later", "5 months later", "6 months later")
+names(labels2)<-1:6
+
+load("manageable_df.Rdata")
+load("manageable_dfincome.Rdata")
+min_time<- min(df$time)
+max_time<-max(df$time)
+
+create_cohort(df, aggregation = "situation", previouscontracts = T,name = "bypresituation")
+
+
 load("bysituation_panel.Rdata")
 df1<-dff
+
 load("bypresituation_panel.Rdata")
 
 dff<-dff %>% 
@@ -232,11 +280,12 @@ results<-results %>%
 
 
 
-
+plots<-list()
 for (x in variable_names){
+  label<-labs[[x]]
 gg<-
   results %>% 
-  filter(variable==x) %>%  
+  filter(variable==x, months_later %in% c(1,3,5)) %>%  
   ggplot(aes(x=time, group=contract, color=contract))+
   geom_point(aes(y=coefficient, alpha=transp))+
   geom_line(aes(y=coefficient, alpha=transp))+
@@ -244,17 +293,26 @@ gg<-
   facet_wrap(~months_later, labeller = labeller(months_later=labels2))+
   geom_vline(xintercept = 0)+
   geom_hline(yintercept = 0)+
-  scale_color_manual(values = c("#065465", "#008080","#008080", "grey40"), name="h")+
+  scale_color_manual(values = c("permanent"="#065465", "pre-permanent"="#065465", "open-ended"= "#008080","project-based"= "#b67182"),
+                     name="h")+
   scale_alpha_manual(values = c(.8, .8, .5,.8), name="h")+
   theme_bw()+
   theme(legend.position = "bottom",
         legend.title = element_blank(),
         axis.title = element_blank(),
-        title = element_text(hjust=.5))
-ggsave2(gg, file=paste0("../../../../../../Plots/DID_bycontract/", x,"2.jpeg"), width = 7, height = 6)
+        title = element_text(hjust=.5))+
+  ggtitle(label)
+plots[[paste(x)]]<-gg
+ggsave2(gg, file=paste0("../../../../../../Plots/DID_bycontract/", x,"2.jpeg"), width = 7, height = 4)
 
 }
 
+plots1<-ggarrange(plotlist = plots[c("unemployed", "salaries", "days_worked" , "ncontracts")], common.legend = T, legend="bottom",
+                  ncol=2, nrow=2)
+plots2<-ggarrange(plotlist = plots[c("project_based", "open_ended", "permanent" , "self_emp")], common.legend = T, legend="bottom",
+                  ncol=2, nrow=2)
+ggsave2(plots1, file="../../../../../../Plots/DID_bycontract/grid1.jpeg", width = 12, height = 10)
+ggsave2(plots2, file="../../../../../../Plots/DID_bycontract/grid2.jpeg", width = 12, height = 10)
 
 # dir.create("../../../../../../Tables")
 # dir.create("../../../../../../Tables/did_bycontract")
@@ -278,26 +336,12 @@ for (contract in contracts) {
   }
 }
 
- ##By situation but before
-rm(list=ls())
-source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
-
-variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
-labels2<- c("1 month later", "2 months later", "3 months later", "4 months later", "5 months later", "6 months later")
-names(labels2)<-1:6
-
-load("manageable_df.Rdata")
-load("manageable_dfincome.Rdata")
-min_time<- min(df$time)
-max_time<-max(df$time)
-
-create_cohort(df, aggregation = "situation", previouscontracts = T,name = "bypresituation")
-
 
 
 ###############THIRD ANALYSIS BY GENDER ####################
 
 rm(list=ls())
+gc()
 source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
 
 variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
@@ -367,11 +411,12 @@ results<-results %>%
 
 
 
-
+plots<-list()
 for (x in variable_names){
+  label<-labs[[x]]
   gg<-
     results %>% 
-    filter(variable==x) %>%  
+    filter(variable==x, months_later %in% c(1,3,5)) %>%  
     ggplot(aes(x=time, group=group, color=group))+
     geom_point(aes(y=coefficient), alpha=.7)+
     geom_line(aes(y=coefficient), alpha=.9)+
@@ -384,10 +429,20 @@ for (x in variable_names){
     theme(legend.position = "bottom",
           legend.title = element_blank(),
           axis.title = element_blank(),
-          title = element_text(hjust=.5))
-  ggsave2(gg, file=paste0("../../../../../../Plots/DID_bygender/", x,".jpeg"), width = 7, height = 6)
+          title = element_text(hjust=.5))+
+    ggtitle(label)
+  plots[[paste(x)]]<- gg
+  ggsave2(gg, file=paste0("../../../../../../Plots/DID_bygender/", x,".jpeg"), width = 7, height = 4)
   
 }
+
+plots1<-ggarrange(plotlist = plots[c("unemployed", "salaries", "days_worked" , "ncontracts")], common.legend = T, legend="bottom",
+                  ncol=2, nrow=2)
+plots2<-ggarrange(plotlist = plots[c("project_based", "open_ended", "permanent" , "self_emp")], common.legend = T, legend="bottom",
+                  ncol=2, nrow=2)
+
+ggsave2(plots1, file="../../../../../../Plots/DID_bygender/grid1.jpeg", width = 12, height = 10)
+ggsave2(plots2, file="../../../../../../Plots/DID_bygender/grid2.jpeg", width = 12, height = 10)
 
 
  #dir.create("../../../../../../Tables/did_bygender")
@@ -418,6 +473,7 @@ for (g in groups) {
 ################ FOURTH: ANALYSIS BY PROVINCE ##############
 
 rm(list=ls())
+gc()
 source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
 
 variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
@@ -463,13 +519,12 @@ max_time<-max(df$time)
  
 # Change the local codes to province codes
  
- df$person_muni_latest <- replace_province(df$person_muni_latest)
+ #df$person_muni_latest <- replace_province(df$person_muni_latest)
 # 
- create_cohort(df, aggregation="person_muni_latest", name="byregion")
+ #create_cohort(df, aggregation="person_muni_latest", name="byregion")
 
 
 load("byregion_panel.Rdata")
-
 
 
 result_models<- list()
@@ -530,7 +585,6 @@ results1<-results %>%
 
 map_df<-left_join(regional_plot2, results1, by="id2")
 
-if (x!="project_based"){
 gg<-map_df %>%
   ggplot() +
   geom_polygon(aes( x= long_c, 
@@ -545,32 +599,12 @@ gg<-map_df %>%
   theme(panel.background = element_rect(linewidth= 1, color = "white", fill = "white")) +
   scale_fill_gradient(low="#d0a5ae", 
                       high = "#19547b")+
-  scale_alpha_manual(values = c(0.5, 1))+
+  scale_alpha_manual(values = c("non-relevant"=0.5, "relevant"=1))+
   guides(color="none",
          alpha="none")+
   theme(legend.title=element_blank())+
   scale_color_manual(values = c("white", "black"))+
   facet_wrap(~months_later, labeller = labeller(months_later=labels2) )
-}else{
-  gg<-map_df %>%
-    ggplot() +
-    geom_polygon(aes( x= long_c,
-                      y = lat_c,
-                      group = group.x,
-                      fill=coefficient,
-                      color="black"),
-                 linewidth = 0.05 ) +
-    geom_path(data = canaries_line, aes(x=long, y = lat, group = NULL), color = "grey40")+
-    theme_void() +
-    theme(panel.background = element_rect(linewidth= 1, color = "white", fill = "white")) +
-    scale_fill_gradient(low="#d0a5ae",
-                        high = "#19547b")+
-    guides(color="none",
-           alpha="none")+
-    theme(legend.title=element_blank())+
-    scale_color_manual(values = c("white", "black"))+
-    facet_wrap(~months_later, labeller = labeller(months_later=labels2) )
-}
 
 
 ggsave2(gg, file=paste0("../../../../../../Plots/DID_byprovince/", x,".jpeg"), width = 10, height = 6)
@@ -583,6 +617,7 @@ ggsave2(gg, file=paste0("../../../../../../Plots/DID_byprovince/", x,".jpeg"), w
 
 ################ FIFTH: BY OCCUPATION ###################
 rm(list=ls())
+gc()
 source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
 
 variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
@@ -665,10 +700,13 @@ results<-results %>%
             stars=ifelse(pvalue<=0.1, "significant", "Not significant"),
             pretest=ifelse(pretrends<=.05, "significant", "Not significant"))
 
+
+plots<-list()
 for (x in variable_names){
   results1<-results %>% 
     filter(variable==x)
-
+  label<-labs[[x]]
+  if(x %in% c("unemployed", "days_worked", "project_based", "permanent")) {
 gg<-
   results1 %>% 
   ggplot(aes(y=group2, x=coefficient))+
@@ -680,12 +718,42 @@ gg<-
         legend.position = "none")+
   geom_vline(xintercept = 0)+
   scale_color_manual(values = c("#008080", "red"))+
+  guides(color="none")+
+  ggtitle(label)+
   facet_wrap(~months_later, labeller = labeller(months_later=labels2) )
+  } else {
+    gg<-
+      results1 %>% 
+      ggplot(aes(y=group2, x=coefficient))+
+      geom_point(aes(color=pretest), fill="#008080",size=3,shape=21, alpha=.7)+
+      geom_errorbarh(aes(xmax=plus95, xmin=minus95), color="#008080", alpha=.5)+
+      theme_bw()+
+      theme(axis.title = element_blank(),
+            axis.text.x = element_text(angle = 90),
+            legend.position = "none",
+            axis.text.y = element_blank())+
+      geom_vline(xintercept = 0)+
+      scale_color_manual(values = c("#008080", "red"))+
+      guides(color="none")+
+      ggtitle(label)+
+      facet_wrap(~months_later, labeller = labeller(months_later=labels2) )
+}
+
+plots[[paste(x)]]<- gg
   
 ggsave2(gg, file=paste0("../../../../../../Plots/DID_byoccupation/", x,".jpeg"), width = 10, height = 6)
 
 }
-  
+ 
+plots1<-ggarrange(plotlist = plots[c("unemployed", "salaries", "days_worked" , "ncontracts")], common.legend = T, legend="bottom",
+                  ncol=2, nrow=2,widths = c(1.3,1))
+
+plots2<-ggarrange(plotlist = plots[c("project_based", "open_ended", "permanent" , "self_emp")], common.legend = T, legend="bottom",
+                  ncol=2, nrow=2,widths = c(1.3,1))
+
+ggsave2(plots1, file="../../../../../../Plots/DID_byoccupation/grid1.jpeg", width = 10, height = 10)
+ggsave2(plots2, file="../../../../../../Plots/DID_byoccupation/grid2.jpeg", width = 10, height = 10)
+
 
 
 ############### SIXTH: BY SECTOR #######################
@@ -929,6 +997,7 @@ ggsave2(gg, file=paste0("../../../../../../Plots/DID_byoccupation/", x,".jpeg"),
 
 ############### SIXTH: BY SECTOR2 #######################
 rm(list=ls())
+gc()
 source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
 
 variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
@@ -978,7 +1047,6 @@ df<-df %>%
 
 
 create_cohort(df, aggregation="sector2", name="bysector2")
-
 load("bysector2_panel.Rdata")
 
 
@@ -1043,10 +1111,13 @@ results<-results %>%
             stars=ifelse(pvalue<=0.1, "significant", "Not significant"),
             pretest=ifelse(pretrends<=.05, "significant", "Not significant"))
 
+plots<-list()
 for (x in variable_names){
   results1<-results %>% 
     filter(variable==x)
-  
+  label<-labs[[x]]
+  if(x %in% c("unemployed", "days_worked", "project_based", "permanent")) {
+   
   gg<-
     results1 %>% 
     ggplot(aes(y=group, x=coefficient))+
@@ -1057,16 +1128,52 @@ for (x in variable_names){
           axis.text.x = element_text(angle = 90),
           legend.position = "none")+
     geom_vline(xintercept = 0)+
-    scale_color_manual(values = c("#008080", "red"))+
+    scale_color_manual(values = c("Not significant"="#008080", "significant"="red"))+
+    guides(color="none")+
+    ggtitle(label)+
     facet_wrap(~months_later, labeller = labeller(months_later=labels2) )
+  
+  } else {
+    gg<-
+      results1 %>% 
+      ggplot(aes(y=group, x=coefficient))+
+      geom_point(aes(color=pretest), fill="#008080",size=3,shape=21, alpha=.7)+
+      geom_errorbarh(aes(xmax=plus95, xmin=minus95), color="#008080", alpha=.5)+
+      theme_bw()+
+      theme(axis.title = element_blank(),
+            axis.text.x = element_text(angle = 90),
+            legend.position = "none",
+            axis.text.y = element_blank())+
+      geom_vline(xintercept = 0)+
+      scale_color_manual(values = c("Not significant"="#008080", "significant"="red"))+
+      guides(color="none")+
+      ggtitle(label)+
+      facet_wrap(~months_later, labeller = labeller(months_later=labels2) )
+    
+  }
+  
+  
+  plots[[paste(x)]]<-gg
   
   ggsave2(gg, file=paste0("../../../../../../Plots/DID_bysector2/", x,".jpeg"), width = 10, height = 6)
   
 }
 
+plots1<-ggarrange(plotlist = plots[c("unemployed", "salaries", "days_worked" , "ncontracts")], common.legend = T, legend="bottom",
+                  ncol=2, nrow=2,widths = c(2,1))
+
+plots2<-ggarrange(plotlist = plots[c("project_based", "open_ended", "permanent" , "self_emp")], common.legend = T, legend="bottom",
+                  ncol=2, nrow=2,widths = c(2,1))
+
+ggsave2(plots1, file="../../../../../../Plots/DID_bysector2/grid1.jpeg", width = 10, height = 10)
+ggsave2(plots2, file="../../../../../../Plots/DID_bysector2/grid2.jpeg", width = 10, height = 10)
+
+
+
 
 ####################SEVENTH: BY AGE GROUP ##################
-rm(list=ls())
+rm(list=ls()) 
+gc()
 source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
 
 variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
@@ -1082,17 +1189,20 @@ max_time<-max(df$time)
 
 df$age<-df$yearmonth%/%100- df$birth_date %/% 100
 
-df[, age_group:= case_when(age<25 ~ "<25",
-                           age %in% c(25:34) ~ "25-34",
-                           age %in% c(35:44) ~ "35-44",
-                           age %in% c(45:54) ~ "45-54",
-                           age %in% c(55:64) ~ "55-64",
-                           age > 64 ~ "65+")]
+df<-df %>% 
+  select(-c( occupation, sector,birth_date,sex, person_muni_latest))
+
+
+df$age_group[df$age<25]<- "<25"
+df$age_group[df$age %in% c(25:34)]<- "25-34"
+df$age_group[df$age %in% c(35:44)]<- "35-44"
+df$age_group[df$age %in% c(45:54)]<- "45-54"
+df$age_group[df$age %in% c(55:64)]<- "55-64"
+df$age_group[df$age > 64]<- "65+"
 
 create_cohort(df, aggregation = "age_group", name = "byagegroup")
 
 load("byagegroup_panel.Rdata")
-
 result_models<- list()
 
 groups<-unique(dff$group)
@@ -1142,11 +1252,12 @@ results<-results %>%
 
 
 
-
+plots<-list()
 for (x in variable_names){
+  label<-labs[[x]]
  gg<-
     results %>% 
-    filter(variable==x) %>%  
+    filter(variable==x, months_later %in% c(1,3,5)) %>%  
     ggplot(aes(x=time, group=group, color=group))+
     geom_point(aes(y=coefficient), alpha=.7)+
     geom_line(aes(y=coefficient), alpha=.9)+
@@ -1154,16 +1265,25 @@ for (x in variable_names){
     facet_wrap(~months_later, labeller = labeller(months_later=labels2))+
     geom_vline(xintercept = 0)+
     geom_hline(yintercept = 0)+
-    #scale_color_manual(values = c("#008080","#b67182",  "grey20"))+
+    scale_color_manual(values = c("grey60", "#a9c7ee", "#51aff7","#006884", "black"))+
     theme_bw()+
     theme(legend.position = "bottom",
           legend.title = element_blank(),
           axis.title = element_blank(),
-          title = element_text(hjust=.5))
+          title = element_text(hjust=.5))+
+   ggtitle(label)
+ plots[[paste(x)]]<-gg
   ggsave2(gg, file=paste0("../../../../../../Plots/DID_byagegroup/", x,".jpeg"), width = 7, height = 6)
   
 }
 
+plots1<-ggarrange(plotlist = plots[c("unemployed", "salaries", "days_worked" , "ncontracts")], common.legend = T, legend="bottom",
+                 ncol=2, nrow=2)
+plots2<-ggarrange(plotlist = plots[c("project_based", "open_ended", "permanent" , "self_emp")], common.legend = T, legend="bottom",
+                  ncol=2, nrow=2)
+
+ggsave2(plots1, file="../../../../../../Plots/DID_byagegroup/grid1.jpeg", width = 12, height = 10)
+ggsave2(plots2, file="../../../../../../Plots/DID_byagegroup/grid2.jpeg", width = 12, height = 10)
 
 
 ########### PREANALYSIS: LOGIT #####
