@@ -166,15 +166,25 @@ return(df)
 
 
 
-create_cohort<-function(df, aggregation=NULL,
-                        previouscontracts=FALSE,
+create_cohort<-function(df,
+                        aggregation=NULL,
+                        pbonly=FALSE,
+                        rc=FALSE,
                         name){
   
+  if(rc==T){
+    df<-df[df$time>=12,]
+    df$time <- df$time-12
+    max_time<-max_time-12
+  }
+  
 for (i in min_time:max_time){
-  if(previouscontracts) {
+  
+  
+  if(pbonly==T) {
     df1 <- df %>%
       group_by(person_id) %>%
-      mutate(treatment = ifelse(any(time == i & yearmonth == exit_month & situation != "unemp")  & entry_date < 20220000, 1, NA)) %>%
+      mutate(treatment = ifelse(any(time == i & yearmonth == exit_month & situation == "project-based"), 1, NA)) %>%
       filter(!is.na(treatment)) %>%
       select(-treatment)
   } else {
@@ -186,6 +196,11 @@ for (i in min_time:max_time){
   }
 
 
+if(rc==T){
+  used<-unique(df1$person_id)  
+  df <- df[!(df$person_id %in% used), ]
+}
+  
 #Now let's create a complete grid for the individuals so there is one observation per person per month
 
 complete_grid<-expand.grid(person_id=unique(df1$person_id),
@@ -195,7 +210,6 @@ df1<-merge(complete_grid, df1, by=c("person_id", "time"), all.x = TRUE)
 
 
 df1$days_spell[is.na(df1$days_spell)]<-0
-df1$ncontracts[is.na(df1$ncontracts)]<-0
 
 
 setDT(df1)
