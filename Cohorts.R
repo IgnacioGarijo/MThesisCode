@@ -210,7 +210,7 @@ df1<-merge(complete_grid, df1, by=c("person_id", "time"), all.x = TRUE)
 
 
 df1$days_spell[is.na(df1$days_spell)]<-0
-
+df1$ncontracts[df1$ncontracts==0]<-NA
 
 setDT(df1)
 
