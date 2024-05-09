@@ -17,23 +17,37 @@ setDT(df)
 
 ##Number of contracts
 
+df$ncontracts[df$ncontracts==0]<-NA
+df<-df[!is.na(df$ncontracts),]
+
 dfncontracts<- df %>% 
   group_by(year, month, contr_type) %>% 
   summarize(ncontracts=mean(ncontracts, na.rm = T)) %>% 
   mutate(date=as.Date(paste(year, month, "01", sep="-")))
 
-dfncontracts1<-df %>% 
-  filter(contr_type=="permanent", entry_date<20220000) %>% 
+dfncontracts1<-df[df$contr_type=="permanent"]
+rm(df)
+
+dfncontracts1$contract_date <- as.Date(as.character(dfncontracts1$entry_date), format = "%Y%m%d")
+
+dfncontracts1$current_date <- as.Date(paste(dfncontracts1$year, dfncontracts1$month, "01", sep = "-"))
+
+dfncontracts1$years_difference <- as.numeric(difftime(dfncontracts1$current_date, dfncontracts1$contract_date, units = "days") / 365)
+
+dfncontracts1 <- dfncontracts1[dfncontracts1$years_difference >= 1, ]
+
+
+dfncontracts1<-dfncontracts1 %>% 
   group_by(year, month) %>%
   summarize(ncontracts=mean(ncontracts, na.rm = T)) %>% 
   mutate(date=as.Date(paste(year, month, "01", sep="-")),
-         contr_type="pre-permanent")
+         contr_type="old-permanent")
   
 dfncontracts<-rbind(dfncontracts, dfncontracts1)
 
 gg<-
   dfncontracts %>% 
-  filter(contr_type %in% c("permanent", "pre-permanent","open-ended", "project-based")) %>% 
+  filter(contr_type %in% c("permanent", "old-permanent","open-ended", "project-based")) %>% 
   filter(!is.na(contr_type), contr_type!="Pre-retirement") %>% 
   ggplot(aes(x=date, y=ncontracts, group=contr_type, color=contr_type, alpha=contr_type))+
   geom_line()+
@@ -47,13 +61,35 @@ gg<-
         legend.title = element_blank(),
         axis.title.x = element_blank())+
   ylab("Average number of contracts")+
-  scale_color_manual(name="h",values = c("permanent"="#065465","pre-permanent"="#065465", "open-ended"= "#008080","project-based"= "#b67182"))+
-    scale_alpha_manual(values = c(.7,.7,.4,.7), name="h")
-
+  scale_color_manual(name="h",values = c("permanent"="#065465","old-permanent"="#065465", "open-ended"= "#008080","project-based"= "#b67182"))+
+  scale_alpha_manual(values = c("permanent"=.7, "open-ended"=.7, "old-permanent"=.4, "project-based"=.7), name="h")
+  
 
 ggsave2(gg, file="../../../../../../Plots/descriptive_mcvl/YESnofcontracts.jpeg", width = 5, height = 3)
 
+
+dfncontracts1<-dfncontracts %>% 
+  filter(contr_type %in% c("permanent", "old-permanent")) %>% 
+  pivot_wider(names_from = contr_type, values_from = ncontracts) %>% 
+  mutate(ratio= (permanent - `old-permanent`)/`old-permanent`,
+         var="ncontracts") 
+
+gg<-dfncontracts1 %>% 
+    ggplot(aes(x=date, y=dif))+
+  geom_line( color="#065465", alpha=.7)+
+  geom_point(color="#065465", alpha=.8)+
+  scale_y_continuous(labels = scales::percent)+
+  geom_vline(xintercept = as.Date("2022-01-01"))+
+  geom_vline(xintercept = c(as.Date("2021-01-01"), as.Date("2020-01-01"), as.Date("2019-01-01")), linetype="dashed")+
+  theme(axis.title = element_blank())
+
+ggsave2(gg, file="../../../../../../Plots/descriptive_mcvl/difnofcontracts.jpeg", width = 5, height = 3)
+
+
+
 ##days worked
+
+load("descriptivepanel.Rdata")
 
 dfdaysworked<-df %>% 
   group_by(year, month, contr_type) %>% 
@@ -61,19 +97,29 @@ dfdaysworked<-df %>%
   mutate(daysworked= ifelse(month==2, daysworked*30/28 , daysworked ),
          date=as.Date(paste(year, month, "01", sep="-")))
 
-dfdaysworked2<-df %>% 
-  filter(contr_type=="permanent", entry_date<20220000) %>% 
+df1<-df[df$contr_type=="permanent"]
+rm(df)
+
+df1$contract_date <- as.Date(as.character(df1$entry_date), format = "%Y%m%d")
+
+df1$current_date <- as.Date(paste(df1$year, df1$month, "01", sep = "-"))
+
+df1$years_difference <- as.numeric(difftime(df1$current_date, df1$contract_date, units = "days") / 365)
+
+df1 <- df1[df1$years_difference >= 1, ]
+
+dfdaysworked2<-df1 %>% 
   group_by(year, month) %>% 
   summarise(daysworked=mean(days_spell)) %>% 
   mutate(daysworked= ifelse(month==2, daysworked*30/28 , daysworked ),
          date=as.Date(paste(year, month, "01", sep="-")),
-         contr_type="pre-permanent")
+         contr_type="old-permanent")
 
 dfdaysworked<-rbind(dfdaysworked, dfdaysworked2)
 
 ggdaysworked<-
 dfdaysworked %>% 
-  filter(contr_type %in% c("permanent", "pre-permanent", "open-ended", "project-based")) %>% 
+  filter(contr_type %in% c("permanent", "old-permanent", "open-ended", "project-based")) %>% 
   ggplot(aes(x=date, y=daysworked, group=contr_type, color=contr_type, alpha=contr_type))+
   geom_line()+
   geom_point( size=1)+
@@ -85,11 +131,32 @@ dfdaysworked %>%
         legend.title = element_blank(),
         axis.title.x = element_blank())+
   ylab("Average days under spell")+
-  scale_alpha_manual(values = c(.7,.7,.4,.7), name="h")+
-  scale_color_manual(values = c("permanent"="#065465", "pre-permanent"="#065465", "open-ended"= "#008080","project-based"= "#b67182"),
+  scale_alpha_manual(values = c("permanent"=.7, "open-ended"=.7, "old-permanent"=.4, "project-based"=.7), name="h")+
+  scale_color_manual(values = c("permanent"="#065465", "old-permanent"="#065465", "open-ended"= "#008080","project-based"= "#b67182"),
                      name="h")
 
 ggsave2(ggdaysworked, file="../../../../../../Plots/descriptive_mcvl/YESdaysworked.jpeg", width = 5, height = 3)
+
+
+
+dfdif<-
+  dfdaysworked %>% 
+  filter(contr_type %in% c("permanent", "old-permanent")) %>% 
+  pivot_wider(names_from = contr_type, values_from = daysworked) %>% 
+  mutate(ratio= (permanent - `old-permanent`)/`old-permanent`,
+         var= "days_worked") 
+
+gg<-
+dfdif %>% 
+  ggplot(aes(x=date, y=dif))+
+  geom_line( color="#065465", alpha=.7)+
+  geom_point(color="#065465", alpha=.8)+
+  scale_y_continuous(labels = scales::percent)+
+  geom_vline(xintercept = as.Date("2022-01-01"))+
+  geom_vline(xintercept = c(as.Date("2021-01-01"), as.Date("2020-01-01"), as.Date("2019-01-01")), linetype="dashed")+
+  theme(axis.title = element_blank())
+
+ggsave2(gg, file="../../../../../../Plots/descriptive_mcvl/difdaysworked.jpeg", width = 5, height = 3)
 
 
 ##Less income?
@@ -100,18 +167,17 @@ dfincome<-df %>%
   summarise(income=mean(income, na.rm=T)) %>% 
   mutate(date=as.Date(paste(year, month, "01", sep="-")))
 
-dfincome2<-df %>% 
-  filter(contr_type=="permanent", entry_date<20220000) %>% 
+dfincome2<-df1 %>% 
   group_by(year, month) %>% 
   summarise(income=mean(income, na.rm = T)) %>% 
   mutate(date=as.Date(paste(year, month, "01", sep="-")),
-         contr_type="pre-permanent")
+         contr_type="old-permanent")
 
 dfincome<-rbind(dfincome, dfincome2)
 
 ggincome<-
   dfincome %>% 
-  filter(contr_type %in% c("permanent", "pre-permanent", "open-ended", "project-based")) %>% 
+  filter(contr_type %in% c("permanent", "old-permanent", "open-ended", "project-based")) %>% 
   ggplot(aes(x=date, y=income/100, group=contr_type, color=contr_type, alpha=contr_type))+
   geom_line()+
   geom_point( size=1)+
@@ -123,12 +189,52 @@ ggincome<-
         legend.title = element_blank(),
         axis.title.x = element_blank())+
   ylab("Average monthly income")+
-  scale_alpha_manual(values = c(.7,.7,.4,.7), name="h")+
-  scale_color_manual(values = c("permanent"="#065465", "pre-permanent"="#065465", "open-ended"= "#008080","project-based"= "#b67182"),
+  scale_alpha_manual(values = c("permanent"=.7, "open-ended"=.7, "old-permanent"=.4, "project-based"=.7), name="h")+
+  scale_color_manual(values = c("permanent"="#065465", "old-permanent"="#065465", "open-ended"= "#008080","project-based"= "#b67182"),
                      name="h")
 
 ggsave2(ggincome, file="../../../../../../Plots/descriptive_mcvl/YESincome.jpeg", width = 5, height = 3)
 
+dfdif2<-
+  dfincome %>% 
+  filter(contr_type %in% c("permanent", "old-permanent")) %>% 
+  pivot_wider(names_from = contr_type, values_from = income) %>% 
+  mutate(ratio= ( permanent-`old-permanent`)/`old-permanent`,
+         var="income")
+
+gg<-
+  dfdif2 %>% 
+  ggplot(aes(x=date, y=ratio))+
+  geom_line( color="#065465", alpha=.7)+
+  geom_point(color="#065465", alpha=.8)+
+  scale_y_continuous(labels = scales::percent)+
+  geom_vline(xintercept = as.Date("2022-01-01"))+
+  geom_vline(xintercept = c(as.Date("2021-01-01"), as.Date("2020-01-01"), as.Date("2019-01-01")), linetype="dashed")+
+  theme(axis.title = element_blank())
+
+  
+  
+ggsave2(gg, file="../../../../../../Plots/descriptive_mcvl/difincome.jpeg", width = 5, height = 3)
+
+
+dfdiff<-rbind(dfdif2, dfdif, dfncontracts1)
+
+
+gg<-
+  dfdiff %>% 
+  ggplot(aes(x=date, y=ratio, color=var,group=var))+
+  geom_line(alpha=.7)+
+  geom_point( alpha=.8)+
+  scale_y_continuous(breaks = seq(-0.075, 0.01, by=0.01),labels = scales::percent)+
+  scale_color_manual(labels=c("days_worked"= "N. of days worked", "income"="Income", "ncontracts"="N. of contracts"),values = c("#065465", "#008080", "#b67182"))+
+  geom_vline(xintercept = as.Date("2022-01-01"))+
+  geom_vline(xintercept = c(as.Date("2021-01-01"), as.Date("2020-01-01"), as.Date("2019-01-01")), linetype="dashed")+
+  theme(axis.title.x = element_blank(),
+        legend.position = "bottom",
+        legend.title = element_blank())+
+  ylab("Ratio of permanent/old-permanent")
+
+ggsave2(gg, file="../../../../../../Plots/descriptive_mcvl/YESdif.jpeg", width = 5, height = 3.5)
 
 
 ########### DURATION OF CONTRACTS ##################333
@@ -236,7 +342,7 @@ df1<-df[yearmonth==202112,]
 
 df1 %>% 
   group_by(sex) %>% 
-  summarize(var=sum(contr_type=="project-based", na.rm = T)/ sum(!is.na(contr_type), na.rm = T)) %>% 
+  summarize(var=sum(contr_type=="project-based", na.rm = T)/ sum(!is.na(contr_type), na.rm = T)*100) %>% 
   mutate(sex=ifelse(sex==1, "man", "woman"))
 
 
@@ -253,17 +359,24 @@ df1$age_group[df1$age %in% c(45:54)]<- "45-54"
 df1$age_group[df1$age %in% c(55:64)]<- "55-64"
 df1$age_group[df1$age > 64]<- "65+"
 
-df1 %>% 
+gg<-
+  df1 %>% 
   group_by(age_group) %>% 
   summarize(var=sum(contr_type=="project-based", na.rm = T)/ sum(!is.na(contr_type), na.rm = T)) %>% 
+    mutate(label=paste0(round(var*100,2), "%")) %>% 
   ggplot(aes(x=age_group, y=var, fill=age_group))+
+    geom_text(aes(label=label),
+              nudge_y = 0.01,
+              color="grey40")+
   geom_col(alpha=.8)+
   scale_fill_manual(values = c("#8eb1c2", "#51aff7","#006884",  "#446879", "#044766"))+
   theme(legend.title = element_blank(),
         axis.title = element_blank())+
   scale_y_continuous(labels = scales::percent)+
   guides(fill="none")
-  
+
+
+ggsave2(gg, file="../../../../../../Plots/descriptive_mcvl/prebyagegroup.jpeg", width = 5, height = 3)
 ##### BY SECTOR ########
 
 df1$sector <- ifelse(df1$sector %in% c(11, 12,13, 14, 15, 16,17,21, 22, 23, 24, 31, 32, 51, 52,
@@ -331,17 +444,25 @@ cc<-scales::seq_gradient_pal("#9bc9be", "#0e387a", "Lab")(seq(0,1,length.out=(le
                                                                                     )-1)
                                                               )
                                                           )
-df1 %>% 
+gg<-
+  df1 %>% 
   filter(!is.na(sector2)) %>% 
   group_by(sector2) %>% 
   summarize(var=sum(contr_type=="project-based", na.rm = T)/ sum(!is.na(contr_type), na.rm = T))%>% 
+    mutate(label=paste0(round(var*100,2), "%")) %>% 
   ggplot(aes(y=sector2, x=var, fill=sector2))+
   geom_col(alpha=.9)+
-  theme(legend.title = element_blank(),
+    geom_text(aes(label=label),
+              nudge_x = 0.03,
+              color="grey40",
+              size=3)+
+    theme(legend.title = element_blank(),
         axis.title = element_blank())+
   scale_x_continuous(labels = scales::percent)+
   scale_fill_manual(values= cc)+
   guides(fill="none")
+
+ggsave2(gg, file="../../../../../../Plots/descriptive_mcvl/prebysector.jpeg", width = 7, height = 3)
 
 ###BY OCCUPATION #######
 
@@ -373,18 +494,25 @@ df1$group2 <- factor(df1$group2, levels = rev(c("Engineers/Top Management", "Tec
                                                         "Administrative Assistants", "1st 2nd Grade Officers","3rd Grade Officers/Specialists",
                                                         "Unqualified +18","<18 years old")))
 
-df1 %>% 
+gg<-
+  df1 %>% 
   filter(!is.na(group2)) %>% 
   group_by(group2) %>% 
   summarize(var=sum(contr_type=="project-based", na.rm = T)/ sum(!is.na(contr_type), na.rm = T)) %>% 
+    mutate(label=paste0(round(var*100,2), "%")) %>% 
   ggplot(aes(y=group2, x=var, fill=group2))+
   geom_col(alpha=.8)+
+    geom_text(aes(label=label),
+              nudge_x = 0.015,
+              color="grey40",
+              size=3)+
   theme(legend.title = element_blank(),
         axis.title = element_blank())+
   scale_x_continuous(labels = scales::percent)+
   scale_fill_manual(values= cc)+
   guides(fill="none")
 
+ggsave2(gg, file="../../../../../../Plots/descriptive_mcvl/prebyoccupation.jpeg", width = 5.5, height = 3)
 
 ########### BY REGION ##############
 
@@ -428,7 +556,13 @@ map_df<-df1 %>%
 
 map_df<-left_join(regional_plot2, map_df)
 
-map_df %>%
+gg<-
+  map_df %>%
+    group_by(`shapefile_provincias$Texto`) %>% 
+    mutate(count=1:n(),
+           label=ifelse(count==1,first(round(var*100,2)),NA),
+           long_label=mean(long_c),
+           lat_label=mean(lat_c)) %>% 
   ggplot() +
   geom_polygon(aes( x= long_c, 
                     y = lat_c, 
@@ -437,6 +571,11 @@ map_df %>%
                color="white",
                linewidth = 0.05 ) +
   geom_path(data = canaries_line, aes(x=long, y = lat, group = NULL), color = "grey40")+
+  geom_text(aes(label=label,
+                x= long_label, 
+                y = lat_label),
+            color="grey20",
+            size=2)+
   theme_void() +
   theme(panel.background = element_rect(linewidth= 1, color = "white", fill = "white")) +
   scale_fill_gradient(low="#9bc9be", 
@@ -446,4 +585,91 @@ map_df %>%
   guides(color="none",
          alpha="none")+
   theme(legend.title=element_blank())
+ggsave2(gg, file="../../../../../../Plots/descriptive_mcvl/prebyprovince.jpeg", width = 5, height = 3)
+
+
+df %>%
+  filter(yearmonth %/% 100== 2021) %>% 
+  group_by(time) %>% 
+  summarise(temp=sum(contr_type %in% c("other temporary","project-based","Internship or training","production circumstances","Replacement")),
+            pb=sum(contr_type == "project-based", na.rm = T),
+            pb/temp
+            )
+
+df1 %>% 
+  filter(group2=="Unqualified +18", person_muni_latest==21, sector2 == "AGRICULTURE, FORESTRY AND FISHING", sex==1, age_group=="<25")%>% 
+  summarise(temp=sum(contr_type %in% c("other temporary","project-based","Internship or training","production circumstances","Replacement")),
+            pb=sum(contr_type == "project-based", na.rm = T),
+            pb/temp,
+            n()
+  )
+
+
+df$person_muni_latest <- replace_province(df$person_muni_latest)
+df$age<-df$yearmonth%/%100- df$birth_date %/% 100
+
+df$sector <- ifelse(df$sector %in% c(11, 12,13, 14, 15, 16,17,21, 22, 23, 24, 31, 32, 51, 52,
+                                       61, 62, 71,72, 81, 89, 91, 99),
+                     paste0("0", df$sector),
+                     df$sector)
+
+
+df$sector<-substr(df$sector, 1,2)
+
+
+
+
+df %>% 
+  filter(occupation==10, person_muni_latest==21, as.numeric(sector) %in% c(1:3), sex==1, age<25)%>% 
+  summarise(temp=sum(contr_type %in% c("other temporary","project-based","Internship or training","production circumstances","Replacement")),
+            pb=sum(contr_type == "project-based", na.rm = T),
+            pb/temp,
+            n()
+  )
+
+
+
+Sys.setlocale("LC_TIME", "English")
+
+# Create the dataframe
+df <- data.frame(
+  date = seq(as.Date("2020-01-01"), as.Date("2022-12-01"), by = "month"),
+  time=1:36,
+  var= c(rep(2, 12),rep(3,12), 3:14)
+) %>% 
+  mutate(month= format(date, "%B"),
+         control= ifelse(time%in% c(1:24), "control", NA),
+         treatment= ifelse(time %in% c(13:36), "treatment", NA))
+
+
+df1<-df %>% 
+  pivot_longer(names_to = "treatment", cols = c("treatment", "control")) %>% 
+  filter(!is.na(value)) %>% 
+  arrange(value, time) %>% 
+  mutate(time2= ifelse(treatment=="treatment", time-12, time),
+         month2=ifelse(time2<13, paste0(1, month), paste0(2, month)),
+         var2=ifelse(value=="control", var+1, var))
+
+df1$month2 <- factor(df1$month2, levels = c("1January", "1February", "1March", "1April", "1May", "1June", "1July", "1August", "1September", "1October", "1November", "1December",
+                                            "2January", "2February", "2March", "2April", "2May", "2June", "2July", "2August", "2September", "2October", "2November", "2December"))
+
+
+gg<-
+  df1 %>% 
+  ggplot(aes(x=month2, y=var, color=value, group=value)) +
+  geom_line()+
+  geom_point(alpha=.7)+
+  geom_text(aes(label=format(date, "%m/%y")),
+            nudge_y=.6,
+            nudge_x = -.1,
+            size=2,check_overlap = T)+
+  geom_vline(xintercept = "2January")+
+  scale_color_manual(values = c("#065465", "#008080"))+
+  theme(axis.title = element_blank(),
+        axis.text.x = element_text(angle = 70, vjust = .5),
+        legend.position = c(.1,.8),
+        legend.title = element_blank(),
+        legend.background = element_blank())
+
+ggsave2(gg, file="../../../../../../Plots/descriptive_mcvl/example.jpeg", width = 6, height = 3)
 

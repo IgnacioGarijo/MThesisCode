@@ -242,19 +242,19 @@ twowayfeweights(df5, "ewdsum", "indiv", "time", "tra", type = "feTR", summary_me
 
 
 
-mod_employed = feols(employedr~ i(timeto, da, ref = +0) + rate + jcompleta + htrab+otro+ edad+male+ncony+educsup|                    ## Other controls
+mod_employed = feols(employedr~ i(timeto, da, ref = +0) |                    ## Other controls
                        indiv+ yearq,                             ## FEs
                      cluster = ~indiv,                          ## Clustered SEs
                      data = df5)
-mod_employedsum = feols(employedsum ~ i(timeto, da, ref = +0) + rate + jcompleta + htrab+otro+ edad+male+ncony+educsup|                    ## Other controls
+mod_employedsum = feols(employedsum ~ i(timeto, da, ref = +0) |                    ## Other controls
                           indiv+ yearq,                             ## FEs
                         cluster = ~indiv,                          ## Clustered SEs
                         data = df5)
-mod_ewdr = feols(ewdr ~ i(timeto, da, ref = +0) + rate + jcompleta + htrab+otro+ edad+male+ncony+educsup|                    ## Other controls
+mod_ewdr = feols(ewdr ~ i(timeto, da, ref = +0) |                    ## Other controls
                           indiv+ yearq,                             ## FEs
                         cluster = ~indiv,                          ## Clustered SEs
                         data = df5)
-mod_ewdsum = feols(ewdsum ~ i(timeto, da, ref = +0) + rate + jcompleta + htrab+otro+ edad+male+ncony+educsup|                    ## Other controls
+mod_ewdsum = feols(ewdsum ~ i(timeto, da, ref = +0) |                    ## Other controls
                    indiv+ yearq,                             ## FEs
                  cluster = ~indiv,                          ## Clustered SEs
                  data = df5)
@@ -281,11 +281,11 @@ twowayfeweights(df5, "ratesum", "indiv", "time", "tra", type = "feTR", summary_m
 
 
 
-mod_temp = feols(rate ~ i(timeto, da, ref=+0) + employedr + jcompleta + htrab+otro+ edad+male+ncony+educsup|                    ## Other controls
+mod_temp = feols(rate ~ i(timeto, da, ref=+0) |                    ## Other controls
                    indiv+ yearq,                             ## FEs
                  cluster = ~indiv,                          ## Clustered SEs
                  data = df5)
-mod_tempsum = feols(ratesum ~ i(timeto, da, ref=+0) + employedr + jcompleta + htrab+otro+ edad+male+ncony+educsup|                    ## Other controls
+mod_tempsum = feols(ratesum ~ i(timeto, da, ref=+0) |                    ## Other controls
                       indiv+ yearq,                             ## FEs
                     cluster = ~indiv,                          ## Clustered SEs
                     data = df5)
@@ -315,7 +315,7 @@ twowayfeweights(df5, "temprate", "indiv", "time", "tra", type = "feTR", summary_
 
 
 
-mod_temprate = feols(temprate ~ i(timeto, da, ref=+0) + employedr + jcompleta + htrab+otro+ edad+male+ncony+educsup|                    ## Other controls
+mod_temprate = feols(temprate ~ i(timeto, da, ref=+0) |                    ## Other controls
                        indiv+ yearq,                             ## FEs
                      cluster = ~indiv,                          ## Clustered SEs
                      data = df5)
@@ -340,11 +340,11 @@ twowayfeweights(df5, "permrate", "indiv", "time", "tra", type = "feTR", summary_
 
 
 
-mod_permrate = feols(permrate ~ i(timeto, da, ref = +0) + employedr + jcompleta + htrab+otro+ edad+male+ncony+educsup|                    ## Other controls
+mod_permrate = feols(permrate ~ i(timeto, da, ref = +0) |                    ## Other controls
                        indiv+ yearq,                             ## FEs
                      cluster = ~indiv,                          ## Clustered SEs
                      data = df5)
-mod_permsum = feols(permsum ~ i(timeto, da, ref = +0) + employedr + jcompleta + htrab+otro+ edad+male+ncony+educsup|                    ## Other controls
+mod_permsum = feols(permsum ~ i(timeto, da, ref = +0) |                    ## Other controls
                       indiv+ yearq,                             ## FEs
                     cluster = ~indiv,                          ## Clustered SEs
                     data = df5)
@@ -369,13 +369,13 @@ twowayfeweights(df5, "openendsum", "indiv", "time", "tra", type = "feTR", summar
 
 
 
-mod_openendr = feols(openendr ~ i(timeto, da, ref = +0) + employedr + jcompleta + htrab+otro+ edad+male+ncony+educsup|                    ## Other controls
+mod_openendr = feols(openendr ~ i(timeto, da, ref = +0)|                    ## Other controls
                        indiv+ yearq,                             ## FEs
                      cluster = ~indiv,                          ## Clustered SEs
                      data = df5)
-mod_openendsum = feols(openendsum ~ i(timeto, da, ref = +0) + employedr + jcompleta + htrab+otro+ edad+male+ncony+educsup|                    ## Other controls
+mod_openendsum = feols(openendsum ~ i(timeto, da, ref = +0) |                    ## Other controls
                          indiv+ yearq,                             ## FEs
-                       cluster = ~indiv,                          ## Clustered SEs
+                      cluster = ~indiv,                          ## Clustered SEs
                        data = df5)
 
 
@@ -400,11 +400,11 @@ twowayfeweights(df5, "jcompletasum", "indiv", "time", "tra", type = "feTR", summ
 
 
 
-mod_full = feols(jcompleta ~ i(timeto, da, ref=+0) + employedr + rate + htrab+otro+ edad+male+ncony+educsup|                    ## Other controls
+mod_full = feols(jcompleta ~ i(timeto, da, ref=+0) |                    ## Other controls
                    indiv+ yearq,                             ## FEs
                  cluster = ~indiv,                          ## Clustered SEs
                  data = df5)
-mod_fulls = feols(jcompletasum ~ i(timeto, da, ref=+0) + employedr + rate + htrab+otro+ edad+male+ncony+educsup|                    ## Other controls
+mod_fulls = feols(jcompletasum ~ i(timeto, da, ref=+0) |                    ## Other controls
                     indiv+ yearq,                             ## FEs
                   cluster = ~indiv,                          ## Clustered SEs
                   data = df5)
@@ -435,11 +435,11 @@ twowayfeweights(df5, "hcontrato", "indiv", "time", "tra", type = "feTR", summary
 
 
 
-mod_hours = feols(htrab ~ i(timeto, da, ref=+0) + employedr + rate + jcompleta+otro+ edad+male+ncony+educsup|                    ## Other controls
+mod_hours = feols(htrab ~ i(timeto, da, ref=+0) |                    ## Other controls
                     indiv+ yearq,                             ## FEs
                   cluster = ~indiv,                          ## Clustered SEs
                   data = df5)
-mod_hourscontr = feols(hcontrato ~ i(timeto, da, ref=+0) + employedr + rate + jcompleta+otro+ edad+male+ncony+educsup|                    ## Other controls
+mod_hourscontr = feols(hcontrato ~ i(timeto, da, ref=+0) |                    ## Other controls
                          indiv+ yearq,                             ## FEs
                        cluster = ~indiv,                          ## Clustered SEs
                        data = df5)
@@ -463,11 +463,11 @@ twowayfeweights(df5, "otrosum", "indiv", "time", "tra", type = "feTR", summary_m
 
 
 
-mod_otro = feols(otro ~ i(timeto, da, ref=+0) + employedr + rate + jcompleta+htrab+ edad+male+ncony+educsup|                    ## Other controls
+mod_otro = feols(otro ~ i(timeto, da, ref=+0) |                    ## Other controls
                    indiv+ yearq,                             ## FEs
                  cluster = ~indiv,                          ## Clustered SEs
                  data = df5)
-mod_otrosum = feols(otrosum ~ i(timeto, da, ref=+0) + employedr + rate + jcompleta+htrab+ edad+male+ncony+educsup|                    ## Other controls
+mod_otrosum = feols(otrosum ~ i(timeto, da, ref=+0) |                    ## Other controls
                       indiv+ yearq,                             ## FEs
                     cluster = ~indiv,                          ## Clustered SEs
                     data = df5)
