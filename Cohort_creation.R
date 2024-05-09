@@ -100,7 +100,7 @@ load("manageable_dfincome.Rdata")
 min_time<- min(df$time)
 max_time<-max(df$time)
 
-create_cohort(df, aggregation="person_muni_latest", name="byregionpb", pbonly = TRUE)
+create_cohort(df, aggregation="person_muni_latest", name="byregion")
 
 
 ################ FIFTH: BY OCCUPATION ###################
@@ -226,5 +226,5 @@ max_time<-max(df$time)
 
 
 
-create_cohort(df, aggregation = "age_group", name = "byagegrouppb", pbonly = TRUE)
+create_cohort(df, aggregation = "age_group", name = "byagegroup")
 
