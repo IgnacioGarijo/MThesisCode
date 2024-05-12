@@ -70,6 +70,29 @@ max_time<-max(df$time)
 create_cohort(df, name="fromanykind3")
 
 
+############2.A excluding cohorts #######################
+
+rm(list=ls())
+gc()
+source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
+
+variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
+labels2<- c("1 month later", "2 months later", "3 months later", "4 months later", "5 months later", "6 months later")
+names(labels2)<-1:6
+labs<-list(days_worked="N. days worked", salaries="Income", ncontracts="N. contracts",
+           open_ended= "Open ended", permanent="Permanent", project_based="Project-based", 
+           self_emp="Self-employment", unemployed= "Unemployment")
+
+
+load("manageable_df.Rdata")
+load("manageable_dfincome.Rdata")
+min_time<- min(df$time)
+max_time<-max(df$time)
+
+
+create_cohort(df, name = "exludingcohort", aggregation = "situation",rc = TRUE)
+
+
 ############# BY CONTRACT ##########
 rm(list=ls())
 gc()
