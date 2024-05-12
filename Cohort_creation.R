@@ -19,6 +19,38 @@ library(ggpubr) #To grid the plots
 
 setwd("C:/Users/ignac/OneDrive - Universidad Loyola Andalucía/Trabajo/Universidad/Máster/2º/2 semestre/TFM/Código/DiegoPuga/esurban_replication/esurban_replication/tmp/mcvl_cdf_2022")
 
+
+
+
+
+
+
+# load("finalpanel2019c.Rdata")
+# 
+# dfincome<-create_income_df(min_year=2019)
+# 
+# df<-create_manageable_df(df, min_year = 2019)
+# 
+# save(df, file = "manageable_df.Rdata")
+# save(dfincome, file="manageable_dfincome.Rdata")
+
+# load("manageable_df.Rdata")
+# df[, emp:= ifelse(!is.na(contr_type)| job_relationship %in% c(87,901,902,910,930,932,937,951),1,0)]
+# 
+# df[,  situation:= ifelse(!is.na(contr_type),
+#                          contr_type,
+#                          ifelse(regime %in% c(500:540, 721:740),
+#                                 "self-emp",ifelse(emp==1, "other",
+#                                                   "unemp")
+#                          )
+# )
+# ]
+# 
+# df$situation[is.na(df$situation)]<-"unemp"
+# 
+# save(df,file="manageable_df.Rdata")
+
+
 rm(list = ls())
 source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
 

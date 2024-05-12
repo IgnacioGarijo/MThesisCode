@@ -11,7 +11,7 @@ library(rgdal) #Mapas
 
 theme_set(theme_bw())
 
-setwd("C:/Users/ignac/OneDrive - Universidad Loyola Andalucía/Trabajo/Universidad/Máster/2º/2 semestre/TFM/Código/DiegoPuga/esurban_replication/esurban_replication/tmp/mcvl_cdf_2022")
+setwd("C:/Users/ignac/OneDrive - Universidad Loyola AndalucÃ­a/Trabajo/Universidad/MÃ¡ster/2Âº/2 semestre/TFM/CÃ³digo/DiegoPuga/esurban_replication/esurban_replication/tmp/mcvl_cdf_2022")
 load("descriptivepanel.Rdata")
 setDT(df)
 

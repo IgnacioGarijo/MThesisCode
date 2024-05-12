@@ -12,7 +12,6 @@ library(broom)
 library(modelsummary)
 library(texreg) #for the tables
 library(broom)   #Para los mapas
-library(rgdal) #Mapas
 library(pROC)
 library(ggpubr) #To grid the plots
 library(gsynth)
@@ -20,7 +19,9 @@ library(gsynth)
 
 theme_set(theme_bw())
 
-setwd("C:/Users/ignac/OneDrive - Universidad Loyola Andalucía/Trabajo/Universidad/Máster/2º/2 semestre/TFM/Código/DiegoPuga/esurban_replication/esurban_replication/tmp/mcvl_cdf_2022")
+setwd("C:/Users/ignac/OneDrive - Universidad Loyola AndalucÃ­a/Trabajo/Universidad/MÃ¡ster/2Âº/2 semestre/TFM/CÃ³digo/DiegoPuga/esurban_replication/esurban_replication/tmp/mcvl_cdf_2022")
+
+source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Functions.R")
 
 # for (i in 1957:2006){
 #   load(paste0("finalcohort", i, ".Rdata"))
@@ -399,9 +400,15 @@ df1<-df %>%
   )
 
 
+df1<-df1 %>% 
+  mutate(year= yearmonth %/% 100) %>% 
+  group_by(sector, year) %>%
+  mutate(yearproj=mean(project_based, na.rm = T))
+  
+
 df2<-df1 %>% 
   group_by(yearmonth) %>% 
-  mutate(treatment=ifelse(project_based>median(project_based), 1, 0)) %>% 
+  mutate(treatment=ifelse(yearproj>median(yearproj), 1, 0)) %>% 
   ungroup() %>% 
   group_by(sector) %>% 
   mutate(treatment2=ifelse(any(yearmonth==202112 & treatment==1), 1,0))
@@ -419,6 +426,7 @@ df2$inttreat<-ifelse(df2$timeto>=0 & df2$treatment2 ==1, 1, 0)
 labs<-list(days_worked="N. days worked", salaries="Income", ncontracts="N. contracts",
            open_ended= "Open ended", permanent="Permanent", project_based="Project-based", 
            self_emp="Self-employment", unemployed= "Unemployment")
+variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
 
 models<-list()
 plots<-list()
@@ -520,3 +528,153 @@ for (variable in variable_names) {
 
 byoccgrid<-gridExtra::grid.arrange(grobs = plots2, ncol = 2)
 ggsave2(byoccgrid, file=paste0("../../../../../../Plots/rc/synth/byocc", x,".jpeg"), width = 6, height = 8)
+
+
+
+############# DENSITY PLOTS FOR PB ONLY ######################
+
+
+load("manageable_df.Rdata")
+load("manageable_dfincome.Rdata")
+
+df1 <- df %>%
+  filter(time %in% c(37:47,25:35) & yearmonth == exit_month & situation == "project-based") %>% 
+  mutate(treatment= as.factor(ifelse(time %in% c(37:47), "2022", "2021")))
+
+
+df1$days_spell[is.na(df1$days_spell)]<-0
+df1$ncontracts[df1$ncontracts==0]<-NA
+
+df1<-merge(df1, dfincome, by=c("person_id", "time"), all.x = T )
+
+df1$income[is.na(df1$income)] <- 0
+
+df1$income=df1$income/100
+
+df1$person_muni_latest <- replace_province(df1$person_muni_latest)
+
+shapefile_provincias <- st_read("provincias/Provincias_ETRS89_30N.shp")
+
+shapefile_provincias<-as_Spatial(shapefile_provincias)
+
+nombres_provincias <- tibble(provincia=shapefile_provincias$Texto,
+                             id=as.numeric(shapefile_provincias$Codigo))
+
+df1<-df1 %>% 
+  mutate(id=as.numeric(person_muni_latest))
+
+df1<-left_join(df1, nombres_provincias, by="id") 
+
+df1$sector <- ifelse(df1$sector %in% c(11, 12,13, 14, 15, 16,17,21, 22, 23, 24, 31, 32, 51, 52,
+                                     61, 62, 71,72, 81, 89, 91, 99),
+                    paste0("0", df1$sector),
+                    df1$sector)
+
+
+df1$sector<-substr(df1$sector, 1,2)
+
+
+df1<-df1 %>%
+  mutate(group3=as.numeric(sector),
+         sector=case_when(group3 %in% c(1:3) ~ "AGRICULTURE, FORESTRY AND FISHING",
+                           group3 %in% c(5:9) ~ "MINING AND QUARRYING",
+                           group3 %in% c(10:33) ~ "MANUFACTURING",
+                           group3 ==35 ~ "ELECTRICITY, GAS, STEAM AND AIR CONDITIONING SUPPLY",
+                           group3 %in% c(36:39)~"WATER SUPPLY AND WASTE MANAGEMENT",
+                           group3 %in% c(41:43) ~ "CONSTRUCTION",
+                           group3 %in% c(45:47) ~ "WHOLESALE & REPAIR OF MOTOR VEHICLES",
+                           group3 %in% c(49:53) ~ "TRANSPORTATION AND STORAGE",
+                           group3 %in% c(55,56) ~ "ACCOMMODATION AND FOOD SERVICE",
+                           group3 %in% c(58:63) ~ "INFORMATION AND COMMUNICATION",
+                           group3 %in% c(64:66)~ "FINANCIAL AND INSURANCE ACTIVITIES",
+                           group3 == 68 ~ "REAL ESTATE",
+                           group3 %in% c(69:75)~ "PROFESSIONAL, SCIENTIFIC AND TECHNICAL",
+                           group3 %in% c(77:82) ~ "ADMINISTRATIVE & SUPPORT SERVICE ACTIVITIES",
+                           group3==84 ~ "PUBLIC ADMINISTRATION AND DEFENCE",
+                           group3==85 ~ "EDUCATION",
+                           group3 %in% c(86:88) ~ "HUMAN HEALTH AND SOCIAL WORK",
+                           group3 %in% c(90:93) ~ "ARTS, ENTERTAINMENT AND RECREATION",
+                           group3 %in% c(94,95) ~ "OTHER SERVICES",
+                           group3 %in% c(96:98) ~ "ACTIVITIES OF HOUSEHOLDS AS EMPLOYERS",
+                           group3 == 99 ~ "EXTRATERRITORIAL ORGANIZATIONS ACTIVITIES",
+                           TRUE ~ NA_character_
+         ))
+
+
+df1$age<-df1$yearmonth%/%100- df1$birth_date %/% 100
+
+
+df1$age_group[df1$age<25]<- "<25"
+df1$age_group[df1$age %in% c(25:34)]<- "25-34"
+df1$age_group[df1$age %in% c(35:44)]<- "35-44"
+df1$age_group[df1$age %in% c(45:54)]<- "45-54"
+df1$age_group[df1$age %in% c(55:64)]<- "55-64"
+df1$age_group[df1$age > 64]<- "65+"
+
+
+df1<-df1 %>% 
+  mutate(group=occupation,
+occupation= case_when(
+  group == 1 ~ "Engineers/Top Management",
+  group == 2 ~ "Technical Engineers/Experts",
+  group == 3 ~ "Managers",
+  group == 4 ~ "UntitledAssistants",
+  group == 5 ~ "Administrative Officers",
+  group == 6 ~ "Subordinates",
+  group == 7 ~ "Administrative Assistants",
+  group == 8 ~ "1st 2nd Grade Officers",
+  group == 9 ~ "3rd Grade Officers/Specialists",
+  group == 10 ~ "Unqualified +18",
+  group ==11 ~ "<18 years old",
+  TRUE ~ NA_character_
+))
+
+df1<-df1 %>% 
+  mutate(gender=ifelse(sex==1, "Men", "Women"))
+
+
+
+df2<-df1 %>%
+  mutate(ncontracts=ifelse(ncontracts>10, 10,ncontracts)) %>% 
+  pivot_longer(cols = c("days_spell","ncontracts","income"),names_to = "var", values_to = "value") 
+
+
+gg<-df2 %>% 
+  ggplot(aes(x=value, ..scaled.., color=as.factor(treatment)))+
+  geom_density()+
+  facet_wrap(~var, scales = "free", nrow = 3)+
+  scale_x_continuous(
+    limits = ~ c(min(.x), ceiling(max(.x))),
+    breaks = ~ seq(min(.x), max(.x), length.out = 5),
+    expand = c(0, 0),
+    labels = scales::number_format(scale = 1) 
+  )+
+  theme(legend.position = "bottom")
+
+ggsave2(gg, file=paste0("../../../../../../Plots/rc/pbonly.jpeg"), width = 7, height = 5)
+
+df3<-df1 %>% 
+  mutate(occupation=as.factor(occupation), 
+         sector=as.factor(sector), 
+         age_group=as.factor(age_group), 
+         gender=as.factor(gender),
+         person_muni_latest=as.factor(person_muni_latest)) %>% 
+  pivot_longer(cols = c("occupation", "sector", "age_group", "gender", "provincia"))
+
+df3 <- df3 %>%
+  group_by(name,treatment) %>%
+  mutate(totalworkers = n()) %>% 
+  group_by(treatment,name,value) %>% 
+  summarise(share=n()/mean(totalworkers))
+
+gg<-df3 %>% 
+  filter(!is.na(value)) %>% 
+  ggplot(aes(y=value, x=share, fill=as.factor(treatment)))+
+  geom_bar(position="dodge2", stat="identity")+
+  facet_wrap(~name, scales = "free", nrow = 3)+
+  scale_x_continuous(labels = scales::percent)+
+  theme(legend.position = "bottom")
+ggsave2(gg, file=paste0("../../../../../../Plots/rc/pbonly1.jpeg"), width = 9, height = 10)
+
+
+
