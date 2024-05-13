@@ -1203,7 +1203,94 @@ results$variable <- factor(results$variable, levels = c("project_based", "open_e
   
 
 
+########## BY QUANTILE ###############
+  
+  
+  load("byquantile_panel.Rdata")
+  dff$salaries<- dff$salaries/100
+  
+  result_models<- list()
+  
+  groups<-unique(dff$group)
+  
+  
+  for (g in groups){
+    dftwfe<-create_twfe_dataframe(dff[dff$group==g,],
+                                  first_variable = 3, 
+                                  last_variable = 16, 
+                                  time_dif = 12,
+                                  treatment_time = 37,
+                                  months = 30)
+    result_models[[g]]<-create_results(dftwfe, paste0("DID_disaggregated", g),disaggregation = TRUE, figures = F )
+  }
+  
 
+  
+  results<-data.frame()
+  
+  for (g in groups){
+    for (variable in variable_names){
+      for(number in c(1:6)){
+        pretrends<-result_models[[g]]$pre_trends[[paste("mod", g, variable, number, sep = "_")]]$p
+        results1<- rownames_to_column(as.data.frame(result_models[[g]]$did_coefs[[paste("mod", g, variable, number, sep = "_")]]$coeftable)) %>% 
+          mutate(group=g, 
+                 variable= variable, 
+                 months_later=number,
+                 pre_trends=pretrends)
+        results<-rbind(results, results1)
+      }
+    }
+  }
+  
+  
+  results<-results %>% 
+    filter(rowname=="ATT") %>% 
+    transmute(rowname=rowname,
+              coefficient= Estimate,
+              pvalue= `Pr(>|t|)`,
+              group=group,
+              variable=variable,
+              months_later=months_later,
+              se= `Std. Error`,
+              plus95=coefficient+se*1.96,
+              minus95=coefficient-se*1.96,
+              pretrends=pre_trends,
+              stars=ifelse(pvalue<=0.1, "significant", "Not significant"),
+              pretest=ifelse(pretrends<=.05, "significant", "Not significant"))
+  
+  
+  plots<-list()
+  
+  labs<-c("N. days worked", "Income", "N. contracts","Open ended","Permanent","Project-based", 
+          "Self-employment", "Unemployment")
+  names(labs)<-c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", 
+                 "self_emp", "unemployed")
+  results$variable <- factor(results$variable, levels = c("project_based", "open_ended", "permanent", "unemployed", "self_emp", "salaries", "ncontracts", "days_worked"))
+  
+  
+  cc<-scales::seq_gradient_pal("#0e387a","#9bc9be",  "Lab")(seq(0,1,length.out=(length(unique(df1$quantile)
+  ))
+  )
+  )
+  
+  gg<-
+    results %>% 
+    ggplot(aes(x=as.factor(months_later), y=coefficient))+
+    geom_col(aes(fill=as.factor(group), color=pretest), position="dodge2", alpha=.7)+
+    geom_errorbar(aes(ymax=plus95, ymin=minus95, group=group), position="dodge2", color="#008080", alpha=.5)+
+    theme_bw()+
+    theme(axis.title = element_blank(),
+          legend.position = "bottom",
+          legend.title = element_blank())+
+    geom_hline(yintercept = 0)+
+    scale_fill_manual(values = cc)+
+     scale_color_manual(values = c("Significant"="red", "Not significant"= "white"))+
+      guides(color="none")+
+    facet_wrap(~variable, labeller = labeller(variable=labs), ncol = 2, scales = "free" )
+  
+  ggsave2(gg, file=paste0("../../../../../../Plots/DID_byquantile/grid.jpeg"), width = 8, height = 9)
+  
+  
 
 
 

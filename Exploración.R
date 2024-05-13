@@ -673,3 +673,62 @@ gg<-
 
 ggsave2(gg, file="../../../../../../Plots/descriptive_mcvl/example.jpeg", width = 6, height = 3)
 
+###### BY QUANTILE ########
+load("manageable_df.Rdata")
+
+df<-df %>% 
+  select(-c(occupation, sector, sex, person_muni_latest))
+
+df2021 <- df %>%
+  filter(yearmonth %/% 100 == 2021)
+
+load("manageable_dfincome.Rdata")
+
+
+df2021<-left_join(df2021, dfincome)
+
+# Step 2: Group data by person
+df2021 <- df2021 %>%
+  group_by(person_id) %>% 
+  summarise(total_income_2021 = sum(income, na.rm = T))%>%
+  mutate(quantile = ntile(total_income_2021, 5))
+
+# Step 5: Join summary data back into main dataframe
+df <- df %>%
+  left_join(df2021, by = "person_id")
+
+df$total_income_2021<-NULL
+
+df1<-df[yearmonth==202112,]
+
+cc<-scales::seq_gradient_pal("#0e387a","#9bc9be",  "Lab")(seq(0,1,length.out=(length(unique(df1$quantile)
+))
+)
+)
+
+gg<-
+  df1 %>% 
+  filter(!is.na(quantile)) %>% 
+  group_by(quantile) %>% 
+  summarize(var=sum(contr_type=="project-based", na.rm = T)/ sum(!is.na(contr_type), na.rm = T)) %>% 
+  mutate(label=paste0(round(var*100,2), "%")) %>% 
+  ggplot(aes(x=as.factor(quantile), 
+             y=var, 
+             color= stage(as.factor(quantile), after_scale = alpha(color, 1)),
+             fill= stage(as.factor(quantile), after_scale= alpha(fill, .6))
+             ))+
+  geom_col()+
+  geom_text(aes(label=label),
+            nudge_y = 0.015,
+            color="grey30",
+            size=3)+
+  theme(legend.title = element_blank(),
+        axis.title = element_blank())+
+  scale_y_continuous(labels = scales::percent)+
+  scale_fill_manual(values= cc)+
+    scale_color_manual(values= cc)+
+  guides(fill="none",
+         color="none")
+
+ggsave2(gg, file="../../../../../../Plots/descriptive_mcvl/prebyquantile.jpeg", width = 5.5, height = 3)
+

@@ -52,7 +52,7 @@ setwd("C:/Users/ignac/OneDrive - Universidad Loyola Andalucía/Trabajo/Universid
 
 
 rm(list = ls())
-source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
+source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Functions.R")
 
 variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
 labels2<- c("1 month later", "2 months later", "3 months later", "4 months later", "5 months later", "6 months later")
@@ -74,7 +74,7 @@ create_cohort(df, name="fromanykind3")
 
 rm(list=ls())
 gc()
-source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
+source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Functions.R")
 
 variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
 labels2<- c("1 month later", "2 months later", "3 months later", "4 months later", "5 months later", "6 months later")
@@ -96,7 +96,7 @@ create_cohort(df, name = "exludingcohort", aggregation = "situation",rc = TRUE)
 ############# BY CONTRACT ##########
 rm(list=ls())
 gc()
-source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
+source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Functions.R")
 
 variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
 labels2<- c("1 month later", "2 months later", "3 months later", "4 months later", "5 months later", "6 months later")
@@ -114,7 +114,7 @@ create_cohort(df, aggregation = "situation", name = "bysituation")
 
 rm(list=ls())
 gc()
-source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
+source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Functions.R")
 
 variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
 labels2<- c("1 month later", "2 months later", "3 months later", "4 months later", "5 months later", "6 months later")
@@ -137,7 +137,7 @@ create_cohort(df, name = "bygender", aggregation = "sex")
 
 rm(list=ls())
 gc()
-source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
+source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Functions.R")
 
 variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
 labels2<- c("1 month later", "2 months later", "3 months later", "4 months later", "5 months later", "6 months later")
@@ -161,7 +161,7 @@ create_cohort(df, aggregation="person_muni_latest", name="byregion")
 ################ FIFTH: BY OCCUPATION ###################
 rm(list=ls())
 gc()
-source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
+source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Functions.R")
 
 variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
 labels2<- c("1 month later", "2 months later", "3 months later", "4 months later", "5 months later", "6 months later")
@@ -184,7 +184,7 @@ create_cohort(df, aggregation = "occupation", name="byoccupation")
 ############### SIXTH: BY SECTOR2 #######################
 rm(list=ls())
 gc()
-source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
+source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Functions.R")
 
 variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
 labels2<- c("1 month later", "2 months later", "3 months later", "4 months later", "5 months later", "6 months later")
@@ -249,7 +249,7 @@ create_cohort(df, aggregation="sector2", name="bysector2", pbonly = F)
 ####################SEVENTH: BY AGE GROUP ##################
 rm(list=ls()) 
 gc()
-source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
+source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Functions.R")
 
 variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
 labels2<- c("1 month later", "2 months later", "3 months later", "4 months later", "5 months later", "6 months later")
@@ -283,3 +283,45 @@ max_time<-max(df$time)
 
 create_cohort(df, aggregation = "age_group", name = "byagegroup")
 
+#######INCOME? ###########
+rm(list=ls()) 
+gc()
+source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Functions.R")
+
+variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
+labels2<- c("1 month later", "2 months later", "3 months later", "4 months later", "5 months later", "6 months later")
+names(labels2)<-1:6
+labs<-list(days_worked="N. days worked", salaries="Income", ncontracts="N. contracts",
+           open_ended= "Open ended", permanent="Permanent", project_based="Project-based", 
+           self_emp="Self-employment", unemployed= "Unemployment")
+
+
+load("manageable_df.Rdata")
+
+df<-df %>% 
+  select(-c(occupation, sector, sex, person_muni_latest))
+
+df2021 <- df %>%
+  filter(yearmonth %/% 100 == 2021)
+
+load("manageable_dfincome.Rdata")
+min_time<- min(df$time)
+max_time<-max(df$time)
+
+
+
+df2021<-left_join(df2021, dfincome)
+
+# Step 2: Group data by person
+df2021 <- df2021 %>%
+  group_by(person_id) %>% 
+  summarise(total_income_2021 = sum(income, na.rm = T))%>%
+  mutate(quantile = ntile(total_income_2021, 5))
+
+# Step 5: Join summary data back into main dataframe
+df <- df %>%
+  left_join(df2021, by = "person_id")
+
+df$total_income_2021<-NULL
+
+create_cohort(df, aggregation = "quantile",name = "byquantile")
