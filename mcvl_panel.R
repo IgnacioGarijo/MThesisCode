@@ -433,6 +433,20 @@ for (i in 1957:2006){
 }
 
 
+
+
+df %>% 
+  group_by(year) %>% 
+  mutate(weights=final_weights/sum(weights,na.rm=T))
+
+
+
+
+
+
+
+
+
 #Final panel for main analysis
 
 load("finalcohort1957.Rdata")

@@ -7,7 +7,7 @@ library(lubridate) #to calculate differences between dates
 library(zoo) 
 library(cowplot) #To save plots
 library(broom)   #Para los mapas
-library(rgdal) #Mapas
+library(sf) #Mapas
 
 theme_set(theme_bw())
 
@@ -262,6 +262,32 @@ dfcontracts8<- dfcontracts8 %>%
          less_than_30=ifelse(duration<30, 1, 0),
          less_than_90=ifelse(duration<90, 1, 0))
 
+
+# dfcontracts9<-dfcontracts8 %>% 
+#   group_by(dates) %>% 
+#   summarize(below7=mean(less_than_7, na.rm = T),
+#             below15=mean(less_than_15, na.rm=T),
+#             below30=mean(less_than_30, na.rm=T),
+#             below90=mean(less_than_90, na.rm = T)) %>% 
+#   ungroup() %>% 
+#   arrange(dates) %>%
+#   mutate(below7= rollmean(below7, k=30, align = "right", fill=NA),
+#          below15= rollmean(below15, k=30, align = "right", fill=NA),
+#          below30= rollmean(below30, k=30, align = "right", fill=NA),
+#          below90=rollmean(below90, k=30, align = "right", fill=NA))
+# 
+# dfcontracts9 %>% 
+#   ggplot(aes(x=dates))+
+#   geom_line(aes(y=below7) , color="red")+
+#   geom_line(aes(y=below15), color="blue")+
+#   geom_line(aes(y=below30), color="lightblue")+
+#   geom_line(aes(y=below90), color="lightgreen")+
+#   geom_vline(xintercept = as.Date("2022-01-01"))+
+#   geom_vline(xintercept = as.Date("2021-01-01"), linetype="dashed" , alpha=.4)+
+#   geom_vline(xintercept = as.Date("2020-01-01"), linetype="dashed", alpha=.4)+
+#   geom_vline(xintercept = as.Date("2019-01-01"), linetype="dashed", alpha=.4)+
+#   theme(axis.title.x = element_blank())
+#   
 
 
 dfcontracts9<-dfcontracts8 %>% 
