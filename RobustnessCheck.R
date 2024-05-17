@@ -333,7 +333,7 @@ for (contract in contracts) {
 
 
 gc()
-source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Cohorts.R")
+source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Functions.R")
 
 variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
 labels2<- c("1 month later", "2 months later", "3 months later", "4 months later", "5 months later", "6 months later")

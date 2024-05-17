@@ -263,20 +263,22 @@ dfcontracts8<- dfcontracts8 %>%
          less_than_90=ifelse(duration<90, 1, 0))
 
 
-# dfcontracts9<-dfcontracts8 %>% 
-#   group_by(dates) %>% 
+# dfcontracts9<-dfcontracts8 %>%
+#   group_by(dates) %>%
 #   summarize(below7=mean(less_than_7, na.rm = T),
 #             below15=mean(less_than_15, na.rm=T),
 #             below30=mean(less_than_30, na.rm=T),
-#             below90=mean(less_than_90, na.rm = T)) %>% 
-#   ungroup() %>% 
+#             below90=mean(less_than_90, na.rm = T)) %>%
+#   ungroup() %>%
 #   arrange(dates) %>%
 #   mutate(below7= rollmean(below7, k=30, align = "right", fill=NA),
 #          below15= rollmean(below15, k=30, align = "right", fill=NA),
 #          below30= rollmean(below30, k=30, align = "right", fill=NA),
 #          below90=rollmean(below90, k=30, align = "right", fill=NA))
 # 
-# dfcontracts9 %>% 
+# 
+# 
+# dfcontracts9 %>%
 #   ggplot(aes(x=dates))+
 #   geom_line(aes(y=below7) , color="red")+
 #   geom_line(aes(y=below15), color="blue")+
@@ -287,7 +289,79 @@ dfcontracts8<- dfcontracts8 %>%
 #   geom_vline(xintercept = as.Date("2020-01-01"), linetype="dashed", alpha=.4)+
 #   geom_vline(xintercept = as.Date("2019-01-01"), linetype="dashed", alpha=.4)+
 #   theme(axis.title.x = element_blank())
-#   
+# 
+
+
+dfcontracts8_summary <- dfcontracts8 %>%
+  mutate(week = floor_date(dates, "week")) %>%
+  group_by(week) %>%
+  summarize(below7=mean(less_than_7, na.rm = T),
+            below15=mean(less_than_15, na.rm=T),
+            below30=mean(less_than_30, na.rm=T),
+            below90=mean(less_than_90, na.rm = T)) %>%
+  ungroup() %>% 
+  filter(week >= ymd("2020-07-01") & week <= ymd("2022-06-30"))
+
+dfcontracts8_summary <- dfcontracts8_summary %>% 
+  mutate(treatment = if_else(week > ymd("2021-06-30"), "2021-2022", "2020-2021"),
+         adjusted_date = if_else(week > ymd("2021-06-30"), week %m-% years(1), week), 
+         after= ifelse(adjusted_date > ymd("2020-12-31"), "after", "before"),
+         numb= ifelse(treatment=="2021-2022", row_number()-52, row_number()))
+
+dfcontracts8gg<-dfcontracts8_summary %>% 
+  pivot_longer(cols = c(below7, below15, below30, below90))
+  
+dfcontracts8gg<-dfcontracts8gg %>% 
+  arrange(treatment, adjusted_date, name) %>% 
+  mutate(after2= ifelse(after=="after", value, NA),
+         before2=ifelse(after=="before", value, NA), 
+         month= substr(adjusted_date, 6,7),
+         year=substr(adjusted_date, 1,4))
+
+dfcontracts8gg$name <- factor(dfcontracts8gg$name, levels = c("below7", "below15", "below30", "below90"))
+
+
+ggduration2<-dfcontracts8gg %>% 
+  ggplot(aes(x=numb, color=treatment)) +
+  geom_point(aes(y=after2), alpha=.7)+
+  geom_point(aes(y=before2), alpha=.7)+
+  geom_line(aes(y=after2), alpha=.3)+
+  geom_line(aes(y=before2), alpha=.3)+
+  geom_smooth(aes(y=before2), alpha=.7, se=F, method = "lm")+
+  geom_smooth(aes(y=after2),  alpha=.7,se=F, method = "lm")+
+  facet_wrap(~name)+
+  scale_color_manual(values = c("#008080","#0e387a"))+
+  geom_vline(xintercept = 27, linetype="dashed" , alpha=.4)+
+  theme(legend.position = "bottom", 
+        axis.title = element_blank(),
+        legend.title = element_blank())
+
+ggsave2(ggduration2, file="../../../../../../Plots/descriptive_mcvl/YESggduration2.jpeg", width = 7, height = 6)
+
+dfcontracts9<- pivot_longer(dfcontracts8_summary, cols = c(2:5)) %>%
+  mutate(after2018a=ifelse(after2018==1 & after2019==0 & after2020==0 & after2021==0, value, NA),
+         after2019a=ifelse(after2018==1 & after2019==1 & after2020==0 & after2021==0, value, NA),
+         after2020a=ifelse(after2018==1 & after2019==1 & after2020==1 & after2021==0, value, NA),
+         after2021a=ifelse(after2018==1 & after2019==1 & after2020==1 & after2021==1, value, NA)
+         )
+
+
+dfcontracts9 %>%
+  ggplot(aes(x=week))+
+  geom_point(aes(y=after2018a))+
+  geom_point(aes(y=after2019a))+
+  geom_point(aes(y=after2020a))+
+  geom_point(aes(y=after2021a))+
+  geom_smooth(aes(y=after2018a), method="lm", se=F)+
+  geom_smooth(aes(y=after2019a), method="lm", se=F)+
+  geom_smooth(aes(y=after2020a), method="lm", se=F)+
+  geom_smooth(aes(y=after2021a), method="lm", se=F)+
+  facet_wrap(~name)+
+  geom_vline(xintercept = as.Date("2022-01-01"))+
+  geom_vline(xintercept = as.Date("2021-01-01"), linetype="dashed" , alpha=.4)+
+  geom_vline(xintercept = as.Date("2020-01-01"), linetype="dashed", alpha=.4)+
+  geom_vline(xintercept = as.Date("2019-01-01"), linetype="dashed", alpha=.4)
+
 
 
 dfcontracts9<-dfcontracts8 %>% 

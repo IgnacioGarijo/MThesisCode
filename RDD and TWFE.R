@@ -30,8 +30,6 @@ labs<-list(days_worked="N. days worked", salaries="Income", ncontracts="N. contr
 
 
 
-#Using the functions
-
 
 
 ############### FIRST ANALYSIS AGGREGATED ################
