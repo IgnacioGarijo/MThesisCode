@@ -10,7 +10,7 @@
 # 
 # theme_set(theme_minimal())
 
-# setwd("C:/Users/ignac/OneDrive - Universidad Loyola Andalucía/Trabajo/Universidad/Máster/2º/2 semestre/TFM/Código/DiegoPuga/esurban_replication/esurban_replication/tmp/mcvl_cdf_2022")
+# setwd("C:/Users/ignac/OneDrive - Universidad Loyola Andaluc?a/Trabajo/Universidad/M?ster/2?/2 semestre/TFM/C?digo/DiegoPuga/esurban_replication/esurban_replication/tmp/mcvl_cdf_2022")
 
 
 
@@ -237,7 +237,7 @@ df1$contr_type<-NULL
 df1$yearmonth<-NULL
 df1$exit_month<-NULL
 
-#Let´s also merge with income data 
+#Let?s also merge with income data 
 
 df1<-merge(df1, dfincome, by=c("person_id", "time"), all.x = T )
 
@@ -438,6 +438,9 @@ create_rdd_figures<-function(df1, df2, dffnames, treatment_time, new_directory){
 create_results<- function(dftwfe, new_directory, disaggregation=FALSE, figures=TRUE){
  if(figures==T) {dir.create(paste0("../../../../../../Plots/", new_directory))}
   
+  dftwfe<-dftwfe %>% 
+    mutate(tra=ifelse(time2>-1 & treatment==1, 1, 0))
+  
   dff1<-dftwfe[dftwfe$time2<max(dftwfe$time2),]
   dff2<-dftwfe[dftwfe$time2<max(dftwfe$time2)-1,]
   dff3<-dftwfe[dftwfe$time2<max(dftwfe$time2)-2,]
@@ -450,9 +453,11 @@ create_results<- function(dftwfe, new_directory, disaggregation=FALSE, figures=T
   models<-list()
   did_coefs<-list()
   pre_trends<-list()
+  weights<-list()
 
   outcome_variables<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
   
+
   for(x in outcome_variables){
     for (y in c(1:6)){
       
@@ -460,15 +465,18 @@ create_results<- function(dftwfe, new_directory, disaggregation=FALSE, figures=T
                    data = dflist[[y]])
       
       modelsgg[[paste("mod",x, y, sep = "_")]]<-model
+      
 
       if (disaggregation==FALSE ){
         models[[paste("mod",x, y, sep = "_")]]<-model
         did_coefs[[paste("mod",x, y, sep = "_")]]<-summary(model, agg = c("ATT" = "time2::[^-]"))
         pre_trends[[paste("mod",x, y, sep = "_")]]<-wald(model, "time2::-")
+      try(weights[[paste("mod",x, y, sep = "_")]]<-twowayfeweights(dflist[[y]], x, "treatment", "time2", "tra", type = "feTR", summary_measures = T))
       } else if (disaggregation==TRUE) {
         models[[paste("mod",g,x, y, sep = "_")]]<-model
         did_coefs[[paste("mod",g,x, y, sep = "_")]]<-summary(model, agg = c("ATT" = "time2::[^-]"))
         pre_trends[[paste("mod",g,x, y, sep = "_")]]<-wald(model, "time2::-")
+        try(weights[[paste("mod",g,x, y, sep = "_")]]<-twowayfeweights(dflist[[y]], x, "treatment", "time2", "tra", type = "feTR", summary_measures = T))
         
       }
       
@@ -504,7 +512,7 @@ create_results<- function(dftwfe, new_directory, disaggregation=FALSE, figures=T
       ggsave2(gg, file=paste0("../../../../../../Plots/", new_directory,"/DID_", x,".jpeg"), width = 7, height = 5)
     } else{}
   }
-  tables<-list("models"=models, "did_coefs"=did_coefs, "pre_trends"=pre_trends)
+  tables<-list("models"=models, "did_coefs"=did_coefs, "pre_trends"=pre_trends, "weights"=weights)
   return(tables)
 }
 

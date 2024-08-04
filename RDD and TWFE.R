@@ -13,6 +13,7 @@ library(texreg) #for the tables
 library(broom)   #Para los mapas
 library(sf) #Mapas
 library(pROC)
+library(TwoWayFEWeights)
 library(ggpubr) #To grid the plots
 
 
@@ -168,14 +169,21 @@ dftwfe<-create_twfe_dataframe(dff[dff$group==g,],
 result_models[[g]]<-create_results(dftwfe, paste0("DID_disaggregated", g),disaggregation = TRUE, figures = F )
 }
 
-
+for (contract in contracts){
+  for (variable in variable_names){
+    for(number in 1:6){
+      print(result_models[[contract]]$weights[[paste("mod", contract, variable, number, sep = "_")]])$nrminus
+      
+    }
+  }
+  }
 
 results<-data.frame()
 
 for (contract in contracts){
   for (variable in variable_names){
     for(number in 1:6){
-pretrends<-result_models[[g]]$pre_trends[[paste("mod", g, variable, number, sep = "_")]]$p
+pretrends<-result_models[[contract]]$pre_trends[[paste("mod", contract, variable, number, sep = "_")]]$p
 results1<- rownames_to_column(as.data.frame(result_models[[contract]]$models[[paste("mod", contract, variable, number, sep = "_")]]$coeftable)) %>% 
   mutate(contract=contract, 
          variable= variable, 
