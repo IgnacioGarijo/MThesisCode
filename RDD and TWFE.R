@@ -18,8 +18,7 @@ library(ggpubr) #To grid the plots
 
 
 theme_set(theme_minimal())
-
-setwd("C:/Users/ignac/OneDrive - Universidad Loyola Andalucía/Trabajo/Universidad/Máster/2º/2 semestre/TFM/Código/DiegoPuga/esurban_replication/esurban_replication/tmp/mcvl_cdf_2022")
+setwd("C:/Users/ignac/OneDrive - Universidad Loyola AndalucÃ­a/Trabajo/Universidad/MÃ¡ster/2Âº/2 semestre/TFM/CÃ³digo/DiegoPuga/esurban_replication/esurban_replication/tmp/mcvl_cdf_2022")
 source("C:/Users/ignac/OneDrive/Documentos/GitHub/MThesisCode/Functions.R")
 
 variable_names<- c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", "self_emp", "unemployed")
@@ -148,6 +147,85 @@ plots<-ggarrange(plotlist = plots, common.legend = T, legend="bottom",
                   ncol=2, nrow=4)
 ggsave2(plots, file="../../../../../../Plots/verylongtwfe3/grid.jpeg", width = 7, height = 9)
 
+
+
+ ## JUST DID COEFS ###
+
+
+results<-data.frame()
+
+  for (variable in variable_names){
+    for(number in c(1:6)){
+      pretrends<-result_models$pre_trends[[paste("mod", variable, number, sep = "_")]]$p
+      results1<- rownames_to_column(as.data.frame(result_models$did_coefs[[paste("mod", variable, number, sep = "_")]]$coeftable)) %>% 
+        mutate(variable= variable, 
+               months_later=number,
+               pre_trends=pretrends)
+      results<-rbind(results, results1)
+    }
+  }
+
+
+
+results<-results %>% 
+  filter(rowname=="ATT") %>% 
+  transmute(rowname=rowname,
+            coefficient= Estimate,
+            pvalue= `Pr(>|t|)`,
+            variable=variable,
+            months_later=months_later,
+            se= `Std. Error`,
+            plus95=coefficient+se*1.96,
+            minus95=coefficient-se*1.96,
+            pretrends=pre_trends,
+            stars=ifelse(pvalue<=0.1, "significant", "Not significant"),
+            stars2= case_when(pvalue %in% c(.050001,.1) ~ "*",
+                              pvalue %in% c(.010001,.05)~"**",
+                              pvalue <=.01~ "***",
+                              TRUE ~ ""),
+            pretest=ifelse(pretrends<=.05, "significant", "Not significant"))
+
+
+plots<-list()
+
+labs<-c("N. days worked", "Income", "N. contracts","Open ended","Permanent","Project-based", 
+        "Self-employment", "Unemployment")
+names(labs)<-c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", 
+               "self_emp", "unemployed")
+results$variable <- factor(results$variable, levels = c("project_based", "open_ended", "permanent", "unemployed", "self_emp", "salaries", "ncontracts", "days_worked"))
+
+cc<-scales::seq_gradient_pal("#9bc9be", "#0e387a", "Lab")(seq(0,1,length.out=(length(unique(results$months_later)
+))
+)
+)
+
+gg<-
+  results %>% 
+  ggplot(aes(x=as.factor(months_later), y=coefficient))+
+  geom_col(aes(fill=as.factor(months_later), alpha= pretest), position="dodge2")+
+  geom_errorbar(aes(ymax=plus95, ymin=minus95,  group=as.factor(months_later)),width=.3, position="dodge2", color= "grey30", alpha=.5)+
+  theme_bw()+
+  geom_text(aes(label=paste0(round(coefficient,2),stars2)))+
+  theme(axis.title = element_blank(),
+        legend.position = "bottom",
+        legend.title = element_blank())+
+  geom_hline(yintercept = 0)+
+  scale_fill_manual(values = cc)+
+  scale_alpha_manual(values = c("Not significant"=.6, "significant"=.2))+
+  guides(alpha="none", 
+         fill="none")+
+  facet_wrap(~variable, labeller = labeller(variable=labs), ncol = 2, scales = "free" )
+
+
+#ggsave2(gg, file=paste0("../../../../../../Plots/DID_byagegroup/grid.jpeg"), width = 8, height = 10)
+
+ggsave2(gg, file="../../../../../../Plots/verylongtwfe3/gridate.jpeg", width = 7, height = 9)
+
+
+
+
+
+
 ################# SECOND ANALYSIS, BY SITUATION ###################
 
 
@@ -157,7 +235,7 @@ dff$salaries<- dff$salaries/100
 result_models<- list()
 
 contracts<-c("permanent", "open-ended", "project-based")
-
+groups=contracts
 
 for (g in contracts){
 dftwfe<-create_twfe_dataframe(dff[dff$group==g,],
@@ -263,6 +341,132 @@ for (contract in contracts) {
   }
 }
 
+
+# JUST DID COEFFICIENTS
+
+results<-data.frame()
+
+for (g in groups){
+  for (variable in variable_names){
+    for(number in c(1:6)){
+      pretrends<-result_models[[g]]$pre_trends[[paste("mod", g, variable, number, sep = "_")]]$p
+      results1<- rownames_to_column(as.data.frame(result_models[[g]]$did_coefs[[paste("mod", g, variable, number, sep = "_")]]$coeftable)) %>% 
+        mutate(group=g, 
+               variable= variable, 
+               months_later=number,
+               pre_trends=pretrends)
+      results<-rbind(results, results1)
+    }
+  }
+}
+
+
+results<-results %>% 
+  filter(rowname=="ATT") %>% 
+  transmute(rowname=rowname,
+            coefficient= Estimate,
+            pvalue= `Pr(>|t|)`,
+            group=group,
+            variable=variable,
+            months_later=months_later,
+            se= `Std. Error`,
+            plus95=coefficient+se*1.96,
+            minus95=coefficient-se*1.96,
+            pretrends=pre_trends,
+            stars=ifelse(pvalue<=0.1, "significant", "Not significant"),
+            stars2= case_when(pvalue %in% c(.050001,.1) ~ "*",
+                              pvalue %in% c(.010001,.05)~"**",
+                              pvalue <=.01~ "***",
+                              TRUE ~ ""),
+            pretest=ifelse(pretrends<=.05, "significant", "Not significant"))
+
+
+plots<-list()
+
+labs<-c("N. days worked", "Income", "N. contracts","Open ended","Permanent","Project-based", 
+        "Self-employment", "Unemployment")
+names(labs)<-c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", 
+               "self_emp", "unemployed")
+results$variable <- factor(results$variable, levels = c("project_based", "open_ended", "permanent", "unemployed", "self_emp", "salaries", "ncontracts", "days_worked"))
+
+cc<-scales::seq_gradient_pal("#9bc9be", "#0e387a", "Lab")(seq(0,1,length.out=(length(unique(results$months_later)
+))
+)
+)
+
+
+gg1 <- results %>%
+  filter(variable %in% c("project_based", "open_ended", "permanent", "unemployed")) %>% 
+  ggplot(aes(x = as.factor(group), y = coefficient, group = as.factor(months_later), fill = as.factor(months_later))) +
+  geom_col(aes(alpha = pretest), position = "dodge2") +
+  geom_errorbar(aes(ymax = plus95, ymin = minus95), position = "dodge2", color = "#008080", alpha = .5) +
+  ggrepel::geom_text_repel(aes(label = paste0(round(coefficient, 2), stars2)), 
+                           position = position_dodge(width = 0.9),
+                           box.padding = 0.3,  # Space between labels
+                           size = 3, 
+                           direction = "y",    # Adjusts placement vertically
+                           max.overlaps = Inf,
+                           segment.color = 'transparent') +
+  geom_text(aes(label = months_later, y = -Inf), 
+            position = position_dodge(width = 1), 
+            vjust = 1,
+            size = 3, 
+            color="black") +
+  
+  theme_bw() +
+  theme(axis.title = element_blank(),
+        axis.text.x = element_text(color = "black", vjust = -.1),
+      #  axis.ticks = element_line(color="black", hjust=.5),
+        legend.position = "bottom",
+        legend.title = element_blank(),
+        plot.margin = margin(10, 10, 30, 10)) +
+  geom_hline(yintercept = 0) +
+  geom_vline(xintercept = c(1.5, 2.5), color="grey")+
+  scale_fill_manual(values = cc) +
+  scale_alpha_manual(values = c("Not significant" = .6, "significant" = .2)) +
+  guides(alpha = "none", 
+         fill="none") +
+  facet_wrap(~variable, labeller = labeller(variable = labs), ncol = 2, scales = "free") +
+  coord_cartesian(clip = "off")
+
+
+ggsave2(gg1, file=paste0("../../../../../../Plots/DID_bycontract/gridATE1.jpeg"), width = 10, height = 9)
+
+
+
+gg2 <- results %>%
+  filter(variable %in% c("self_emp", "salaries", "ncontracts", "days_worked")) %>% 
+  ggplot(aes(x = as.factor(group), y = coefficient, group = as.factor(months_later), fill = as.factor(months_later))) +
+  geom_col(aes(alpha = pretest), position = "dodge2") +
+  geom_errorbar(aes(ymax = plus95, ymin = minus95), position = "dodge2", color = "#008080", alpha = .5) +
+  ggrepel::geom_text_repel(aes(label = paste0(round(coefficient, 2), stars2)), 
+                  position = position_dodge(width = 0.9),
+                  box.padding = 0.3,  # Space between labels
+                  size = 3, 
+                  direction = "y",    # Adjusts placement vertically
+                  max.overlaps = Inf) +
+  geom_text(aes(label = months_later, y = -Inf), 
+            position = position_dodge(width = 1), 
+            vjust = 1,
+            size = 3, 
+            color="grey30") +
+  theme_bw() +
+  theme(axis.title = element_blank(),
+        legend.position = "bottom",
+        legend.title = element_blank(),
+        plot.margin = margin(10, 10, 30, 10)) +
+  geom_hline(yintercept = 0) +
+  geom_vline(xintercept = c(1.5, 2.5), color="grey")+
+  scale_fill_manual(values = cc) +
+  scale_alpha_manual(values = c("Not significant" = .6, "significant" = .2)) +
+  guides(alpha = "none", 
+         fill="none") +
+  facet_wrap(~variable, labeller = labeller(variable = labs), ncol = 2, scales = "free") +
+  coord_cartesian(clip = "off")
+
+
+
+ggsave2(gg2, file=paste0("../../../../../../Plots/DID_bycontract/gridATE2.jpeg"), width = 10, height = 9)
 
 
 ###############THIRD ANALYSIS BY GENDER ####################
@@ -378,6 +582,100 @@ for (g in groups) {
   }
   
 }
+
+# JUST DID COEFFICIENTS
+
+results<-data.frame()
+
+for (g in groups){
+  for (variable in variable_names){
+    for(number in c(1:6)){
+      pretrends<-result_models[[g]]$pre_trends[[paste("mod", g, variable, number, sep = "_")]]$p
+      results1<- rownames_to_column(as.data.frame(result_models[[g]]$did_coefs[[paste("mod", g, variable, number, sep = "_")]]$coeftable)) %>% 
+        mutate(group=g, 
+               variable= variable, 
+               months_later=number,
+               pre_trends=pretrends)
+      results<-rbind(results, results1)
+    }
+  }
+}
+
+
+results<-results %>% 
+  filter(rowname=="ATT") %>% 
+  transmute(rowname=rowname,
+            coefficient= Estimate,
+            pvalue= `Pr(>|t|)`,
+            group=group,
+            variable=variable,
+            months_later=months_later,
+            se= `Std. Error`,
+            plus95=coefficient+se*1.96,
+            minus95=coefficient-se*1.96,
+            pretrends=pre_trends,
+            stars=ifelse(pvalue<=0.1, "significant", "Not significant"),
+            stars2= case_when(pvalue %in% c(.050001,.1) ~ "*",
+                              pvalue %in% c(.010001,.05)~"**",
+                              pvalue <=.01~ "***",
+                              TRUE ~ ""),
+            pretest=ifelse(pretrends<=.05, "significant", "Not significant"))
+
+
+plots<-list()
+
+labs<-c("N. days worked", "Income", "N. contracts","Open ended","Permanent","Project-based", 
+        "Self-employment", "Unemployment")
+names(labs)<-c("days_worked", "salaries", "ncontracts", "open_ended", "permanent", "project_based", 
+               "self_emp", "unemployed")
+results$variable <- factor(results$variable, levels = c("project_based", "open_ended", "permanent", "unemployed", "self_emp", "salaries", "ncontracts", "days_worked"))
+
+cc1<-scales::seq_gradient_pal("#9bc9be", "#0e387a", "Lab")(seq(0,1,length.out=(length(unique(results$months_later)
+))
+)
+)
+cc2<-scales::seq_gradient_pal("#ff8da1", "#97599a", "Lab")(seq(0,1,length.out=(length(unique(results$months_later)
+))
+)
+)
+
+cc<-c(cc1,cc2)
+ 
+gg<- results %>%
+  ggplot(aes(x = as.factor(group), y = coefficient, group = as.factor(months_later), fill =interaction(as.factor(months_later), group))) +
+  geom_col(aes(alpha = pretest), position = "dodge2") +
+  geom_errorbar(aes(ymax = plus95, ymin = minus95, color=as.factor(group)), position = "dodge2", alpha = .5) +
+  ggrepel::geom_text_repel(aes(label = paste0(round(coefficient, 2), stars2)),
+                           position = position_dodge(width = 0.9),
+                           box.padding = 0.2,  # Space between labels
+                           size = 3,
+                           direction = "y",    # Adjusts placement vertically
+                           max.overlaps = Inf,
+                           segment.color = 'transparent') +
+  geom_text(aes(label = months_later, y = -Inf), 
+            position = position_dodge(width = 1), 
+            vjust = 1,
+            size = 3, 
+            color="grey30") +
+  
+  theme_bw() +
+  theme(axis.title = element_blank(),
+        legend.position = "bottom",
+        legend.title = element_blank(),
+        plot.margin = margin(10, 10, 30, 10)) +
+  geom_hline(yintercept = 0) +
+  scale_fill_manual(values = cc) +
+  scale_alpha_manual(values = c("Not significant" = .6, "significant" = .2)) +
+  scale_color_manual(values = c("men"="#0e387a", "women"="#4c2882"))+
+  guides(alpha = "none", 
+         fill="none", 
+         color="none") +
+  facet_wrap(~variable, labeller = labeller(variable = labs), ncol = 2, scales = "free") +
+  coord_cartesian(clip = "off")
+
+
+ggsave2(gg, file=paste0("../../../../../../Plots/DID_bygender/gridATE.jpeg"), width = 10, height = 9)
+
 
 
 
@@ -1274,27 +1572,36 @@ results$variable <- factor(results$variable, levels = c("project_based", "open_e
   results$variable <- factor(results$variable, levels = c("project_based", "open_ended", "permanent", "unemployed", "self_emp", "salaries", "ncontracts", "days_worked"))
   
   
-  cc<-scales::seq_gradient_pal("#0e387a","#9bc9be",  "Lab")(seq(0,1,length.out=(length(unique(df1$quantile)
+  cc<-scales::seq_gradient_pal("#0e387a","#9bc9be",  "Lab")(seq(0,1,length.out=(length(unique(results$months_later)
   ))
   )
   )
   
   gg<-
     results %>% 
-    ggplot(aes(x=as.factor(months_later), y=coefficient))+
-    geom_col(aes(fill=as.factor(group), color=pretest), position="dodge2", alpha=.7)+
-    geom_errorbar(aes(ymax=plus95, ymin=minus95, group=group), position="dodge2", color="#008080", alpha=.5)+
+    ggplot(aes(x=as.factor(group), y=coefficient))+
+    geom_col(aes(fill=as.factor(months_later), color=pretest), position="dodge2", alpha=.7)+
+    geom_errorbar(aes(ymax=plus95, ymin=minus95, group=as.factor(months_later)), position="dodge2", color="#008080", alpha=.5)+
     theme_bw()+
     theme(axis.title = element_blank(),
           legend.position = "bottom",
-          legend.title = element_blank())+
+          legend.title = element_blank(), 
+          axis.text.x = element_text(vjust = -.5))+
     geom_hline(yintercept = 0)+
+    geom_vline(xintercept = c(1.5,2.5,3.5,4.5), color="grey30")+
     scale_fill_manual(values = cc)+
-     scale_color_manual(values = c("Significant"="red", "Not significant"= "white"))+
-      guides(color="none")+
+    scale_x_discrete(labels=c("Q1", "Q2", "Q3", "Q4", "Q5")) +
+    geom_text(aes(label = as.factor(months_later), y = -Inf), 
+              position = position_dodge(width = 1), 
+              vjust = 1,
+              size = 3, 
+              color="grey30")+
+    scale_color_manual(values = c("Significant"="red", "Not significant"= "white"))+
+      guides(color="none",
+             fill="none")+
     facet_wrap(~variable, labeller = labeller(variable=labs), ncol = 2, scales = "free" )
   
-  ggsave2(gg, file=paste0("../../../../../../Plots/DID_byquantile/grid.jpeg"), width = 8, height = 9)
+  ggsave2(gg, file=paste0("../../../../../../Plots/DID_byquantile/grid2.jpeg"), width = 8, height = 9)
   
   
 
@@ -1319,22 +1626,22 @@ df1 <- df1 %>%
   mutate(province = as.factor(case_when(
     province == 2 ~ "Albacete",
     province == 3 ~ "Alicante",
-    province == 4 ~ "Almería",
-    province == 1 ~ "Álava",
+    province == 4 ~ "Almer?a",
+    province == 1 ~ "?lava",
     province == 33 ~ "Asturias",
-    province == 5 ~ "Ávila",
+    province == 5 ~ "?vila",
     province == 6 ~ "Badajoz",
     province == 7 ~ "Balears, Illes",
     province == 8 ~ "Barcelona",
     province == 48 ~ "Bizkaia",
     province == 9 ~ "Burgos",
-    province == 10 ~ "Cáceres",
-    province == 11 ~ "Cádiz",
+    province == 10 ~ "C?ceres",
+    province == 11 ~ "C?diz",
     province == 39 ~ "Cantabria",
-    province == 12 ~ "Castellón",
+    province == 12 ~ "Castell?n",
     province == 13 ~ "Ciudad Real",
-    province == 14 ~ "Córdoba",
-    province == 15 ~ "Coruña, A",
+    province == 14 ~ "C?rdoba",
+    province == 15 ~ "Coru?a, A",
     province == 16 ~ "Cuenca",
     province == 20 ~ "Gipuzkoa",
     province == 17 ~ "Girona",
@@ -1342,12 +1649,12 @@ df1 <- df1 %>%
     province == 19 ~ "Guadalajara",
     province == 21 ~ "Huelva",
     province == 22 ~ "Huesca",
-    province == 23 ~ "Jaén",
-    province == 24 ~ "León",
+    province == 23 ~ "Ja?n",
+    province == 24 ~ "Le?n",
     province == 25 ~ "Lleida",
     province == 27 ~ "Lugo",
     province == 28 ~ "Madrid",
-    province == 29 ~ "Málaga",
+    province == 29 ~ "M?laga",
     province == 30 ~ "Murcia",
     province == 31 ~ "Navarra",
     province == 32 ~ "Ourense",
@@ -1369,7 +1676,7 @@ df1 <- df1 %>%
     province == 50 ~ "Zaragoza",
     province == 51 ~ "Ceuta",
     province == 52 ~ "Melilla",
-    TRUE ~ "Desconocida"  # Opción predeterminada en caso de que no haya ninguna coincidencia
+    TRUE ~ "Desconocida"  # Opci?n predeterminada en caso de que no haya ninguna coincidencia
   )))
 
 ## Occupation
