@@ -1,0 +1,1638 @@
+        \documentclass[12pt,a4]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{array}
+\usepackage{graphicx}% use this package if an eps figure is included.
+\usepackage{mathrsfs}
+\usepackage{multirow}
+\usepackage{siunitx}
+\setlength\topmargin{-1.1in} \addtolength\textheight{2.1in}
+\addtolength{\oddsidemargin}{-0.2in}
+\addtolength{\evensidemargin}{-0.1in} \textwidth 5.8in
+\newcounter{questioncounter}
+\newcounter{equestioncounter}
+\setlength\parskip{10pt} \setlength\parindent{0in}
+\usepackage{subcaption}
+\usepackage[
+backend=biber,
+style=apa,
+]{biblatex}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{mygreen}{RGB}{0, 128, 128}
+\usepackage[hidelinks]{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage{adjustbox}
+\usepackage{afterpage} 
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage[skip=10pt plus1pt, indent=40pt]{parskip}
+\usepackage{threeparttable}
+\usepackage[pscoord]{eso-pic}% The zero point of the coordinate systemis the lower left corner of the page (the default)
+\linespread{1.5}
+\hypersetup{colorlinks,linkcolor={mygreen},citecolor={mygreen},urlcolor={mygreen}}  
+
+
+\newcommand{\placetextbox}[3]{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>}
+	\setbox0=\hbox{#3}% Put <stuff> in a box
+	\AddToShipoutPictureFG*{% Add <stuff> to current page foreground
+		\put(\LenToUnit{#1\paperwidth},\LenToUnit{#2\paperheight}){\vtop{{\null}\makebox[0pt][c]{#3}}}%
+	}%
+}%
+
+\addbibresource{export.bib}
+
+
+\begin{document}
+	
+	
+	\title{\textsc{Spain v. Temporality: The Impact Of The 2021 Labor Reform}}
+	
+	
+	\author{Ignacio Garijo Campos\\
+		\small MRes in Economics Sciences Po Paris}
+	\maketitle
+	
+	\begin{abstract}
+		Temporary jobs are correlated with lower human capital investment, productivity, salaries and worse working conditions. As the share of temporary workers in Spain doubles that of the EU, the latest Spanish labor reform banned the creation of \textit{project-based} contracts, responsible for 40\% of all temporary arrangements. Using administrative panel data, a cohort level Two-Way-Fixed-Effect approach has been conducted to asses the impact of this ambitious reform. Results show that the policy managed to reallocate workers into permanent contracts without increasing unemployment. Furthermore, while the conditions of former project-based workers improved, permanent jobs have become less stable on average as a result of the absorption of these workers. 
+	\end{abstract}
+	
+	\newpage
+	\textcolor{white}{.}
+	\clearpage
+	\section{\textsc{Introduction}}
+	
+	Consistently throughout the years, the Spanish share of workers under temporary contracts has been considerably higher than the European average. While the continental average resides roughly around 10\%, this number is doubled to 20\% in the case of the country from the Iberian peninsula \parencite{conde2021contra}.
+	
+	The importance of tourism or the great amount of small firms are usually wrongfully blamed for this phenomenon, while data shows that this difference has been persistent across industries, group ages, firm size and levels of education \parencite{conde2021contra, esade}. Every year, 25 million temporary contracts were created, while the size of active population of the country is only 23 million. Day, weekend and week long contracts sum up to most of these contracts.
+	
+	Many labor reforms have tried to tackle this issue that neglects human capital investment, productivity growth, workers' well-being, and incentivizes low value-added activities. However, the share of workers under temporary contracts has remained above European averages along the years. 
+	
+	The last reform took place in December 2021, when the creation of \textit{project-based} contracts or "contrato de obra y servicio" was banned, causing a great shock in the Spanish labor market, as they added up to 40\% of temporary contracts. 
+	
+	In this regard, this type of contract was used for all kinds of activities, allowing employers to adjust to their short-term labor needs even to a day level, with roughly 50\% of the contracts finishing in less than 7 days, and 75\% of them lasting less than 30 days. 
+	
+	The reform also made \textit{intermittent open-ended} contracts or "contrato fijo-discontinuo" more versatile, a sort of \textit{zero-hour} permanent contract (\cite{conde2023reforming}). This aimed to absorb the seasonal jobs that were under project-based contracts, granting more stable arrangements with higher severance payments in case of job-loss. Non-seasonal workers would then have to be hired either as permanent or other type of temporary jobs which require more specific conditions to be formalized. In this sense, Section \ref{section:litreview} explores the existing literature on this topic and details the institutional setting of the reform.
+	
+	This study thus aims to assess the impact of this reform on the Spanish economy using the "Continuous Sample of Working Lives", an administrative panel with the labor history of 4\% of the population related to the Spanish Social Security. This rich dataset allows the following of individuals throughout the entirety of their working lives. Section \ref{section:data} develops on the dataset and data manipulation conducted to build the final panel used in this study. As the reform took place in December 2021, this is the first work to address this policy with individual panel data.
+	
+	Then, Section \ref{metho} explains the empirical design. Using a Two-Way-Fixed-Effect approach, monthly cohorts of workers that suffered job-loss were followed up to 6 months to assess the consequences of the reform in their employment rates, income, number of days worked in a month, number of contracts held in a month and probability to become a permanent or open-ended worker. 
+	
+	The variables of interest were aggregated by cohort. Then, the regressions were carried out using those cohorts of 2021 and 2022 as treatment group, with the same month of the previous year as control. This allows to disentangle the impact of the reform from that of the seasonality of the labor market.
+	
+	In this regard, the impact of the reform affected more than just workers under project-based contracts, as the equilibrium between contracts was altered. This is because now, workers under other contracts cannot reallocate to project-based arrangements after job-loss either. 
+	
+	Therefore, the main specification of this analysis considers cohorts of workers who experienced job-loss from any type of contract.
+	
+	However, exposure to project-based contracts varied greatly between gender, age group, sector, profession, region or income quantiles. Section \ref{preanal} offers an overview of this in detail, showing also that these variables are great predictors of the exposure to this type of contracts and thus to the reform. As a consequence, other TWFE regressions have been carried out to assess the impact of this policy in these different groups.
+	
+	Then, Section \ref{results} displays the results of the empirical strategy of the paper. 
+	
+	First, in \ref{subsection:baseline}, results show that the policy was able to reallocate workers into permanent and open-ended contracts without affecting unemployment, but also without increasing the monthly days worked, income or any other variables. In fact, the reallocation of temporary workers into permanent jobs has caused a decline in the average monthly days worked or the durability of spells for permanent jobs due to composition effects. 
+	
+	This is what \textcite{conde2023reforming} coin as the "contractual" rather than "empirical" effects. The authors state that the reform only had the former, as they find no impact on job creation and destruction in key days as Mondays, Fridays, Sundays, or first and last days of the month. They thus defend that the temporary nature of the labor market was not altered, but rather hidden under very short-term permanent contracts.
+	
+	However, when examining workers of each type of contract individually, results show that cohorts of project-based workers that experienced job-loss after the reform consistently displayed higher wages, less number of contracts in a month, and more monthly average days worked. 
+	
+	Motivated by Section \ref{preanal}, subsections \ref{section:bycontr} to \ref{subsection:quantile} show results for each gender, age group, sector, profession, region and income quantile to shed light on the impact of the policy in different groups. These results show higher impact of the policy on men and young workers, as they had bigger shares of project-based contracts in the first place. 
+	
+	Results by sector manifest different responses to the policy. For example, while construction workers experienced a great increase in their probability to transition into permanent contracts, agriculture workers were more likely to become open-ended employees, due to the seasonality of the latter.
+	
+	Similarly, results by profession show that low-skill workers were more affected by transitions into open-ended jobs, while the increase in permanent shares 
+	was more homogeneous between professions. 
+	
+	This was also the case for regional differences. Here, provinces with more workers in agricultural activities were more likely to transition to open-ended contracts while increases in permanent shares were roughly homogeneous between regions. 
+	
+	Finally, Subsection \ref{subsection:quantile} show that the reform had a positive effect in equality, as workers from lower quantiles had bigger positive effects in permanent shares, income, employment, and number of days worked.
+	
+	All in all, Section \ref{section:litreview} contextualize the institutional setting and literature. Sections \ref{section:data} and \ref{metho} detail the data and methodology. Then, Section \ref{preanal} show descriptive statistics, which provide insights and context on the Spanish labor market before and after the reform. Finally, Section \ref{results} displays the results of the empirical strategy.
+	
+	
+	\section{\textsc{Literature review and Institutional Setting}}\label{section:litreview}
+	
+	Short-term contracts are associated with lower salaries, job-stability, productivity and investment in human capital. However, they allow great flexibility for employers, that do not incur in firing costs and can adapt to their needs even to the day level. In this regard, temporality in the Spanish labor market is twice as high as the European average. Despite differences between sectors, temporary jobs are more common in Spain for all of them, excluding the hypotheses that temporary jobs are just a consequence of the seasonality implied with tourism.
+	
+	One of the possible explanations for this issue is the high firing costs and protection level for permanent contracts. \textcite{centeno2012excess, hijzen2017impact, kahn2010employment} find bigger differences in protection between permanent and temporary contracts lead to an overuse of the latter.
+	
+	This is associated with negative outcomes for both the worker and the employer. Firstly, because neither of them have incentives to invest in human capital, as the relation between employer and employee is not stable \parencite{cabrales2014dual}. Then, it also incentivizes the creation of firms in industries in which temporary jobs offer a comparative advantage. Both of these things are consistent with the association between temporality and low productivity and growth rates \parencite{bassanini2009job, cahuc2016explaining, damiani2016temporary, dolado2016does, hijzen2017impact}. 
+	
+	Moreover, \textcite{perez2014can} show how short-term contracts also explain weaker job stability and greater wage inequality. It affects more the low-skilled, and the youth. This is especially concerning considering that poor working conditions at the beginning of the professional career have a negative impact on salaries up to 15 years later, and it affects 66\% of the the Spanish youth \parencite{garcia2023dual, gorjon2021}. As a consequence, there is also a negative effect on the youth capacity to leave parent's home and start a life project, and thus on fertility rates \parencite{conde2021contra}.
+	
+	In this context, several labor reforms have tried to tackle this severe issue, with little results. The last labor reform took place in December 2021, prohibiting the creation of \textit{project-based} contracts, responsible for 40\% of temporary contracts. Moreover, it promoted a transition into \textit{intermittent open-ended} contracts or regular \textit{permanent} contracts. 
+	
+	Project-based contracts were the most popular among the pool of temporary contracts in Spain, along with contracts due to "\textit{production circumstances}"or "\textit{Substitution of other workers}". 
+	
+	While production circumstances contracts and substitution contracts have rigid rules on when is the employer allowed to use them, project-based were often used as all-rounder. As a consequence, this type of contract facilitated the creation of temporary job spells without a specific causation, and roughly 40\% of temporary contracts were of this kind. 
+	
+	With the aim of reducing temporality in the Spanish labor market, this reform banned the creation of new project-based contracts, which accounted for 10\% of the workers in Spain before it took place on December 28th 2021 at a national level (Figure \ref{fig:gg1}). This flexible design of contracts allowed for the creation of arrangements of varied nature. On the one hand, it was used for seasonal jobs and short-term needs of the employers. On the other hand, for \textit{de facto} permanent workers but \textit{de iure} temporary whose contract was renewed frequently, allowing firms and the public administration to flexibly concatenate these kinds of contracts regularly. This allowed firms to adapt to their short-term needs with great flexibility, as well as reduce severance payments expenses. In fact, severance payments for temporary contracts amount to 12 days per year worked, but 20 for permanent workers, including intermittent open-ended arrangements.
+	
+	
+	The reform also changed open-ended arrangements to make them more versatile, which are since then specified in art. 16 of \textcite{ley} for "the execution of tasks of a seasonal nature or linked to productive activities during specific periods, or for the development of those that, while not having a seasonal nature, involve intermittent provision with certain, determined, or undetermined periods of execution." 
+	
+	Thus, workers who used to have temporary jobs due to seasonality are to be hired now under the intermittent open-ended contracts. This is a form of permanent contract that resembles the zero-hours contracts that exist in other European countries (\cite{conde2023reforming}). For this analysis, regular permanent and open-ended contracts are considered different, meaning that the latter are not considered when alluding to permanent, as they are very different in terms of conditions and demographics under them.
+	
+	The intermittent nature of the open-ended contract allows flexibility to the employer, who decides which periods of the year is the employee going to work. At the same time, the permanent characteristic allows for a more stable relationship between the employer and the employee. It also implies higher severance payment costs for the employer and benefits for the employee since these are considered a type of permanent contract. The severance payment is not calculated over the period of validity of the contract, but over the period of effective work of the employee. Moreover, the worker only receives a salary and only contributes to Social Security when they are working and not during the whole period of the contract. Due to this, the Social Security dataset is able to trace when these workers are \textit{actively} working and not just holding a so-called \textit{inactive} intermittent open ended contract.
+	
+	With this approach, the reform is motivated by defending that the employee would benefit from a more stable working situation, and both employee and employer would have incentives to invest in human capital. It could also compromise the viability of low added-value projects that would benefit from the "\textit{project-based}" contract that existed previously. 
+	
+	Similarly, those workers who would chain temporary jobs should fall now into regular permanent jobs, leading into higher job-security for the worker and eligibility for severance payments, as well as incentives to invest in human capital both for the employer and employee.
+	
+	An important detail about this reform is that it did not ban "\textit{project-based}" contracts immediately, but it banned the creation of new ones, with a 3 month period of adaptation, and allowing for those that already existed to finish no matter their deadline. Figure \ref{fig:gg1} shows the evolution of the share of workers under these different types of contracts affected by the reform.
+	
+	In panel \ref{pana}, quarterly data from the Spanish Labor Force shows the evolution of the number of workers under a certain type of contract. The reform prompted a big fall of \textit{project-based} temporary contracts in the first year, an even bigger hike in \textit{intermittent open ended}, and a smaller one in the permanent ones. However one should account for the share of total workers by contract type, since conclusions from panel \ref{pana} only can be deceiving if one does not consider, for example, that \textit{intermittent open-ended} contracts accounted for a very small share of workers before. Panel \ref{panb} then shows the share of total workers under each contract. 
+	
+	This is consistent with \textcite{domenech2022reforma} findings which point to a "positive evolution of permanent contracts, an increase of the flows from temporary to permanent, a strong increase in the number of \textit{intermittent open-ended}, and a decrease of the temporality rate in 2022".
+	
+	However, \textcite{conde2023reforming} find that creation and destruction of jobs on key days of the month did not vary after the reform. This implies that very short-term contracts like week, weekend or month long contracts did not decrease after the reform. A possible explanation of this result is that short-term contracts were not reduced but just transferred to other types of contracts. Again, \textcite{conde2023reforming} suggest that permanent contracts might have become weaker after the reform since low-productivity workers with inherently unstable working spells have carried their poor conditions to permanent contracts. Results show that the share of very short-term permanent contracts has increased, and that the average monthly number of days worked has decreased for these type of contracts due to the absorption of former project-based workers. However, the conditions for the latter seem to have improved in terms of income, average number of days worked or number of contracts held in a month.
+	
+	All in all, there is little evidence of the implications of this important labor reform. BBVA and ESADE reports from \textcite{esade} and \textcite{domenech2022reforma} are very preliminary and not peer-reviewed; while \textcite{conde2023reforming} focus on time series of destruction and construction of jobs. This analysis on the other hand aims to address for the first time the situation of workers affected by the reform, as well as the effects in different types of contracts, sectors, occupations, regions, genders, and age groups.
+	
+	\begin{figure}[hbt!]
+		\caption{Evolution of workers under project-based, open-ended and permanent contracts in Spain}
+		\label{fig:gg1}
+		\centering
+		\begin{subfigure}{1\textwidth}
+			\caption[]{Evolution of number workers by type of contract, 2019T1=100\%}
+			\includegraphics[width=0.9\textwidth]{gg6.jpg}
+			\label{pana}
+		\end{subfigure}
+		\begin{subfigure}{1\textwidth}
+			\caption[]{Share of total workers by contract type}
+			\includegraphics[width=0.9\textwidth]{gg2.jpg}
+			\label{panb}
+		\end{subfigure}
+		\vspace{\baselineskip} % Add some vertical space
+		\caption*{\textcolor{darkgray}{Data source: Spanish Labour Force.}}
+	\end{figure}
+	
+	\clearpage
+	
+	\section{\textsc{Data}}\label{section:data}
+	
+	This essay uses administrative panel data from the Spanish Social Security and tax authority, more specifically the 2022 version of "Muestra Continua de Vidas Laborales" (MCVL), known in English as "Continuous Sample of Working Lives" (CSWL). 
+	
+	This is an extremely rich panel that follows an anonymous random sample of 4\% of the population affiliated to the Spanish Social Security, including workers, pensioners, and unemployment benefit recipients. This accounts for 1.302.213 people. It gives access to the full labor market history of each of these individuals, registering dates of beginning and ending of contracts and their type, the firm they work for and other relevant characteristics of the spell. It also registers variables like gender, age, educational attainment, country of birth, or nationality. Since it matches with monthly tax data from the Spanish tax authority, it has information on earnings or relevant household information like number of children or marriage status. 
+	
+	Another characteristic of this data is that it is able to track down the periods in which workers with open-ended contracts are working. Since open-ended contracts are a form of permanent contract that gets activated and deactivated to adapt to the necessities of the employer, other data sources are not always capable of tracing when these workers are actively working or if they are just holding one or more intermittent open ended contracts during a period of inactivity. For instance, a worker holding an open-ended contract to work as a waiter in the summer would hold a contract for the whole year, and would thus be counted as employed by the Spanish Social Security. However, since during the period of so-called inactivity the employee is not contributing to Social Security, the dataset does not contemplate it as period of work and allows for a more exact identification of effective work for these contracts.
+	
+	The panel consists of 22 files due to the size and differently shaped information it contains. These can be divided into 7 different categories of information, which are then subdivided in files so that each of them would not be more than 2GB. 
+	
+	The first file contains personal information about each person, with one observation per individual with their date of birth, sex, nationality, region of birth, locality of current residence, nationality, or level of education.
+	
+	The following 4 files contain the labor market information of the individuals, with one observation per person and spell since the beginning of their relationship with the Spanish Social Security, going as far back as the 1960s. The information of these files contain the profession, sector, region, type of contract, type of regime, date of beginning and end of the spell, and cause of separation among many others.
+	
+	The 13 following ones include information of their contributions to the Social Security. There is one observation per individual, firm and year, and columns for the income of each month. This is the information taken as a proxy for labor income, which is not a strong assumption considering that the main source of income in Spain comes from labor.
+	
+	There is another file for pension contributions and other variables related to the pension system in Spain. This information was not used for the analysis.
+	
+	Moreover, there are three more datafiles: one for information of the people living in the same household as the individual, another one with the data from the tax authority, which is only available when access to tax authority is granted too, and a final one that facilitates the mapping of each individual in each file. 
+	
+	The information from each file can be joined by individual using a common anonymous individual numeric identifier. The following Subsection explains the process of building the final panel with one observation per individual and month. A very detailed metadata file in Spanish is available at the \href{https://www.seg-social.es/wps/wcm/connect/wss/320b09c6-dc33-42be-b532-08880e618742/MCVLGuia20230919.pdf?MOD=AJPERES}{website} of the Spanish Social Security for further information. 
+	
+	\subsection{Individual level, cohort level and spell level panels}
+	
+	Only information from individuals born from 1957 to 2006 has been used, as it matches the age of working population at the time the data was retrieved.
+	
+	Since the main information is presented as one observation per spell and individual, these panels have been transformed to one observation per person, year, month, and spell. Then, only the main spell of each month, taken as the one in which the individual has spent more days in has been kept, resulting in a panel with one observation per individual, month and year. However, some information has been saved from the other spells, such as the types of contracts or the number of them that an individual was holding at a specific period. As for the income, when more than one observation per person and period was found, the sum of the incomes was taken to have one observation per individual at each period of time.
+	
+	
+	The final main panel therefore combines individual, labor history, and income data from 1.302.213 people, which amounts to 4\% of people related to the Spanish Social Security. It includes one observation per person and month since January 2018 to December 2022. 
+	
+	This panel has been used to compute the descriptive figures and the exploration of the data, the logit regressions that justify the disaggregations conducted in the analysis, and the creation of the cohort datasets to compute the results. 
+	
+	The detailed instructions on how the cohort-level datasets were constructed for the main analysis are explained in Section \ref{metho}.
+	
+	A third spell-level panel was constructed. This last dataset holds one observation per spell, which allows to track at a contract level instead of individual level. It was used for Figures \ref{fig:dur} and \ref{fig:dur2}.
+	
+	\section{\textsc{Methodology}}\label{metho}
+	
+	There is a wide literature of two-way fixed effect regressions used to estimate Difference-in-Differences treatment effects. This has been widely used in Spain in the past years to assess the impact on employment and wages of the increase of the minimum wage or the introduction of the basic income \parencite{gorjon2022employment, de2017assessing, barcelo2021efectos}.
+	
+	This work follows from this literature, but with several differences. First, this reform is different and unique to the Spanish case, meaning that there are no other examples in the literature on this specific approach for this reform. \textcite{conde2023reforming}, for example, use time series of creation and destruction of contracts in their main analysis,  but do not analyse the situation of individuals before and after the reform. \textcite{esade} use a more similar quasiexperimental approach estimating TWFE regressions, but with preliminary cross-sectional data and without cohort-level analysis.
+	
+	In this regard, there are essentially two main difficulties that complicate the design of the analysis. On the one hand, the treatment is staggered: as project-based contracts were not banned immediately, but only the creation of new ones was, labor market dynamics did not change overnight. Consequently, individuals only saw the impact of the reform as they were separated from their job. Since the reform affected a specific type of temporary contracts, the transition to this new equilibrium depended on the end-date of these contracts. That being said, around 50\% of project-based contracts end before 7 days, and between 60\% and 75\% before 30 days, as shown in Figure \ref{fig:dur}.
+	
+	This alone is not a problem since Two-Way-Fixed-Effect estimations can be robust to heterogeneous treatment effects under staggered designs, as shown by \textcite{callaway2021difference, borusyak2021revisiting, gardner2022two, liu2022practical, wooldridge2021two, sun2021estimating}.
+	
+	However, the second difficulty comes from the identification of those impacted by the reform. One could use one of the methodologies mentioned above and compute staggered design two way fixed effect regressions in which treatment is defined as the moment in which the project-based contract is over. However, there are several issues that invalidate this approach, both for internal and external validation. The most obvious one is that the instability, short-duration and seasonality of project-based contracts conveys that those who held a project-based contract immediately before the reform are not the only ones affected by it. For example, since the policy came into place in December 2021, seasonal jobs that do not respond to Christmas or winter job creation would not be considered as treated if workers holding the contract at the moment of the reform were used as treatment group.
+	
+	Moreover, banning the creation of a widely used contract does not only affect those who are under it, but the whole labor market. For example, if the reform leads to higher unemployment because workers cannot be reallocated to other contracts easily, salaries would theoretically decrease for all workers, as employers would win comparative bargaining power.
+	
+	For these reasons, a cohort-level approach has been used. The cohort approach aims to follow the groups of workers who got separated from their job at a specific month of a given year. For each period (month) of time, workers who suffered job-loss, regardless of the cause, have been selected, and their information up to 6 months later has been stored and aggregated at the cohort level to follow their situation. This aggregation contains the average number of days worked, average income, average number of contracts, and probability rate of being unemployed, self-employed or employed with a specific contract type 1 to 6 months later. These same variables were then used as outcome variables in the regressions, as explained below.
+	
+	It is worth mentioning that the same individual can belong at the same time to multiple cohorts, since workers can see their jobs terminated multiple times during the long period in which they are followed. This is especially important since the analysis is focused on workers whose main characteristic is having high job instability, and thus restricting individuals to one cohort would not be optimal. It also allows to observe the effects of the reform on the composition of workers under a given contract, since many workers are reallocated to other contracts after the reform. 
+	
+	The CSWL does not map perfectly the people who are unemployed since it only contains information when they contribute to Social Security. Therefore, they only appear as unemployed while receiving unemployment benefits. For this reason, when information was missing for an individual at a given month, it has been computed as being unemployed. Thus, the amount of people unemployed could potentially be overestimated since they could have also transitioned to inactivity. 
+	
+	However, this should not endanger the results of this study since the analysis pursues to estimate the consequences of the reform on employment, meaning that being pushed to unemployment or to inactivity is similar since both are forms of \textit{no-employment}. Similarly, when no income was reported in the data, income was assumed to be 0. No income reported means that the individual did not contribute to Social Security in any way, which implies that they did not receive any salary or unemployment benefit. The informal labor market then lies outside of the reach of this study. 
+	
+	Cohorts were then followed up to 6 months after the separation, with no changes in the composition of the cohort in different months. However, just comparing the evolution of the outcome variables before and after the treatment would yield highly biased estimators of the effect of the reform, as the month to month variation is greatly explained by seasonality in the labor market. This is shown in Appendix \ref{Appe} with an RDD design with time as cut-off, in which a placebo with data from the previous year is also displayed to show the importance of seasonality.
+	
+	Therefore, and motivated by the results from these figures, cohorts from the previous year are used as control. This design should rid the results of the effects of seasonality and therefore isolate the treatment effects of the reform on the outcome variables.
+	
+	Two-way-fixed-effects regressions were then estimated for each outcome variable, accounting for group and time fixed effects, leaving out covariates as \textcite{de2020two} show that non-saturated covariates can lead to negative residuals. Results are shown in an event-study manner for the baseline model and disaggregations by gender or type of contract; while an Average Treatment Effect (ATE) has been estimated for the tables and other disaggregations for the sake of brevity and precision. When this is the case, only results that surpassed a parallel trend Wald Test at a 5\% significance level are shown.
+	
+	In other words, cohorts of workers who suffered job-loss in 2021 and 2022 are taken as treatment cohorts, and those who suffered job-loss in 2020 and 2021 as control or placebo - Figure \ref{fig:example} -. This way, cohorts of each month are compared to those of the same one the previous year, and treatment is defined in the transition from December to January. Figure \ref{fig:example} displays a hypothetical example of the comparison that is carried out by the TWFE regressions, in which each point is the average outcome variable value of each cohort. 
+	
+	This approach was designed to avoid 2020, the year with biggest impact of the COVID-19 pandemics, to be used in the cohorts after treatment. Nonetheless, Appendix \ref{appe1819} shows that results are robust to changes in the control group, taking cohorts of the last years before COVID, 2018 and 2019, as control. It is worth mentioning that the baseline model does not consider them as control in the first place since the Spanish Labor Market has been subject to changes since then, like the considerable increase in the minimum wage \parencite{gorjon2022employment}. In addition, Appendix \ref{bcall} displays balancing checks that show the comparability of the treatment and control groups of the baseline approach in the study. 
+	
+	\begin{figure}[hbt!]
+		\caption{Treatment example}
+		\label{fig:example}
+		\centering 
+		\includegraphics[width=\textwidth]{descr_plots/example.jpeg}
+	\end{figure}
+	
+	\begin{equation}\label{eq}
+		Y_{g, t}=\sum_{g^{\prime}=1}^2 \widehat{\alpha}_{g^{\prime}} 1\left\{g=g^{\prime}\right\}+\sum_{t^{\prime}=1}^T \widehat{\gamma}_{t^{\prime}} 1\left\{t=t^{\prime}\right\}+\sum_{\ell=-F+2, \ell \neq 0}^{T-F+1} \widehat{\beta}_{\ell} 1\{t=F-1+\ell\} T_g+\hat{\epsilon}_{g, t} 
+	\end{equation}
+	
+	Equation \ref{eq} shows the regression equation used to obtain the results in Section \ref{results}. Here, g is binary (cohorts can be either considered in the treatment or the control group); t follows the same logic as the x axis in Figure \ref{fig:example}; $Y_{g,t}$ is the outcome variable at period t and group g, $\widehat\alpha_{g^{\prime}}$ is a group fixed effect, $\widehat\gamma_{t^{\prime}}$ is a time fixed effect, $\widehat\beta_\ell$ is the coefficient of the event-study regression that displays the treatment effect $\ell$ periods into the reform; F is the moment of treatment; and $\hat{\epsilon}_{g, t} $ is the error term.
+	
+	Note that income 3 months after job-loss and income 5 months after it are different outcome variables and and thus different regressions. In this sense, for the baseline model, 48 equations are estimated, as there are 8 variables of interest as detailed below, which are followed up to 6 months after job separation.
+	
+	For instance, when income 3 months after separation is analyzed, a regression in which the outcome variable is the income 3 months after job-loss, and the treatment and control groups are the cohorts as described in Figure \ref{fig:example} is estimated. The resulting coefficients of the event-study compare the situation in a given month with that same month but the previous year.
+	
+	With this design, one must avoid observations from cohorts prior to the reform that look into the periods after it. In other words, when salaries six months after being separated from the job are being studied, the previous month to treatment, December 2021, cannot be included. This is because the income six months after being separated from the job for the December 2021 cohort is their income in June 2022, which is far into the reform. This technique resembles a \textit{donut} RDD design. Appendix \ref{Appe} shows this visually with the previously mentioned RDD style figures. 
+	
+	This cohort-level design was later replicated for each type of disaggregation detailed in Section \ref{preanal}, meaning that, for instance, for the analysis by gender, cohorts of men and women were separated and computed independently. Disaggregated results were obtained to estimate the impact of the reform on different demographics according to relevant variables such as gender, sector, profession, income quantile, region or age group. This is especially relevant since the Spanish labor market is notably segmented according to different demographics, which is further explained in Section \ref{descrdisagg}. As already mentioned, \textcite{perez2014can} find that temporary contracts affect more the young and low-skilled, but gender, regional, income and sector differences are also remarkable. 
+	
+	Furthermore, the most relevant disaggregation is arguably that of Section \ref{section:bycontr}, which separates cohorts of workers who suffered job-loss by type of contract. This allows, first, to see the effects of the reform on workers with project-based contracts, the most affected group; second, the effects on permanent and intermittent open-ended workers, which can be taken as spillovers.
+	
+	Nonetheless, these results are subject to composition effects. For project-based workers, because the reform banned the creation of this kind of contracts, so the workers remaining in these contracts at the end of 2023 might not be comparable to those of the previous ones. For permanent and open-ended cohorts, because after treatment cohorts can be affected by reallocated workers from project-based contracts. 
+	
+	The first could potentially endanger the reliability of the results. To show this is not the case, Appendix \ref{bcpb} displays balancing checks that show that these cohorts of workers in treatment and control are indeed similar and comparable. 
+	
+	The second is not an issue since composition effects are a great part of the impact of the reform, and is thus interesting to observe. However, one might want to disentangle the composition effects from the impact on workers who do not hold a permanent contract due to the effect of the reform. Therefore, a different approach was pursued in Appendix \ref{appeexcluding}, which shows results for permanent workers in a design in which individuals can only belong to one cohort (the first time they experience job-loss in the period of analysis). For instance, a worker that has been separated from a project-based contract, reallocated to a permanent contract, and laid-off again, would only be considered in the cohort of the month in which he experienced job-loss from the project-based contract. With this design, the composition of cohorts of permanent workers is not affected by reallocated workers due to the reform. While most results are similar with this different approach, the differences shed light on the effects of composition changes in permanent cohorts. Thus, one can analyze if the reform affected negatively already existing permanent workers or if the changes are driven solely by newcomers. This was only performed for permanent cohorts as the number of open-ended workers before the reform was too low for this alternative design to perform optimally.
+	
+	Finally, following the balancing checks in Appendix \ref{bcpb}, the disaggregations have been recomputed using only project-based cohorts of workers. This allows for a much more precise understanding of the direct effects of the reform on the targeted individuals. These results are shown in Appendix \ref{AppePB}.
+	
+	As for outcome variables of interest, the following ones were chosen due to their importance in welfare:
+	
+	\begin{itemize}
+		\item \textbf{Days worked in a month}: one of the biggest challenges for the Spanish labor market is allocating the workers in stable contracts that allows them to work consistently during the month and therefore earning enough. Reducing the temporality rate should bring an increase in the number of days worked. Results show that average days worked after job-loss have not increased for the overall economy, but they have between 1 and 1.8 days when looking only at project-based workers. Two effects oppose here: 
+		\begin{itemize}
+			\item Effects on the extensive margin: if the reform pushes workers to unemployment, number of days worked in a month are expected to decrease.
+			\item Effects on the intensive margin: workers who are successfully reallocated to permanent contracts as the reform intends should expect a positive impact in the number of days worked in a month.
+		\end{itemize}
+		
+		
+		\item \textbf{Number of contracts held in a month}: Temporality leads to the concatenation of multiple contracts in a month, or holding many contracts at the same time to obtain enough income. In this context, day, weekend or week long contracts are very common and can be taken as a sign of poor working conditions and job instability. This variable is then measured for non-zero values, i.e. only in the intensive margin, meaning that results show the number of contracts held among the people who have at least one contract in a month. Results are insignificant in the baseline model, but average number of contracts after job-loss seem to have been reduced between 0.4 and 0.1 for project-based workers.
+		
+		\item \textbf{Income}: as proxy of salary, income is a straight-forward measure of workers well-being and overall socioeconomic situation. The effects on the extensive and intensive margins should work similarly as with days worked. No significant effects are found for the overall economy, while project-based cohorts experienced an increase of 177€ 1 month after job-loss which then fades into 92€ after 6 months. 
+		
+		\item \textbf{Probability of unemployment}: computed as the share of workers from the specific cohort in unemployment. Unemployment could rise with a policy of this nature if employers are not capable of reallocating the before temporary workers in permanent contracts. Results show that unemployment was not increased due to the reform, but reallocation of project-based workers was delayed, causing an increase of unemployment shares of 6 p.p. 1 month after job-loss, which then turns insignificant.
+		
+		\item \textbf{Probability of Self-employment}: project-based contracts allow high flexibility for employers, who can decide even at the day level when to employ each worker. Accordingly, self-employment is sometimes used under the same logic. Many self-employed in Spain are only hired by one company repeatedly, and are coined as \textit{fake self-employed}, meaning that, similar to the case of project-based contracts, they are \textit{de facto} permanent workers with \textit{de iure} worse working conditions (no severance payments eligibility and therefore no job security). Since these specific type of self-employed and project-based employees are similar in this sense, it seems relevant to estimate the effects of the reform on the rate of self-employed. Nonetheless, results show that there is no evidence that shows that workers affected by the reform have transitions to self-employment.
+		
+		\item \textbf{Probability of holding an open-ended contract}: while open-ended contracts are a subtype of permanent on contracts, this analysis separates them due to their significant differences. The probability of holding an open-ended contract is computed as the share of workers from a specific cohort who are under this type of contract.
+		
+		\item \textbf{Probability of holding a permanent contract}: since the main objective of the reform was to increase the rate of permanent contracts to guarantee job-security and better working conditions for the workers, the share of workers from a specific cohort holding a permanent contract after a certain amount of months is a crucial variable of interest. After losing a job, workers are now 11 to 13 p.p. more likely to have a permanent job.
+		
+		\item \textbf{Probability of holding a project-based contract}: as with other contracts, it is computed as the share of workers under this kind of arrangement. Results come mechanically as creation of project-based contracts are banned after the reform.
+	\end{itemize}
+	
+	\section{Pre-analysis}\label{preanal}
+	
+	As above-mentioned, this reform affected the whole labor market in different ways. Temporary workers were affected as they could not hold project-based contracts anymore once their contracts were over. Permanent and open-ended workers contracts were affected too since successfully reallocated former project-based workers now held these contracts.
+	
+	The consequences of moving from short-term to long-term contracts are various: monthly number of days worked or contracts, income and spell duration are affected. Figures \ref{fig:inc} to \ref{fig:dif} address this descriptively. Only project-based, permanent and open-ended contracts are shown since they are those most affected by the reform. 
+	
+	In addition, a more transparent line has been added for permanent contracts with more than one year of tenure. Since the reform took place at the end of December 2021 and the last datapoints are from December 2022, that line is conformed by permanent contracts who were created before the reform. This aims to separate the impact of the reform in those holding permanent contracts due to composition effects -temporary workers that transitioned to permanent contracts- and non-composition effects -the effect on those workers that already held permanent contracts-. With this examination, one could shed light on if permanent contracts are weaker now as hinted by \textcite{conde2023reforming}. Figure \ref{fig:dif} displays a ratio of the difference between these variables for permanent contracts and long-tenure permanent workers over the latter. 
+	
+	Figure \ref{fig:inc} shows the evolution of the average monthly salary in euros for each type of contract. Here, the average salary of project-based contracts goes up rapidly after the reform. This is probably because those with this the shortest term contracts were the ones who exited this type of contracts first, and only those with longer term contracts, and therefore a better overall position, remained. 
+	
+	\begin{figure}[hbt!]
+		\caption{ Average monthly income by type of contract}
+		\label{fig:inc}
+		\centering 
+		\includegraphics[width=\textwidth]{descr_plots/YESincome.jpeg}
+	\end{figure}
+	
+	As for the case of intermittent open-ended contracts, salaries seemed to go down when compared to other years, possibly due to the new workers coming from project-based contracts.
+	
+	Finally, permanent contracts' average salary remained relatively constant. However, the distance with the workers with more than one year increases, while it was roughly constant before the reform. This is confirmed in \ref{fig:dif}, showing that while the difference in income between these two groups was around 3\% before the reform, it moved to 6\% after it. That could indicate that while project-based workers are being reallocated to permanent jobs, they are not adopting the conditions of other permanent workers, but rather they might be carrying their low-wages with them. 
+	
+	
+	Figure \ref{fig:dw} displays the average number of days worked in a month for each type of contract. In this case, permanent contracts' average days worked decrease, which does not happen for the other years. It remains constant for the long tenured permanent contracts, hinting that permanent contracts did become weaker in terms of average days under spell due to new workers that got reallocated. In Figure \ref{fig:dif} it is shown that, while the difference in number of days worked between these two groups remained constant at -0.5\%, after the reform it went down to -1\% and -1.5\%. Again, this shows that permanent contracts became worse for the employee on average.
+	
+	
+	\begin{figure}[hbt!]
+		\caption{Average number of days worked in a month by type of contract}
+		\label{fig:dw}
+		\centering 
+		\includegraphics[width=\textwidth]{descr_plots/YESdaysworked.jpeg}
+	\end{figure}
+	
+	The logic for project-based and open-ended contracts is similar as that in Figure \ref{fig:inc}, since project-based contracts find a positive impact - only longer duration contracts remain -, and open-ended contracts suffer a negative impact, probably due to newcomers.
+	
+	As for the duration of the contracts, Figure \ref{fig:dur} uses a 30 day moving average to display the share of contracts created each day that lasted less than 7, 15, 30 and 90 days. 
+	
+	
+	\begin{figure}[hbt!]
+		\caption{Share of contracts that lasted less than 7,15, 30 and 90 days respective to their day of creation (30day moving average)}
+		\label{fig:dur}
+		\centering 
+		\includegraphics[width=\textwidth]{descr_plots/YESggduration.jpeg}
+	\end{figure}
+	
+	
+	\begin{figure}[hbt!]
+		\caption{Average share of contracts per week that end before 7, 15, 30 and 90 days }
+		\label{fig:dur2}
+		\centering 
+		\includegraphics[width=\textwidth]{descr_plots/YESggduration2.jpeg}
+	\end{figure}
+	
+	First, one can observe that around 50\% of project-based contracts lasted less than a week, and almost all of them lasted less than 3 months. For permanent jobs, this number is much lower, as expected, but it increased after the reform, indicating that permanent contracts became less stable after the reform in this instance too. Similarly, open-ended contracts became weaker too in this aspect.
+	
+	As for the overall effects on duration of contracts, Figure \ref{fig:dur2} shows the average share of contracts created each week that end before 7, 15, 30 and 90 days, looking 6 months before and after the reform. Similarly to Appendix \ref{Appe}, this RDD style plot displays the previous year as a \textit{placebo} in green, aiming to disentangle the effects of the reform from those of seasonality. The graph suggests that the reform might have had an impact on the duration of contracts, reducing the share of short-term contracts in the economy. However, causal effects cannot be inferred by this figure only.
+	
+	Finally, Figure \ref{fig:ncontr} show similar results as the previous ones for number of contracts held in a month in the intensive margin. The project-based contracts that remained after the reform were those of longer-term and therefore those that meant less number of contracts per month.
+	
+	
+	\begin{figure}[hbt!]
+		\caption{ Average number of contracts held in a month by type of contract}
+		\label{fig:ncontr}
+		\centering 
+		\includegraphics[width=\textwidth]{descr_plots/YESnofcontracts.jpeg}
+	\end{figure}
+	
+	As for open-ended contracts, the average number of contracts went up, suggesting that project-based workers brought their instability to the new contracts, and consistent with \textcite{conde2023reforming}'s findings that show that the patterns of contract creation and destruction did not change.
+	
+	Finally, permanent workers experienced a small increase in the average number of contracts, which is not present when looking only at those permanent with tenure long enough to not be directly affected by the reform, consistent with previous findings. Figure \ref{fig:dif} shows that long tenured contracts had on average 0.5\% less contracts per month before the policy, but after it that number increased up to 1\%.
+	
+	\begin{figure}[hbt!]
+		\caption{Ratio of monthly average of days worked, number of contracts and income for permanent contract over permanent contracts with one year of tenure}
+		\label{fig:dif}
+		\centering 
+		\includegraphics[width=\textwidth]{descr_plots/YESdif.jpeg}
+	\end{figure}
+	
+	\clearpage
+	\subsection{Disaggregations}\label{descrdisagg}
+	
+	The Spanish labor market is notably segmented, causing great disparities in temporality rates due to sectors, professions, regions, age group, income quantiles, or gender.
+	
+	In this sense, Figure \ref{fig:roc} shows that these characteristics are great predictors of the probability to belong to a specific type of contract, manifesting that these are relevant variables for the potential exposure to the policy. 
+	
+	To produce this figure, only observations of December 2021 were used, as they are the most relevant due to the proximity to the reform. 3 probit models were then estimated to test the capability of these variables of interest to predict belonging to a specific contract as a proxy of how relevant they are to explain labor market situations and thus exposure to the reform. Performing this kind of binary analysis allows for the production of ROC curves, which visually show the prediction capabilities of binary probability models. 
+	
+	The horizontal axis shows the false positive rate, while the vertical axis the true positive rate, both for in sample predictions. The diagonal or \textit{coin-toss} line shows equal probabilities of wrongly and truthfully predicting a \textit{positive}, where positive means being under the specific type of contract. Thus, the further up from the diagonal, the better the model is at predicting, and the Area Under the Curve (AUC) is commonly used as an estimate of how good the model is at it. This number is shown in the legend for each contract, manifesting the high capability of these models to predict the type of contract a person holds. 
+	
+	\begin{figure}[hbt!]
+		\caption{ROC curves of the predictive capability of socioeconomic variables on the type of contract}
+		\label{fig:roc}
+		\centering 
+		\includegraphics[width=\textwidth]{ROC.jpeg}
+	\end{figure}
+	
+	
+	Thus, these demographic and socioeconomic characteristics are very important in order to understand the disparities of exposure to temporary arrangements, and therefore to the reform.
+	
+	Firstly, in December 2021, women's incidence in project-based contracts was of 8.6\%, while men's was 10.6\%. The effects of the reform are thus more visible in men. 
+	
+	As per age group, Figure \ref{fig:descr:agegroup} shows that younger workers are more exposed to this type of contract, with special incidence in the population below 25 years old. In fact, more than 20\% of the youngest group of workers hold these contracts, while this is only true for roughly 7\% of the oldest ones. This shows that temporary contracts are high for each age group, yet still they vary a lot between them.
+	
+	\begin{figure}[hbt!]
+		\caption{ Share of project-based contracts by age group}
+		\label{fig:descr:agegroup}
+		\centering 
+		\includegraphics[width=\textwidth]{descr_plots/Pre-treatment/prebyagegroup.jpeg}
+	\end{figure}
+	
+	Furthermore, Figure \ref{fig:descr:province} displays the share of workers under project-based contracts by province in December 2021, the last month before the reform. The south, mainly the regions of Andalucía, Extremadura and the southern part of Castilla La Mancha present values over 15\%, with a maximum of 25\% in Huelva. On the other hand, the north differs a lot in these numbers, where the percentage of workers under project-based contracts are usually below 10\%, with minimums below 7\% in the basque country.
+	
+	
+	\begin{figure}[hbt!]
+		\caption{Share of project-based contracts by region}
+		\label{fig:descr:province}
+		\centering 
+		\includegraphics[width=\textwidth]{descr_plots/Pre-treatment/prebyprovince.jpeg}
+	\end{figure}
+	
+	This is partially explained by the incidence of the agrarian sector in each region. Huelva or Jaén are known because of the importance of activities related to agriculture, which, as shown by \ref{fig:descr:sector}, presents very high shares of project-based contracts, probably due to the seasonality of the harvesting season.
+	
+	\begin{figure}[hbt!]
+		\caption{ Share of project-based contracts by sector}
+		\label{fig:descr:sector}
+		\centering 
+		\includegraphics[width=\textwidth]{descr_plots/Pre-treatment/prebysector.jpeg}
+	\end{figure}
+	
+	
+	While many sectors still present very high values of project-based incidence, the disparity between them is remarkable, which motivates the analysis in Subsection \ref{ssbysector}. More than 40\% of contracts in "Agriculture, forestry and fishing" were project-based in the month before the reform, while only 0.37\% were of this nature for financial services.
+	
+	Finally, different professions also present dissimilar exposure to project-based contracts, as displayed in Figure \ref{fig:descr:occupation}. This Figure shows professions by level of skill. With the exception of the low incidence of these contracts in administrative officers, the share of workers in project-based contracts decreases with skill. 19.43\% percentage points separate the unqualified workers with administrative officers. 
+	
+	\begin{figure}[hbt!]
+		\caption{Share of project-based contracts by occupation}
+		\label{fig:descr:occupation}
+		\centering 
+		\includegraphics[width=\textwidth]{descr_plots/Pre-treatment/prebyoccupation.jpeg}
+	\end{figure}
+	
+	As a consequence, project-based contracts are correlated with lower income. In fact, as shown by Figure \ref{fig:descr:quantile}, only the 2.25\% of the richest 20\% held these contracts, while almost 25\% of the richest did.
+	
+	\begin{figure}[hbt!]
+		\caption{Share of project-based contracts by income quantile (1-lowest)}
+		\label{fig:descr:quantile}
+		\centering 
+		\includegraphics[width=\textwidth]{descr_plots/Pre-treatment/prebyquantile.jpeg}
+	\end{figure}
+	
+	All in all, demographic and socioeconomic differences are great predictors of the probability of being tackled by this reform, as shown in Figure \ref{fig:roc}. As an example, drawing an observation from 2021 of a low-skilled male individual below 25 years old who lives in Huelva and works in Agriculture, forestry and fishing, has roughly a 90\% chance of being under a project-based contract. This motivates the following disaggregations that follow after the baseline model.
+	
+	
+	\clearpage
+	\section{\textsc{Results}}\label{results}
+	\subsection{Baseline model}\label{subsection:baseline}
+	
+	
+	The baseline model uses cohorts of workers separated from their job of all kinds of types of contracts and demographics. This analysis then measures the overall impact of the policy in all workers who lost their job at some point after the reform. 
+	
+	\begin{figure}[hbt!]
+		\caption{ Event study for the baseline model}
+		\label{fig:baseline}
+		\centering 
+		\includegraphics[width=\textwidth]{Results/verylongtwfe3/grid.jpeg}
+	\end{figure}
+	
+	
+	Figure \ref{fig:baseline} shows event-studies on the variables of interest for 1,3, and 5 months after the reform, and Table \ref{tab:baseline} shows the Average Treatment Effect (ATE) for all months.
+	
+	The baseline model shows a positive significant effect of the policy in the probability of holding both open-ended contracts and permanent contracts, and a negative effect on project-based arrangements. In addition, effects on probability of non-employment are not significant. We can thus conclude that the policy managed to reallocate workers in different types of contracts without decreasing the employment rate of these workers. These results hold when looking as far as six months after separation. 
+	
+	Indeed, the probability of holding a permanent job after being laid-off increased between 11 and 13 percentage points (p.p.)  between 1 and 6 months after job-loss. For open-ended, it increased 14 p.p.
+	
+	However, the conditions for these workers did not change greatly, as results are not significant for income, days worked, or number of contracts. This is consistent with \textcite{conde2023reforming}'s findings, who show that while contracts changed in name, conditions were not greatly affected, in their case measured as creation and destruction of jobs in key days of the week and month.
+	
+	Here, it is worth mentioning that holding a permanent contract does not imply higher contributions to Social Security and therefore does not lead to superior unemployment nor pension conditions in the future. However, both firms and workers benefit from permanent contracts as they imply a small discount in Social Security contributions. Permanent workers pay 6.47\% of their pre-tax salary to the Social Security, while temporary workers pay 6.52\%. This small difference is weakened after taxes, meaning that a worker making 30.000€ a year before taxes only pays 12€ more of yearly contributions if they hold a temporary contract. The difference for the employer is higher, but still minimal (1.2\% p.p. before applying taxes).
+	
+	Finally, the probability of being self-employed did not change, rejecting the hypothesis that workers could transit to \textit{fake self-employed} to adapt to employers needs.
+	
+	A more disaggregated approach shows that results can vary depending on the group studied. One could expect these results to be conservative as project-based contracts were held by 10\% of the working population, and while the policy affected the overall labor-market as shown by the results, the impact varied greatly between different groups. The next sections display results disaggregating by type of contract, gender, age group, region, sector, occupation and income quantile.
+	
+	\begin{table}
+		\caption{ATE estimators for baseline model}
+		\tiny
+		\centering
+		\begin{tabular}{l c c c c c c}
+			\hline
+			& 1 month later & 2 months later & 3 months later & 4 months later & 5 months later & 6 months later \\
+			\hline
+			Project-based & $-0.23^{***}$ & $-0.24^{***}$ & $-0.24^{***}$ & $-0.24^{***}$ & $-0.23^{***}$ & $-0.23^{***}$ \\
+			& $(0.01)$      & $(0.01)$      & $(0.02)$      & $(0.02)$      & $(0.02)$      & $(0.03)$      \\
+			\hline
+			Open-ended & $0.14^{***}$ & $0.14^{***}$ & $0.14^{***}$ & $0.14^{***}$ & $0.15^{***}$ & $0.14^{***}$ \\
+			& $(0.00)$     & $(0.00)$     & $(0.01)$     & $(0.02)$     & $(0.02)$     & $(0.02)$     \\
+			\hline
+			
+			Permanent & $0.11^{***}$ & $0.12^{***}$ & $0.12^{***}$ & $0.12^{***}$ & $0.13^{***}$ & $0.13^{***}$ \\
+			& $(0.01)$     & $(0.01)$     & $(0.02)$     & $(0.02)$     & $(0.02)$     & $(0.02)$     \\
+			\hline
+			
+			Not-employed & $0.01$   & $0.00$   & $-0.01$  & $-0.02$  & $-0.02$  & $-0.03$  \\
+			& $(0.03)$ & $(0.03)$ & $(0.03)$ & $(0.04)$ & $(0.04)$ & $(0.05)$ \\
+			\hline
+			
+			Self-employed & $-0.04$  & $-0.04$  & $-0.04$  & $-0.04$  & $-0.04$  & $-0.04$  \\
+			& $(0.04)$ & $(0.05)$ & $(0.05)$ & $(0.05)$ & $(0.05)$ & $(0.06)$ \\
+			\hline
+			
+			Income & $-26.88$  & $-13.53$  & $-2.70$   & $6.38$    & $2.45$    & $9.81$    \\
+			& $(34.63)$ & $(37.75)$ & $(41.83)$ & $(45.83)$ & $(44.27)$ & $(45.67)$ \\
+			\hline
+			
+			Number of contracts & $0.00$   & $0.00$   & $0.01$   & $0.00$   & $0.02$   & $0.04$   \\
+			& $(0.05)$ & $(0.04)$ & $(0.04)$ & $(0.04)$ & $(0.05)$ & $(0.05)$ \\
+			\hline
+			Days worked & $-0.82$  & $-0.57$  & $-0.24$  & $-0.00$  & $-0.03$  & $-0.06$  \\
+			& $(0.79)$ & $(0.79)$ & $(0.88)$ & $(1.00)$ & $(1.13)$ & $(1.29)$ \\
+			\hline
+			\multicolumn{7}{l}{\scriptsize{$^{***}p<0.01$; $^{**}p<0.05$; $^{*}p<0.1$}}
+		\end{tabular}
+		\label{tab:baseline}
+	\end{table}
+	
+	
+	
+	\clearpage
+	\subsection{By type of contract}\label{section:bycontr}
+	
+	Results by type of contract differentiate between cohorts of workers who suffered a separation from their job under a specific contract. These results are shown in figures \ref{fig:bycontract1}, \ref{fig:bycontract2} and Table \ref{table:bycontract}.
+	
+	As expected, cohorts of project-based workers were much more affected by the reform than other types of contracts, although permanent and open-ended workers were affected too.
+	
+	Project-based cohorts experienced a significant increase of 25 p.p. of moving to permanent jobs 1 month after job-loss, number that decreased to 18 p.p. for six months after. For open-ended contracts, it increased from 13 percentage points to 24 with the months. 
+	
+	In contrast to the baseline model, monthly income increased for them between 92€ and 191€ depending on the number of months ahead. This is especially relevant because the number considers no income as 0, so it is not looking only at the intensive margin. In addition, there is only a negative significant impact of 6 p.p. in employment 1 month after lay-off. This result suggests that, since this type of worker cannot acquire this type of short-term contracts anymore, the reallocation takes longer but still happens.
+	
+	Results are also significant for number of contracts up to three months after treatment. Project-based workers who experienced job-loss after the reform were likely to have between 0.43 and 0.11 less contracts per month, although the impact decreases and becomes insignificant when looking further into the future. This is not an effect of unemployment as the variable looks only at non-zero number of contracts.
+	
+	As for days worked in a month, they went up slightly yet with significance after the first month and before the last, between 1 and 1.81 days a month. Considering that employment was not affected, this is consistent with this type of workers transitioning to more stable jobs that allow for more days worked.
+	
+	
+	Cohorts of workers from open-ended contracts experienced spill-over effects from the reform, since the probability of transitioning to permanent jobs also increased for them significantly, from 5 p.p. to 10 p.p. 6 months after separation. 
+	
+	The reform had no effect on their probability to acquire an open-ended contract, but as expected it reduced their probability to hold a project-based contract.
+	
+	Contrary to project-based cohort workers, open-ended cohorts did experience a significant reduction in their employment probability after job-loss, but only in the first two months (15 and 11 p.p. respectively). They also experienced a 200€ decrease in their income, and an increase in their number of contracts. 
+	
+	Considering these are similar but opposite results than those of project-based contracts, the effects could be driven by composition effects, meaning that project-based contract workers that transitioned to open-ended and experienced job-loss again might be responsible for this changes.
+	
+	One can look at composition effects when analyzing the effects of the reform on permanent cohorts. For these workers, transitioning to open-ended jobs was between 5 and 6 p.p. more likely, while transitioning to project-based was naturally less likely after the reform. The policy did not impact the probability of getting a permanent contract after job-loss nor that of being unemployed. When looking at Table \ref{table:excluding:bycontract}, results suggest that the probability of transitioning to open-ended contracts is also higher and significant for the cohorts robust to composition effects, but less (3p.p.). This could mean that, while the reform managed to increase the use of this type of contract, some of the effect on permanent workers might come from reallocated project-based workers after the reform.
+	
+	Similarly, cohorts of permanent contracts from Table \ref{table:excluding:bycontract} were significantly more likely to acquire a permanent contract after job-loss (betweeen 4 and 7 p.p. from 1 to 6 months after job-loss). This could be hinting to the fact that the reform affected positively the possibility of getting a permanent contract for already permanent workers who experienced job separation, but results in the baseline specification bias this effect downwards due to the composition change of these cohorts as a consequence of the absorption of workers who held other contracts before the reform.
+	
+	Results on income are robust to composition effects, meaning that income was decreased for permanent contracts, no matter which specification is taken. Moreover, days worked in a month and number of contracts were barely affected, although self-employment decreased in 2 p.p.
+	
+	The following results take cohorts of workers who suffered job-loss from any type of contract in consideration, but disaggregate by sector, gender, occupation, age group, income quantile and region to estimate the effects on different types of groups and assess the impact of the reform in the Spanish economy.
+	
+	\begin{figure}[hbt!]
+		\caption{Event-study by contract}
+		\label{fig:bycontract1}
+		\centering 
+		\includegraphics[width=1.1\textwidth]{Results/DID_bycontract/grid2.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{Event-study by contract}
+		\label{fig:bycontract2}
+		\centering 
+		\includegraphics[width=1.1\textwidth]{Results/DID_bycontract/grid1.jpeg}
+	\end{figure}
+	
+	
+	
+	\begin{table}
+		\caption{ATE estimators by contract}         \label{table:bycontract}
+		\tiny
+		\begin{subtable}{\linewidth}
+			\centering
+			\caption{Project-based}
+			\begin{tabular}{l c c c c c c}
+				\hline
+				& 1 month later & 2 months later & 3 months later & 4 months later & 5 months later & 6 months later \\
+				\hline
+				Project-based & $-0.53^{***}$ & $-0.54^{***}$ & $-0.52^{***}$ & $-0.51^{***}$ & $-0.50^{***}$ & $-0.50^{***}$ \\
+				& $(0.02)$      & $(0.02)$      & $(0.04)$      & $(0.04)$      & $(0.05)$      & $(0.06)$      \\
+				\hline
+				Open-ended & $0.13^{***}$ & $0.15^{***}$ & $0.18^{***}$ & $0.21^{***}$ & $0.24^{***}$ & $0.24^{***}$ \\
+				& $(0.00)$     & $(0.01)$     & $(0.01)$     & $(0.02)$     & $(0.02)$     & $(0.02)$     \\
+				\hline
+				
+				Permanent  & $0.25^{***}$ & $0.24^{***}$ & $0.21^{***}$ & $0.20^{***}$ & $0.20^{***}$ & $0.18^{***}$ \\
+				& $(0.01)$     & $(0.01)$     & $(0.01)$     & $(0.02)$     & $(0.02)$     & $(0.02)$     \\
+				\hline
+				
+				Not-employed & $0.06^{**}$ & $0.03$   & $-0.01$  & $-0.02$  & $-0.03$  & $-0.04$  \\
+				& $(0.02)$    & $(0.03)$ & $(0.03)$ & $(0.03)$ & $(0.04)$ & $(0.04)$ \\
+				\hline
+				
+				Self-employed & $0.00$   & $0.00$   & $-0.00$  & $-0.01$  & $-0.01$  & $-0.01$  \\
+				& $(0.00)$ & $(0.00)$ & $(0.00)$ & $(0.00)$ & $(0.00)$ & $(0.01)$ \\
+				\hline
+				
+				Income & $177.71^{***}$ & $189.43^{***}$ & $191.32^{***}$ & $169.65^{***}$ & $121.29^{***}$ & $92.83^{**}$ \\
+				& $(22.52)$      & $(26.24)$      & $(31.57)$      & $(33.16)$      & $(36.76)$      & $(41.44)$    \\
+				\hline
+				
+				Number of contracts  & $-0.43^{***}$ & $-0.31^{***}$ & $-0.23^{***}$ & $-0.20^{***}$ & $-0.16^{**}$ & $-0.11^{*}$ \\
+				& $(0.05)$      & $(0.05)$      & $(0.05)$      & $(0.05)$      & $(0.06)$     & $(0.06)$    \\
+				\hline
+				Days worked  & $0.73$   & $1.04^{*}$ & $1.53^{**}$ & $1.84^{**}$ & $1.81^{*}$ & $1.55$   \\
+				& $(0.51)$ & $(0.52)$   & $(0.59)$    & $(0.73)$    & $(0.87)$   & $(1.00)$ \\
+				\hline
+			\end{tabular}
+		\end{subtable}
+		
+		\begin{subtable}{\linewidth}
+			\centering
+			\caption{Open-ended}
+			\begin{tabular}{l c c c c c c}
+				\hline
+				& 1 month later & 2 months later & 3 months later & 4 months later & 5 months later & 6 months later \\
+				\hline
+				Project-based& $-0.13^{***}$ & $-0.13^{***}$ & $-0.11^{***}$ & $-0.11^{***}$ & $-0.10^{***}$ & $-0.09^{***}$ \\
+				& $(0.02)$      & $(0.02)$      & $(0.02)$      & $(0.02)$      & $(0.02)$      & $(0.02)$      \\
+				\hline
+				Open-ended & $0.05$   & $0.00$   & $-0.03$  & $-0.04$  & $-0.05$  & $-0.05$  \\
+				& $(0.04)$ & $(0.03)$ & $(0.04)$ & $(0.03)$ & $(0.03)$ & $(0.04)$ \\
+				\hline
+				
+				Permanent & $0.05^{***}$ & $0.07^{***}$ & $0.08^{***}$ & $0.09^{***}$ & $0.09^{***}$ & $0.10^{***}$ \\
+				& $(0.02)$     & $(0.02)$     & $(0.01)$     & $(0.01)$     & $(0.01)$     & $(0.02)$     \\
+				\hline
+				
+				Not-employed& $-0.15^{***}$ & $-0.11^{*}$ & $-0.07$  & $-0.04$  & $-0.02$  & $-0.02$  \\
+				& $(0.04)$      & $(0.05)$    & $(0.06)$ & $(0.06)$ & $(0.06)$ & $(0.07)$ \\
+				\hline
+				Self-employed  & $-0.00$  & $0.00$   & $0.00$   & $0.00$   & $0.01^{*}$ & $0.01$   \\
+				& $(0.01)$ & $(0.01)$ & $(0.00)$ & $(0.00)$ & $(0.00)$   & $(0.00)$ \\
+				\hline
+				
+				Income & $-200.49^{***}$ & $-206.03^{***}$ & $-203.19^{***}$ & $-188.20^{***}$ & $-192.80^{**}$ & $-219.67^{**}$ \\
+				& $(41.84)$       & $(39.82)$       & $(43.67)$       & $(55.84)$       & $(80.36)$      & $(97.90)$      \\
+				\hline
+				
+				Number of contracts   & $0.45^{***}$ & $0.44^{***}$ & $0.38^{***}$ & $0.35^{***}$ & $0.35^{***}$ & $0.40^{***}$ \\
+				& $(0.07)$     & $(0.06)$     & $(0.05)$     & $(0.05)$     & $(0.06)$     & $(0.05)$     \\
+				\hline
+				Days worked  & $1.58$   & $0.66$   & $-0.34$  & $-1.17$  & $-1.73$  & $-2.28$  \\
+				& $(1.12)$ & $(1.54)$ & $(1.62)$ & $(1.68)$ & $(1.75)$ & $(1.68)$ \\
+				\hline
+				
+			\end{tabular}
+		\end{subtable}
+		
+		\begin{subtable}{\linewidth}
+			\centering
+			\caption{Permanent}
+			\begin{tabular}{l c c c c c c}
+				\hline
+				& 1 month later & 2 months later & 3 months later & 4 months later & 5 months later & 6 months later \\
+				\hline
+				Project-based & $-0.07^{***}$ & $-0.07^{***}$ & $-0.07^{***}$ & $-0.07^{***}$ & $-0.08^{***}$ & $-0.08^{***}$ \\
+				& $(0.01)$      & $(0.01)$      & $(0.01)$      & $(0.01)$      & $(0.01)$      & $(0.01)$      \\
+				\hline
+				Open-ended & $0.05^{***}$ & $0.06^{***}$ & $0.06^{***}$ & $0.06^{***}$ & $0.06^{***}$ & $0.05^{***}$ \\
+				& $(0.00)$     & $(0.00)$     & $(0.00)$     & $(0.00)$     & $(0.00)$     & $(0.00)$     \\
+				\hline
+				
+				Permanent & $-0.01$  & $-0.00$  & $0.00$   & $0.01$   & $0.02$   & $0.03$   \\
+				& $(0.02)$ & $(0.02)$ & $(0.02)$ & $(0.02)$ & $(0.02)$ & $(0.02)$ \\
+				\hline
+				Not-employed & $0.03$   & $0.01$   & $0.01$   & $0.00$   & $-0.00$  & $-0.00$  \\
+				& $(0.03)$ & $(0.03)$ & $(0.03)$ & $(0.03)$ & $(0.03)$ & $(0.03)$ \\
+				\hline
+				
+				Self-employed & $-0.02^{***}$ & $-0.02^{***}$ & $-0.02^{***}$ & $-0.02^{***}$ & $-0.02^{***}$ & $-0.02^{***}$ \\
+				& $(0.00)$      & $(0.00)$      & $(0.00)$      & $(0.00)$      & $(0.01)$      & $(0.01)$      \\
+				\hline
+				
+				Income & $-283.42^{***}$ & $-280.65^{***}$ & $-269.02^{***}$ & $-258.64^{***}$ & $-220.34^{***}$ & $-187.14^{***}$ \\
+				& $(49.46)$       & $(48.98)$       & $(51.61)$       & $(56.43)$       & $(55.47)$       & $(60.20)$       \\
+				\hline
+				
+				Number of contracts   & $-0.01$  & $-0.00$  & $0.00$   & $0.01$   & $0.01$   & $0.00$   \\
+				& $(0.03)$ & $(0.02)$ & $(0.02)$ & $(0.02)$ & $(0.02)$ & $(0.02)$ \\
+				\hline
+				Days worked & $0.02$   & $0.02^{**}$ & $0.02^{*}$ & $0.02^{*}$ & $0.02$   & $0.02$   \\
+				& $(0.01)$ & $(0.01)$    & $(0.01)$   & $(0.01)$   & $(0.01)$ & $(0.01)$ \\
+				\hline
+				
+			\end{tabular}
+		\end{subtable}
+		
+	\end{table}
+	\clearpage
+	\subsection{By gender}
+	
+	Results according to figures \ref{fig:bygender1} and \ref{fig:bygender2}, and Table \ref{table:bygender} show that men were more affected by the reform, which is consistent with the fact that they held more project-based contracts before the policy (10.6\% of working men hold these contracts while  8.6\% of women). Just as in the baseline model, results for project-based, open-ended and permanent shares are significant, meaning that, overall, the reform had an impact on the type of contract the worker is under. It also implies that the reform successfully reallocated workers from short-term contracts to permanent and intermittent open-ended ones. 
+	
+	In this regard, while permanent shares increased between 16 and 15 p.p. for men, they only did between 9 and 11 for women. This difference persists for the increase in open-ended shares, income and days worked and the decrease in project-based or number of contracts. 
+	
+	Other variables have no significant results, as in the baseline model, pointing to the fact that the reform changed the structure of the contracts in Spain without impacting unemployment or decreasing the salaries of the workers.
+	
+	When looking at results of cohorts of project-based contracts only (Section \ref{section:pb:gender}), one can see that most effects of the reform on these workers were higher for men, with bigger increases in salaries and decreases in number of contracts per month, although similar effects on the number of days worked in a month.
+	
+	
+	
+	\begin{figure}[hbt!]
+		\caption{Event-study by gender}
+		\label{fig:bygender1}
+		\centering 
+		\includegraphics[width=1.1\textwidth]{Results/DID_bygender/grid2.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{Event-study by gender}
+		\label{fig:bygender2}
+		\centering 
+		\includegraphics[width=1.1\textwidth]{Results/DID_bygender/grid1.jpeg}
+	\end{figure}
+	
+	
+	
+	
+	\begin{table}
+		\caption{Results by gender}\label{table:bygender}
+		\scriptsize
+		\begin{subtable}{\linewidth}
+			\centering
+			\caption{Women}
+			\begin{tabular}{l c c c c c c}
+				\hline
+				& 1 month later & 2 months later & 3 months later & 4 months later & 5 months later & 6 months later \\
+				\hline
+				Project-based & $-0.17^{***}$ & $-0.17^{***}$ & $-0.17^{***}$ & $-0.17^{***}$ & $-0.17^{***}$ & $-0.17^{***}$ \\
+				& $(0.01)$      & $(0.01)$      & $(0.01)$      & $(0.02)$      & $(0.02)$      & $(0.02)$      \\
+				\hline
+				Open-ended  & $0.12^{***}$ & $0.12^{***}$ & $0.12^{***}$ & $0.13^{***}$ & $0.13^{***}$ & $0.12^{***}$ \\
+				& $(0.00)$     & $(0.01)$     & $(0.02)$     & $(0.02)$     & $(0.02)$     & $(0.02)$     \\
+				\hline
+				
+				Permanent & $0.09^{***}$ & $0.10^{***}$ & $0.10^{***}$ & $0.10^{***}$ & $0.11^{***}$ & $0.11^{***}$ \\
+				& $(0.01)$     & $(0.01)$     & $(0.02)$     & $(0.02)$     & $(0.02)$     & $(0.02)$     \\
+				\hline
+				
+				Not-employed & $0.01$   & $-0.00$  & $-0.02$  & $-0.02$  & $-0.02$  & $-0.03$  \\
+				& $(0.03)$ & $(0.03)$ & $(0.04)$ & $(0.04)$ & $(0.05)$ & $(0.05)$ \\
+				\hline
+				
+				Self-employed & $-0.04$  & $-0.04$  & $-0.04$  & $-0.03$  & $-0.03$  & $-0.04$  \\
+				& $(0.04)$ & $(0.04)$ & $(0.04)$ & $(0.04)$ & $(0.05)$ & $(0.05)$ \\
+				\hline
+				
+				Income & $-29.91$  & $-16.08$  & $-4.25$   & $5.45$    & $-3.10$   & $1.39$    \\
+				& $(43.25)$ & $(47.41)$ & $(51.87)$ & $(58.27)$ & $(49.82)$ & $(51.24)$ \\
+				\hline
+				
+				Number of contracts & $0.01$   & $0.01$   & $0.01$   & $0.01$   & $0.03$   & $0.05$   \\
+				& $(0.05)$ & $(0.05)$ & $(0.05)$ & $(0.04)$ & $(0.05)$ & $(0.04)$ \\
+				\hline
+				Days worked & $-0.83$  & $-0.57$  & $-0.17$  & $0.04$   & $-0.00$  & $-0.06$  \\
+				& $(0.76)$ & $(0.81)$ & $(0.91)$ & $(1.04)$ & $(1.14)$ & $(1.29)$ \\
+				\hline
+				\multicolumn{7}{l}{\scriptsize{$^{***}p<0.01$; $^{**}p<0.05$; $^{*}p<0.1$}}
+			\end{tabular}
+		\end{subtable}
+		
+		\vspace{0.5cm}
+		
+		\begin{subtable}{\linewidth}
+			\centering
+			\caption{Men}
+			\begin{tabular}{l c c c c c c}
+				\hline
+				& 1 month later & 2 months later & 3 months later & 4 months later & 5 months later & 6 months later \\
+				\hline
+				Project-based & $-0.29^{***}$ & $-0.30^{***}$ & $-0.30^{***}$ & $-0.30^{***}$ & $-0.29^{***}$ & $-0.29^{***}$ \\
+				& $(0.01)$      & $(0.02)$      & $(0.02)$      & $(0.03)$      & $(0.03)$      & $(0.03)$      \\
+				\hline
+				Open-ended & $0.16^{***}$ & $0.16^{***}$ & $0.16^{***}$ & $0.16^{***}$ & $0.16^{***}$ & $0.15^{***}$ \\
+				& $(0.00)$     & $(0.00)$     & $(0.01)$     & $(0.01)$     & $(0.02)$     & $(0.02)$     \\
+				\hline
+				Permanent & $0.13^{***}$ & $0.14^{***}$ & $0.14^{***}$ & $0.15^{***}$ & $0.15^{***}$ & $0.16^{***}$ \\
+				& $(0.01)$     & $(0.01)$     & $(0.02)$     & $(0.02)$     & $(0.02)$     & $(0.02)$     \\
+				\hline
+				
+				Not-employed & $0.01$   & $0.00$   & $-0.01$  & $-0.02$  & $-0.02$  & $-0.02$  \\
+				& $(0.03)$ & $(0.03)$ & $(0.03)$ & $(0.04)$ & $(0.04)$ & $(0.05)$ \\
+				\hline
+				
+				Self-employed & $-0.04$  & $-0.05$  & $-0.05$  & $-0.04$  & $-0.04$  & $-0.05$  \\
+				& $(0.05)$ & $(0.05)$ & $(0.05)$ & $(0.05)$ & $(0.06)$ & $(0.07)$ \\
+				\hline
+				
+				Income & $-21.98$  & $-8.62$   & $1.48$    & $10.14$   & $11.40$   & $21.17$   \\
+				& $(29.49)$ & $(32.01)$ & $(36.95)$ & $(39.05)$ & $(42.25)$ & $(44.31)$ \\
+				\hline
+				
+				Number of contracts  & $-0.01$  & $-0.01$  & $0.00$   & $0.00$   & $0.01$   & $0.03$   \\
+				& $(0.04)$ & $(0.04)$ & $(0.04)$ & $(0.04)$ & $(0.05)$ & $(0.05)$ \\
+				\hline
+				Days worked & $-0.81$  & $-0.55$  & $-0.30$  & $-0.04$  & $-0.06$  & $-0.07$  \\
+				& $(0.83)$ & $(0.81)$ & $(0.88)$ & $(0.99)$ & $(1.14)$ & $(1.29)$ \\
+				\hline
+				\multicolumn{7}{l}{\scriptsize{$^{***}p<0.01$; $^{**}p<0.05$; $^{*}p<0.1$}}
+			\end{tabular}
+		\end{subtable}
+		
+	\end{table}
+	
+	
+	\clearpage
+	\subsection{By age group}
+	
+	Results by age group are shown in Figure \ref{fig:agegroup} with the ATE estimator for the sake of brevity and precision. Since temporary contracts are more common in younger workers, results are expected to be more notable for them. Nonetheless this is not true for all variables.
+	
+	Results show that while younger workers were more reallocated to open-ended arrangements, older workers were more affected by transitions to permanent, probably due to tenure and experience. These results hold for all months after job-loss. 
+	
+	Other results are not significant for the overall economy, although one could check the results for project-based only cohorts of workers to look for a more precise understanding of the effects of the policy (Section \ref{section:pb:age}). Here, it is shown that the higher transitions to permanent jobs for older workers imply also higher reduction of number of contracts per month.However, cohorts of younger workers coming from project-based contracts increased the number of days worked more. This could be driven by effects on unemployment, since it seems that younger workers were reallocated more easily. Similarly, income grew more for younger workers, especially the group of workers between 25 and 34 years old.
+	
+	On the other hand, even though the ATE on unemployment is positive for all groups for one month after job separation, and mostly insignificant for other months, it seems like older workers were more probable to end in unemployment than the young. This could be because reallocations to permanent jobs are more expensive for the employer and therefore not all older workers can transition to these contracts.
+	
+	
+	\begin{figure}[hbt!]
+		\centering
+		\caption{Average Treatment effect of the reform by age group 1 to 6 months after job-loss}\label{fig:agegroup}
+		\begin{threeparttable}
+			\includegraphics[width=1\textwidth]{Results/DID_byagegroup/grid.jpeg}
+			\captionsetup{font=scriptsize}
+			\begin{tablenotes}
+				\tiny
+				\item All results displayed successfully passed a parallel trends test (Wald test) at a 5\% significance level.
+			\end{tablenotes}
+		\end{threeparttable}
+	\end{figure}
+	
+	\clearpage
+	\subsection{By sector}\label{ssbysector}
+	
+	Some sectors are more likely to have temporary workers, as shown in Figure \ref{fig:descr:sector}, and therefore are expected to be more impacted by the reform. 
+	
+	Figures \ref{fig:bysector1} and \ref{fig:bysector2} display results for the ATE 1, 3, and 5 months after separation from job. 
+	
+	A sectorial dissection offers more precise insights on the effects of the reform. For instance, workers from agrarian activities, the sector that had a bigger share of project-based contracts, transitioned mostly to open-ended. Since open-ended arrangements were made more versatile and are thought for seasonal activities, this result could have been anticipated.
+	
+	Other sectors with high rate of project-based contracts were more impacted by transitions to permanent contracts, like the construction sector. However, this did not translate to significant impacts on income, days worked, unemployment or number of contracts.
+	
+	When analyzing the cohorts of project-based contract cohorts only, these other results are significant depending on the sector, displaying a more precise idea of the effects of the reform on the targeted workers (Appendix \ref{rc:ssbysector}).
+	
+	Here, number of days worked offer a more precise idea of the impact of the reform on employment, since the probability of being unemployed only offers insights on the extensive margin. Effects are positive and go up to 3 more days worked per month for some sectors like arts, entertainment, and recreation, which also had a very high rate of project-based contracts before the reform. 
+	
+	Finally, results on number of contracts are more homogeneous, but it is worth mentioning that in information and communication, workers decreased in 2 the number of contracts held in a month, which, considering that the number of days worked in a month and income after job-loss increased, points to a highly positive effect of the policy.
+	
+	
+	\begin{figure}[hbt!]
+		\centering
+		\caption{Average Treatment effect of the reform by sector 1, 3, and 5 months after job-loss}
+		\label{fig:bysector1}
+		\begin{threeparttable}
+			\includegraphics[width=1\textwidth]{Results/DID_bysector2/grid2.jpeg}
+			\captionsetup{font=scriptsize}
+			\begin{tablenotes}
+				\tiny
+				\item \textcolor{darkgray}{Results which models did not pass a parallel trends test (Wald test) at a 5\% significance level are displayed with a red ring around the point.}
+			\end{tablenotes}
+		\end{threeparttable}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\centering
+		\caption{Average Treatment effect of the reform by sector 1, 3, and 5 months after job-loss}
+		\label{fig:bysector2}
+		\begin{threeparttable}
+			\includegraphics[width=1\textwidth]{Results/DID_bysector2/grid1.jpeg}
+			\captionsetup{font=scriptsize}
+			\begin{tablenotes}
+				\tiny
+				\item \textcolor{darkgray}{Results which models did not pass a parallel trends test (Wald test) at a 5\% significance level are displayed with a red ring around the point.}
+			\end{tablenotes}
+		\end{threeparttable}
+	\end{figure}
+	
+	
+	
+	
+	\clearpage
+	\subsection{By occupation}
+	
+	As shown by Figure \ref{fig:descr:occupation}, exposure to policy varies a lot between professions, with the less skilled workers being more exposed. 
+	
+	Results according to figures \ref{fig:byoccupation1} and \ref{fig:byoccupation2} show that the less-skilled workers transitioned more to both open-ended and permanent contracts, although the correlation is much more remarkable for open-ended workers. For example, 1st and 2nd grade officers who suffered job-loss from project-based contracts were almost more than 20 percentage points more probable to hold a permanent job after 1,3, or 5 months.
+	
+	Other effects are not significant, only an increase in the number of contracts held in a month for managers, which could be explained by the fact that they are the least affected in terms of increase of transition to permanent jobs.
+	
+	When looking at results of project-based contract cohorts only in Appendix \ref{section:pb:occup}, the impact on income or days worked, does not decrease but increase with the skill level (apart from top managers, engineers and experts). The ATE estimator shows that even though project-based workers from lower skill levels were more affected in terms of the shape of the contracts, this did not hold for income or days worked, which could point to not so progressive effects of the reform in terms of inequality. 
+	
+	
+	\begin{figure}[hbt!]
+		\centering
+		\caption{Average Treatment effect of the reform by occupation 1, 3, and 5 months after job-loss}
+		\label{fig:byoccupation1}
+		\begin{threeparttable}
+			\includegraphics[width=1\textwidth]{Results/DID_byoccupation/grid2.jpeg}
+			\captionsetup{font=scriptsize}
+			\begin{tablenotes}
+				\tiny
+				\item \textcolor{darkgray}{Results which models did not pass a parallel trends test (Wald test) at a 5\% significance level are displayed with a red ring around the point.}
+			\end{tablenotes}
+		\end{threeparttable}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\centering
+		\caption{Average Treatment effect of the reform by occupation 1, 3, and 5 months after job-loss}
+		\label{fig:byoccupation2}
+		\begin{threeparttable}
+			\includegraphics[width=1\textwidth]{Results/DID_byoccupation/grid1.jpeg}
+			\captionsetup{font=scriptsize}
+			\begin{tablenotes}
+				\tiny
+				\item \textcolor{darkgray}{Results which models did not pass a parallel trends test (Wald test) at a 5\% significance level are displayed with a red ring around the point.}
+			\end{tablenotes}
+		\end{threeparttable}
+	\end{figure}
+	
+	\clearpage
+	\subsection{By regions (\textit{provincia} level)}
+	
+	Finally, regional differences in share of project-based contracts vary largely between regions, as displayed in Figure \ref{fig:descr:province}. Figures \ref{fig:prov1} to \ref{fig:prov8} show the ATE of the policy for the different variables of interest 1, 3 and 5 months after job-loss. Results are highlighted when ATE is significant at the 10\% percent level and parallel trends Wald estimator showed to be insignificant at the 5\% level.
+	
+	While the effect on open-ended was higher in the south of Spain, that of permanent contract was homogeneous throughout the territory. This could be because Castilla La Mancha, Extremadura and Andalucía are regions in which agrarian sector is very prominent. 
+	
+	When looking at the impact on project-based cohorts in Appendix \ref{section:pb:region}, results also show a negative effect on unemployment in the first month, which is also more pronounced in the south and Castilla La Mancha, but also in the nortwestern region of Galicia. As abovementioned, this could indicate that reallocating into a new job after the reform took longer due to the lack of short-term contracts.
+	
+	Despite the cohorts of project-based workers in the south of Spain being more affected by the reform, the impact on income after job-loss is higher in the north, probably due to a higher share of reallocation into permanent than open-ended.
+	
+	Again, the number of contracts also decreased more in the north, meaning that more stable jobs were found there as a consequence of the reform. However, this effect is relatively homogeneous between regions and its significance decreases with time after job separation.
+	
+	Finally, the impact on number days of worked on project-based cohorts only was not significant for all regions. While it was negative in some provinces in the region of Castilla La Mancha in the first month after job-loss, this effect fades away after 3 or 5 months, and significant results are all positive, with larger impact of the reform in the north of Spain.
+	
+	
+	\begin{figure}[hbt!]
+		\caption{DID estimators on probability of project-based contract}
+		\label{fig:prov1}
+		\centering 
+		\includegraphics[width=1\textwidth]{Results/DID_byprovince/project_based.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{DID estimators on probability of open-ended contract}
+		\label{fig:prov2}
+		\centering 
+		\includegraphics[width=1\textwidth]{Results/DID_byprovince/open_ended.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{DID estimators on probability of permanent contract}
+		\label{fig:prov3}
+		\centering 
+		\includegraphics[width=1\textwidth]{Results/DID_byprovince/permanent.jpeg}
+	\end{figure}
+	
+	
+	\begin{figure}[hbt!]
+		\caption{DID estimators on probability of not employed}
+		\label{fig:prov4}
+		\centering 
+		\includegraphics[width=1\textwidth]{Results/DID_byprovince/unemployed.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{DID estimators on probability of self-employed}
+		\label{fig:prov5}
+		\centering 
+		\includegraphics[width=1\textwidth]{Results/DID_byprovince/self_emp.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{DID estimators on average monthly income}
+		\label{fig:prov6}
+		\centering 
+		\includegraphics[width=1\textwidth]{Results/DID_byprovince/salaries.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{DID estimators on average monthly n. of contracts}
+		\label{fig:prov7}
+		\centering 
+		\includegraphics[width=1\textwidth]{Results/DID_byprovince/ncontracts.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{DID estimators on average monthly n. of days worked}
+		\label{fig:prov8}
+		\centering 
+		\includegraphics[width=1\textwidth]{Results/DID_byprovince/days_worked.jpeg}
+	\end{figure}
+	
+	\clearpage
+	
+	\subsection{By income quantile}\label{subsection:quantile}
+	
+	Results by quantile manifest that the reform had a positive effect on equality. Lower quantiles were more affected in terms of project-based rates reduction, as well as open-ended and permanent rates increases. They also experienced a more positive effect on income, which points to a positive effect on income equality. Moreover, the lowest  quantile was the only one with positive effects on employment and on number of days worked.
+	
+	Since lower income quantiles had much bigger incidences in project-based contract, as shown by Figure \ref{fig:descr:quantile}, these results point towards strong positive effects in terms of income equality. 
+	
+	In fact, not only did the reform affected more positively the lower quantiles, but it also had some negative effects on the highest ones, for whom unemployment after job-loss increased and income decreased. 
+	
+	\begin{figure}[hbt!]
+		\centering
+		\caption{Average Treatment effect of the reform by income quantile 1-6 months after job-loss}
+		\begin{threeparttable}
+			\label{fig:quantile}
+			\includegraphics[width=\textwidth]{Results/DID_byquantile/grid.jpeg}
+			\captionsetup{font=scriptsize}
+			\begin{tablenotes}
+				\tiny
+				\item \textcolor{darkgray}{Results which models did not pass a parallel trends test (Wald test) at a 5\% significance level are displayed with a red ring around the bar.}
+			\end{tablenotes}
+		\end{threeparttable}
+	\end{figure}
+	\clearpage
+	
+	\section{\textsc{Conclusions}}\label{section:conclusions}
+	
+	The Spanish Labor Reform from December 2021 changed the structure of the Spanish Labor Market by banning the creation of the type of contracts that constituted 40\% of the temporary arrangements in the country. 
+	
+	This led to a massive transition of temporary workers to permanent contracts, either in the shape of regular permanent contracts, or in that of intermittent open-ended, a sort of zero-hour contract suitable for seasonal activities. 
+	
+	Results show that, while the temporality rate was forced to change and many workers were reallocated in permanent contracts, the effects in the conditions of workers of the overall economy did not vary greatly. However, the policy managed to reallocate workers from temporary jobs to permanent ones without evidence of increases in unemployment or decreases in income. Moreover, preliminary findings that suggest that the share of very short-term contracts (i.e. contracts that end before 7, 15, 30 and 90 days) has decreased.
+	
+	The data suggests that those temporary workers that were affected by the policy did not immediately acquire the conditions (in terms of salaries, days worked in a month, number of contracts, etc.) of the permanent ones. As a consequence, the latter are now less stable and optimal, as they have absorbed the more precarious former project-based workers. In this sense, permanent jobs now hold in average more contracts and work less days in the month. Income also seems to be negatively affected for this type of contract, as well as the shares of contracts that last less than 7, 15, 30 or 90 days, consistent with the existing literature.
+	
+	Nonetheless, the situation of workers who held project-based contracts, while still not as good as other permanent arrangements, has improved in terms of salaries, days worked in a month, or number of contracts held at the same time in a month.
+	
+	Moreover, disaggregated results manifest different outcomes for different groups. For example, men were more affected by women as they were more likely to be under a project-based contract before the treatment. Younger workers were more affected than older ones for the same reason, but older ones were more likely to transition into permanent jobs and thus benefit from a higher increase in days worked in a month and a greater decrease in number of contracts held in a month. 
+	
+	As for sectors, while workers from some industries like construction were more likely to transition to permanent arrangements after the reform, agrarian workers moved into open-ended contracts due to their adaptability to seasonal activities. Furthermore, the probability of transitioning to open-ended contracts increased more for lower skill professions, while transitions to permanent contracts was more stable between professions. 
+	
+	Regional differences manifest in that the policy was more effective turning contracts into open-ended in the south, where agriculture is more important, while, again, transitions to permanent contracts were more homogeneous between regions. 
+	
+	Finally, the reform positively affected the cohorts of workers from lower quantiles, with more positive effects in permanent and open-ended shares, income, employment, and number of days worked. This could point to a positive impact of the policy in income equality.
+	
+	The long-run effects of this original policy are yet to be discovered. Further research could explore if the reduction of temporary rates translates into variations in investment in human capital, firm profitability, employer's capability to adapt to short-term shocks, income inequality, or viability of low value-added projects that depended on these temporary contracts.
+	
+	\clearpage
+	
+	\printbibliography
+	\clearpage
+	
+	\appendix
+	\section{\textsc{Appendix: Donut RDD design and seasonality}}\label{Appe}
+	
+	\begin{figure}[hbt!]
+		\caption{ Probability of holding a project-based contract}
+		\centering 
+		\includegraphics[width=.9\textwidth]{Results/RDD/project_based.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{ Probability of holding an open ended contract}
+		\centering 
+		\includegraphics[width=.9\textwidth]{Results/RDD/open_ended.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{ Probability of holding a permanent contract}
+		\centering 
+		\includegraphics[width=\textwidth]{Results/RDD/permanent.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{ Probability of not being employed}
+		\centering 
+		\includegraphics[width=\textwidth]{Results/RDD/unemployed.jpeg}
+	\end{figure}
+	
+	
+	\begin{figure}[hbt!]
+		\caption{ Probability of being self-employed}
+		\centering 
+		\includegraphics[width=\textwidth]{Results/RDD/self_emp.jpeg}
+	\end{figure}
+	
+	
+	\begin{figure}[hbt!]
+		\caption{Average income}
+		\centering 
+		\includegraphics[width=\textwidth]{Results/RDD/salaries.jpeg}
+	\end{figure}
+	
+	
+	\begin{figure}[hbt!]
+		\caption{ Number of contracts per month (>0)}
+		\centering 
+		\includegraphics[width=\textwidth]{Results/RDD/ncontracts.jpeg}
+	\end{figure}
+	
+	
+	\begin{figure}[hbt!]
+		\caption{ Number of days worked in a month}
+		\centering 
+		\includegraphics[width=\textwidth]{Results/RDD/days_worked.jpeg}
+	\end{figure}
+	
+	
+	\clearpage
+	\section{\textsc{Appendix: Impact of the reform on project-based contract cohorts by gender, age group, sector, occupation and region}}\label{AppePB}
+	
+	
+	\subsection{By gender}\label{section:pb:gender}
+	
+	
+	\begin{figure}[hbt!]
+		\caption{Event-study by gender}
+		\label{fig:rc:bygender1}
+		\centering 
+		\includegraphics[width=1.1\textwidth]{pb/DID_bygender/grid2.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{Event-study by gender}
+		\label{fig:rc:bygender2}
+		\centering 
+		\includegraphics[width=1.1\textwidth]{pb/DID_bygender/grid1.jpeg}
+	\end{figure}
+	
+	
+	
+	
+	\begin{table}
+		\caption{Results by gender}\label{table:rc:bygender}
+		\scriptsize
+		\begin{subtable}{\linewidth}
+			\centering
+			\caption{Women}
+			\begin{tabular}{l c c c c c c}
+				\hline
+				& 1 month later & 2 months later & 3 months later & 4 months later & 5 months later & 6 months later \\
+				\hline
+				Project-based & $-0.47^{***}$ & $-0.47^{***}$ & $-0.45^{***}$ & $-0.44^{***}$ & $-0.44^{***}$ & $-0.43^{***}$ \\
+				& $(0.02)$      & $(0.02)$      & $(0.03)$      & $(0.04)$      & $(0.04)$      & $(0.05)$      \\
+				\hline
+				Open-ended  & $0.11^{***}$ & $0.13^{***}$ & $0.16^{***}$ & $0.19^{***}$ & $0.23^{***}$ & $0.23^{***}$ \\
+				& $(0.00)$     & $(0.01)$     & $(0.01)$     & $(0.02)$     & $(0.02)$     & $(0.02)$     \\
+				\hline
+				
+				Permanent & $0.22^{***}$ & $0.21^{***}$ & $0.17^{***}$ & $0.16^{***}$ & $0.16^{***}$ & $0.15^{***}$ \\
+				& $(0.01)$     & $(0.01)$     & $(0.01)$     & $(0.02)$     & $(0.02)$     & $(0.02)$     \\
+				\hline
+				
+				Not-employed & $0.07^{**}$ & $0.03$   & $-0.00$  & $-0.02$  & $-0.03$  & $-0.04$  \\
+				& $(0.03)$    & $(0.03)$ & $(0.03)$ & $(0.04)$ & $(0.04)$ & $(0.05)$ \\
+				\hline
+				
+				Self-employed & $0.00$   & $0.00$   & $0.00$   & $-0.00$  & $-0.00$  & $-0.00$  \\
+				& $(0.00)$ & $(0.00)$ & $(0.00)$ & $(0.00)$ & $(0.00)$ & $(0.01)$ \\
+				\hline
+				
+				Income & $172.85^{***}$ & $173.71^{***}$ & $175.58^{***}$ & $152.36^{***}$ & $107.28^{**}$ & $74.64$   \\
+				& $(25.93)$      & $(29.17)$      & $(33.63)$      & $(35.03)$      & $(39.60)$     & $(43.19)$ \\
+				\hline
+				
+				Number of contracts  & $-0.39^{***}$ & $-0.28^{***}$ & $-0.19^{***}$ & $-0.16^{**}$ & $-0.13^{*}$ & $-0.07$  \\
+				& $(0.06)$      & $(0.06)$      & $(0.06)$      & $(0.06)$     & $(0.06)$    & $(0.07)$ \\
+				\hline
+				Days worked & $0.95^{*}$ & $1.16^{*}$ & $1.57^{**}$ & $1.67^{*}$ & $1.85^{*}$ & $1.45$   \\
+				& $(0.54)$   & $(0.62)$   & $(0.69)$    & $(0.82)$   & $(0.98)$   & $(1.11)$ \\
+				\hline
+				\multicolumn{7}{l}{\scriptsize{$^{***}p<0.01$; $^{**}p<0.05$; $^{*}p<0.1$}}
+			\end{tabular}
+		\end{subtable}
+		
+		\vspace{0.5cm}
+		
+		\begin{subtable}{\linewidth}
+			\centering
+			\caption{Men}
+			\begin{tabular}{l c c c c c c}
+				\hline
+				& 1 month later & 2 months later & 3 months later & 4 months later & 5 months later & 6 months later \\
+				\hline
+				Project-based & $-0.57^{***}$ & $-0.57^{***}$ & $-0.55^{***}$ & $-0.55^{***}$ & $-0.54^{***}$ & $-0.53^{***}$ \\
+				& $(0.02)$      & $(0.02)$      & $(0.04)$      & $(0.05)$      & $(0.05)$      & $(0.06)$      \\
+				\hline
+				Open-ended & $0.15^{***}$ & $0.17^{***}$ & $0.19^{***}$ & $0.21^{***}$ & $0.24^{***}$ & $0.24^{***}$ \\
+				& $(0.00)$     & $(0.01)$     & $(0.01)$     & $(0.02)$     & $(0.02)$     & $(0.03)$     \\
+				\hline
+				
+				Permanent & $0.28^{***}$ & $0.26^{***}$ & $0.24^{***}$ & $0.23^{***}$ & $0.22^{***}$ & $0.21^{***}$ \\
+				& $(0.01)$     & $(0.01)$     & $(0.01)$     & $(0.02)$     & $(0.02)$     & $(0.02)$     \\
+				\hline
+				
+				Not-employed & $0.05^{**}$ & $0.02$   & $-0.02$  & $-0.03$  & $-0.04$  & $-0.05$  \\
+				& $(0.02)$    & $(0.02)$ & $(0.03)$ & $(0.03)$ & $(0.04)$ & $(0.04)$ \\
+				\hline
+				
+				Self-employed & $0.00$   & $0.00$   & $-0.00$  & $-0.01^{*}$ & $-0.01$  & $-0.01$  \\
+				& $(0.00)$ & $(0.00)$ & $(0.00)$ & $(0.00)$    & $(0.01)$ & $(0.01)$ \\
+				\hline
+				
+				Income & $201.56^{***}$ & $223.91^{***}$ & $226.21^{***}$ & $206.77^{***}$ & $154.98^{***}$ & $127.37^{***}$ \\
+				& $(21.61)$      & $(26.44)$      & $(32.27)$      & $(33.56)$      & $(36.51)$      & $(41.91)$      \\
+				\hline
+				
+				Number of contracts  & $-0.45^{***}$ & $-0.33^{***}$ & $-0.25^{***}$ & $-0.22^{***}$ & $-0.18^{***}$ & $-0.14^{**}$ \\
+				& $(0.05)$      & $(0.05)$      & $(0.05)$      & $(0.05)$      & $(0.06)$      & $(0.06)$     \\
+				\hline
+				Days worked & $0.65$   & $1.10^{**}$ & $1.64^{***}$ & $2.10^{***}$ & $1.90^{**}$ & $1.73^{*}$ \\
+				& $(0.51)$ & $(0.49)$    & $(0.56)$     & $(0.71)$     & $(0.83)$    & $(0.95)$   \\
+				\hline
+				\multicolumn{7}{l}{\scriptsize{$^{***}p<0.01$; $^{**}p<0.05$; $^{*}p<0.1$}}
+			\end{tabular}
+		\end{subtable}
+		
+	\end{table}
+	
+	
+	\clearpage
+	\subsection{By age group}\label{section:pb:age}
+	
+	
+	\begin{figure}[hbt!]
+		\caption{ATE estimators by age group}
+		\label{fig:rc:agegroup}
+		\centering 
+		\includegraphics[width=1\textwidth]{pb/DID_byagegroup/grid.jpeg}
+		\captionsetup{font=scriptsize}
+		\caption*{ All results displayed successfully passed a parallel trends test (Wald test) at a 5\% significance level}
+	\end{figure}
+	
+	\clearpage
+	\subsection{By sector}\label{rc:ssbysector}
+	
+	
+	\begin{figure}[hbt!]
+		\caption{ATE estimators by sector}
+		\label{fig:rc:bysector1}
+		\centering 
+		\includegraphics[width=1\textwidth]{pb/DID_bysector2/grid2.jpeg}
+		\captionsetup{font=scriptsize}
+		\caption*{Only results which models did not pass a parallel trends test (Wald test) at a 5\% significance level are displayed with a red ring around the point}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{ATE estimators by sector}
+		\label{fig:rc:bysector2}
+		\centering 
+		\includegraphics[width=1\textwidth]{pb/DID_bysector2/grid1.jpeg}
+		\captionsetup{font=scriptsize}
+		\caption*{Only results which models did not pass a parallel trends test (Wald test) at a 5\% significance level are displayed with a red ring around the point}
+	\end{figure}
+	
+	
+	
+	\clearpage
+	\subsection{By occupation}\label{section:pb:occup}
+	
+	
+	\begin{figure}[hbt!]
+		\caption{ATE estimators by occupation}
+		\label{fig:rc:byoccupation1}
+		\centering 
+		\includegraphics[width=1\textwidth]{pb/DID_byoccupation/grid2.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{ATE estimators by occupation}
+		\label{fig:rc:byoccupation2}
+		\centering 
+		\includegraphics[width=1\textwidth]{pb/DID_byoccupation/grid1.jpeg}
+	\end{figure}
+	
+	\clearpage
+	\subsection{By regions (\textit{provincia} level)}\label{section:pb:region}
+	
+	
+	
+	\begin{figure}[hbt!]
+		\caption{DID estimators on probability of project-based contract}
+		\label{fig:rc:prov1}
+		\centering 
+		\includegraphics[width=1\textwidth]{pb/DID_byprovince/project_based.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{DID estimators on probability of open-ended contract}
+		\label{fig:rc:prov2}
+		\centering 
+		\includegraphics[width=1\textwidth]{pb/DID_byprovince/open_ended.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{DID estimators on probability of permanent contract}
+		\label{fig:rc:prov3}
+		\centering 
+		\includegraphics[width=1\textwidth]{pb/DID_byprovince/permanent.jpeg}
+	\end{figure}
+	
+	
+	\begin{figure}[hbt!]
+		\caption{DID estimators on probability of not employed}
+		\label{fig:rc:prov4}
+		\centering 
+		\includegraphics[width=1\textwidth]{pb/DID_byprovince/unemployed.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{DID estimators on probability of self-employed}
+		\label{fig:rc:prov5}
+		\centering 
+		\includegraphics[width=1\textwidth]{pb/DID_byprovince/self_emp.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{DID estimators on average monthly income}
+		\label{fig:rc:prov6}
+		\centering 
+		\includegraphics[width=1\textwidth]{pb/DID_byprovince/salaries.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{DID estimators on average monthly n. of contracts}
+		\label{fig:rc:prov7}
+		\centering 
+		\includegraphics[width=1\textwidth]{pb/DID_byprovince/ncontracts.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{DID estimators on average monthly n. of days worked}
+		\label{fig:rc:prov8}
+		\centering 
+		\includegraphics[width=1\textwidth]{pb/DID_byprovince/days_worked.jpeg}
+	\end{figure}
+	
+	\clearpage
+	
+	\section{\textsc{Appendix: Results using 2018/2019 as control}} \label{appe1819}
+	
+	\subsection{Baseline model}
+	
+	\begin{figure}[hbt!]
+		\caption{ Event study for the baseline model}
+		\label{fig:baseline1819}
+		\centering 
+		\includegraphics[width=\textwidth]{rc/verylongtwfe3/grid.jpeg}
+	\end{figure}
+	
+	
+	\begin{table}
+		\caption{ATE estimators for baseline model}
+		\tiny
+		\centering
+		\begin{tabular}{l c c c c c c}
+			\hline
+			& 1 month later & 2 months later & 3 months later & 4 months later & 5 months later & 6 months later \\
+			\hline
+			Project-based & $-0.25^{***}$ & $-0.26^{***}$ & $-0.25^{***}$ & $-0.25^{***}$ & $-0.25^{***}$ & $-0.24^{***}$ \\
+			& $(0.01)$      & $(0.01)$      & $(0.02)$      & $(0.03)$      & $(0.03)$      & $(0.04)$      \\
+			\hline
+			Open-ended & $0.14^{***}$ & $0.14^{***}$ & $0.14^{***}$ & $0.15^{***}$ & $0.15^{***}$ & $0.14^{***}$ \\
+			& $(0.00)$     & $(0.00)$     & $(0.01)$     & $(0.02)$     & $(0.02)$     & $(0.02)$     \\
+			\hline
+			
+			Permanent & $0.12^{***}$ & $0.13^{***}$ & $0.13^{***}$ & $0.14^{***}$ & $0.15^{***}$ & $0.15^{***}$ \\
+			& $(0.01)$     & $(0.01)$     & $(0.01)$     & $(0.02)$     & $(0.02)$     & $(0.02)$     \\
+			\hline
+			
+			Not-employed & $0.02$   & $0.02$   & $0.02$   & $0.02^{**}$ & $0.03^{***}$ & $0.03^{**}$ \\
+			& $(0.02)$ & $(0.02)$ & $(0.01)$ & $(0.01)$    & $(0.01)$     & $(0.01)$    \\
+			\hline
+			
+			Self-employed & $0.01^{***}$ & $0.01^{***}$ & $0.01^{***}$ & $0.01^{***}$ & $0.01^{***}$ & $0.01^{***}$ \\
+			& $(0.00)$     & $(0.00)$     & $(0.00)$     & $(0.00)$     & $(0.00)$     & $(0.00)$     \\
+			\hline
+			
+			Income & $94.52^{***}$ & $103.99^{***}$ & $107.28^{***}$ & $111.40^{***}$ & $100.21^{***}$ & $99.69^{**}$ \\
+			& $(23.09)$     & $(26.80)$      & $(27.71)$      & $(29.94)$      & $(31.91)$      & $(33.76)$    \\
+			\hline
+			
+			Number of contracts & $-0.13^{***}$ & $-0.13^{***}$ & $-0.12^{***}$ & $-0.13^{***}$ & $-0.11^{***}$ & $-0.09^{*}$ \\
+			& $(0.04)$      & $(0.04)$      & $(0.04)$      & $(0.03)$      & $(0.03)$      & $(0.04)$    \\
+			\hline
+			Days worked & $-0.16$  & $-0.27$  & $-0.26$  & $-0.28$  & $-0.41$  & $-0.48$  \\
+			& $(0.39)$ & $(0.44)$ & $(0.37)$ & $(0.32)$ & $(0.31)$ & $(0.38)$ \\
+			\hline
+			\hline
+			\multicolumn{7}{l}{\scriptsize{$^{***}p<0.01$; $^{**}p<0.05$; $^{*}p<0.1$}}
+		\end{tabular}
+		\label{tab:baseline1819}
+	\end{table}
+	
+	
+	\clearpage
+	
+	\subsection{By type of contract}
+	
+	
+	\begin{figure}[hbt!]
+		\caption{Event-study by contract}
+		\label{fig:bycontract1_1819}
+		\centering 
+		\includegraphics[width=1.1\textwidth]{rc/DID_bycontract/grid2.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{Event-study by contract}
+		\label{fig:bycontract2_1819}
+		\centering 
+		\includegraphics[width=1.1\textwidth]{rc/DID_bycontract/grid1.jpeg}
+	\end{figure}
+	
+	
+	
+	\begin{table}
+		\caption{ATE estimators by contract}         \label{table:bycontract_1819}
+		\tiny
+		\begin{subtable}{\linewidth}
+			\centering
+			\caption{Project-based}
+			\begin{tabular}{l c c c c c c}
+				\hline
+				& 1 month later & 2 months later & 3 months later & 4 months later & 5 months later & 6 months later \\
+				\hline
+				Project-based & $-0.53^{***}$ & $-0.53^{***}$ & $-0.51^{***}$ & $-0.51^{***}$ & $-0.50^{***}$ & $-0.49^{***}$ \\
+				& $(0.02)$      & $(0.02)$      & $(0.04)$      & $(0.05)$      & $(0.06)$      & $(0.07)$      \\
+				\hline
+				Open-ended & $0.14^{***}$ & $0.16^{***}$ & $0.19^{***}$ & $0.21^{***}$ & $0.24^{***}$ & $0.24^{***}$ \\
+				& $(0.00)$     & $(0.01)$     & $(0.01)$     & $(0.02)$     & $(0.02)$     & $(0.03)$     \\
+				\hline
+				
+				Permanent  & $0.26^{***}$ & $0.25^{***}$ & $0.22^{***}$ & $0.21^{***}$ & $0.21^{***}$ & $0.19^{***}$ \\
+				& $(0.01)$     & $(0.01)$     & $(0.01)$     & $(0.02)$     & $(0.02)$     & $(0.03)$     \\
+				\hline
+				
+				Not-employed & $0.10^{***}$ & $0.07^{***}$ & $0.04^{**}$ & $0.03^{***}$ & $0.03^{***}$ & $0.02^{**}$ \\
+				& $(0.02)$     & $(0.02)$     & $(0.02)$    & $(0.01)$     & $(0.01)$     & $(0.01)$    \\
+				\hline
+				
+				Self-employed & $0.01^{***}$ & $0.00^{***}$ & $0.00$   & $-0.00$  & $-0.00$  & $-0.00$  \\
+				& $(0.00)$     & $(0.00)$     & $(0.00)$ & $(0.00)$ & $(0.00)$ & $(0.00)$ \\
+				\hline
+				
+				Income & $256.13^{***}$ & $272.12^{***}$ & $271.42^{***}$ & $244.62^{***}$ & $190.73^{***}$ & $156.19^{***}$ \\
+				& $(21.31)$      & $(25.79)$      & $(29.95)$      & $(28.77)$      & $(28.02)$      & $(29.92)$      \\
+				\hline
+				
+				Number of contracts  & $-0.57^{***}$ & $-0.46^{***}$ & $-0.37^{***}$ & $-0.35^{***}$ & $-0.31^{***}$ & $-0.27^{***}$ \\
+				& $(0.03)$      & $(0.03)$      & $(0.03)$      & $(0.03)$      & $(0.04)$      & $(0.04)$      \\
+				\hline
+				Days worked   & $0.56$   & $0.74^{*}$ & $1.05^{**}$ & $1.12^{***}$ & $0.95^{***}$ & $0.69^{**}$ \\
+				& $(0.39)$ & $(0.42)$   & $(0.42)$    & $(0.37)$     & $(0.27)$     & $(0.25)$    \\
+				\hline
+			\end{tabular}
+		\end{subtable}
+		
+		\begin{subtable}{\linewidth}
+			\centering
+			\caption{Open-ended}
+			\begin{tabular}{l c c c c c c}
+				\hline
+				& 1 month later & 2 months later & 3 months later & 4 months later & 5 months later & 6 months later \\
+				\hline
+				Project-based & $-0.13^{***}$ & $-0.12^{***}$ & $-0.10^{***}$ & $-0.10^{***}$ & $-0.10^{***}$ & $-0.09^{***}$ \\
+				& $(0.02)$      & $(0.01)$      & $(0.01)$      & $(0.01)$      & $(0.02)$      & $(0.02)$      \\
+				\hline
+				Open-ended  & $0.04$   & $0.00$   & $-0.04$  & $-0.04$  & $-0.04$  & $-0.03$  \\
+				& $(0.04)$ & $(0.04)$ & $(0.03)$ & $(0.03)$ & $(0.03)$ & $(0.04)$ \\
+				\hline
+				
+				Permanent & $0.06^{***}$ & $0.08^{***}$ & $0.09^{***}$ & $0.10^{***}$ & $0.10^{***}$ & $0.10^{***}$ \\
+				& $(0.01)$     & $(0.01)$     & $(0.01)$     & $(0.01)$     & $(0.01)$     & $(0.02)$     \\
+				\hline
+				
+				Not-employed & $-0.07$  & $-0.01$  & $0.05$   & $0.08^{**}$ & $0.09^{**}$ & $0.07^{*}$ \\
+				& $(0.05)$ & $(0.06)$ & $(0.04)$ & $(0.04)$    & $(0.03)$    & $(0.04)$   \\
+				\hline
+				Self-employed  & $0.00$   & $0.00$   & $0.00$   & $0.00$   & $0.00$   & $0.00$   \\
+				& $(0.00)$ & $(0.00)$ & $(0.00)$ & $(0.00)$ & $(0.00)$ & $(0.00)$ \\
+				\hline
+				
+				Income & $-102.21^{***}$ & $-113.12^{***}$ & $-124.85^{**}$ & $-131.87^{***}$ & $-129.11^{***}$ & $-127.16^{**}$ \\
+				& $(31.84)$       & $(34.24)$       & $(45.27)$      & $(39.73)$       & $(34.26)$       & $(43.73)$      \\
+				\hline
+				
+				Number of contracts   & $0.15^{**}$ & $0.18^{**}$ & $0.16^{**}$ & $0.15^{***}$ & $0.16^{**}$ & $0.18^{**}$ \\
+				& $(0.07)$    & $(0.07)$    & $(0.07)$    & $(0.05)$     & $(0.06)$    & $(0.08)$    \\
+				\hline
+				Days worked  & $0.79$   & $-0.74$  & $-2.48^{**}$ & $-3.24^{**}$ & $-3.40^{**}$ & $-3.20^{**}$ \\
+				& $(1.31)$ & $(1.62)$ & $(1.07)$     & $(1.20)$     & $(1.17)$     & $(1.32)$     \\
+				\hline
+				
+			\end{tabular}
+		\end{subtable}
+		
+		\begin{subtable}{\linewidth}
+			\centering
+			\caption{Permanent}
+			\begin{tabular}{l c c c c c c}
+				\hline
+				& 1 month later & 2 months later & 3 months later & 4 months later & 5 months later & 6 months later \\
+				\hline
+				Project-based & $-0.08^{***}$ & $-0.08^{***}$ & $-0.08^{***}$ & $-0.09^{***}$ & $-0.09^{***}$ & $-0.08^{***}$ \\
+				& $(0.00)$      & $(0.01)$      & $(0.01)$      & $(0.01)$      & $(0.01)$      & $(0.01)$      \\
+				\hline
+				Open-ended & $0.05^{***}$ & $0.06^{***}$ & $0.06^{***}$ & $0.06^{***}$ & $0.06^{***}$ & $0.05^{***}$ \\
+				& $(0.00)$     & $(0.00)$     & $(0.00)$     & $(0.00)$     & $(0.00)$     & $(0.00)$     \\
+				\hline
+				
+				Permanent & $0.04^{**}$ & $0.05^{***}$ & $0.05^{***}$ & $0.06^{***}$ & $0.07^{***}$ & $0.07^{***}$ \\
+				& $(0.01)$    & $(0.01)$     & $(0.02)$     & $(0.02)$     & $(0.02)$     & $(0.02)$     \\
+				\hline
+				Not-employed & $0.04^{***}$ & $0.04^{***}$ & $0.05^{***}$ & $0.05^{***}$ & $0.05^{***}$ & $0.05^{***}$ \\
+				& $(0.01)$     & $(0.01)$     & $(0.01)$     & $(0.01)$     & $(0.01)$     & $(0.01)$     \\
+				\hline
+				
+				Self-employed & $-0.01^{***}$ & $-0.01^{***}$ & $-0.01^{***}$ & $-0.01^{***}$ & $-0.01^{***}$ & $-0.01^{***}$ \\
+				& $(0.00)$      & $(0.00)$      & $(0.00)$      & $(0.00)$      & $(0.00)$      & $(0.00)$      \\
+				\hline
+				
+				Income & $-133.69^{***}$ & $-128.40^{***}$ & $-116.86^{***}$ & $-84.41^{***}$ & $-57.77^{*}$ & $-27.71$  \\
+				& $(32.57)$       & $(26.62)$       & $(26.47)$       & $(26.43)$      & $(29.59)$    & $(32.90)$ \\
+				\hline
+				
+				Number of contracts  & $0.03^{***}$ & $0.02^{***}$ & $0.01^{*}$ & $0.01$   & $0.01^{*}$ & $0.00$   \\
+				& $(0.01)$     & $(0.01)$     & $(0.01)$   & $(0.01)$ & $(0.00)$   & $(0.01)$ \\
+				\hline
+				Days worked & $-1.56^{***}$ & $-1.69^{***}$ & $-1.85^{***}$ & $-1.70^{***}$ & $-1.63^{***}$ & $-1.67^{***}$ \\
+				& $(0.45)$      & $(0.30)$      & $(0.24)$      & $(0.24)$      & $(0.21)$      & $(0.21)$      \\
+				\hline
+				
+			\end{tabular}
+		\end{subtable}
+		
+	\end{table}
+	
+	\clearpage
+	
+	\section{\textsc{Appendix: Results with excluding cohorts for permanent workers}}\label{appeexcluding}
+	
+	The results shown in this Sectionare robust to compositions effects, since workers can only belong to one cohort of workers who suffered job-loss. This means that there is no possibility that a project-based worker lost their job after the reform and affected the pool of post-treatment cohorts.
+	
+	
+	\begin{table}[!hbt]
+		\caption{ATE estimators for excluding cohorts of permanent workers}         \label{table:excluding:bycontract}
+		\tiny
+		\centering
+		\begin{tabular}{l c c c c c c}
+			\hline
+			& 1 month later & 2 months later & 3 months later & 4 months later & 5 months later & 6 months later \\
+			\hline
+			Project-based & $-0.06^{***}$ & $-0.06^{***}$ & $-0.07^{***}$ & $-0.07^{***}$ & $-0.07^{***}$ & $-0.07^{***}$ \\
+			& $(0.01)$      & $(0.01)$      & $(0.01)$      & $(0.01)$      & $(0.01)$      & $(0.01)$      \\
+			\hline
+			Open-ended & $0.03^{***}$ & $0.03^{***}$ & $0.03^{***}$ & $0.03^{***}$ & $0.03^{***}$ & $0.03^{***}$ \\
+			& $(0.00)$     & $(0.00)$     & $(0.00)$     & $(0.00)$     & $(0.00)$     & $(0.00)$     \\
+			\hline
+			
+			Permanent & $0.04^{***}$ & $0.05^{***}$ & $0.05^{***}$ & $0.05^{***}$ & $0.06^{***}$ & $0.07^{***}$ \\
+			& $(0.01)$     & $(0.01)$     & $(0.01)$     & $(0.02)$     & $(0.02)$     & $(0.02)$     \\
+			\hline
+			Not-employed & $0.03$   & $0.03$   & $0.03$   & $0.03$   & $0.03$   & $0.03^{*}$ \\
+			& $(0.03)$ & $(0.03)$ & $(0.03)$ & $(0.02)$ & $(0.02)$ & $(0.02)$   \\
+			\hline
+			
+			Self-employed & $-0.00$  & $-0.00$  & $-0.00$  & $-0.01$  & $-0.01$  & $-0.00$  \\
+			& $(0.00)$ & $(0.00)$ & $(0.00)$ & $(0.00)$ & $(0.00)$ & $(0.00)$ \\
+			\hline
+			
+			Income & $-283.98^{***}$ & $-283.01^{***}$ & $-273.20^{***}$ & $-246.64^{**}$ & $-199.16^{**}$ & $-135.81$ \\
+			& $(72.14)$       & $(78.01)$       & $(81.26)$       & $(85.29)$      & $(90.47)$      & $(97.13)$ \\
+			\hline
+			
+			Number of contracts   & $-0.01$  & $-0.00$  & $-0.00$  & $-0.01$  & $-0.01$  & $-0.02$  \\
+			& $(0.01)$ & $(0.01)$ & $(0.01)$ & $(0.01)$ & $(0.01)$ & $(0.01)$ \\
+			\hline
+			Days worked & $-1.41^{*}$ & $-1.44^{*}$ & $-1.43^{**}$ & $-1.46^{**}$ & $-1.43^{**}$ & $-1.43^{***}$ \\
+			& $(0.80)$    & $(0.74)$    & $(0.60)$     & $(0.54)$     & $(0.49)$     & $(0.46)$      \\
+			\hline
+			
+		\end{tabular}
+		
+	\end{table}
+	
+	\clearpage
+	
+	\section{Appendix: Balancing checks}
+	
+	\subsection{Baseline model}\label{bcall}
+	
+	\begin{figure}[hbt!]
+		\caption{Density of number of contracts, income and days worked for treatment and control cohorts}
+		\label{fig:bcall1}
+		\centering 
+		\includegraphics[width=1\textwidth]{bc/alldensity.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{Share of workers per sector, occupation, age group, gender and region}
+		\label{fig:bcall2}
+		\centering 
+		\includegraphics[width=\textwidth]{bc/all2.jpeg}
+	\end{figure}
+	\clearpage
+	\subsection{Cohorts of project-based workers} \label{bcpb}
+	
+	\begin{figure}[hbt!]
+		\caption{Density of number of contracts, income and days worked for treatment and control cohorts}
+		\label{fig:bcpb1}
+		\centering 
+		\includegraphics[width=\textwidth]{bc/pbonly.jpeg}
+	\end{figure}
+	
+	\begin{figure}[hbt!]
+		\caption{Share of workers per sector, occupation, age group, gender and region}
+		\label{fig:bcpb2}
+		\centering 
+		\includegraphics[width=1\textwidth]{bc/pbonly2.jpeg}
+	\end{figure}
+	
+	\clearpage
+	
+	\centering
+	
+	\section*{Agradecimientos}
+	\placetextbox{0.78}{0.473}{\textcolor{white}{My beau iful lil' kurwas.}}% 
+	Sin riesgo de parecer lo más mínimamente original, no podría acabar sin agradecer y dedicar este trabajo que tanto tiempo y esfuerzo me ha costado, y en definitiva, estos dos años tan especiales y tan duros, a quienes de verdad son responsables de que este trabajo sea posible.
+	
+	A mis profesores, de primaria, secundaria, grado y máster que han hecho que aprender sea tan fácil, y que me han enseñado mucho más de lo que cabe en un temario.
+	
+	A mi familia, que siempre me lo ha dado y permitido todo, y a quienes más se echa de menos cuando se vive fuera. Por fin ya pronto reunidos otra vez, en casa, con Mia.
+	
+	A los amigos de toda la vida, que me han escuchado con tanta paciencia y me han dado el oxígeno que necesitaba con cada risa, cada cerveza al sol y cada ensaladilla,
+	
+	A los que he encontrado aquí, por las noches hasta las 11 en la biblioteca y sobre todo por todas las demás, en la filmoteca, en Higuma, Chez Shen, Burdeos, y tantos más. Siempre nos quedará París. 
+	
+	Al amor de mi vida. Si me parara a agradecértelo todo, tendría que escribir un libro mucho más largo que este trabajo. Estos dos años son sólo una prueba más de que somos para siempre. Gracias, gracias, gracias. Por siempre apostar por mí y por nosotros, por quererme y cuidarme como nadie lo ha hecho nunca. You have bewitched me body and soul, and I love, I love, I love you.
+	
+	Y a ti, abuelo. Nadie se empeñó tanto en que siempre estudiara y trabajara más. Nadie me empujó tanto a darlo todo, ni estuvo tan orgulloso de mí siempre. Sé que también lo estarías ahora, más que nadie, y aunque estemos muy lejos, parece increíble que todos veamos la misma luna.
+	
+	En definitiva, a mi gente, mi hogar, a todos.
+	
+	
+\end{document}

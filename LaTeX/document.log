@@ -1,0 +1,1777 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.11.10)  10 NOV 2025 10:49
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**./document.tex
+(document.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/base\size12.clo
+File: size12.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count187
+\c@section=\count188
+\c@subsection=\count189
+\c@subsubsection=\count190
+\c@paragraph=\count191
+\c@subparagraph=\count192
+\c@figure=\count193
+\c@table=\count194
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+Package: amsmath 2023/05/13 v2.17o AMS math features
+\@mathmargin=\skip50
+
+For additional information on amsmath, use the `?' option.
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks17
+\ex@=\dimen141
+))
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen142
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count195
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count196
+\leftroot@=\count197
+LaTeX Info: Redefining \overline on input line 399.
+LaTeX Info: Redefining \colon on input line 410.
+\classnum@=\count198
+\DOTSCASE@=\count199
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box51
+\strutbox@=\box52
+LaTeX Info: Redefining \big on input line 722.
+LaTeX Info: Redefining \Big on input line 723.
+LaTeX Info: Redefining \bigg on input line 724.
+LaTeX Info: Redefining \Bigg on input line 725.
+\big@size=\dimen143
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count266
+LaTeX Info: Redefining \bmod on input line 905.
+LaTeX Info: Redefining \pmod on input line 910.
+LaTeX Info: Redefining \smash on input line 940.
+LaTeX Info: Redefining \relbar on input line 970.
+LaTeX Info: Redefining \Relbar on input line 971.
+\c@MaxMatrixCols=\count267
+\dotsspace@=\muskip16
+\c@parentequation=\count268
+\dspbrk@lvl=\count269
+\tag@help=\toks18
+\row@=\count270
+\column@=\count271
+\maxfields@=\count272
+\andhelp@=\toks19
+\eqnshift@=\dimen144
+\alignsep@=\dimen145
+\tagshift@=\dimen146
+\tagwidth@=\dimen147
+\totwidth@=\dimen148
+\lineht@=\dimen149
+\@envbody=\toks20
+\multlinegap=\skip51
+\multlinetaggap=\skip52
+\mathdisplay@stack=\toks21
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+Package: array 2023/10/16 v2.5g Tabular extension package (FMi)
+\col@sep=\dimen150
+\ar@mcellbox=\box53
+\extrarowheight=\dimen151
+\NC@list=\toks22
+\extratabsurround=\skip53
+\backup@length=\skip54
+\ar@cellbox=\box54
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks23
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.c
+fg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen152
+\Gin@req@width=\dimen153
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/jknappen\mathrsfs.sty
+Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
+\symrsfs=\mathgroup6
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
+Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
+\multirow@colwidth=\skip55
+\multirow@cntb=\count273
+\multirow@dima=\skip56
+\bigstrutjot=\dimen154
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/siunitx\siunitx.sty
+Package: siunitx 2025-07-09 v3.4.14 A comprehensive (SI) units package
+\l__siunitx_number_uncert_offset_int=\count274
+\l__siunitx_number_exponent_fixed_int=\count275
+\l__siunitx_number_min_decimal_int=\count276
+\l__siunitx_number_min_integer_int=\count277
+\l__siunitx_number_round_precision_int=\count278
+\l__siunitx_number_lower_threshold_int=\count279
+\l__siunitx_number_upper_threshold_int=\count280
+\l__siunitx_number_group_first_int=\count281
+\l__siunitx_number_group_size_int=\count282
+\l__siunitx_number_group_minimum_int=\count283
+\l__siunitx_angle_tmp_dim=\dimen155
+\l__siunitx_angle_marker_box=\box55
+\l__siunitx_angle_unit_box=\box56
+\l__siunitx_compound_count_int=\count284
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/translations\translatio
+ns.sty
+Package: translations 2022/02/05 v1.12 internationalization of LaTeX2e packages
+ (CN)
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count285
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds
+.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.s
+ty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+) (C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+))
+\l__siunitx_table_tmp_box=\box57
+\l__siunitx_table_tmp_dim=\dimen156
+\l__siunitx_table_column_width_dim=\dimen157
+\l__siunitx_table_integer_box=\box58
+\l__siunitx_table_decimal_box=\box59
+\l__siunitx_table_uncert_box=\box60
+\l__siunitx_table_before_box=\box61
+\l__siunitx_table_after_box=\box62
+\l__siunitx_table_before_dim=\dimen158
+\l__siunitx_table_carry_dim=\dimen159
+\l__siunitx_unit_tmp_int=\count286
+\l__siunitx_unit_position_int=\count287
+\l__siunitx_unit_total_int=\count288
+)
+\c@questioncounter=\count289
+\c@equestioncounter=\count290
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.sty
+Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen160
+\captionmargin=\dimen161
+\caption@leftmargin=\dimen162
+\caption@rightmargin=\dimen163
+\caption@width=\dimen164
+\caption@indent=\dimen165
+\caption@parindent=\dimen166
+\caption@hangindent=\dimen167
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count291
+\c@continuedfloat=\count292
+)
+Package caption Info: New subtype `subfigure' on input line 238.
+\c@subfigure=\count293
+Package caption Info: New subtype `subtable' on input line 238.
+\c@subtable=\count294
+) (C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.sty
+Package: biblatex 2023/03/05 v3.19 programmable bibliographies (PK/MW)
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+)) (C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/logreq\logreq.sty
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count295
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/logreq\logreq.def
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+))
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
+Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+\c@tabx@nest=\count296
+\c@listtotal=\count297
+\c@listcount=\count298
+\c@liststart=\count299
+\c@liststop=\count300
+\c@citecount=\count301
+\c@citetotal=\count302
+\c@multicitecount=\count303
+\c@multicitetotal=\count304
+\c@instcount=\count305
+\c@maxnames=\count306
+\c@minnames=\count307
+\c@maxitems=\count308
+\c@minitems=\count309
+\c@citecounter=\count310
+\c@maxcitecounter=\count311
+\c@savedcitecounter=\count312
+\c@uniquelist=\count313
+\c@uniquename=\count314
+\c@refsection=\count315
+\c@refsegment=\count316
+\c@maxextratitle=\count317
+\c@maxextratitleyear=\count318
+\c@maxextraname=\count319
+\c@maxextradate=\count320
+\c@maxextraalpha=\count321
+\c@abbrvpenalty=\count322
+\c@highnamepenalty=\count323
+\c@lownamepenalty=\count324
+\c@maxparens=\count325
+\c@parenlevel=\count326
+\blx@tempcnta=\count327
+\blx@tempcntb=\count328
+\blx@tempcntc=\count329
+\c@blx@maxsection=\count330
+\blx@maxsegment@0=\count331
+\blx@notetype=\count332
+\blx@parenlevel@text=\count333
+\blx@parenlevel@foot=\count334
+\blx@sectionciteorder@0=\count335
+\blx@sectionciteorderinternal@0=\count336
+\blx@entrysetcounter=\count337
+\blx@biblioinstance=\count338
+\labelnumberwidth=\skip57
+\labelalphawidth=\skip58
+\biblabelsep=\skip59
+\bibitemsep=\skip60
+\bibnamesep=\skip61
+\bibinitsep=\skip62
+\bibparsep=\skip63
+\bibhang=\skip64
+\blx@bcfin=\read2
+\blx@bcfout=\write3
+\blx@langwohyphens=\language79
+\c@mincomprange=\count339
+\c@maxcomprange=\count340
+\c@mincompwidth=\count341
+Package biblatex Info: Trying to load biblatex default data model...
+Package biblatex Info: ... file 'blx-dm.def' found.
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-dm.def
+File: blx-dm.def 2023/03/05 v3.19 biblatex localization (PK/MW)
+)
+Package biblatex Info: Trying to load biblatex style data model...
+Package biblatex Info: ... file 'apa.dbx' found.
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/biblatex-apa\apa.dbx
+File: apa.dbx 2025/08/27 v9.20 APA biblatex style data model
+)
+Package biblatex Info: Trying to load biblatex custom data model...
+Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
+\c@afterword=\count342
+\c@savedafterword=\count343
+\c@annotator=\count344
+\c@savedannotator=\count345
+\c@author=\count346
+\c@savedauthor=\count347
+\c@bookauthor=\count348
+\c@savedbookauthor=\count349
+\c@commentator=\count350
+\c@savedcommentator=\count351
+\c@editor=\count352
+\c@savededitor=\count353
+\c@editora=\count354
+\c@savededitora=\count355
+\c@editorb=\count356
+\c@savededitorb=\count357
+\c@editorc=\count358
+\c@savededitorc=\count359
+\c@foreword=\count360
+\c@savedforeword=\count361
+\c@holder=\count362
+\c@savedholder=\count363
+\c@introduction=\count364
+\c@savedintroduction=\count365
+\c@namea=\count366
+\c@savednamea=\count367
+\c@nameb=\count368
+\c@savednameb=\count369
+\c@namec=\count370
+\c@savednamec=\count371
+\c@translator=\count372
+\c@savedtranslator=\count373
+\c@shortauthor=\count374
+\c@savedshortauthor=\count375
+\c@shorteditor=\count376
+\c@savedshorteditor=\count377
+\c@narrator=\count378
+\c@savednarrator=\count379
+\c@execproducer=\count380
+\c@savedexecproducer=\count381
+\c@execdirector=\count382
+\c@savedexecdirector=\count383
+\c@with=\count384
+\c@savedwith=\count385
+\c@labelname=\count386
+\c@savedlabelname=\count387
+\c@institution=\count388
+\c@savedinstitution=\count389
+\c@lista=\count390
+\c@savedlista=\count391
+\c@listb=\count392
+\c@savedlistb=\count393
+\c@listc=\count394
+\c@savedlistc=\count395
+\c@listd=\count396
+\c@savedlistd=\count397
+\c@liste=\count398
+\c@savedliste=\count399
+\c@listf=\count400
+\c@savedlistf=\count401
+\c@location=\count402
+\c@savedlocation=\count403
+\c@organization=\count404
+\c@savedorganization=\count405
+\c@origlocation=\count406
+\c@savedoriglocation=\count407
+\c@origpublisher=\count408
+\c@savedorigpublisher=\count409
+\c@publisher=\count410
+\c@savedpublisher=\count411
+\c@language=\count412
+\c@savedlanguage=\count413
+\c@origlanguage=\count414
+\c@savedoriglanguage=\count415
+\c@citation=\count416
+\c@savedcitation=\count417
+\c@pageref=\count418
+\c@savedpageref=\count419
+\shorthandwidth=\skip65
+\shortjournalwidth=\skip66
+\shortserieswidth=\skip67
+\shorttitlewidth=\skip68
+\shortauthorwidth=\skip69
+\shorteditorwidth=\skip70
+\locallabelnumberwidth=\skip71
+\locallabelalphawidth=\skip72
+\localshorthandwidth=\skip73
+\localshortjournalwidth=\skip74
+\localshortserieswidth=\skip75
+\localshorttitlewidth=\skip76
+\localshortauthorwidth=\skip77
+\localshorteditorwidth=\skip78
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-compat.def
+File: blx-compat.def 2023/03/05 v3.19 biblatex compatibility (PK/MW)
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex.def' found.
+ (C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.def
+File: biblatex.def 2023/03/05 v3.19 biblatex compatibility (PK/MW)
+\c@textcitecount=\count420
+\c@textcitetotal=\count421
+\c@textcitemaxnames=\count422
+\c@biburlbigbreakpenalty=\count423
+\c@biburlbreakpenalty=\count424
+\c@biburlnumpenalty=\count425
+\c@biburlucpenalty=\count426
+\c@biburllcpenalty=\count427
+\biburlbigskip=\muskip18
+\biburlnumskip=\muskip19
+\biburlucskip=\muskip20
+\biburllcskip=\muskip21
+\c@smartand=\count428
+)
+Package biblatex Info: Trying to load bibliography style 'apa'...
+Package biblatex Info: ... file 'apa.bbx' found.
+ (C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/biblatex-apa\apa.bbx
+File: apa.bbx 2025/08/27 v9.20 APA biblatex references style
+Package biblatex Info: Trying to load bibliography style 'standard'...
+Package biblatex Info: ... file 'standard.bbx' found.
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/bbx\standard.b
+bx
+File: standard.bbx 2023/03/05 v3.19 biblatex bibliography style (PK/MW)
+\c@bbx:relatedcount=\count429
+\c@bbx:relatedtotal=\count430
+)
+Package biblatex Info: Delimiter 'nameyeardelim' in context 'bib' already defin
+ed, overwriting.
+Package biblatex Info: Delimiter 'nameyeardelim' in context 'biblist' already d
+efined, overwriting.
+Package biblatex Info: Delimiter 'nonameyeardelim' in context 'bib' already def
+ined, overwriting.
+Package biblatex Info: Delimiter 'nonameyeardelim' in context 'biblist' already
+ defined, overwriting.
+)
+Package biblatex Info: Trying to load citation style 'apa'...
+Package biblatex Info: ... file 'apa.cbx' found.
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/biblatex-apa\apa.cbx
+File: apa.cbx 2025/08/27 v9.20 APA biblatex citation style
+Package biblatex Info: Delimiter 'nameyeardelim' in context '' already defined,
+ overwriting.
+Package biblatex Info: Delimiter 'andothersdelim' in context '' already defined
+, overwriting.
+Package biblatex Info: Redefining '\fullcite'.
+Package biblatex Info: Redefining '\citeauthor'.
+Package biblatex Info: Redefining '\citeyear'.
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\cites'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\parencites'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcites'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\footcitetexts'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\smartcites'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\textcites'.
+)
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.cfg
+File: biblatex.cfg 
+)
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Document encoding is UTF8 ....
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3.sty
+Package: expl3 2024-01-04 L3 programming layer (loader) 
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
+tex.def
+File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count431
+\l__pdf_internal_box=\box63
+))
+Package biblatex Info: ... and expl3
+(biblatex)             2024-01-04 L3 programming layer (loader) 
+(biblatex)             is new enough (at least 2020/04/06),
+(biblatex)             setting 'casechanger=expl3'.
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-case-expl3
+.sty
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/xparse\xpars
+e.sty
+Package: xparse 2023-10-10 L3 Experimental document command parser
+)
+Package: blx-case-expl3 2023/03/05 v3.19 expl3 case changing code for biblatex
+))
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+Package: xcolor 2023/11/15 v3.01 LaTeX color extensions (UK)
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1350.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1354.
+Package xcolor Info: Model `RGB' extended on input line 1366.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1368.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1371.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1372.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1373.
+) (C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/graphics\dvipsnam.def
+File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
+) (C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
+Package: hyperref 2023-11-26 v7.01g Hypertext links for LaTeX
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefine
+keys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.s
+ty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+) (C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/letltxmacro\letltxmacro
+.sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/auxhook\auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
+Package: nameref 2023-11-26 v2.56 Cross-referencing by name of section
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettit
+lestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count432
+)
+\@linkdim=\dimen168
+\Hy@linkcounter=\count433
+\Hy@pagecounter=\count434
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
+File: pd1enc.def 2023-11-26 v7.01g Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count435
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
+File: puenc.def 2023-11-26 v7.01g Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Hyper figures OFF on input line 4181.
+Package hyperref Info: Link nesting OFF on input line 4186.
+Package hyperref Info: Hyper index ON on input line 4189.
+Package hyperref Info: Plain pages OFF on input line 4196.
+Package hyperref Info: Backreferencing OFF on input line 4201.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4448.
+\c@Hy@tempcnt=\count436
+LaTeX Info: Redefining \url on input line 4786.
+\XeTeXLinkMargin=\dimen169
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc
+.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count437
+\Field@Width=\dimen170
+\Fld@charsize=\dimen171
+Package hyperref Info: Hyper figures OFF on input line 6065.
+Package hyperref Info: Link nesting OFF on input line 6070.
+Package hyperref Info: Hyper index ON on input line 6073.
+Package hyperref Info: backreferencing OFF on input line 6080.
+Package hyperref Info: Link coloring OFF on input line 6085.
+Package hyperref Info: Link coloring with OCG OFF on input line 6090.
+Package hyperref Info: PDF/A mode OFF on input line 6095.
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/base\atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count438
+\c@Item=\count439
+\c@Hfootnote=\count440
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
+File: hpdftex.def 2023-11-26 v7.01g Hyperref driver for pdfTeX
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/base\atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
+kage
+with kernel methods
+)
+\Fld@listcount=\count441
+\c@bookmark@seq@number=\count442
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfil
+echeck.sty
+Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniquec
+ounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+84.
+)
+\Hy@SectionHShift=\skip79
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\adjustbox.sty
+Package: adjustbox 2025/02/26 v1.3c Adjusting TeX boxes (trim, clip, ...)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/xkeyval\xkeyval.sty
+Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkeyval.tex
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkvutils.tex
+\XKV@toks=\toks24
+\XKV@tempa@toks=\toks25
+)
+\XKV@depth=\count443
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\adjcalc.sty
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\trimclip.sty
+Package: trimclip 2025/02/21 v1.2a Trim and clip general TeX material
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/collectbox\collectbox.s
+ty
+Package: collectbox 2022/10/17 v0.4c Collect macro arguments as boxes
+\collectedbox=\box64
+)
+\tc@llx=\dimen172
+\tc@lly=\dimen173
+\tc@urx=\dimen174
+\tc@ury=\dimen175
+Package trimclip Info: Using driver 'tc-pdftex.def'.
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\tc-pdftex.def
+File: tc-pdftex.def 2025/02/26 v2.3 Clipping driver for pdftex
+))
+\adjbox@Width=\dimen176
+\adjbox@Height=\dimen177
+\adjbox@Depth=\dimen178
+\adjbox@Totalheight=\dimen179
+\adjbox@pwidth=\dimen180
+\adjbox@pheight=\dimen181
+\adjbox@pdepth=\dimen182
+\adjbox@ptotalheight=\dimen183
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/ifoddpage\ifoddpage.sty
+Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
+\c@checkoddpage=\count444
+) (C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/varwidth\varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box65
+\sift@deathcycles=\count445
+\@vwid@loff=\dimen184
+\@vwid@roff=\dimen185
+)) (C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/tools\afterpage.sty
+Package: afterpage 2023/07/04 v1.08 After-Page Package (DPC)
+\AP@output=\toks26
+\AP@partial=\box66
+\AP@footins=\box67
+) (C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/parskip\parskip.sty
+Package: parskip 2021-03-14 v2.0h non-zero parskip adjustments
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/threeparttable\threepar
+ttable.sty
+Package: threeparttable 2003/06/13  v 3.0
+\@tempboxb=\box68
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/eso-pic\eso-pic.sty
+Package: eso-pic 2023/05/03 v3.0c eso-pic (RN)
+\ESO@tempdima=\dimen186
+\ESO@tempdimb=\dimen187
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 33.
+Package translations Info: No language package found. I am going to use `englis
+h' as default language. on input line 46.
+\@quotelevel=\count446
+\@quotereset=\count447
+
+
+LaTeX Warning: Unused global option(s):
+    [a4].
+
+(document.aux)
+\openout1 = `document.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
+ii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count448
+\scratchdimen=\dimen188
+\scratchbox=\box69
+\nofMPsegments=\count449
+\nofMParguments=\count450
+\everyMPshowfont=\toks27
+\MPscratchCnt=\count451
+\MPscratchDim=\dimen189
+\MPnumerator=\count452
+\makeMPintoPDFobject=\count453
+\everyMPtoPDFconversion=\toks28
+)
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
+ase.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.c
+fg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+))
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/translations/dicts\tran
+slations-basic-dictionary-english.trsl
+File: translations-basic-dictionary-english.trsl (english translation file `tra
+nslations-basic-dictionary')
+)
+Package translations Info: loading dictionary `translations-basic-dictionary' f
+or `english'. on input line 46.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: hyperref package is loaded.
+Package caption Info: threeparttable package is loaded.
+Package caption Info: End \AtBeginDocument code.
+Package biblatex Info: Trying to load language 'english' -> 'english-apa'...
+Package biblatex Info: ... file 'english-apa.lbx' found.
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/biblatex-apa\english-ap
+a.lbx
+File: english-apa.lbx 2025/08/27 v9.20 APA biblatex localisation
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/lbx\english.lb
+x
+File: english.lbx 2023/03/05 v3.19 biblatex localization (PK/MW)
+)
+Package biblatex Info: Trying to load language 'american' -> 'american-apa'...
+Package biblatex Info: ... file 'american-apa.lbx' found.
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/biblatex-apa\american-a
+pa.lbx
+File: american-apa.lbx 2025/08/27 v9.20 APA biblatex localisation
+Package biblatex Info: Trying to load language 'american'...
+Package biblatex Info: ... file 'american.lbx' found.
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/lbx\american.l
+bx
+File: american.lbx 2023/03/05 v3.19 biblatex localization (PK/MW)
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/lbx\english.lb
+x
+File: english.lbx 2023/03/05 v3.19 biblatex localization (PK/MW)
+))))
+Package biblatex Info: Input encoding 'utf8' detected.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'utf8'.
+\openout3 = `document.bcf'.
+
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'document.bbl' found.
+ (document.bbl)
+Package biblatex Info: Reference section=0 on input line 46.
+Package biblatex Info: Reference segment=0 on input line 46.
+Package hyperref Info: Link coloring ON on input line 46.
+ (document.out) (document.out)
+\@outlinefile=\write4
+\openout4 = `document.out'.
+
+LaTeX Font Info:    Trying to load font information for U+msa on input line 55.
+
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 55.
+
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 55
+.
+
+(C:\Users\ignac\AppData\Local\Programs\MiKTeX\tex/latex/jknappen\ursfs.fd
+File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
+)
+[1
+
+{C:/Users/ignac/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2]
+
+LaTeX Warning: Citation 'conde2021contra' on page 3 undefined on input line 65.
+
+
+
+LaTeX Warning: Citation 'conde2021contra' on page 3 undefined on input line 67.
+
+
+
+LaTeX Warning: Citation 'esade' on page 3 undefined on input line 67.
+
+
+LaTeX Warning: Citation 'conde2023reforming' on page 3 undefined on input line 
+75.
+
+
+Overfull \hbox (51.57849pt too wide) in paragraph at lines 75--76
+\T1/cmr/m/n/12 discontinuo" more ver-sa-tile, a sort of \T1/cmr/m/it/12 zero-ho
+ur \T1/cmr/m/n/12 per-ma-nent con-tract ([]).
+ []
+
+[3
+
+] [4]
+
+LaTeX Warning: Citation 'conde2023reforming' on page 5 undefined on input line 
+93.
+
+
+LaTeX Warning: Citation '' on page 5 undefined on input line 93.
+
+[5]
+
+LaTeX Warning: Citation 'centeno2012excess' on page 6 undefined on input line 1
+15.
+
+
+LaTeX Warning: Citation 'hijzen2017impact' on page 6 undefined on input line 11
+5.
+
+
+LaTeX Warning: Citation 'kahn2010employment' on page 6 undefined on input line 
+115.
+
+
+LaTeX Warning: Citation '' on page 6 undefined on input line 115.
+
+
+Overfull \hbox (9.86084pt too wide) in paragraph at lines 115--116
+\T1/cmr/m/n/12 pro-tec-tion level for per-ma-nent con-tracts. []; [];
+ []
+
+
+LaTeX Warning: Citation 'cabrales2014dual' on page 6 undefined on input line 11
+7.
+
+
+LaTeX Warning: Citation 'bassanini2009job' on page 6 undefined on input line 11
+7.
+
+
+LaTeX Warning: Citation 'cahuc2016explaining' on page 6 undefined on input line
+ 117.
+
+
+LaTeX Warning: Citation 'damiani2016temporary' on page 6 undefined on input lin
+e 117.
+
+
+LaTeX Warning: Citation 'dolado2016does' on page 6 undefined on input line 117.
+
+
+
+LaTeX Warning: Citation 'hijzen2017impact' on page 6 undefined on input line 11
+7.
+
+
+Overfull \hbox (54.96373pt too wide) in paragraph at lines 117--118
+\T1/cmr/m/n/12 ([]; []; []; [];
+ []
+
+[6]
+
+LaTeX Warning: Citation 'perez2014can' on page 7 undefined on input line 119.
+
+
+LaTeX Warning: Citation '' on page 7 undefined on input line 119.
+
+
+LaTeX Warning: Citation 'garcia2023dual' on page 7 undefined on input line 119.
+
+
+
+LaTeX Warning: Citation 'gorjon2021' on page 7 undefined on input line 119.
+
+
+LaTeX Warning: Citation 'conde2021contra' on page 7 undefined on input line 119
+.
+
+[7]
+
+LaTeX Warning: Citation 'ley' on page 8 undefined on input line 130.
+
+
+LaTeX Warning: Citation '' on page 8 undefined on input line 130.
+
+
+LaTeX Warning: Citation 'conde2023reforming' on page 8 undefined on input line 
+132.
+
+[8]
+
+LaTeX Warning: Citation 'domenech2022reforma' on page 9 undefined on input line
+ 144.
+
+
+LaTeX Warning: Citation '' on page 9 undefined on input line 144.
+
+
+Overfull \hbox (0.21739pt too wide) in paragraph at lines 144--145
+[]\T1/cmr/m/n/12 This is con-sis-tent with [][] find-
+ []
+
+
+LaTeX Warning: Citation 'conde2023reforming' on page 9 undefined on input line 
+146.
+
+
+LaTeX Warning: Citation '' on page 9 undefined on input line 146.
+
+
+LaTeX Warning: Citation 'conde2023reforming' on page 9 undefined on input line 
+146.
+
+
+LaTeX Warning: Citation '' on page 9 undefined on input line 146.
+
+[9]
+
+LaTeX Warning: Citation 'esade' on page 10 undefined on input line 148.
+
+
+LaTeX Warning: Citation '' on page 10 undefined on input line 148.
+
+
+LaTeX Warning: Citation 'domenech2022reforma' on page 10 undefined on input lin
+e 148.
+
+
+LaTeX Warning: Citation '' on page 10 undefined on input line 148.
+
+
+LaTeX Warning: Citation 'conde2023reforming' on page 10 undefined on input line
+ 148.
+
+
+LaTeX Warning: Citation '' on page 10 undefined on input line 148.
+
+<gg6.jpg, id=196, 2107.875pt x 1505.625pt>
+File: gg6.jpg Graphic file (type jpg)
+<use gg6.jpg>
+Package pdftex.def Info: gg6.jpg  used on input line 156.
+(pdftex.def)             Requested size: 377.24702pt x 269.46155pt.
+<gg2.jpg, id=197, 2107.875pt x 1505.625pt>
+File: gg2.jpg Graphic file (type jpg)
+<use gg2.jpg>
+Package pdftex.def Info: gg2.jpg  used on input line 161.
+(pdftex.def)             Requested size: 377.24702pt x 269.46155pt.
+
+LaTeX Warning: Float too large for page by 6.98068pt on input line 166.
+
+[10] [11 <./gg6.jpg> <./gg2.jpg>] [12
+
+] [13]
+
+LaTeX Warning: Citation 'gorjon2022employment' on page 14 undefined on input li
+ne 209.
+
+
+LaTeX Warning: Citation 'de2017assessing' on page 14 undefined on input line 20
+9.
+
+
+LaTeX Warning: Citation 'barcelo2021efectos' on page 14 undefined on input line
+ 209.
+
+[14]
+
+LaTeX Warning: Citation 'conde2023reforming' on page 15 undefined on input line
+ 211.
+
+
+LaTeX Warning: Citation '' on page 15 undefined on input line 211.
+
+
+LaTeX Warning: Citation 'esade' on page 15 undefined on input line 211.
+
+
+LaTeX Warning: Citation '' on page 15 undefined on input line 211.
+
+
+LaTeX Warning: Citation 'callaway2021difference' on page 15 undefined on input 
+line 215.
+
+
+LaTeX Warning: Citation 'borusyak2021revisiting' on page 15 undefined on input 
+line 215.
+
+
+LaTeX Warning: Citation 'gardner2022two' on page 15 undefined on input line 215
+.
+
+
+LaTeX Warning: Citation 'liu2022practical' on page 15 undefined on input line 2
+15.
+
+
+LaTeX Warning: Citation 'wooldridge2021two' on page 15 undefined on input line 
+215.
+
+
+LaTeX Warning: Citation 'sun2021estimating' on page 15 undefined on input line 
+215.
+
+
+LaTeX Warning: Citation '' on page 15 undefined on input line 215.
+
+
+Overfull \hbox (57.13116pt too wide) in paragraph at lines 215--216
+[]\T1/cmr/m/n/12 ; []; []; [];
+ []
+
+[15] [16]
+
+LaTeX Warning: Citation 'de2020two' on page 17 undefined on input line 233.
+
+
+LaTeX Warning: Citation '' on page 17 undefined on input line 233.
+
+[17]
+
+LaTeX Warning: Citation 'gorjon2022employment' on page 18 undefined on input li
+ne 237.
+
+<descr_plots/example.jpeg, id=244, 1806.75pt x 903.375pt>
+File: descr_plots/example.jpeg Graphic file (type jpg)
+<use descr_plots/example.jpeg>
+Package pdftex.def Info: descr_plots/example.jpeg  used on input line 243.
+(pdftex.def)             Requested size: 419.16621pt x 209.57764pt.
+[18 <./descr_plots/example.jpeg>]
+
+LaTeX Warning: Citation 'perez2014can' on page 19 undefined on input line 258.
+
+
+LaTeX Warning: Citation '' on page 19 undefined on input line 258.
+
+[19] [20] [21] [22]
+
+LaTeX Warning: Citation 'conde2023reforming' on page 23 undefined on input line
+ 301.
+
+
+LaTeX Warning: Citation '' on page 23 undefined on input line 301.
+
+[23]
+<descr_plots/YESincome.jpeg, id=299, 1505.625pt x 903.375pt>
+File: descr_plots/YESincome.jpeg Graphic file (type jpg)
+<use descr_plots/YESincome.jpeg>
+Package pdftex.def Info: descr_plots/YESincome.jpeg  used on input line 309.
+(pdftex.def)             Requested size: 419.16621pt x 251.49591pt.
+ [24 <./descr_plots/YESincome.jpeg>]
+<descr_plots/YESdaysworked.jpeg, id=307, 1505.625pt x 903.375pt>
+File: descr_plots/YESdaysworked.jpeg Graphic file (type jpg)
+<use descr_plots/YESdaysworked.jpeg>
+Package pdftex.def Info: descr_plots/YESdaysworked.jpeg  used on input line 324
+.
+(pdftex.def)             Requested size: 419.16621pt x 251.49591pt.
+ [25 <./descr_plots/YESdaysworked.jpeg>]
+<descr_plots/YESggduration.jpeg, id=316, 2107.875pt x 1806.75pt>
+File: descr_plots/YESggduration.jpeg Graphic file (type jpg)
+<use descr_plots/YESggduration.jpeg>
+Package pdftex.def Info: descr_plots/YESggduration.jpeg  used on input line 336
+.
+(pdftex.def)             Requested size: 419.16621pt x 359.27594pt.
+<descr_plots/YESggduration2.jpeg, id=317, 2107.875pt x 1806.75pt>
+File: descr_plots/YESggduration2.jpeg Graphic file (type jpg)
+<use descr_plots/YESggduration2.jpeg>
+Package pdftex.def Info: descr_plots/YESggduration2.jpeg  used on input line 34
+4.
+(pdftex.def)             Requested size: 419.16621pt x 359.27594pt.
+ [26 <./descr_plots/YESggduration.jpeg>]
+<descr_plots/YESnofcontracts.jpeg, id=325, 1505.625pt x 903.375pt>
+File: descr_plots/YESnofcontracts.jpeg Graphic file (type jpg)
+<use descr_plots/YESnofcontracts.jpeg>
+Package pdftex.def Info: descr_plots/YESnofcontracts.jpeg  used on input line 3
+58.
+(pdftex.def)             Requested size: 419.16621pt x 251.49591pt.
+
+
+LaTeX Warning: Citation 'conde2023reforming' on page 27 undefined on input line
+ 361.
+
+
+LaTeX Warning: Citation '' on page 27 undefined on input line 361.
+
+[27 <./descr_plots/YESggduration2.jpeg>]
+<descr_plots/YESdif.jpeg, id=332, 1505.625pt x 1053.9375pt>
+File: descr_plots/YESdif.jpeg Graphic file (type jpg)
+<use descr_plots/YESdif.jpeg>
+Package pdftex.def Info: descr_plots/YESdif.jpeg  used on input line 369.
+(pdftex.def)             Requested size: 419.16621pt x 293.4119pt.
+ [28 <./descr_plots/YESnofcontracts.jpeg>] [29 <./descr_plots/YESdif.jpeg>]
+<ROC.jpeg, id=342, 2409.0pt x 2107.875pt>
+File: ROC.jpeg Graphic file (type jpg)
+<use ROC.jpeg>
+Package pdftex.def Info: ROC.jpeg  used on input line 387.
+(pdftex.def)             Requested size: 419.16621pt x 366.76086pt.
+ [30
+
+]
+<descr_plots/Pre-treatment/prebyagegroup.jpeg, id=350, 1505.625pt x 903.375pt>
+File: descr_plots/Pre-treatment/prebyagegroup.jpeg Graphic file (type jpg)
+<use descr_plots/Pre-treatment/prebyagegroup.jpeg>
+Package pdftex.def Info: descr_plots/Pre-treatment/prebyagegroup.jpeg  used on 
+input line 401.
+(pdftex.def)             Requested size: 419.16621pt x 251.49591pt.
+<descr_plots/Pre-treatment/prebyprovince.jpeg, id=352, 1505.625pt x 903.375pt>
+File: descr_plots/Pre-treatment/prebyprovince.jpeg Graphic file (type jpg)
+<use descr_plots/Pre-treatment/prebyprovince.jpeg>
+Package pdftex.def Info: descr_plots/Pre-treatment/prebyprovince.jpeg  used on 
+input line 411.
+(pdftex.def)             Requested size: 419.16621pt x 251.49591pt.
+ [31 <./ROC.jpeg>]
+<descr_plots/Pre-treatment/prebysector.jpeg, id=360, 2107.875pt x 903.375pt>
+File: descr_plots/Pre-treatment/prebysector.jpeg Graphic file (type jpg)
+<use descr_plots/Pre-treatment/prebysector.jpeg>
+Package pdftex.def Info: descr_plots/Pre-treatment/prebysector.jpeg  used on in
+put line 420.
+(pdftex.def)             Requested size: 419.16621pt x 179.63797pt.
+ [32 <./descr_plots/Pre-treatment/prebyagegroup.jpeg> <./descr_plots/Pre-treatm
+ent/prebyprovince.jpeg>]
+<descr_plots/Pre-treatment/prebyoccupation.jpeg, id=368, 1656.1875pt x 903.375p
+t>
+File: descr_plots/Pre-treatment/prebyoccupation.jpeg Graphic file (type jpg)
+<use descr_plots/Pre-treatment/prebyoccupation.jpeg>
+Package pdftex.def Info: descr_plots/Pre-treatment/prebyoccupation.jpeg  used o
+n input line 432.
+(pdftex.def)             Requested size: 419.16621pt x 228.62764pt.
+<descr_plots/Pre-treatment/prebyquantile.jpeg, id=370, 1656.1875pt x 903.375pt>
+
+File: descr_plots/Pre-treatment/prebyquantile.jpeg Graphic file (type jpg)
+<use descr_plots/Pre-treatment/prebyquantile.jpeg>
+Package pdftex.def Info: descr_plots/Pre-treatment/prebyquantile.jpeg  used on 
+input line 441.
+(pdftex.def)             Requested size: 419.16621pt x 228.62764pt.
+ [33 <./descr_plots/Pre-treatment/prebysector.jpeg>] [34 <./descr_plots/Pre-tre
+atment/prebyoccupation.jpeg> <./descr_plots/Pre-treatment/prebyquantile.jpeg>]
+<Results/verylongtwfe3/grid.jpeg, id=382, 2107.875pt x 2710.125pt>
+File: Results/verylongtwfe3/grid.jpeg Graphic file (type jpg)
+<use Results/verylongtwfe3/grid.jpeg>
+Package pdftex.def Info: Results/verylongtwfe3/grid.jpeg  used on input line 45
+8.
+(pdftex.def)             Requested size: 419.16621pt x 538.91393pt.
+
+
+LaTeX Warning: Citation 'conde2023reforming' on page 35 undefined on input line
+ 468.
+
+
+LaTeX Warning: Citation '' on page 35 undefined on input line 468.
+
+[35
+
+] [36 <./Results/verylongtwfe3/grid.jpeg>]
+Overfull \hbox (9.1939pt too wide) in paragraph at lines 480--516
+ [][] 
+ []
+
+[37] [38
+
+] [39]
+<Results/DID_bycontract/grid2.jpeg, id=422, 3613.5pt x 3011.25pt>
+File: Results/DID_bycontract/grid2.jpeg Graphic file (type jpg)
+<use Results/DID_bycontract/grid2.jpeg>
+Package pdftex.def Info: Results/DID_bycontract/grid2.jpeg  used on input line 
+556.
+(pdftex.def)             Requested size: 461.08539pt x 384.21648pt.
+
+Overfull \hbox (41.91917pt too wide) in paragraph at lines 556--557
+ [][] 
+ []
+
+<Results/DID_bycontract/grid1.jpeg, id=423, 3613.5pt x 3011.25pt>
+File: Results/DID_bycontract/grid1.jpeg Graphic file (type jpg)
+<use Results/DID_bycontract/grid1.jpeg>
+Package pdftex.def Info: Results/DID_bycontract/grid1.jpeg  used on input line 
+563.
+(pdftex.def)             Requested size: 461.08539pt x 384.21648pt.
+
+Overfull \hbox (41.91917pt too wide) in paragraph at lines 563--564
+ [][] 
+ []
+
+
+Overfull \hbox (9.1939pt too wide) in paragraph at lines 574--608
+ [][] 
+ []
+
+
+Overfull \hbox (9.1939pt too wide) in paragraph at lines 613--647
+ [][] 
+ []
+
+
+Overfull \hbox (9.1939pt too wide) in paragraph at lines 652--686
+ [][] 
+ []
+
+[40 <./Results/DID_bycontract/grid2.jpeg>] [41] [42 <./Results/DID_bycontract/g
+rid1.jpeg>]
+<Results/DID_bygender/grid2.jpeg, id=440, 3613.5pt x 3011.25pt>
+File: Results/DID_bygender/grid2.jpeg Graphic file (type jpg)
+<use Results/DID_bygender/grid2.jpeg>
+Package pdftex.def Info: Results/DID_bygender/grid2.jpeg  used on input line 70
+6.
+(pdftex.def)             Requested size: 461.08539pt x 384.21648pt.
+
+Overfull \hbox (41.91917pt too wide) in paragraph at lines 706--707
+ [][] 
+ []
+
+<Results/DID_bygender/grid1.jpeg, id=441, 3613.5pt x 3011.25pt>
+File: Results/DID_bygender/grid1.jpeg Graphic file (type jpg)
+<use Results/DID_bygender/grid1.jpeg>
+Package pdftex.def Info: Results/DID_bygender/grid1.jpeg  used on input line 71
+3.
+(pdftex.def)             Requested size: 461.08539pt x 384.21648pt.
+
+Overfull \hbox (41.91917pt too wide) in paragraph at lines 713--714
+ [][] 
+ []
+
+
+Overfull \hbox (62.44235pt too wide) in paragraph at lines 725--760
+ [][] 
+ []
+
+
+Overfull \hbox (62.44235pt too wide) in paragraph at lines 767--801
+ [][] 
+ []
+
+[43
+
+] [44] [45 <./Results/DID_bygender/grid2.jpeg>] [46 <./Results/DID_bygender/gri
+d1.jpeg>]
+<Results/DID_byagegroup/grid.jpeg, id=464, 2409.0pt x 3011.25pt>
+File: Results/DID_byagegroup/grid.jpeg Graphic file (type jpg)
+<use Results/DID_byagegroup/grid.jpeg>
+Package pdftex.def Info: Results/DID_byagegroup/grid.jpeg  used on input line 8
+22.
+(pdftex.def)             Requested size: 419.16621pt x 523.94409pt.
+ [47
+
+] [48 <./Results/DID_byagegroup/grid.jpeg>]
+<Results/DID_bysector2/grid2.jpeg, id=479, 3613.5pt x 3011.25pt>
+File: Results/DID_bysector2/grid2.jpeg Graphic file (type jpg)
+<use Results/DID_bysector2/grid2.jpeg>
+Package pdftex.def Info: Results/DID_bysector2/grid2.jpeg  used on input line 8
+54.
+(pdftex.def)             Requested size: 419.16621pt x 349.29605pt.
+<Results/DID_bysector2/grid1.jpeg, id=480, 3613.5pt x 3011.25pt>
+File: Results/DID_bysector2/grid1.jpeg Graphic file (type jpg)
+<use Results/DID_bysector2/grid1.jpeg>
+Package pdftex.def Info: Results/DID_bysector2/grid1.jpeg  used on input line 8
+68.
+(pdftex.def)             Requested size: 419.16621pt x 349.29605pt.
+ [49
+
+] [50 <./Results/DID_bysector2/grid2.jpeg>] [51 <./Results/DID_bysector2/grid1.
+jpeg>]
+<Results/DID_byoccupation/grid2.jpeg, id=502, 3011.25pt x 3011.25pt>
+File: Results/DID_byoccupation/grid2.jpeg Graphic file (type jpg)
+<use Results/DID_byoccupation/grid2.jpeg>
+Package pdftex.def Info: Results/DID_byoccupation/grid2.jpeg  used on input lin
+e 897.
+(pdftex.def)             Requested size: 419.16621pt x 419.13689pt.
+<Results/DID_byoccupation/grid1.jpeg, id=503, 3011.25pt x 3011.25pt>
+File: Results/DID_byoccupation/grid1.jpeg Graphic file (type jpg)
+<use Results/DID_byoccupation/grid1.jpeg>
+Package pdftex.def Info: Results/DID_byoccupation/grid1.jpeg  used on input lin
+e 911.
+(pdftex.def)             Requested size: 419.16621pt x 419.13689pt.
+ [52
+
+]
+[53 <./Results/DID_byoccupation/grid2.jpeg>] [54 <./Results/DID_byoccupation/gr
+id1.jpeg>]
+<Results/DID_byprovince/project_based.jpeg, id=524, 5420.25pt x 1806.75pt>
+File: Results/DID_byprovince/project_based.jpeg Graphic file (type jpg)
+<use Results/DID_byprovince/project_based.jpeg>
+Package pdftex.def Info: Results/DID_byprovince/project_based.jpeg  used on inp
+ut line 940.
+(pdftex.def)             Requested size: 419.16621pt x 139.71841pt.
+<Results/DID_byprovince/open_ended.jpeg, id=525, 5420.25pt x 1806.75pt>
+File: Results/DID_byprovince/open_ended.jpeg Graphic file (type jpg)
+<use Results/DID_byprovince/open_ended.jpeg>
+Package pdftex.def Info: Results/DID_byprovince/open_ended.jpeg  used on input 
+line 947.
+(pdftex.def)             Requested size: 419.16621pt x 139.71841pt.
+<Results/DID_byprovince/permanent.jpeg, id=526, 5420.25pt x 1806.75pt>
+File: Results/DID_byprovince/permanent.jpeg Graphic file (type jpg)
+<use Results/DID_byprovince/permanent.jpeg>
+Package pdftex.def Info: Results/DID_byprovince/permanent.jpeg  used on input l
+ine 954.
+(pdftex.def)             Requested size: 419.16621pt x 139.71841pt.
+<Results/DID_byprovince/unemployed.jpeg, id=527, 5420.25pt x 1806.75pt>
+File: Results/DID_byprovince/unemployed.jpeg Graphic file (type jpg)
+<use Results/DID_byprovince/unemployed.jpeg>
+Package pdftex.def Info: Results/DID_byprovince/unemployed.jpeg  used on input 
+line 962.
+(pdftex.def)             Requested size: 419.16621pt x 139.71841pt.
+<Results/DID_byprovince/self_emp.jpeg, id=528, 5420.25pt x 1806.75pt>
+File: Results/DID_byprovince/self_emp.jpeg Graphic file (type jpg)
+<use Results/DID_byprovince/self_emp.jpeg>
+Package pdftex.def Info: Results/DID_byprovince/self_emp.jpeg  used on input li
+ne 969.
+(pdftex.def)             Requested size: 419.16621pt x 139.71841pt.
+<Results/DID_byprovince/salaries.jpeg, id=529, 5420.25pt x 1806.75pt>
+File: Results/DID_byprovince/salaries.jpeg Graphic file (type jpg)
+<use Results/DID_byprovince/salaries.jpeg>
+Package pdftex.def Info: Results/DID_byprovince/salaries.jpeg  used on input li
+ne 976.
+(pdftex.def)             Requested size: 419.16621pt x 139.71841pt.
+<Results/DID_byprovince/ncontracts.jpeg, id=530, 5420.25pt x 1806.75pt>
+File: Results/DID_byprovince/ncontracts.jpeg Graphic file (type jpg)
+<use Results/DID_byprovince/ncontracts.jpeg>
+Package pdftex.def Info: Results/DID_byprovince/ncontracts.jpeg  used on input 
+line 983.
+(pdftex.def)             Requested size: 419.16621pt x 139.71841pt.
+<Results/DID_byprovince/days_worked.jpeg, id=531, 5420.25pt x 1806.75pt>
+File: Results/DID_byprovince/days_worked.jpeg Graphic file (type jpg)
+<use Results/DID_byprovince/days_worked.jpeg>
+Package pdftex.def Info: Results/DID_byprovince/days_worked.jpeg  used on input
+ line 990.
+(pdftex.def)             Requested size: 419.16621pt x 139.71841pt.
+ [55
+
+] [56 <./Results/DID_byprovince/project_based.jpeg> <./Results/DID_byprovince/o
+pen_ended.jpeg> <./Results/DID_byprovince/permanent.jpeg>]
+[57 <./Results/DID_byprovince/unemployed.jpeg> <./Results/DID_byprovince/self_e
+mp.jpeg> <./Results/DID_byprovince/salaries.jpeg>] [58 <./Results/DID_byprovinc
+e/ncontracts.jpeg> <./Results/DID_byprovince/days_worked.jpeg>]
+<Results/DID_byquantile/grid.jpeg, id=559, 2409.0pt x 2710.125pt>
+File: Results/DID_byquantile/grid.jpeg Graphic file (type jpg)
+<use Results/DID_byquantile/grid.jpeg>
+Package pdftex.def Info: Results/DID_byquantile/grid.jpeg  used on input line 1
+008.
+(pdftex.def)             Requested size: 419.16621pt x 471.54968pt.
+ [59
+
+] [60 <./Results/DID_byquantile/grid.jpeg>] [61
+
+] [62]
+
+LaTeX Warning: Empty bibliography on input line 1042.
+
+<Results/RDD/project_based.jpeg, id=579, 2409.0pt x 1806.75pt>
+File: Results/RDD/project_based.jpeg Graphic file (type jpg)
+<use Results/RDD/project_based.jpeg>
+Package pdftex.def Info: Results/RDD/project_based.jpeg  used on input line 105
+1.
+(pdftex.def)             Requested size: 377.24702pt x 282.93808pt.
+<Results/RDD/open_ended.jpeg, id=580, 2409.0pt x 1806.75pt>
+File: Results/RDD/open_ended.jpeg Graphic file (type jpg)
+<use Results/RDD/open_ended.jpeg>
+Package pdftex.def Info: Results/RDD/open_ended.jpeg  used on input line 1057.
+(pdftex.def)             Requested size: 377.24702pt x 282.93808pt.
+<Results/RDD/permanent.jpeg, id=581, 2409.0pt x 1806.75pt>
+File: Results/RDD/permanent.jpeg Graphic file (type jpg)
+<use Results/RDD/permanent.jpeg>
+Package pdftex.def Info: Results/RDD/permanent.jpeg  used on input line 1063.
+(pdftex.def)             Requested size: 419.16621pt x 314.36646pt.
+<Results/RDD/unemployed.jpeg, id=582, 2409.0pt x 1806.75pt>
+File: Results/RDD/unemployed.jpeg Graphic file (type jpg)
+<use Results/RDD/unemployed.jpeg>
+Package pdftex.def Info: Results/RDD/unemployed.jpeg  used on input line 1069.
+(pdftex.def)             Requested size: 419.16621pt x 314.36646pt.
+<Results/RDD/self_emp.jpeg, id=583, 2409.0pt x 1806.75pt>
+File: Results/RDD/self_emp.jpeg Graphic file (type jpg)
+<use Results/RDD/self_emp.jpeg>
+Package pdftex.def Info: Results/RDD/self_emp.jpeg  used on input line 1076.
+(pdftex.def)             Requested size: 419.16621pt x 314.36646pt.
+<Results/RDD/salaries.jpeg, id=584, 2409.0pt x 1806.75pt>
+File: Results/RDD/salaries.jpeg Graphic file (type jpg)
+<use Results/RDD/salaries.jpeg>
+Package pdftex.def Info: Results/RDD/salaries.jpeg  used on input line 1083.
+(pdftex.def)             Requested size: 419.16621pt x 314.36646pt.
+<Results/RDD/ncontracts.jpeg, id=585, 2409.0pt x 1806.75pt>
+File: Results/RDD/ncontracts.jpeg Graphic file (type jpg)
+<use Results/RDD/ncontracts.jpeg>
+Package pdftex.def Info: Results/RDD/ncontracts.jpeg  used on input line 1090.
+(pdftex.def)             Requested size: 419.16621pt x 314.36646pt.
+<Results/RDD/days_worked.jpeg, id=586, 2409.0pt x 1806.75pt>
+File: Results/RDD/days_worked.jpeg Graphic file (type jpg)
+<use Results/RDD/days_worked.jpeg>
+Package pdftex.def Info: Results/RDD/days_worked.jpeg  used on input line 1097.
+
+(pdftex.def)             Requested size: 419.16621pt x 314.36646pt.
+[63
+
+
+ <./Results/RDD/project_based.jpeg>]
+
+LaTeX Warning: Text page 64 contains only floats.
+
+[64 <./Results/RDD/open_ended.jpeg> <./Results/RDD/permanent.jpeg>] [65 <./Resu
+lts/RDD/unemployed.jpeg>] [66 <./Results/RDD/self_emp.jpeg>] [67 <./Results/RDD
+/salaries.jpeg>] [68 <./Results/RDD/ncontracts.jpeg>] [69 <./Results/RDD/days_w
+orked.jpeg>]
+Overfull \hbox (8.21611pt too wide) in paragraph at lines 1102--1102
+[]\T1/cmr/bx/sc/17.28 Appendix: Im-pact of the re-form on project-
+ []
+
+
+Overfull \hbox (30.72124pt too wide) in paragraph at lines 1102--1102
+\T1/cmr/bx/sc/17.28 based con-tract co-horts by gen-der, age group,
+ []
+
+<pb/DID_bygender/grid2.jpeg, id=624, 3613.5pt x 3011.25pt>
+File: pb/DID_bygender/grid2.jpeg Graphic file (type jpg)
+<use pb/DID_bygender/grid2.jpeg>
+Package pdftex.def Info: pb/DID_bygender/grid2.jpeg  used on input line 1112.
+(pdftex.def)             Requested size: 461.08539pt x 384.21648pt.
+
+Overfull \hbox (41.91917pt too wide) in paragraph at lines 1112--1113
+ [][] 
+ []
+
+<pb/DID_bygender/grid1.jpeg, id=625, 3613.5pt x 3011.25pt>
+File: pb/DID_bygender/grid1.jpeg Graphic file (type jpg)
+<use pb/DID_bygender/grid1.jpeg>
+Package pdftex.def Info: pb/DID_bygender/grid1.jpeg  used on input line 1119.
+(pdftex.def)             Requested size: 461.08539pt x 384.21648pt.
+
+Overfull \hbox (41.91917pt too wide) in paragraph at lines 1119--1120
+ [][] 
+ []
+
+
+Overfull \hbox (62.44235pt too wide) in paragraph at lines 1131--1166
+ [][] 
+ []
+
+
+Overfull \hbox (62.44235pt too wide) in paragraph at lines 1173--1208
+ [][] 
+ []
+
+[70
+
+ <./pb/DID_bygender/grid2.jpeg>] [71] [72 <./pb/DID_bygender/grid1.jpeg>]
+<pb/DID_byagegroup/grid.jpeg, id=641, 2409.0pt x 3011.25pt>
+File: pb/DID_byagegroup/grid.jpeg Graphic file (type jpg)
+<use pb/DID_byagegroup/grid.jpeg>
+Package pdftex.def Info: pb/DID_byagegroup/grid.jpeg  used on input line 1221.
+(pdftex.def)             Requested size: 419.16621pt x 523.94409pt.
+
+[73
+
+ <./pb/DID_byagegroup/grid.jpeg>]
+<pb/DID_bysector2/grid2.jpeg, id=648, 3613.5pt x 3011.25pt>
+File: pb/DID_bysector2/grid2.jpeg Graphic file (type jpg)
+<use pb/DID_bysector2/grid2.jpeg>
+Package pdftex.def Info: pb/DID_bysector2/grid2.jpeg  used on input line 1234.
+(pdftex.def)             Requested size: 419.16621pt x 349.29605pt.
+<pb/DID_bysector2/grid1.jpeg, id=649, 3613.5pt x 3011.25pt>
+File: pb/DID_bysector2/grid1.jpeg Graphic file (type jpg)
+<use pb/DID_bysector2/grid1.jpeg>
+Package pdftex.def Info: pb/DID_bysector2/grid1.jpeg  used on input line 1243.
+(pdftex.def)             Requested size: 419.16621pt x 349.29605pt.
+ [74
+
+ <./pb/DID_bysector2/grid2.jpeg>]
+[75 <./pb/DID_bysector2/grid1.jpeg>]
+<pb/DID_byoccupation/grid2.jpeg, id=660, 3011.25pt x 3011.25pt>
+File: pb/DID_byoccupation/grid2.jpeg Graphic file (type jpg)
+<use pb/DID_byoccupation/grid2.jpeg>
+Package pdftex.def Info: pb/DID_byoccupation/grid2.jpeg  used on input line 125
+8.
+(pdftex.def)             Requested size: 419.16621pt x 419.13689pt.
+<pb/DID_byoccupation/grid1.jpeg, id=661, 3011.25pt x 3011.25pt>
+File: pb/DID_byoccupation/grid1.jpeg Graphic file (type jpg)
+<use pb/DID_byoccupation/grid1.jpeg>
+Package pdftex.def Info: pb/DID_byoccupation/grid1.jpeg  used on input line 126
+5.
+(pdftex.def)             Requested size: 419.16621pt x 419.13689pt.
+ [76
+
+ <./pb/DID_byoccupation/grid2.jpeg>]
+[77 <./pb/DID_byoccupation/grid1.jpeg>]
+<pb/DID_byprovince/project_based.jpeg, id=672, 5420.25pt x 1806.75pt>
+File: pb/DID_byprovince/project_based.jpeg Graphic file (type jpg)
+<use pb/DID_byprovince/project_based.jpeg>
+Package pdftex.def Info: pb/DID_byprovince/project_based.jpeg  used on input li
+ne 1277.
+(pdftex.def)             Requested size: 419.16621pt x 139.71841pt.
+<pb/DID_byprovince/open_ended.jpeg, id=673, 5420.25pt x 1806.75pt>
+File: pb/DID_byprovince/open_ended.jpeg Graphic file (type jpg)
+<use pb/DID_byprovince/open_ended.jpeg>
+Package pdftex.def Info: pb/DID_byprovince/open_ended.jpeg  used on input line 
+1284.
+(pdftex.def)             Requested size: 419.16621pt x 139.71841pt.
+<pb/DID_byprovince/permanent.jpeg, id=674, 5420.25pt x 1806.75pt>
+File: pb/DID_byprovince/permanent.jpeg Graphic file (type jpg)
+<use pb/DID_byprovince/permanent.jpeg>
+Package pdftex.def Info: pb/DID_byprovince/permanent.jpeg  used on input line 1
+291.
+(pdftex.def)             Requested size: 419.16621pt x 139.71841pt.
+<pb/DID_byprovince/unemployed.jpeg, id=675, 5420.25pt x 1806.75pt>
+File: pb/DID_byprovince/unemployed.jpeg Graphic file (type jpg)
+<use pb/DID_byprovince/unemployed.jpeg>
+Package pdftex.def Info: pb/DID_byprovince/unemployed.jpeg  used on input line 
+1299.
+(pdftex.def)             Requested size: 419.16621pt x 139.71841pt.
+<pb/DID_byprovince/self_emp.jpeg, id=676, 5420.25pt x 1806.75pt>
+File: pb/DID_byprovince/self_emp.jpeg Graphic file (type jpg)
+<use pb/DID_byprovince/self_emp.jpeg>
+Package pdftex.def Info: pb/DID_byprovince/self_emp.jpeg  used on input line 13
+06.
+(pdftex.def)             Requested size: 419.16621pt x 139.71841pt.
+<pb/DID_byprovince/salaries.jpeg, id=677, 5420.25pt x 1806.75pt>
+File: pb/DID_byprovince/salaries.jpeg Graphic file (type jpg)
+<use pb/DID_byprovince/salaries.jpeg>
+Package pdftex.def Info: pb/DID_byprovince/salaries.jpeg  used on input line 13
+13.
+(pdftex.def)             Requested size: 419.16621pt x 139.71841pt.
+<pb/DID_byprovince/ncontracts.jpeg, id=678, 5420.25pt x 1806.75pt>
+File: pb/DID_byprovince/ncontracts.jpeg Graphic file (type jpg)
+<use pb/DID_byprovince/ncontracts.jpeg>
+Package pdftex.def Info: pb/DID_byprovince/ncontracts.jpeg  used on input line 
+1320.
+(pdftex.def)             Requested size: 419.16621pt x 139.71841pt.
+<pb/DID_byprovince/days_worked.jpeg, id=679, 5420.25pt x 1806.75pt>
+File: pb/DID_byprovince/days_worked.jpeg Graphic file (type jpg)
+<use pb/DID_byprovince/days_worked.jpeg>
+Package pdftex.def Info: pb/DID_byprovince/days_worked.jpeg  used on input line
+ 1327.
+(pdftex.def)             Requested size: 419.16621pt x 139.71841pt.
+ [78
+
+ <./pb/DID_byprovince/project_based.jpeg> <./pb/DID_byprovince/open_ended.jpeg>
+ <./pb/DID_byprovince/permanent.jpeg>] [79 <./pb/DID_byprovince/unemployed.jpeg
+> <./pb/DID_byprovince/self_emp.jpeg> <./pb/DID_byprovince/salaries.jpeg>] [80 
+<./pb/DID_byprovince/ncontracts.jpeg> <./pb/DID_byprovince/days_worked.jpeg>]
+<rc/verylongtwfe3/grid.jpeg, id=701, 2107.875pt x 2710.125pt>
+File: rc/verylongtwfe3/grid.jpeg Graphic file (type jpg)
+<use rc/verylongtwfe3/grid.jpeg>
+Package pdftex.def Info: rc/verylongtwfe3/grid.jpeg  used on input line 1340.
+(pdftex.def)             Requested size: 419.16621pt x 538.91393pt.
+
+Overfull \hbox (9.1939pt too wide) in paragraph at lines 1348--1385
+ [][] 
+ []
+
+[81
+
+ <./rc/verylongtwfe3/grid.jpeg>] [82]
+<rc/DID_bycontract/grid2.jpeg, id=712, 3613.5pt x 3011.25pt>
+File: rc/DID_bycontract/grid2.jpeg Graphic file (type jpg)
+<use rc/DID_bycontract/grid2.jpeg>
+Package pdftex.def Info: rc/DID_bycontract/grid2.jpeg  used on input line 1397.
+
+(pdftex.def)             Requested size: 461.08539pt x 384.21648pt.
+
+Overfull \hbox (41.91917pt too wide) in paragraph at lines 1397--1398
+ [][] 
+ []
+
+<rc/DID_bycontract/grid1.jpeg, id=713, 3613.5pt x 3011.25pt>
+File: rc/DID_bycontract/grid1.jpeg Graphic file (type jpg)
+<use rc/DID_bycontract/grid1.jpeg>
+Package pdftex.def Info: rc/DID_bycontract/grid1.jpeg  used on input line 1404.
+
+(pdftex.def)             Requested size: 461.08539pt x 384.21648pt.
+
+Overfull \hbox (41.91917pt too wide) in paragraph at lines 1404--1405
+ [][] 
+ []
+
+
+Overfull \hbox (9.1939pt too wide) in paragraph at lines 1415--1449
+ [][] 
+ []
+
+
+Overfull \hbox (9.1939pt too wide) in paragraph at lines 1454--1488
+ [][] 
+ []
+
+
+Overfull \hbox (9.1939pt too wide) in paragraph at lines 1493--1527
+ [][] 
+ []
+
+[83
+
+ <./rc/DID_bycontract/grid2.jpeg>] [84] [85 <./rc/DID_bycontract/grid1.jpeg>]
+Overfull \hbox (9.1939pt too wide) in paragraph at lines 1542--1576
+ [][] 
+ []
+
+[86
+
+]
+<bc/alldensity.jpeg, id=734, 2107.875pt x 1505.625pt>
+File: bc/alldensity.jpeg Graphic file (type jpg)
+<use bc/alldensity.jpeg>
+Package pdftex.def Info: bc/alldensity.jpeg  used on input line 1589.
+(pdftex.def)             Requested size: 419.16621pt x 299.39662pt.
+<bc/all2.jpeg, id=735, 2710.125pt x 4516.875pt>
+File: bc/all2.jpeg Graphic file (type jpg)
+<use bc/all2.jpeg>
+Package pdftex.def Info: bc/all2.jpeg  used on input line 1596.
+(pdftex.def)             Requested size: 419.16621pt x 698.59212pt.
+
+
+LaTeX Warning: Float too large for page by 30.07466pt on input line 1597.
+
+[87
+
+ <./bc/alldensity.jpeg>] [88 <./bc/all2.jpeg>]
+<bc/pbonly.jpeg, id=746, 2107.875pt x 1505.625pt>
+File: bc/pbonly.jpeg Graphic file (type jpg)
+<use bc/pbonly.jpeg>
+Package pdftex.def Info: bc/pbonly.jpeg  used on input line 1605.
+(pdftex.def)             Requested size: 419.16621pt x 299.39662pt.
+<bc/pbonly2.jpeg, id=747, 2710.125pt x 4516.875pt>
+File: bc/pbonly2.jpeg Graphic file (type jpg)
+<use bc/pbonly2.jpeg>
+Package pdftex.def Info: bc/pbonly2.jpeg  used on input line 1612.
+(pdftex.def)             Requested size: 419.16621pt x 698.59212pt.
+
+
+LaTeX Warning: Float too large for page by 30.07466pt on input line 1613.
+
+[89
+
+ <./bc/pbonly.jpeg>] [90 <./bc/pbonly2.jpeg>] [91
+
+] (document.aux)
+ ***********
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
+ ***********
+
+
+LaTeX Warning: There were undefined references.
+
+Package rerunfilecheck Info: File `document.out' has not changed.
+(rerunfilecheck)             Checksum: 734B25837CD91C163C5E9F3D35AA698C;5525.
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                document
+(biblatex)                and rerun LaTeX afterwards.
+
+Package logreq Info: Writing requests to 'document.run.xml'.
+\openout1 = `document.run.xml'.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 25819 strings out of 474486
+ 515752 string characters out of 5743754
+ 1969542 words of memory out of 5000000
+ 47614 multiletter control sequences out of 15000+600000
+ 580138 words of font info for 93 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 73i,12n,101p,1410b,5183s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\ignac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi
+1440.pk> <C:\Users\ignac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
+0\ecrm0800.pk> <C:\Users\ignac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
+/dpi600\ecrm0600.pk> <C:\Users\ignac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
+pen/ec/dpi600\tcrm1200.pk> <C:\Users\ignac\AppData\Local\MiKTeX\fonts/pk/ljfour
+/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\ignac\AppData\Local\MiKTeX\fonts/pk/
+ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\ignac\AppData\Local\MiKTeX\fon
+ts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\ignac\AppData\Local\MiKT
+eX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1728.pk> <C:\Users\ignac\AppData\Loca
+l\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\ignac\AppDat
+a\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\ignac\
+AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1095.pk> <C:\Users\
+ignac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\
+Users\ignac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk
+> <C:\Users\ignac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1
+440.pk> <C:\Users\ignac\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600
+\eccc2074.pk><C:/Users/ignac/AppData/Local/Programs/MiKTeX/fonts/type1/public/a
+msfonts/cm/cmex10.pfb><C:/Users/ignac/AppData/Local/Programs/MiKTeX/fonts/type1
+/public/amsfonts/cm/cmmi12.pfb><C:/Users/ignac/AppData/Local/Programs/MiKTeX/fo
+nts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/ignac/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/ignac/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/ignac/AppData/
+Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/ignac/A
+ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/
+ignac/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
+C:/Users/ignac/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cms
+y5.pfb><C:/Users/ignac/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
+s/cm/cmsy6.pfb><C:/Users/ignac/AppData/Local/Programs/MiKTeX/fonts/type1/public
+/amsfonts/cm/cmsy8.pfb>
+Output written on document.pdf (91 pages, 78498771 bytes).
+PDF statistics:
+ 1377 PDF objects out of 1440 (max. 8388607)
+ 201 named destinations out of 1000 (max. 500000)
+ 569 words of extra memory for PDF output out of 10000 (max. 10000000)
+
