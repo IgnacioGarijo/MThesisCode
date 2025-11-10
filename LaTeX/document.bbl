@@ -1,0 +1,2041 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{apa/apasortcite//global/global}
+    \entry{barcelo2021efectos}{report}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=24bceab6617fab31ca5fda51ff60ea1e}{%
+           family={Barceló},
+           familyi={B\bibinitperiod},
+           given={Cristina},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a0e7e8171b99c26b8c9a2b23c9a7ea43}{%
+           family={Izquierdo},
+           familyi={I\bibinitperiod},
+           given={Mario},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fe73aba56e1a5e9e6c75e20c68426e8c}{%
+           family={Lacuesta},
+           familyi={L\bibinitperiod},
+           given={Aitor},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e369605a59bc6a32fab060affd55656b}{%
+           family={Puente},
+           familyi={P\bibinitperiod},
+           given={Sergio},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b3cfbf87a6835c7facf7648a7ad21d34}{%
+           family={Regil},
+           familyi={R\bibinitperiod},
+           given={Ana\bibnamedelima Valentina},
+           giveni={A\bibinitperiod\bibinitdelim V\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=93c2cb1978bdb2e277e5b02fce365990}{%
+           family={Villanueva},
+           familyi={V\bibinitperiod},
+           given={Ernesto},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {Banco de España}%
+      }
+      \strng{namehash}{f657693f05eb8c75901b84979cd46b62}
+      \strng{fullhash}{dc91c86ad5c22c4de2e5b061cd0b21ba}
+      \strng{bibnamehash}{dc91c86ad5c22c4de2e5b061cd0b21ba}
+      \strng{authorbibnamehash}{dc91c86ad5c22c4de2e5b061cd0b21ba}
+      \strng{authornamehash}{f657693f05eb8c75901b84979cd46b62}
+      \strng{authorfullhash}{dc91c86ad5c22c4de2e5b061cd0b21ba}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Los efectos del salario mínimo interprofesional en el empleo: Nueva evidencia para España}
+      \field{type}{techreport}
+      \field{year}{2021}
+    \endentry
+    \entry{bassanini2009job}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=7b1883f83edae962882fe3aed5d11e07}{%
+           family={Bassanini},
+           familyi={B\bibinitperiod},
+           given={Andrea},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ae2400710f0c542d394eb6806509d6e9}{%
+           family={Nunziata},
+           familyi={N\bibinitperiod},
+           given={Luca},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=80c5789abe03c895610087de2f0e83c5}{%
+           family={Venn},
+           familyi={V\bibinitperiod},
+           given={Danielle},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Oxford University Press}%
+      }
+      \strng{namehash}{fe88c3ca62d7aa1f821e7947bf081449}
+      \strng{fullhash}{241658cca186f91fe28315e2288ece13}
+      \strng{bibnamehash}{241658cca186f91fe28315e2288ece13}
+      \strng{authorbibnamehash}{241658cca186f91fe28315e2288ece13}
+      \strng{authornamehash}{fe88c3ca62d7aa1f821e7947bf081449}
+      \strng{authorfullhash}{241658cca186f91fe28315e2288ece13}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Economic policy}
+      \field{number}{58}
+      \field{title}{Job protection legislation and productivity growth in OECD countries}
+      \field{volume}{24}
+      \field{year}{2009}
+      \field{pages}{349\bibrangedash 402}
+      \range{pages}{54}
+    \endentry
+    \entry{borusyak2021revisiting}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=bd786f74596fee4b3890f929e06a0f8a}{%
+           family={Borusyak},
+           familyi={B\bibinitperiod},
+           given={Kirill},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bf9f59745c80d75e4b28c948d6b49032}{%
+           family={Jaravel},
+           familyi={J\bibinitperiod},
+           given={Xavier},
+           giveni={X\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2e249611355f88583165432eab0ba4e1}{%
+           family={Spiess},
+           familyi={S\bibinitperiod},
+           given={Jann},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{868bd3b0860d23d0522ca78a414bfd87}
+      \strng{fullhash}{088786d88490d4ebdcd781569cc02694}
+      \strng{bibnamehash}{088786d88490d4ebdcd781569cc02694}
+      \strng{authorbibnamehash}{088786d88490d4ebdcd781569cc02694}
+      \strng{authornamehash}{868bd3b0860d23d0522ca78a414bfd87}
+      \strng{authorfullhash}{088786d88490d4ebdcd781569cc02694}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv preprint arXiv:2108.12419}
+      \field{title}{Revisiting event study designs: Robust and efficient estimation}
+      \field{year}{2021}
+    \endentry
+    \entry{cabrales2014dual}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=bd571b1c00d3e045f85b0b0acfb2abfd}{%
+           family={Cabrales},
+           familyi={C\bibinitperiod},
+           given={Antonio},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=003ea534ae97c1ac424261324963eb7a}{%
+           family={Dolado},
+           familyi={D\bibinitperiod},
+           given={Juan\bibnamedelima José},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=29bce2a2bfcb0158f7d1987966c02423}{%
+           family={Mora},
+           familyi={M\bibinitperiod},
+           given={Ricardo},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {CEPR Discussion Paper No. DP10246}%
+      }
+      \strng{namehash}{93e38e43975d415dfcc95c0cd7a105a1}
+      \strng{fullhash}{d9985201fa59b8b9da0a2c50b9d733f3}
+      \strng{bibnamehash}{d9985201fa59b8b9da0a2c50b9d733f3}
+      \strng{authorbibnamehash}{d9985201fa59b8b9da0a2c50b9d733f3}
+      \strng{authornamehash}{93e38e43975d415dfcc95c0cd7a105a1}
+      \strng{authorfullhash}{d9985201fa59b8b9da0a2c50b9d733f3}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Dual labour markets and (lack of) on-the-job training: PIAAC evidence from Spain and other EU countries}
+      \field{year}{2014}
+    \endentry
+    \entry{cahuc2016explaining}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=b910b20c3047e727c567264db8798baa}{%
+           family={Cahuc},
+           familyi={C\bibinitperiod},
+           given={Pierre},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7438e35127454fd346a619939fbd3aa3}{%
+           family={Charlot},
+           familyi={C\bibinitperiod},
+           given={Olivier},
+           giveni={O\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6b98ad9a2a1223e9b1dbb62e5c82e120}{%
+           family={Malherbet},
+           familyi={M\bibinitperiod},
+           given={Franck},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Wiley Online Library}%
+      }
+      \strng{namehash}{93fd23110ba23c14dd61a376d14fc5a2}
+      \strng{fullhash}{0c17af680c57c2b73cbdc12d5bf42493}
+      \strng{bibnamehash}{0c17af680c57c2b73cbdc12d5bf42493}
+      \strng{authorbibnamehash}{0c17af680c57c2b73cbdc12d5bf42493}
+      \strng{authornamehash}{93fd23110ba23c14dd61a376d14fc5a2}
+      \strng{authorfullhash}{0c17af680c57c2b73cbdc12d5bf42493}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Economic Review}
+      \field{number}{2}
+      \field{title}{Explaining the spread of temporary jobs and its impact on labor turnover}
+      \field{volume}{57}
+      \field{year}{2016}
+      \field{pages}{533\bibrangedash 572}
+      \range{pages}{40}
+    \endentry
+    \entry{callaway2021difference}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=4a5a67b3788b4a3653a14d9ab03fba0e}{%
+           family={Callaway},
+           familyi={C\bibinitperiod},
+           given={Brantly},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6581bb80caeb4ae2f2c6c39e9f46ee33}{%
+           family={Sant’Anna},
+           familyi={S\bibinitperiod},
+           given={Pedro},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{ee53ad43a90af6427e7a7b84e596f970}
+      \strng{fullhash}{ee53ad43a90af6427e7a7b84e596f970}
+      \strng{bibnamehash}{ee53ad43a90af6427e7a7b84e596f970}
+      \strng{authorbibnamehash}{ee53ad43a90af6427e7a7b84e596f970}
+      \strng{authornamehash}{ee53ad43a90af6427e7a7b84e596f970}
+      \strng{authorfullhash}{ee53ad43a90af6427e7a7b84e596f970}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of econometrics}
+      \field{number}{2}
+      \field{title}{Difference-in-differences with multiple time periods}
+      \field{volume}{225}
+      \field{year}{2021}
+      \field{pages}{200\bibrangedash 230}
+      \range{pages}{31}
+    \endentry
+    \entry{centeno2012excess}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=a4f5e060234b0e82d5169cc303fda3b0}{%
+           family={Centeno},
+           familyi={C\bibinitperiod},
+           given={Mário},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=0a993e01fdc951cb0d3ac503603b7b94}{%
+           family={Novo},
+           familyi={N\bibinitperiod},
+           given={Álvaro\bibnamedelima A},
+           giveni={Á\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{e23b51b4cc522f5e1bcaacd568b436ca}
+      \strng{fullhash}{e23b51b4cc522f5e1bcaacd568b436ca}
+      \strng{bibnamehash}{e23b51b4cc522f5e1bcaacd568b436ca}
+      \strng{authorbibnamehash}{e23b51b4cc522f5e1bcaacd568b436ca}
+      \strng{authornamehash}{e23b51b4cc522f5e1bcaacd568b436ca}
+      \strng{authorfullhash}{e23b51b4cc522f5e1bcaacd568b436ca}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Labour Economics}
+      \field{number}{3}
+      \field{title}{Excess worker turnover and fixed-term contracts: Causal evidence in a two-tier system}
+      \field{volume}{19}
+      \field{year}{2012}
+      \field{pages}{320\bibrangedash 328}
+      \range{pages}{9}
+    \endentry
+    \entry{conde2023reforming}{report}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=4b5017b3785e94ddbd9a304132d870c5}{%
+           family={Conde-Ruiz},
+           familyi={C\bibinithyphendelim R\bibinitperiod},
+           given={J\bibnamedelima Ignacio},
+           giveni={J\bibinitperiod\bibinitdelim I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=253528e20680c8abbf28b1a1b95d0d3d}{%
+           family={García},
+           familyi={G\bibinitperiod},
+           given={Manu},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=157a878184e56dac369c4b36e610d869}{%
+           family={Puch},
+           familyi={P\bibinitperiod},
+           given={Luis\bibnamedelima A},
+           giveni={L\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=92a8c43c56bde8129b6a9dc5cd1305df}{%
+           family={Ruiz},
+           familyi={R\bibinitperiod},
+           given={Jesus},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {FEDEA}%
+      }
+      \strng{namehash}{a424798f96659d79e98f0319dbf39699}
+      \strng{fullhash}{a59ab082e3edf140187649fa96e5df2e}
+      \strng{bibnamehash}{a59ab082e3edf140187649fa96e5df2e}
+      \strng{authorbibnamehash}{a59ab082e3edf140187649fa96e5df2e}
+      \strng{authornamehash}{a424798f96659d79e98f0319dbf39699}
+      \strng{authorfullhash}{a59ab082e3edf140187649fa96e5df2e}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Reforming Dual Labor Markets:“Empirical” or “Contractual” Temporary Rates?}
+      \field{type}{techreport}
+      \field{year}{2023}
+    \endentry
+    \entry{conde2021contra}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=29ca3b5072b660f2649fa0167310be8c}{%
+           family={Conde-Ruiz},
+           familyi={C\bibinithyphendelim R\bibinitperiod},
+           given={José\bibnamedelima Ignacio},
+           giveni={J\bibinitperiod\bibinitdelim I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=20e073129c4c01cda35d88914289daa7}{%
+           family={Lahera\bibnamedelima Forteza},
+           familyi={L\bibinitperiod\bibinitdelim F\bibinitperiod},
+           given={J},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{d66256a10bc4bbb331c18263f5bba050}
+      \strng{fullhash}{d66256a10bc4bbb331c18263f5bba050}
+      \strng{bibnamehash}{d66256a10bc4bbb331c18263f5bba050}
+      \strng{authorbibnamehash}{d66256a10bc4bbb331c18263f5bba050}
+      \strng{authornamehash}{d66256a10bc4bbb331c18263f5bba050}
+      \strng{authorfullhash}{d66256a10bc4bbb331c18263f5bba050}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{FEDEA, Fundación de Estudios de Economía Aplicada}
+      \field{title}{Contra la dualidad laboral}
+      \field{year}{2021}
+    \endentry
+    \entry{damiani2016temporary}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=83e122ab0e7edb2aa7a0a4bd3d1874f9}{%
+           family={Damiani},
+           familyi={D\bibinitperiod},
+           given={Mirella},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e0adf3aba2e750522ad61bf0e366a7cd}{%
+           family={Pompei},
+           familyi={P\bibinitperiod},
+           given={Fabrizio},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1d69e02adce2c0bd3361c7d4e9a946a7}{%
+           family={Ricci},
+           familyi={R\bibinitperiod},
+           given={Andrea},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Wiley Online Library}%
+      }
+      \strng{namehash}{ef8e5b41c9d3ec34ec3957bbc9566642}
+      \strng{fullhash}{0ea3dae3365b652bd771d209f467ca05}
+      \strng{bibnamehash}{0ea3dae3365b652bd771d209f467ca05}
+      \strng{authorbibnamehash}{0ea3dae3365b652bd771d209f467ca05}
+      \strng{authornamehash}{ef8e5b41c9d3ec34ec3957bbc9566642}
+      \strng{authorfullhash}{0ea3dae3365b652bd771d209f467ca05}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Labour Review}
+      \field{number}{4}
+      \field{title}{Temporary employment protection and productivity growth in EU economies}
+      \field{volume}{155}
+      \field{year}{2016}
+      \field{pages}{587\bibrangedash 622}
+      \range{pages}{36}
+    \endentry
+    \entry{de2020two}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=80f2f05079f95535ba983772aaddc301}{%
+           family={De\bibnamedelima Chaisemartin},
+           familyi={D\bibinitperiod\bibinitdelim C\bibinitperiod},
+           given={Clément},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=08f9062566c5973be3456dd305b16b82}{%
+           family={d’Haultfoeuille},
+           familyi={d\bibinitperiod},
+           given={Xavier},
+           giveni={X\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {American Economic Association 2014 Broadway, Suite 305, Nashville, TN 37203}%
+      }
+      \strng{namehash}{eb3835ff926a03bc868247b3cc5dfd40}
+      \strng{fullhash}{eb3835ff926a03bc868247b3cc5dfd40}
+      \strng{bibnamehash}{eb3835ff926a03bc868247b3cc5dfd40}
+      \strng{authorbibnamehash}{eb3835ff926a03bc868247b3cc5dfd40}
+      \strng{authornamehash}{eb3835ff926a03bc868247b3cc5dfd40}
+      \strng{authorfullhash}{eb3835ff926a03bc868247b3cc5dfd40}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{American Economic Review}
+      \field{number}{9}
+      \field{title}{Two-way fixed effects estimators with heterogeneous treatment effects}
+      \field{volume}{110}
+      \field{year}{2020}
+      \field{pages}{2964\bibrangedash 2996}
+      \range{pages}{33}
+    \endentry
+    \entry{de2017assessing}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=7f8a2e36a4a86c1aaf66d8f4a5d7224f}{%
+           family={De\bibnamedelima la\bibnamedelima Rica},
+           familyi={D\bibinitperiod\bibinitdelim l\bibinitperiod\bibinitdelim R\bibinitperiod},
+           given={S},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4b07104f2b41eac87c9ce4c15175c917}{%
+           family={Gorjón},
+           familyi={G\bibinitperiod},
+           given={L},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{ff69078d261f8fb618aaff83ee0d699a}
+      \strng{fullhash}{ff69078d261f8fb618aaff83ee0d699a}
+      \strng{bibnamehash}{ff69078d261f8fb618aaff83ee0d699a}
+      \strng{authorbibnamehash}{ff69078d261f8fb618aaff83ee0d699a}
+      \strng{authornamehash}{ff69078d261f8fb618aaff83ee0d699a}
+      \strng{authorfullhash}{ff69078d261f8fb618aaff83ee0d699a}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Institute for the Study of Labor (IZA)}
+      \field{title}{Assessing the Impact of a Minimum Income Scheme in the Basque Country}
+      \field{year}{2017}
+    \endentry
+    \entry{dolado2016does}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=a5c1fe5a1cccc12d846f13f6fefdb2f7}{%
+           family={Dolado},
+           familyi={D\bibinitperiod},
+           given={Juan\bibnamedelima J},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5fb4c0f582f038228031fa294231d064}{%
+           family={Ortigueira},
+           familyi={O\bibinitperiod},
+           given={Salvador},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2b524960e4279c7048fa6f6ca1b1fd86}{%
+           family={Stucchi},
+           familyi={S\bibinitperiod},
+           given={Rodolfo},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{244d57d20c0617f4d38602f0b957de4b}
+      \strng{fullhash}{7adc1035d44a3c13def3b7e7b5491433}
+      \strng{bibnamehash}{7adc1035d44a3c13def3b7e7b5491433}
+      \strng{authorbibnamehash}{7adc1035d44a3c13def3b7e7b5491433}
+      \strng{authornamehash}{244d57d20c0617f4d38602f0b957de4b}
+      \strng{authorfullhash}{7adc1035d44a3c13def3b7e7b5491433}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SERIEs}
+      \field{title}{Does dual employment protection affect TFP? Evidence from Spanish manufacturing firms}
+      \field{volume}{7}
+      \field{year}{2016}
+      \field{pages}{421\bibrangedash 459}
+      \range{pages}{39}
+    \endentry
+    \entry{domenech2022reforma}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=81727d15daf34feb200e9fd04d4d0300}{%
+           family={Doménech},
+           familyi={D\bibinitperiod},
+           given={Rafael},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{81727d15daf34feb200e9fd04d4d0300}
+      \strng{fullhash}{81727d15daf34feb200e9fd04d4d0300}
+      \strng{bibnamehash}{81727d15daf34feb200e9fd04d4d0300}
+      \strng{authorbibnamehash}{81727d15daf34feb200e9fd04d4d0300}
+      \strng{authornamehash}{81727d15daf34feb200e9fd04d4d0300}
+      \strng{authorfullhash}{81727d15daf34feb200e9fd04d4d0300}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Cuadernos de Información Económica}
+      \field{title}{La reforma laboral de 2021: una evaluación preliminar}
+      \field{volume}{287}
+      \field{year}{2022}
+      \field{pages}{9\bibrangedash 17}
+      \range{pages}{9}
+    \endentry
+    \entry{garcia2023dual}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=6b7ffbfaab83146b8a2e68534a6c15d7}{%
+           family={Garcia-Louzao},
+           familyi={G\bibinithyphendelim L\bibinitperiod},
+           given={Jose},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4f30ddd1f6bba9c38155df92bdd8e12b}{%
+           family={Hospido},
+           familyi={H\bibinitperiod},
+           given={Laura},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=51ad0d0ee45685c0c554392d3f74c003}{%
+           family={Ruggieri},
+           familyi={R\bibinitperiod},
+           given={Alessandro},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{4f6772a5fc9d636a859604e92390d920}
+      \strng{fullhash}{c99ebcb881bf63ad90603789da5dd8df}
+      \strng{bibnamehash}{c99ebcb881bf63ad90603789da5dd8df}
+      \strng{authorbibnamehash}{c99ebcb881bf63ad90603789da5dd8df}
+      \strng{authornamehash}{4f6772a5fc9d636a859604e92390d920}
+      \strng{authorfullhash}{c99ebcb881bf63ad90603789da5dd8df}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Labour Economics}
+      \field{title}{Dual returns to experience}
+      \field{volume}{80}
+      \field{year}{2023}
+      \field{pages}{102290}
+      \range{pages}{1}
+    \endentry
+    \entry{gardner2022two}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=91208309c506b8d2252f8c9828f1f742}{%
+           family={Gardner},
+           familyi={G\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{91208309c506b8d2252f8c9828f1f742}
+      \strng{fullhash}{91208309c506b8d2252f8c9828f1f742}
+      \strng{bibnamehash}{91208309c506b8d2252f8c9828f1f742}
+      \strng{authorbibnamehash}{91208309c506b8d2252f8c9828f1f742}
+      \strng{authornamehash}{91208309c506b8d2252f8c9828f1f742}
+      \strng{authorfullhash}{91208309c506b8d2252f8c9828f1f742}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv preprint arXiv:2207.05943}
+      \field{title}{Two-stage differences in differences}
+      \field{year}{2022}
+    \endentry
+    \entry{gorjon2021}{article}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=225a7351826bae5ce32bbc7a4f341ce2}{%
+           family={Gorjón},
+           familyi={G\bibinitperiod},
+           given={Lucía},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e001db47adc2263c672b20cd0afc8162}{%
+           family={Osés},
+           familyi={O\bibinitperiod},
+           given={Ainhoa},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=880e78d49fe88d1b23496a8dcb21f306}{%
+           family={Rica},
+           familyi={R\bibinitperiod},
+           given={Sara},
+           giveni={S\bibinitperiod},
+           givenun=0,
+           prefix={de\bibnamedelima la},
+           prefixi={d\bibinitperiod\bibinitdelim l\bibinitperiod}}}%
+        {{un=0,uniquepart=base,hash=b9b903485266aca471cd8eabea611934}{%
+           family={Villar},
+           familyi={V\bibinitperiod},
+           given={Antonio},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{18781340c72435f0c7ab0a0e7d371add}
+      \strng{fullhash}{d5e7d5f18e2ff0574269b5addc749b2b}
+      \strng{bibnamehash}{d5e7d5f18e2ff0574269b5addc749b2b}
+      \strng{authorbibnamehash}{d5e7d5f18e2ff0574269b5addc749b2b}
+      \strng{authornamehash}{18781340c72435f0c7ab0a0e7d371add}
+      \strng{authorfullhash}{d5e7d5f18e2ff0574269b5addc749b2b}
+      \field{extraname}{1}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{ISEAK}
+      \field{title}{The long-lasting scar of bad jobs in the Spanish labour market}
+      \field{year}{2021}
+    \endentry
+    \entry{gorjon2022employment}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=225a7351826bae5ce32bbc7a4f341ce2}{%
+           family={Gorjón},
+           familyi={G\bibinitperiod},
+           given={Lucía},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=beea243eb2ade8f4314dab58202671d4}{%
+           family={Lafuente},
+           familyi={L\bibinitperiod},
+           given={David\bibnamedelima Martinez},
+           giveni={D\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0,
+           prefix={de},
+           prefixi={d\bibinitperiod}}}%
+        {{un=0,uniquepart=base,hash=6facbe1eb18ad7e71c340ea8f92f5f4c}{%
+           family={Romero},
+           familyi={R\bibinitperiod},
+           given={Gonzalo},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{18781340c72435f0c7ab0a0e7d371add}
+      \strng{fullhash}{25f15f59b563b8a6e2cf5eaa57d45916}
+      \strng{bibnamehash}{25f15f59b563b8a6e2cf5eaa57d45916}
+      \strng{authorbibnamehash}{25f15f59b563b8a6e2cf5eaa57d45916}
+      \strng{authornamehash}{18781340c72435f0c7ab0a0e7d371add}
+      \strng{authorfullhash}{25f15f59b563b8a6e2cf5eaa57d45916}
+      \field{extraname}{2}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Employment effects of the minimum wage: Evidence from the Spanish 2019 reform}
+      \field{year}{2022}
+    \endentry
+    \entry{hijzen2017impact}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=d739ba0a328a7cd23b0c508bec6c189e}{%
+           family={Hijzen},
+           familyi={H\bibinitperiod},
+           given={Alexander},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c1f6382e9b68eb2371432851cfbed100}{%
+           family={Mondauto},
+           familyi={M\bibinitperiod},
+           given={Leopoldo},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d0e90ebe49f6688a4d4bf9b069a39367}{%
+           family={Scarpetta},
+           familyi={S\bibinitperiod},
+           given={Stefano},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{21cfb7a27f31d68af4d21650d1393ac7}
+      \strng{fullhash}{fd33b292517e73a59f508416ae52cd65}
+      \strng{bibnamehash}{fd33b292517e73a59f508416ae52cd65}
+      \strng{authorbibnamehash}{fd33b292517e73a59f508416ae52cd65}
+      \strng{authornamehash}{21cfb7a27f31d68af4d21650d1393ac7}
+      \strng{authorfullhash}{fd33b292517e73a59f508416ae52cd65}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Labour Economics}
+      \field{title}{The impact of employment protection on temporary employment: Evidence from a regression discontinuity design}
+      \field{volume}{46}
+      \field{year}{2017}
+      \field{pages}{64\bibrangedash 76}
+      \range{pages}{13}
+    \endentry
+    \entry{kahn2010employment}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=aa0bcbc2aaa438c2693696cc44e7a4d1}{%
+           family={Kahn},
+           familyi={K\bibinitperiod},
+           given={Lawrence\bibnamedelima M},
+           giveni={L\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{aa0bcbc2aaa438c2693696cc44e7a4d1}
+      \strng{fullhash}{aa0bcbc2aaa438c2693696cc44e7a4d1}
+      \strng{bibnamehash}{aa0bcbc2aaa438c2693696cc44e7a4d1}
+      \strng{authorbibnamehash}{aa0bcbc2aaa438c2693696cc44e7a4d1}
+      \strng{authornamehash}{aa0bcbc2aaa438c2693696cc44e7a4d1}
+      \strng{authorfullhash}{aa0bcbc2aaa438c2693696cc44e7a4d1}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Labour Economics}
+      \field{number}{1}
+      \field{title}{Employment protection reforms, employment and the incidence of temporary jobs in Europe: 1996--2001}
+      \field{volume}{17}
+      \field{year}{2010}
+      \field{pages}{1\bibrangedash 15}
+      \range{pages}{15}
+    \endentry
+    \entry{liu2022practical}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=8eb9a91a6692d1ecdffe8fd6b6c152eb}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Licheng},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=33f1f8102ae8d032fb301ab80a09459d}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Ye},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=525088c4272a93c67f7c5e47f118568c}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Yiqing},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Wiley Online Library}%
+      }
+      \strng{namehash}{bdbb7e71977ad6ce374907ae72c307a8}
+      \strng{fullhash}{9ae3cb84a722a2d22f3137c7519c1862}
+      \strng{bibnamehash}{9ae3cb84a722a2d22f3137c7519c1862}
+      \strng{authorbibnamehash}{9ae3cb84a722a2d22f3137c7519c1862}
+      \strng{authornamehash}{bdbb7e71977ad6ce374907ae72c307a8}
+      \strng{authorfullhash}{9ae3cb84a722a2d22f3137c7519c1862}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{American Journal of Political Science}
+      \field{title}{A practical guide to counterfactual estimators for causal inference with time-series cross-sectional data}
+      \field{year}{2022}
+    \endentry
+    \entry{esade}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=317d699cf937b7f4b9e04208066c7612}{%
+           family={Martínez\bibnamedelima Jorge},
+           familyi={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+           given={Ángel\bibnamedelima Ignacio},
+           giveni={Á\bibinitperiod\bibinitdelim I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=20e073129c4c01cda35d88914289daa7}{%
+           family={Lahera\bibnamedelima Forteza},
+           familyi={L\bibinitperiod\bibinitdelim F\bibinitperiod},
+           given={J},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{9c59d4712ca34b10c37140f80b57f283}
+      \strng{fullhash}{9c59d4712ca34b10c37140f80b57f283}
+      \strng{bibnamehash}{9c59d4712ca34b10c37140f80b57f283}
+      \strng{authorbibnamehash}{9c59d4712ca34b10c37140f80b57f283}
+      \strng{authornamehash}{9c59d4712ca34b10c37140f80b57f283}
+      \strng{authorfullhash}{9c59d4712ca34b10c37140f80b57f283}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{EsadeEcPol}
+      \field{title}{¿Está reduciendo la temporalidad la reforma laboral de 2021? Una primera evaluación}
+      \field{year}{2022}
+    \endentry
+    \entry{perez2014can}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=0c2bb0dd6c252ed8a1bc5057c156b5b5}{%
+           family={Pérez},
+           familyi={P\bibinitperiod},
+           given={Jose\bibnamedelimb i\bibnamedelima García},
+           giveni={J\bibinitperiod\bibinitdelim i\bibinitperiod\bibinitdelim G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f5d482f806110583838c52365386a5f0}{%
+           family={Marinescu},
+           familyi={M\bibinitperiod},
+           given={Ioana},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7f1a4893e0699019ee3f248d931a70d6}{%
+           family={Castello},
+           familyi={C\bibinitperiod},
+           given={Judit\bibnamedelima Vall},
+           giveni={J\bibinitperiod\bibinitdelim V\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{75d5c49324c0fa9649e42654e8400322}
+      \strng{fullhash}{66e7484d7a3cb07b0288fb8a89018df4}
+      \strng{bibnamehash}{66e7484d7a3cb07b0288fb8a89018df4}
+      \strng{authorbibnamehash}{66e7484d7a3cb07b0288fb8a89018df4}
+      \strng{authornamehash}{75d5c49324c0fa9649e42654e8400322}
+      \strng{authorfullhash}{66e7484d7a3cb07b0288fb8a89018df4}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Documento de Trabajo}
+      \field{title}{Can Fixed-Term Contracts Put Low Skilled Youth on a Better Career Path? Evidence from Spain}
+      \field{year}{2014}
+      \field{pages}{08}
+      \range{pages}{1}
+    \endentry
+    \entry{ley}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=b91c51255477202348800bc7c81c1f37}{%
+           family={{Spanish Parlament}},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{b91c51255477202348800bc7c81c1f37}
+      \strng{fullhash}{b91c51255477202348800bc7c81c1f37}
+      \strng{bibnamehash}{b91c51255477202348800bc7c81c1f37}
+      \strng{authorbibnamehash}{b91c51255477202348800bc7c81c1f37}
+      \strng{authornamehash}{b91c51255477202348800bc7c81c1f37}
+      \strng{authorfullhash}{b91c51255477202348800bc7c81c1f37}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Real Decreto-ley 32/2021}
+      \field{year}{2021}
+    \endentry
+    \entry{sun2021estimating}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=3011926b49b3aa7b3e8913ca855e42fc}{%
+           family={Sun},
+           familyi={S\bibinitperiod},
+           given={Liyang},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1bfe7aacc440efc360e6a6e3eaa7a2d3}{%
+           family={Abraham},
+           familyi={A\bibinitperiod},
+           given={Sarah},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{c7a84aba4076f349fbfad5258d37c1a1}
+      \strng{fullhash}{c7a84aba4076f349fbfad5258d37c1a1}
+      \strng{bibnamehash}{c7a84aba4076f349fbfad5258d37c1a1}
+      \strng{authorbibnamehash}{c7a84aba4076f349fbfad5258d37c1a1}
+      \strng{authornamehash}{c7a84aba4076f349fbfad5258d37c1a1}
+      \strng{authorfullhash}{c7a84aba4076f349fbfad5258d37c1a1}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Econometrics}
+      \field{number}{2}
+      \field{title}{Estimating dynamic treatment effects in event studies with heterogeneous treatment effects}
+      \field{volume}{225}
+      \field{year}{2021}
+      \field{pages}{175\bibrangedash 199}
+      \range{pages}{25}
+    \endentry
+    \entry{wooldridge2021two}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c93aeef4998e670d5343b7e632c431dc}{%
+           family={Wooldridge},
+           familyi={W\bibinitperiod},
+           given={Jeffrey\bibnamedelima M},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{c93aeef4998e670d5343b7e632c431dc}
+      \strng{fullhash}{c93aeef4998e670d5343b7e632c431dc}
+      \strng{bibnamehash}{c93aeef4998e670d5343b7e632c431dc}
+      \strng{authorbibnamehash}{c93aeef4998e670d5343b7e632c431dc}
+      \strng{authornamehash}{c93aeef4998e670d5343b7e632c431dc}
+      \strng{authorfullhash}{c93aeef4998e670d5343b7e632c431dc}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Available at SSRN 3906345}
+      \field{title}{Two-way fixed effects, the two-way mundlak regression, and difference-in-differences estimators}
+      \field{year}{2021}
+    \endentry
+  \enddatalist
+  \datalist[entry]{apa/global//global/global}
+    \entry{barcelo2021efectos}{report}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=24bceab6617fab31ca5fda51ff60ea1e}{%
+           family={Barceló},
+           familyi={B\bibinitperiod},
+           given={Cristina},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a0e7e8171b99c26b8c9a2b23c9a7ea43}{%
+           family={Izquierdo},
+           familyi={I\bibinitperiod},
+           given={Mario},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fe73aba56e1a5e9e6c75e20c68426e8c}{%
+           family={Lacuesta},
+           familyi={L\bibinitperiod},
+           given={Aitor},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e369605a59bc6a32fab060affd55656b}{%
+           family={Puente},
+           familyi={P\bibinitperiod},
+           given={Sergio},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b3cfbf87a6835c7facf7648a7ad21d34}{%
+           family={Regil},
+           familyi={R\bibinitperiod},
+           given={Ana\bibnamedelima Valentina},
+           giveni={A\bibinitperiod\bibinitdelim V\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=93c2cb1978bdb2e277e5b02fce365990}{%
+           family={Villanueva},
+           familyi={V\bibinitperiod},
+           given={Ernesto},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {Banco de España}%
+      }
+      \strng{namehash}{f657693f05eb8c75901b84979cd46b62}
+      \strng{fullhash}{dc91c86ad5c22c4de2e5b061cd0b21ba}
+      \strng{bibnamehash}{dc91c86ad5c22c4de2e5b061cd0b21ba}
+      \strng{authorbibnamehash}{dc91c86ad5c22c4de2e5b061cd0b21ba}
+      \strng{authornamehash}{f657693f05eb8c75901b84979cd46b62}
+      \strng{authorfullhash}{dc91c86ad5c22c4de2e5b061cd0b21ba}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Los efectos del salario mínimo interprofesional en el empleo: Nueva evidencia para España}
+      \field{type}{techreport}
+      \field{year}{2021}
+    \endentry
+    \entry{bassanini2009job}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=7b1883f83edae962882fe3aed5d11e07}{%
+           family={Bassanini},
+           familyi={B\bibinitperiod},
+           given={Andrea},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ae2400710f0c542d394eb6806509d6e9}{%
+           family={Nunziata},
+           familyi={N\bibinitperiod},
+           given={Luca},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=80c5789abe03c895610087de2f0e83c5}{%
+           family={Venn},
+           familyi={V\bibinitperiod},
+           given={Danielle},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Oxford University Press}%
+      }
+      \strng{namehash}{fe88c3ca62d7aa1f821e7947bf081449}
+      \strng{fullhash}{241658cca186f91fe28315e2288ece13}
+      \strng{bibnamehash}{241658cca186f91fe28315e2288ece13}
+      \strng{authorbibnamehash}{241658cca186f91fe28315e2288ece13}
+      \strng{authornamehash}{fe88c3ca62d7aa1f821e7947bf081449}
+      \strng{authorfullhash}{241658cca186f91fe28315e2288ece13}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Economic policy}
+      \field{number}{58}
+      \field{title}{Job protection legislation and productivity growth in OECD countries}
+      \field{volume}{24}
+      \field{year}{2009}
+      \field{pages}{349\bibrangedash 402}
+      \range{pages}{54}
+    \endentry
+    \entry{borusyak2021revisiting}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=bd786f74596fee4b3890f929e06a0f8a}{%
+           family={Borusyak},
+           familyi={B\bibinitperiod},
+           given={Kirill},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bf9f59745c80d75e4b28c948d6b49032}{%
+           family={Jaravel},
+           familyi={J\bibinitperiod},
+           given={Xavier},
+           giveni={X\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2e249611355f88583165432eab0ba4e1}{%
+           family={Spiess},
+           familyi={S\bibinitperiod},
+           given={Jann},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{868bd3b0860d23d0522ca78a414bfd87}
+      \strng{fullhash}{088786d88490d4ebdcd781569cc02694}
+      \strng{bibnamehash}{088786d88490d4ebdcd781569cc02694}
+      \strng{authorbibnamehash}{088786d88490d4ebdcd781569cc02694}
+      \strng{authornamehash}{868bd3b0860d23d0522ca78a414bfd87}
+      \strng{authorfullhash}{088786d88490d4ebdcd781569cc02694}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv preprint arXiv:2108.12419}
+      \field{title}{Revisiting event study designs: Robust and efficient estimation}
+      \field{year}{2021}
+    \endentry
+    \entry{cabrales2014dual}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=bd571b1c00d3e045f85b0b0acfb2abfd}{%
+           family={Cabrales},
+           familyi={C\bibinitperiod},
+           given={Antonio},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=003ea534ae97c1ac424261324963eb7a}{%
+           family={Dolado},
+           familyi={D\bibinitperiod},
+           given={Juan\bibnamedelima José},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=29bce2a2bfcb0158f7d1987966c02423}{%
+           family={Mora},
+           familyi={M\bibinitperiod},
+           given={Ricardo},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {CEPR Discussion Paper No. DP10246}%
+      }
+      \strng{namehash}{93e38e43975d415dfcc95c0cd7a105a1}
+      \strng{fullhash}{d9985201fa59b8b9da0a2c50b9d733f3}
+      \strng{bibnamehash}{d9985201fa59b8b9da0a2c50b9d733f3}
+      \strng{authorbibnamehash}{d9985201fa59b8b9da0a2c50b9d733f3}
+      \strng{authornamehash}{93e38e43975d415dfcc95c0cd7a105a1}
+      \strng{authorfullhash}{d9985201fa59b8b9da0a2c50b9d733f3}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Dual labour markets and (lack of) on-the-job training: PIAAC evidence from Spain and other EU countries}
+      \field{year}{2014}
+    \endentry
+    \entry{cahuc2016explaining}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=b910b20c3047e727c567264db8798baa}{%
+           family={Cahuc},
+           familyi={C\bibinitperiod},
+           given={Pierre},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7438e35127454fd346a619939fbd3aa3}{%
+           family={Charlot},
+           familyi={C\bibinitperiod},
+           given={Olivier},
+           giveni={O\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6b98ad9a2a1223e9b1dbb62e5c82e120}{%
+           family={Malherbet},
+           familyi={M\bibinitperiod},
+           given={Franck},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Wiley Online Library}%
+      }
+      \strng{namehash}{93fd23110ba23c14dd61a376d14fc5a2}
+      \strng{fullhash}{0c17af680c57c2b73cbdc12d5bf42493}
+      \strng{bibnamehash}{0c17af680c57c2b73cbdc12d5bf42493}
+      \strng{authorbibnamehash}{0c17af680c57c2b73cbdc12d5bf42493}
+      \strng{authornamehash}{93fd23110ba23c14dd61a376d14fc5a2}
+      \strng{authorfullhash}{0c17af680c57c2b73cbdc12d5bf42493}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Economic Review}
+      \field{number}{2}
+      \field{title}{Explaining the spread of temporary jobs and its impact on labor turnover}
+      \field{volume}{57}
+      \field{year}{2016}
+      \field{pages}{533\bibrangedash 572}
+      \range{pages}{40}
+    \endentry
+    \entry{callaway2021difference}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=4a5a67b3788b4a3653a14d9ab03fba0e}{%
+           family={Callaway},
+           familyi={C\bibinitperiod},
+           given={Brantly},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6581bb80caeb4ae2f2c6c39e9f46ee33}{%
+           family={Sant’Anna},
+           familyi={S\bibinitperiod},
+           given={Pedro},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{ee53ad43a90af6427e7a7b84e596f970}
+      \strng{fullhash}{ee53ad43a90af6427e7a7b84e596f970}
+      \strng{bibnamehash}{ee53ad43a90af6427e7a7b84e596f970}
+      \strng{authorbibnamehash}{ee53ad43a90af6427e7a7b84e596f970}
+      \strng{authornamehash}{ee53ad43a90af6427e7a7b84e596f970}
+      \strng{authorfullhash}{ee53ad43a90af6427e7a7b84e596f970}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of econometrics}
+      \field{number}{2}
+      \field{title}{Difference-in-differences with multiple time periods}
+      \field{volume}{225}
+      \field{year}{2021}
+      \field{pages}{200\bibrangedash 230}
+      \range{pages}{31}
+    \endentry
+    \entry{centeno2012excess}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=a4f5e060234b0e82d5169cc303fda3b0}{%
+           family={Centeno},
+           familyi={C\bibinitperiod},
+           given={Mário},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=0a993e01fdc951cb0d3ac503603b7b94}{%
+           family={Novo},
+           familyi={N\bibinitperiod},
+           given={Álvaro\bibnamedelima A},
+           giveni={Á\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{e23b51b4cc522f5e1bcaacd568b436ca}
+      \strng{fullhash}{e23b51b4cc522f5e1bcaacd568b436ca}
+      \strng{bibnamehash}{e23b51b4cc522f5e1bcaacd568b436ca}
+      \strng{authorbibnamehash}{e23b51b4cc522f5e1bcaacd568b436ca}
+      \strng{authornamehash}{e23b51b4cc522f5e1bcaacd568b436ca}
+      \strng{authorfullhash}{e23b51b4cc522f5e1bcaacd568b436ca}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Labour Economics}
+      \field{number}{3}
+      \field{title}{Excess worker turnover and fixed-term contracts: Causal evidence in a two-tier system}
+      \field{volume}{19}
+      \field{year}{2012}
+      \field{pages}{320\bibrangedash 328}
+      \range{pages}{9}
+    \endentry
+    \entry{conde2023reforming}{report}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=4b5017b3785e94ddbd9a304132d870c5}{%
+           family={Conde-Ruiz},
+           familyi={C\bibinithyphendelim R\bibinitperiod},
+           given={J\bibnamedelima Ignacio},
+           giveni={J\bibinitperiod\bibinitdelim I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=253528e20680c8abbf28b1a1b95d0d3d}{%
+           family={García},
+           familyi={G\bibinitperiod},
+           given={Manu},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=157a878184e56dac369c4b36e610d869}{%
+           family={Puch},
+           familyi={P\bibinitperiod},
+           given={Luis\bibnamedelima A},
+           giveni={L\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=92a8c43c56bde8129b6a9dc5cd1305df}{%
+           family={Ruiz},
+           familyi={R\bibinitperiod},
+           given={Jesus},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {FEDEA}%
+      }
+      \strng{namehash}{a424798f96659d79e98f0319dbf39699}
+      \strng{fullhash}{a59ab082e3edf140187649fa96e5df2e}
+      \strng{bibnamehash}{a59ab082e3edf140187649fa96e5df2e}
+      \strng{authorbibnamehash}{a59ab082e3edf140187649fa96e5df2e}
+      \strng{authornamehash}{a424798f96659d79e98f0319dbf39699}
+      \strng{authorfullhash}{a59ab082e3edf140187649fa96e5df2e}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Reforming Dual Labor Markets:“Empirical” or “Contractual” Temporary Rates?}
+      \field{type}{techreport}
+      \field{year}{2023}
+    \endentry
+    \entry{conde2021contra}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=29ca3b5072b660f2649fa0167310be8c}{%
+           family={Conde-Ruiz},
+           familyi={C\bibinithyphendelim R\bibinitperiod},
+           given={José\bibnamedelima Ignacio},
+           giveni={J\bibinitperiod\bibinitdelim I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=20e073129c4c01cda35d88914289daa7}{%
+           family={Lahera\bibnamedelima Forteza},
+           familyi={L\bibinitperiod\bibinitdelim F\bibinitperiod},
+           given={J},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{d66256a10bc4bbb331c18263f5bba050}
+      \strng{fullhash}{d66256a10bc4bbb331c18263f5bba050}
+      \strng{bibnamehash}{d66256a10bc4bbb331c18263f5bba050}
+      \strng{authorbibnamehash}{d66256a10bc4bbb331c18263f5bba050}
+      \strng{authornamehash}{d66256a10bc4bbb331c18263f5bba050}
+      \strng{authorfullhash}{d66256a10bc4bbb331c18263f5bba050}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{FEDEA, Fundación de Estudios de Economía Aplicada}
+      \field{title}{Contra la dualidad laboral}
+      \field{year}{2021}
+    \endentry
+    \entry{damiani2016temporary}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=83e122ab0e7edb2aa7a0a4bd3d1874f9}{%
+           family={Damiani},
+           familyi={D\bibinitperiod},
+           given={Mirella},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e0adf3aba2e750522ad61bf0e366a7cd}{%
+           family={Pompei},
+           familyi={P\bibinitperiod},
+           given={Fabrizio},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1d69e02adce2c0bd3361c7d4e9a946a7}{%
+           family={Ricci},
+           familyi={R\bibinitperiod},
+           given={Andrea},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Wiley Online Library}%
+      }
+      \strng{namehash}{ef8e5b41c9d3ec34ec3957bbc9566642}
+      \strng{fullhash}{0ea3dae3365b652bd771d209f467ca05}
+      \strng{bibnamehash}{0ea3dae3365b652bd771d209f467ca05}
+      \strng{authorbibnamehash}{0ea3dae3365b652bd771d209f467ca05}
+      \strng{authornamehash}{ef8e5b41c9d3ec34ec3957bbc9566642}
+      \strng{authorfullhash}{0ea3dae3365b652bd771d209f467ca05}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Labour Review}
+      \field{number}{4}
+      \field{title}{Temporary employment protection and productivity growth in EU economies}
+      \field{volume}{155}
+      \field{year}{2016}
+      \field{pages}{587\bibrangedash 622}
+      \range{pages}{36}
+    \endentry
+    \entry{de2020two}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=80f2f05079f95535ba983772aaddc301}{%
+           family={De\bibnamedelima Chaisemartin},
+           familyi={D\bibinitperiod\bibinitdelim C\bibinitperiod},
+           given={Clément},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=08f9062566c5973be3456dd305b16b82}{%
+           family={d’Haultfoeuille},
+           familyi={d\bibinitperiod},
+           given={Xavier},
+           giveni={X\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {American Economic Association 2014 Broadway, Suite 305, Nashville, TN 37203}%
+      }
+      \strng{namehash}{eb3835ff926a03bc868247b3cc5dfd40}
+      \strng{fullhash}{eb3835ff926a03bc868247b3cc5dfd40}
+      \strng{bibnamehash}{eb3835ff926a03bc868247b3cc5dfd40}
+      \strng{authorbibnamehash}{eb3835ff926a03bc868247b3cc5dfd40}
+      \strng{authornamehash}{eb3835ff926a03bc868247b3cc5dfd40}
+      \strng{authorfullhash}{eb3835ff926a03bc868247b3cc5dfd40}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{American Economic Review}
+      \field{number}{9}
+      \field{title}{Two-way fixed effects estimators with heterogeneous treatment effects}
+      \field{volume}{110}
+      \field{year}{2020}
+      \field{pages}{2964\bibrangedash 2996}
+      \range{pages}{33}
+    \endentry
+    \entry{de2017assessing}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=7f8a2e36a4a86c1aaf66d8f4a5d7224f}{%
+           family={De\bibnamedelima la\bibnamedelima Rica},
+           familyi={D\bibinitperiod\bibinitdelim l\bibinitperiod\bibinitdelim R\bibinitperiod},
+           given={S},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4b07104f2b41eac87c9ce4c15175c917}{%
+           family={Gorjón},
+           familyi={G\bibinitperiod},
+           given={L},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{ff69078d261f8fb618aaff83ee0d699a}
+      \strng{fullhash}{ff69078d261f8fb618aaff83ee0d699a}
+      \strng{bibnamehash}{ff69078d261f8fb618aaff83ee0d699a}
+      \strng{authorbibnamehash}{ff69078d261f8fb618aaff83ee0d699a}
+      \strng{authornamehash}{ff69078d261f8fb618aaff83ee0d699a}
+      \strng{authorfullhash}{ff69078d261f8fb618aaff83ee0d699a}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Institute for the Study of Labor (IZA)}
+      \field{title}{Assessing the Impact of a Minimum Income Scheme in the Basque Country}
+      \field{year}{2017}
+    \endentry
+    \entry{dolado2016does}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=a5c1fe5a1cccc12d846f13f6fefdb2f7}{%
+           family={Dolado},
+           familyi={D\bibinitperiod},
+           given={Juan\bibnamedelima J},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5fb4c0f582f038228031fa294231d064}{%
+           family={Ortigueira},
+           familyi={O\bibinitperiod},
+           given={Salvador},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2b524960e4279c7048fa6f6ca1b1fd86}{%
+           family={Stucchi},
+           familyi={S\bibinitperiod},
+           given={Rodolfo},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{244d57d20c0617f4d38602f0b957de4b}
+      \strng{fullhash}{7adc1035d44a3c13def3b7e7b5491433}
+      \strng{bibnamehash}{7adc1035d44a3c13def3b7e7b5491433}
+      \strng{authorbibnamehash}{7adc1035d44a3c13def3b7e7b5491433}
+      \strng{authornamehash}{244d57d20c0617f4d38602f0b957de4b}
+      \strng{authorfullhash}{7adc1035d44a3c13def3b7e7b5491433}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SERIEs}
+      \field{title}{Does dual employment protection affect TFP? Evidence from Spanish manufacturing firms}
+      \field{volume}{7}
+      \field{year}{2016}
+      \field{pages}{421\bibrangedash 459}
+      \range{pages}{39}
+    \endentry
+    \entry{domenech2022reforma}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=81727d15daf34feb200e9fd04d4d0300}{%
+           family={Doménech},
+           familyi={D\bibinitperiod},
+           given={Rafael},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{81727d15daf34feb200e9fd04d4d0300}
+      \strng{fullhash}{81727d15daf34feb200e9fd04d4d0300}
+      \strng{bibnamehash}{81727d15daf34feb200e9fd04d4d0300}
+      \strng{authorbibnamehash}{81727d15daf34feb200e9fd04d4d0300}
+      \strng{authornamehash}{81727d15daf34feb200e9fd04d4d0300}
+      \strng{authorfullhash}{81727d15daf34feb200e9fd04d4d0300}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Cuadernos de Información Económica}
+      \field{title}{La reforma laboral de 2021: una evaluación preliminar}
+      \field{volume}{287}
+      \field{year}{2022}
+      \field{pages}{9\bibrangedash 17}
+      \range{pages}{9}
+    \endentry
+    \entry{garcia2023dual}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=6b7ffbfaab83146b8a2e68534a6c15d7}{%
+           family={Garcia-Louzao},
+           familyi={G\bibinithyphendelim L\bibinitperiod},
+           given={Jose},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4f30ddd1f6bba9c38155df92bdd8e12b}{%
+           family={Hospido},
+           familyi={H\bibinitperiod},
+           given={Laura},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=51ad0d0ee45685c0c554392d3f74c003}{%
+           family={Ruggieri},
+           familyi={R\bibinitperiod},
+           given={Alessandro},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{4f6772a5fc9d636a859604e92390d920}
+      \strng{fullhash}{c99ebcb881bf63ad90603789da5dd8df}
+      \strng{bibnamehash}{c99ebcb881bf63ad90603789da5dd8df}
+      \strng{authorbibnamehash}{c99ebcb881bf63ad90603789da5dd8df}
+      \strng{authornamehash}{4f6772a5fc9d636a859604e92390d920}
+      \strng{authorfullhash}{c99ebcb881bf63ad90603789da5dd8df}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Labour Economics}
+      \field{title}{Dual returns to experience}
+      \field{volume}{80}
+      \field{year}{2023}
+      \field{pages}{102290}
+      \range{pages}{1}
+    \endentry
+    \entry{gardner2022two}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=91208309c506b8d2252f8c9828f1f742}{%
+           family={Gardner},
+           familyi={G\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{91208309c506b8d2252f8c9828f1f742}
+      \strng{fullhash}{91208309c506b8d2252f8c9828f1f742}
+      \strng{bibnamehash}{91208309c506b8d2252f8c9828f1f742}
+      \strng{authorbibnamehash}{91208309c506b8d2252f8c9828f1f742}
+      \strng{authornamehash}{91208309c506b8d2252f8c9828f1f742}
+      \strng{authorfullhash}{91208309c506b8d2252f8c9828f1f742}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{arXiv preprint arXiv:2207.05943}
+      \field{title}{Two-stage differences in differences}
+      \field{year}{2022}
+    \endentry
+    \entry{gorjon2022employment}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=225a7351826bae5ce32bbc7a4f341ce2}{%
+           family={Gorjón},
+           familyi={G\bibinitperiod},
+           given={Lucía},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=beea243eb2ade8f4314dab58202671d4}{%
+           family={Lafuente},
+           familyi={L\bibinitperiod},
+           given={David\bibnamedelima Martinez},
+           giveni={D\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0,
+           prefix={de},
+           prefixi={d\bibinitperiod}}}%
+        {{un=0,uniquepart=base,hash=6facbe1eb18ad7e71c340ea8f92f5f4c}{%
+           family={Romero},
+           familyi={R\bibinitperiod},
+           given={Gonzalo},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{18781340c72435f0c7ab0a0e7d371add}
+      \strng{fullhash}{25f15f59b563b8a6e2cf5eaa57d45916}
+      \strng{bibnamehash}{25f15f59b563b8a6e2cf5eaa57d45916}
+      \strng{authorbibnamehash}{25f15f59b563b8a6e2cf5eaa57d45916}
+      \strng{authornamehash}{18781340c72435f0c7ab0a0e7d371add}
+      \strng{authorfullhash}{25f15f59b563b8a6e2cf5eaa57d45916}
+      \field{extraname}{1}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Employment effects of the minimum wage: Evidence from the Spanish 2019 reform}
+      \field{year}{2022}
+    \endentry
+    \entry{gorjon2021}{article}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=225a7351826bae5ce32bbc7a4f341ce2}{%
+           family={Gorjón},
+           familyi={G\bibinitperiod},
+           given={Lucía},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e001db47adc2263c672b20cd0afc8162}{%
+           family={Osés},
+           familyi={O\bibinitperiod},
+           given={Ainhoa},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=880e78d49fe88d1b23496a8dcb21f306}{%
+           family={Rica},
+           familyi={R\bibinitperiod},
+           given={Sara},
+           giveni={S\bibinitperiod},
+           givenun=0,
+           prefix={de\bibnamedelima la},
+           prefixi={d\bibinitperiod\bibinitdelim l\bibinitperiod}}}%
+        {{un=0,uniquepart=base,hash=b9b903485266aca471cd8eabea611934}{%
+           family={Villar},
+           familyi={V\bibinitperiod},
+           given={Antonio},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{18781340c72435f0c7ab0a0e7d371add}
+      \strng{fullhash}{d5e7d5f18e2ff0574269b5addc749b2b}
+      \strng{bibnamehash}{d5e7d5f18e2ff0574269b5addc749b2b}
+      \strng{authorbibnamehash}{d5e7d5f18e2ff0574269b5addc749b2b}
+      \strng{authornamehash}{18781340c72435f0c7ab0a0e7d371add}
+      \strng{authorfullhash}{d5e7d5f18e2ff0574269b5addc749b2b}
+      \field{extraname}{2}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{ISEAK}
+      \field{title}{The long-lasting scar of bad jobs in the Spanish labour market}
+      \field{year}{2021}
+    \endentry
+    \entry{hijzen2017impact}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=d739ba0a328a7cd23b0c508bec6c189e}{%
+           family={Hijzen},
+           familyi={H\bibinitperiod},
+           given={Alexander},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c1f6382e9b68eb2371432851cfbed100}{%
+           family={Mondauto},
+           familyi={M\bibinitperiod},
+           given={Leopoldo},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d0e90ebe49f6688a4d4bf9b069a39367}{%
+           family={Scarpetta},
+           familyi={S\bibinitperiod},
+           given={Stefano},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{21cfb7a27f31d68af4d21650d1393ac7}
+      \strng{fullhash}{fd33b292517e73a59f508416ae52cd65}
+      \strng{bibnamehash}{fd33b292517e73a59f508416ae52cd65}
+      \strng{authorbibnamehash}{fd33b292517e73a59f508416ae52cd65}
+      \strng{authornamehash}{21cfb7a27f31d68af4d21650d1393ac7}
+      \strng{authorfullhash}{fd33b292517e73a59f508416ae52cd65}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Labour Economics}
+      \field{title}{The impact of employment protection on temporary employment: Evidence from a regression discontinuity design}
+      \field{volume}{46}
+      \field{year}{2017}
+      \field{pages}{64\bibrangedash 76}
+      \range{pages}{13}
+    \endentry
+    \entry{kahn2010employment}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=aa0bcbc2aaa438c2693696cc44e7a4d1}{%
+           family={Kahn},
+           familyi={K\bibinitperiod},
+           given={Lawrence\bibnamedelima M},
+           giveni={L\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{aa0bcbc2aaa438c2693696cc44e7a4d1}
+      \strng{fullhash}{aa0bcbc2aaa438c2693696cc44e7a4d1}
+      \strng{bibnamehash}{aa0bcbc2aaa438c2693696cc44e7a4d1}
+      \strng{authorbibnamehash}{aa0bcbc2aaa438c2693696cc44e7a4d1}
+      \strng{authornamehash}{aa0bcbc2aaa438c2693696cc44e7a4d1}
+      \strng{authorfullhash}{aa0bcbc2aaa438c2693696cc44e7a4d1}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Labour Economics}
+      \field{number}{1}
+      \field{title}{Employment protection reforms, employment and the incidence of temporary jobs in Europe: 1996--2001}
+      \field{volume}{17}
+      \field{year}{2010}
+      \field{pages}{1\bibrangedash 15}
+      \range{pages}{15}
+    \endentry
+    \entry{liu2022practical}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=8eb9a91a6692d1ecdffe8fd6b6c152eb}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Licheng},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=33f1f8102ae8d032fb301ab80a09459d}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Ye},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=525088c4272a93c67f7c5e47f118568c}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Yiqing},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Wiley Online Library}%
+      }
+      \strng{namehash}{bdbb7e71977ad6ce374907ae72c307a8}
+      \strng{fullhash}{9ae3cb84a722a2d22f3137c7519c1862}
+      \strng{bibnamehash}{9ae3cb84a722a2d22f3137c7519c1862}
+      \strng{authorbibnamehash}{9ae3cb84a722a2d22f3137c7519c1862}
+      \strng{authornamehash}{bdbb7e71977ad6ce374907ae72c307a8}
+      \strng{authorfullhash}{9ae3cb84a722a2d22f3137c7519c1862}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{American Journal of Political Science}
+      \field{title}{A practical guide to counterfactual estimators for causal inference with time-series cross-sectional data}
+      \field{year}{2022}
+    \endentry
+    \entry{esade}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=317d699cf937b7f4b9e04208066c7612}{%
+           family={Martínez\bibnamedelima Jorge},
+           familyi={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+           given={Ángel\bibnamedelima Ignacio},
+           giveni={Á\bibinitperiod\bibinitdelim I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=20e073129c4c01cda35d88914289daa7}{%
+           family={Lahera\bibnamedelima Forteza},
+           familyi={L\bibinitperiod\bibinitdelim F\bibinitperiod},
+           given={J},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{9c59d4712ca34b10c37140f80b57f283}
+      \strng{fullhash}{9c59d4712ca34b10c37140f80b57f283}
+      \strng{bibnamehash}{9c59d4712ca34b10c37140f80b57f283}
+      \strng{authorbibnamehash}{9c59d4712ca34b10c37140f80b57f283}
+      \strng{authornamehash}{9c59d4712ca34b10c37140f80b57f283}
+      \strng{authorfullhash}{9c59d4712ca34b10c37140f80b57f283}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{EsadeEcPol}
+      \field{title}{¿Está reduciendo la temporalidad la reforma laboral de 2021? Una primera evaluación}
+      \field{year}{2022}
+    \endentry
+    \entry{perez2014can}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=0c2bb0dd6c252ed8a1bc5057c156b5b5}{%
+           family={Pérez},
+           familyi={P\bibinitperiod},
+           given={Jose\bibnamedelimb i\bibnamedelima García},
+           giveni={J\bibinitperiod\bibinitdelim i\bibinitperiod\bibinitdelim G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f5d482f806110583838c52365386a5f0}{%
+           family={Marinescu},
+           familyi={M\bibinitperiod},
+           given={Ioana},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7f1a4893e0699019ee3f248d931a70d6}{%
+           family={Castello},
+           familyi={C\bibinitperiod},
+           given={Judit\bibnamedelima Vall},
+           giveni={J\bibinitperiod\bibinitdelim V\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{75d5c49324c0fa9649e42654e8400322}
+      \strng{fullhash}{66e7484d7a3cb07b0288fb8a89018df4}
+      \strng{bibnamehash}{66e7484d7a3cb07b0288fb8a89018df4}
+      \strng{authorbibnamehash}{66e7484d7a3cb07b0288fb8a89018df4}
+      \strng{authornamehash}{75d5c49324c0fa9649e42654e8400322}
+      \strng{authorfullhash}{66e7484d7a3cb07b0288fb8a89018df4}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Documento de Trabajo}
+      \field{title}{Can Fixed-Term Contracts Put Low Skilled Youth on a Better Career Path? Evidence from Spain}
+      \field{year}{2014}
+      \field{pages}{08}
+      \range{pages}{1}
+    \endentry
+    \entry{ley}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=b91c51255477202348800bc7c81c1f37}{%
+           family={{Spanish Parlament}},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{b91c51255477202348800bc7c81c1f37}
+      \strng{fullhash}{b91c51255477202348800bc7c81c1f37}
+      \strng{bibnamehash}{b91c51255477202348800bc7c81c1f37}
+      \strng{authorbibnamehash}{b91c51255477202348800bc7c81c1f37}
+      \strng{authornamehash}{b91c51255477202348800bc7c81c1f37}
+      \strng{authorfullhash}{b91c51255477202348800bc7c81c1f37}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Real Decreto-ley 32/2021}
+      \field{year}{2021}
+    \endentry
+    \entry{sun2021estimating}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=3011926b49b3aa7b3e8913ca855e42fc}{%
+           family={Sun},
+           familyi={S\bibinitperiod},
+           given={Liyang},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1bfe7aacc440efc360e6a6e3eaa7a2d3}{%
+           family={Abraham},
+           familyi={A\bibinitperiod},
+           given={Sarah},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{c7a84aba4076f349fbfad5258d37c1a1}
+      \strng{fullhash}{c7a84aba4076f349fbfad5258d37c1a1}
+      \strng{bibnamehash}{c7a84aba4076f349fbfad5258d37c1a1}
+      \strng{authorbibnamehash}{c7a84aba4076f349fbfad5258d37c1a1}
+      \strng{authornamehash}{c7a84aba4076f349fbfad5258d37c1a1}
+      \strng{authorfullhash}{c7a84aba4076f349fbfad5258d37c1a1}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Econometrics}
+      \field{number}{2}
+      \field{title}{Estimating dynamic treatment effects in event studies with heterogeneous treatment effects}
+      \field{volume}{225}
+      \field{year}{2021}
+      \field{pages}{175\bibrangedash 199}
+      \range{pages}{25}
+    \endentry
+    \entry{wooldridge2021two}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c93aeef4998e670d5343b7e632c431dc}{%
+           family={Wooldridge},
+           familyi={W\bibinitperiod},
+           given={Jeffrey\bibnamedelima M},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{c93aeef4998e670d5343b7e632c431dc}
+      \strng{fullhash}{c93aeef4998e670d5343b7e632c431dc}
+      \strng{bibnamehash}{c93aeef4998e670d5343b7e632c431dc}
+      \strng{authorbibnamehash}{c93aeef4998e670d5343b7e632c431dc}
+      \strng{authornamehash}{c93aeef4998e670d5343b7e632c431dc}
+      \strng{authorfullhash}{c93aeef4998e670d5343b7e632c431dc}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Available at SSRN 3906345}
+      \field{title}{Two-way fixed effects, the two-way mundlak regression, and difference-in-differences estimators}
+      \field{year}{2021}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
